@@ -41,5 +41,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>AlgoliaApiKey</key>
+	<string>${ALGOLIA_API_KEY}</string>
 </dict>
 </plist>

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 
     let ALGOLIA_APP_ID = "latency"
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
-    let ALGOLIA_API_KEY = "1f6fd3a6fb973cb08419fe7d288fa4db"
+    let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
     var searcher: Searcher!
     
     override func viewDidLoad() {
