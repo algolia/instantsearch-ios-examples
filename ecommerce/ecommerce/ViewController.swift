@@ -39,6 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchProgressController = SearchProgressController(searcher: searcher)
         searchProgressController.delegate = self
         searcher.params.query = searchController.searchBar.text
+        searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount"]
+        searcher.params.attributesToHighlight = ["name"]
         searcher.search()
     }
 
@@ -68,6 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(hits)
         return hits.count
     }
     
@@ -80,8 +83,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             searcher.loadMore()
         }
         
-        print(hits[indexPath.row]["name"] as? String ?? "null")
-        cell.textLabel?.text = hits[indexPath.row]["name"] as? String
+        let item = ItemRecord(json: hits[indexPath.row])
+        cell.textLabel?.text = item.name
+        cell.detailTextLabel?.text = item.category
         
         return cell
     }
