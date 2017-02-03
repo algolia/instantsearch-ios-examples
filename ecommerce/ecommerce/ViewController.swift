@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, InstantSearchControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, InstantSearchControllerDelegate, SearchProgressDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var shouldShowSearchResults = false
     
     var searchController: UISearchController!
+    var searchProgressController: SearchProgressController!
     
     var instantSearchController: InstantSearchController!
     
@@ -28,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
     let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
     var searcher: Searcher!
+    var hits: [JSONObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,31 +39,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         
         loadListOfCountries()
-        
         filteredArray = dataArray
+        //configureCustomSearchController()
+        // comment above and uncomment below If we want to use the built in search bar
+        configureSearchController()
         
-        
-        // Uncomment the following line to enable the default search controller.
-        // configureSearchController()
-        
-        // Comment out the next line to disable the customized search controller and search bar and use the default ones. Also, uncomment the above line.
-        configureCustomSearchController()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
         let index = client.index(withName: ALGOLIA_INDEX_NAME)
         searcher = Searcher(index: index, resultHandler: self.handleResults)
+        searcher.params.hitsPerPage = 15
         
-        
-        searcher.params.query = "iphone"
+        searchProgressController = SearchProgressController(searcher: searcher)
+        searchProgressController.delegate = self
+        searcher.params.query = searchController.searchBar.text
         searcher.search()
     }
+
     
     func handleResults(results: SearchResults?, error: Error?) {
         guard let results = results else { return }
-        print(results.page)
-        print(results.hits)
+        if results.page == 0 {
+            hits = results.hits
+        } else {
+            hits.append(contentsOf: results.hits)
+        }
+
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,27 +81,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if shouldShowSearchResults {
-            return filteredArray.count
-        }
-        else {
-            return dataArray.count
-        }
+        return hits.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath)
         
-        if shouldShowSearchResults {
-            cell.textLabel?.text = filteredArray[indexPath.row]
-        }
-        else {
-            cell.textLabel?.text = dataArray[indexPath.row]
+        // Load more?
+        if indexPath.row + 5 >= hits.count {
+            searcher.loadMore()
         }
         
-        cell.textLabel?.textColor = UIColor.white
-        cell.backgroundColor = UIColor(red: 44.0 / 255.0, green: 98.0 / 255.0, blue: 135.0 / 255.0, alpha: 1)
+        print(hits[indexPath.row]["name"] as? String ?? "null")
+        cell.textLabel?.text = hits[indexPath.row]["name"] as? String
         
         return cell
     }
@@ -143,8 +139,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func configureCustomSearchController() {
         
-        let backgroundColorOfSearchBar = UIColor(red: 13.0 / 255.0, green: 24.0 / 255.0, blue: 37.0 / 255.0, alpha: 1)
-        
+        let backgroundColorOfSearchBar = UIColor.black
         instantSearchController = InstantSearchController(searchResultsController: self, searchBarFrame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.size.width, height: 50.0), searchBarFont: UIFont(name: "Futura", size: 16.0)!, searchBarTextColor: UIColor.white, searchBarTintColor: backgroundColorOfSearchBar)
         
         instantSearchController.instantSearchBar.placeholder = "Search for movies"
@@ -185,15 +180,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        // Filter the data array and get only those countries that match the search text.
-        filteredArray = dataArray.filter({ (country) -> Bool in
-            let countryText:NSString = country as NSString
-            
-            return (countryText.range(of: searchString, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
-        })
-        
-        // Reload the tableview.
-        tableView.reloadData()
+        searcher.params.query = searchController.searchBar.text
+        searcher.search()
     }
     
     
@@ -230,6 +218,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Reload the tableview.
         tableView.reloadData()
+    }
+    
+    // MARK: - SearchProgressDelegate
+    
+    func searchDidStart(_ searchProgressController: SearchProgressController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func searchDidStop(_ searchProgressController: SearchProgressController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 
