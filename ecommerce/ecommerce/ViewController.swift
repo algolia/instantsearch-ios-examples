@@ -10,20 +10,12 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, InstantSearchControllerDelegate, SearchProgressDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SearchProgressDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray = [String]()
-    
-    var filteredArray = [String]()
-    
-    var shouldShowSearchResults = false
-    
     var searchController: UISearchController!
     var searchProgressController: SearchProgressController!
-    
-    var instantSearchController: InstantSearchController!
     
     let ALGOLIA_APP_ID = "latency"
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
@@ -37,11 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        loadListOfCountries()
-        filteredArray = dataArray
-        //configureCustomSearchController()
-        // comment above and uncomment below If we want to use the built in search bar
         configureSearchController()
         
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
@@ -104,25 +91,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 60.0
     }
     
-    
-    // MARK: Custom functions
-    
-    func loadListOfCountries() {
-        // Specify the path to the countries list file.
-        let pathToFile = Bundle.main.path(forResource: "countries", ofType: "txt")
-        
-        if let path = pathToFile {
-            // Load the file contents as a string.
-            let countriesString = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
-            
-            // Append the countries from the string to the dataArray array by breaking them using the line change character.
-            dataArray = countriesString.components(separatedBy: "\n")
-            
-            // Reload the tableview.
-            tableView.reloadData()
-        }
-    }
-    
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
@@ -136,43 +104,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.tableHeaderView = searchController.searchBar
     }
     
-    
-    func configureCustomSearchController() {
-        
-        let backgroundColorOfSearchBar = UIColor.black
-        instantSearchController = InstantSearchController(searchResultsController: self, searchBarFrame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.size.width, height: 50.0), searchBarFont: UIFont(name: "Futura", size: 16.0)!, searchBarTextColor: UIColor.white, searchBarTintColor: backgroundColorOfSearchBar)
-        
-        instantSearchController.instantSearchBar.placeholder = "Search for movies"
-        tableView.tableHeaderView = instantSearchController.instantSearchBar
-        
-        instantSearchController.instantSearchControllerDelegate = self
-    }
-    
-    
-    // MARK: UISearchBarDelegate functions
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        shouldShowSearchResults = true
-        tableView.reloadData()
-    }
-    
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        shouldShowSearchResults = false
-        tableView.reloadData()
-    }
-    
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if !shouldShowSearchResults {
-            shouldShowSearchResults = true
-            tableView.reloadData()
-        }
-        
-        searchController.searchBar.resignFirstResponder()
-    }
-    
-    
     // MARK: UISearchResultsUpdating delegate function
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -180,44 +111,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        searcher.params.query = searchController.searchBar.text
+        searcher.params.query = searchString
         searcher.search()
-    }
-    
-    
-    // MARK: CustomSearchControllerDelegate functions
-    
-    func didStartSearching() {
-        shouldShowSearchResults = true
-        tableView.reloadData()
-    }
-    
-    
-    func didTapOnSearchButton() {
-        if !shouldShowSearchResults {
-            shouldShowSearchResults = true
-            tableView.reloadData()
-        }
-    }
-    
-    
-    func didTapOnCancelButton() {
-        shouldShowSearchResults = false
-        tableView.reloadData()
-    }
-    
-    
-    func didChangeSearchText(_ searchText: String) {
-        
-        // Filter the data array and get only those countries that match the search text.
-        filteredArray = searchText.isEmpty ? dataArray : dataArray.filter({ (country) -> Bool in
-            let countryText: NSString = country as NSString
-            
-            return (countryText.range(of: searchText, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
-        })
-        
-        // Reload the tableview.
-        tableView.reloadData()
     }
     
     // MARK: - SearchProgressDelegate
