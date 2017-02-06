@@ -36,6 +36,7 @@ class ItemCell: UITableViewCell {
             }
             
             categoryLabel.text = item?.category
+            itemImageView.cancelImageDownloadTask()
             
             if let url = item?.imageUrl {
                 itemImageView.setImageWith(url, placeholderImage: ItemCell.placeholder)
