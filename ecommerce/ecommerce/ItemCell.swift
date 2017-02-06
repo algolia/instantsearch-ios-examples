@@ -39,10 +39,13 @@ class ItemCell: UITableViewCell {
             itemImageView.cancelImageDownloadTask()
             
             if let url = item?.imageUrl {
+                itemImageView.contentMode = .scaleAspectFit
                 itemImageView.setImageWith(url, placeholderImage: ItemCell.placeholder)
             } else {
                 itemImageView.image = ItemCell.placeholder
             }
+            
+            backgroundColor = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
         }
     }
 }
