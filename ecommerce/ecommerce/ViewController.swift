@@ -29,6 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100.0
         configureSearchController()
         
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
@@ -76,16 +78,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
         // Load more?
         if indexPath.row + 5 >= hits.count {
             searcher.loadMore()
         }
         
-        let item = ItemRecord(json: hits[indexPath.row])
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = item.category
+        cell.item = ItemRecord(json: hits[indexPath.row])
         
         return cell
     }

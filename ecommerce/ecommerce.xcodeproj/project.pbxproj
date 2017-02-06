@@ -15,8 +15,9 @@
 		E219FAAC1E4382B2006D9CFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E219FAAA1E4382B2006D9CFC /* LaunchScreen.storyboard */; };
 		E219FAB71E4382B2006D9CFC /* ecommerceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAB61E4382B2006D9CFC /* ecommerceTests.swift */; };
 		E219FAC21E4382B2006D9CFC /* ecommerceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAC11E4382B2006D9CFC /* ecommerceUITests.swift */; };
-		E219FAD41E43A46B006D9CFC /* countries.txt in Resources */ = {isa = PBXBuildFile; fileRef = E219FAD31E43A46B006D9CFC /* countries.txt */; };
 		E219FAD81E44C710006D9CFC /* ItemRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAD71E44C710006D9CFC /* ItemRecord.swift */; };
+		E219FADA1E44DB20006D9CFC /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAD91E44DB20006D9CFC /* ItemCell.swift */; };
+		E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FADB1E4880ED006D9CFC /* Helpers.swift */; };
 		F61B94FE5A83AAEF4FBD3C8E /* Pods_ecommerceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC5F93DE8716F3E9C97AADE /* Pods_ecommerceTests.framework */; };
 		FD5D736B46847FDA1C00BCBE /* Pods_ecommerceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A716D6C39742184A7A37A33 /* Pods_ecommerceUITests.framework */; };
 /* End PBXBuildFile section */
@@ -59,8 +60,9 @@
 		E219FABD1E4382B2006D9CFC /* ecommerceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ecommerceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E219FAC11E4382B2006D9CFC /* ecommerceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ecommerceUITests.swift; sourceTree = "<group>"; };
 		E219FAC31E4382B2006D9CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E219FAD31E43A46B006D9CFC /* countries.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countries.txt; sourceTree = "<group>"; };
 		E219FAD71E44C710006D9CFC /* ItemRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemRecord.swift; sourceTree = "<group>"; };
+		E219FAD91E44DB20006D9CFC /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		E219FADB1E4880ED006D9CFC /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		E3C12E07E23E9A50BC9A32ED /* Pods-ecommerceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EF8DE04E87BDFD0B3B86E68B /* Pods-ecommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,7 +121,6 @@
 		E219FA951E4382B1006D9CFC = {
 			isa = PBXGroup;
 			children = (
-				E219FAD31E43A46B006D9CFC /* countries.txt */,
 				E219FAA01E4382B2006D9CFC /* ecommerce */,
 				E219FAB51E4382B2006D9CFC /* ecommerceTests */,
 				E219FAC01E4382B2006D9CFC /* ecommerceUITests */,
@@ -142,8 +143,10 @@
 		E219FAA01E4382B2006D9CFC /* ecommerce */ = {
 			isa = PBXGroup;
 			children = (
+				E219FADB1E4880ED006D9CFC /* Helpers.swift */,
 				E219FAA11E4382B2006D9CFC /* AppDelegate.swift */,
 				E219FAD71E44C710006D9CFC /* ItemRecord.swift */,
+				E219FAD91E44DB20006D9CFC /* ItemCell.swift */,
 				E219FAA31E4382B2006D9CFC /* ViewController.swift */,
 				E219FAA51E4382B2006D9CFC /* Main.storyboard */,
 				E219FAA81E4382B2006D9CFC /* Assets.xcassets */,
@@ -293,7 +296,6 @@
 				E219FAAC1E4382B2006D9CFC /* LaunchScreen.storyboard in Resources */,
 				E219FAA91E4382B2006D9CFC /* Assets.xcassets in Resources */,
 				E219FAA71E4382B2006D9CFC /* Main.storyboard in Resources */,
-				E219FAD41E43A46B006D9CFC /* countries.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,8 +458,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E219FADA1E44DB20006D9CFC /* ItemCell.swift in Sources */,
 				E219FAD81E44C710006D9CFC /* ItemRecord.swift in Sources */,
 				E219FAA41E4382B2006D9CFC /* ViewController.swift in Sources */,
+				E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
