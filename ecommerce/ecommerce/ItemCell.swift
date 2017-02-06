@@ -21,7 +21,12 @@ class ItemCell: UITableViewCell {
     
     var item: ItemRecord? {
         didSet {
-            nameLabel.highlightedText = item?.title_highlighted
+            nameLabel.highlightedText = item?.name_highlighted
+            nameLabel.highlightedTextColor = UIColor.black
+            nameLabel.highlightedBackgroundColor = UIColor.orange
+            categoryLabel.highlightedText = item?.category_highlighted
+            categoryLabel.highlightedTextColor = UIColor.black
+            categoryLabel.highlightedBackgroundColor = UIColor.yellow
             
             if let manufacturer = item?.manufacturer {
                 manufacturerLabel.text = manufacturer
@@ -35,7 +40,6 @@ class ItemCell: UITableViewCell {
                 reviewCountLabel.text = String(describing: customerReviewCount)
             }
             
-            categoryLabel.text = item?.category
             itemImageView.cancelImageDownloadTask()
             
             if let url = item?.imageUrl {

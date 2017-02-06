@@ -61,8 +61,12 @@ struct ItemRecord {
         return URL(string: urlString)
     }
     
-    var title_highlighted: String? {
+    var name_highlighted: String? {
         return SearchResults.highlightResult(hit: json, path: "name")?.value
+    }
+    
+    var category_highlighted: String? {
+        return SearchResults.highlightResult(hit: json, path: "category")?.value
     }
 }
 

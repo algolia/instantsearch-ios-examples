@@ -44,7 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchProgressController.delegate = self
         searcher.params.query = searchController.searchBar.text
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
-        searcher.params.attributesToHighlight = ["name"]
+        searcher.params.attributesToHighlight = ["name", "category"]
         searcher.search()
     }
 

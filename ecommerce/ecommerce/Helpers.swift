@@ -23,15 +23,28 @@
 
 import InstantSearchCore
 import UIKit
+import ObjectiveC
+
+private var xoAssociationKey: UInt8 = 0
 
 extension UILabel {
+    var highlightedBackgroundColor: UIColor? {
+        get {
+            return objc_getAssociatedObject(self, &xoAssociationKey) as? UIColor
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
     var highlightedText: String? {
         get {
             return attributedText?.string
         }
         set {
-            let color = highlightedTextColor ?? self.tintColor ?? UIColor.blue
-            attributedText = newValue == nil ? nil : Highlighter(highlightAttrs: [NSForegroundColorAttributeName: color]).render(text: newValue!)
+            let textColor = highlightedTextColor ?? self.tintColor ?? UIColor.blue
+            let backgroundColor = highlightedBackgroundColor ?? UIColor.clear
+            attributedText = newValue == nil ? nil : Highlighter(highlightAttrs: [NSForegroundColorAttributeName: textColor, NSBackgroundColorAttributeName: backgroundColor]).render(text: newValue!)
         }
     }
 }
