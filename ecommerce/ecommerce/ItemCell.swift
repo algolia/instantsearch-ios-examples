@@ -29,7 +29,7 @@ class ItemCell: UITableViewCell {
             categoryLabel.highlightedBackgroundColor = UIColor.yellow
             
             if let manufacturer = item?.manufacturer {
-                manufacturerLabel.text = manufacturer
+                manufacturerLabel.text = "by \(manufacturer)"
             }
             
             if let price = item?.price {
@@ -37,7 +37,7 @@ class ItemCell: UITableViewCell {
             }
             
             if let customerReviewCount = item?.customerReviewCount {
-                reviewCountLabel.text = String(describing: customerReviewCount)
+                reviewCountLabel.text = "(\(String(describing: customerReviewCount)))"
             }
             
             itemImageView.cancelImageDownloadTask()
