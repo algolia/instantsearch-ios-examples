@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search Bar Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ecommerce" customModuleProvider="target" sceneMemberID="viewController">
@@ -112,8 +112,9 @@
                             <constraint firstItem="Ro2-2Z-Loj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xoO-tA-AtS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="WUT-8e-hga"/>
+                    <navigationItem key="navigationItem" title="Search Bar Item" id="aOp-fQ-1rc"/>
                     <connections>
+                        <outlet property="searchBarNavigationItem" destination="aOp-fQ-1rc" id="PMq-5W-tB7"/>
                         <outlet property="tableView" destination="Ro2-2Z-Loj" id="GDg-Ry-JRy"/>
                     </connections>
                 </viewController>

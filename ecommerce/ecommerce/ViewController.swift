@@ -13,6 +13,7 @@ import AlgoliaSearch
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SearchProgressDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     
     var searchController: UISearchController!
     var searchProgressController: SearchProgressController!
@@ -31,6 +32,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
+        navigationController?.navigationBar.barTintColor = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
         configureSearchController()
         
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
@@ -93,14 +95,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
+        
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search here..."
         searchController.searchBar.delegate = self
+
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        searchController.searchBar.placeholder = "Search here..."
         searchController.searchBar.sizeToFit()
         
-        // Place the search bar view to the tableview headerview.
-        tableView.tableHeaderView = searchController.searchBar
+        searchBarNavigationItem.titleView = searchController.searchBar
     }
     
     // MARK: UISearchResultsUpdating delegate function
