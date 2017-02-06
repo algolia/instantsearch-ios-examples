@@ -22,9 +22,19 @@ class ItemCell: UITableViewCell {
     var item: ItemRecord? {
         didSet {
             nameLabel.highlightedText = item?.title_highlighted
-            manufacturerLabel.text = item?.manufacturer
-            priceLabel.text = String(describing: item?.price)
-            reviewCountLabel.text = String(describing: item?.customerReviewCount)
+            
+            if let manufacturer = item?.manufacturer {
+                manufacturerLabel.text = manufacturer
+            }
+            
+            if let price = item?.price {
+                priceLabel.text = "$\(String(describing: price))"
+            }
+            
+            if let customerReviewCount = item?.customerReviewCount {
+                reviewCountLabel.text = String(describing: customerReviewCount)
+            }
+            
             categoryLabel.text = item?.category
             
             if let url = item?.imageUrl {
@@ -34,5 +44,4 @@ class ItemCell: UITableViewCell {
             }
         }
     }
-
 }
