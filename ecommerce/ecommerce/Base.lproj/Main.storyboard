@@ -106,8 +106,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAA-Ez-PoB" customClass="TopBarView" customModule="ecommerce" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="108" width="375" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMk-It-YbN">
-                                        <rect key="frame" x="8" y="15" width="99" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMk-It-YbN">
+                                        <rect key="frame" x="8" y="15" width="58" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -170,6 +170,7 @@
                     <navigationItem key="navigationItem" title="Amazonia" id="aOp-fQ-1rc"/>
                     <connections>
                         <outlet property="arrowImageView" destination="mKK-uB-P5u" id="hM3-ep-q4r"/>
+                        <outlet property="nbHitsLabel" destination="tMk-It-YbN" id="0BY-EO-fXD"/>
                         <outlet property="searchBarNavigationItem" destination="aOp-fQ-1rc" id="PMq-5W-tB7"/>
                         <outlet property="searchBarView" destination="2C1-MB-EIr" id="gDL-xq-RuS"/>
                         <outlet property="tableView" destination="Ro2-2Z-Loj" id="GDg-Ry-JRy"/>

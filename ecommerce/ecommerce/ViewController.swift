@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
+    @IBOutlet weak var nbHitsLabel: UILabel!
     
     var searchController: UISearchController!
     var searchProgressController: SearchProgressController!
@@ -78,6 +79,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             hits.append(contentsOf: results.hits)
         }
+        
+        nbHitsLabel.text = "\(results.nbHits) results"
 
         self.tableView.reloadData()
     }
