@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ro2-2Z-Loj">
-                                <rect key="frame" x="0.0" y="114" width="375" height="553"/>
+                                <rect key="frame" x="0.0" y="158" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recordCell" rowHeight="131" id="JL1-ca-zgd" customClass="ItemCell" customModule="ecommerce" customModuleProvider="target">
@@ -104,7 +104,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAA-Ez-PoB" customClass="TopBarView" customModule="ecommerce" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMk-It-YbN">
                                         <rect key="frame" x="8" y="15" width="99" height="20.5"/>
@@ -145,15 +145,25 @@
                                     <constraint firstItem="mKK-uB-P5u" firstAttribute="leading" secondItem="txO-NW-9ag" secondAttribute="trailing" constant="3" id="tfY-64-pBV"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2C1-MB-EIr">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="URB-Ee-POi"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Ro2-2Z-Loj" secondAttribute="trailing" id="8Xb-Uy-98U"/>
                             <constraint firstAttribute="trailing" secondItem="YAA-Ez-PoB" secondAttribute="trailing" id="9E2-q1-k5Q"/>
+                            <constraint firstAttribute="trailing" secondItem="2C1-MB-EIr" secondAttribute="trailing" id="D2Y-hi-TV3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ro2-2Z-Loj" secondAttribute="bottom" id="FbY-Fb-QjM"/>
-                            <constraint firstItem="YAA-Ez-PoB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KdC-wU-anP"/>
+                            <constraint firstItem="YAA-Ez-PoB" firstAttribute="top" secondItem="2C1-MB-EIr" secondAttribute="bottom" id="FgD-2y-Mqc"/>
                             <constraint firstItem="Ro2-2Z-Loj" firstAttribute="top" secondItem="YAA-Ez-PoB" secondAttribute="bottom" id="Rab-y5-DjV"/>
+                            <constraint firstItem="2C1-MB-EIr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cTN-Gz-iy1"/>
                             <constraint firstItem="Ro2-2Z-Loj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cap-2o-HhC"/>
+                            <constraint firstItem="2C1-MB-EIr" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="nqW-ei-mZN"/>
                             <constraint firstItem="YAA-Ez-PoB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zHg-eH-jBW"/>
                         </constraints>
                     </view>
@@ -161,6 +171,7 @@
                     <connections>
                         <outlet property="arrowImageView" destination="mKK-uB-P5u" id="hM3-ep-q4r"/>
                         <outlet property="searchBarNavigationItem" destination="aOp-fQ-1rc" id="PMq-5W-tB7"/>
+                        <outlet property="searchBarView" destination="2C1-MB-EIr" id="gDL-xq-RuS"/>
                         <outlet property="tableView" destination="Ro2-2Z-Loj" id="GDg-Ry-JRy"/>
                         <outlet property="topBarView" destination="YAA-Ez-PoB" id="5e8-4t-ccn"/>
                     </connections>

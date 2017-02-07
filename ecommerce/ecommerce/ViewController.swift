@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet weak var searchBarView: UIView!
     
     var searchController: UISearchController!
     var searchProgressController: SearchProgressController!
@@ -124,11 +125,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-        searchController.searchBar.placeholder = "Search here..."
+        searchController.searchBar.placeholder = "Search items"
         searchController.searchBar.sizeToFit()
         
-        searchBarNavigationItem.titleView = searchController.searchBar
-        //tableView.tableHeaderView = searchController.searchBar
+        searchController.searchBar.barTintColor = BAR_COLOR
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.layer.cornerRadius = 1.0
+        searchController.searchBar.clipsToBounds = true
+        searchBarView.addSubview(searchController.searchBar)
+        
     }
     
     // MARK: UISearchResultsUpdating delegate function
