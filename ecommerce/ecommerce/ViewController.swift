@@ -12,12 +12,18 @@ import AlgoliaSearch
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SearchProgressDelegate {
     
+    @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
+    @IBOutlet weak var arrowImageView: UIImageView!
     
     var searchController: UISearchController!
     var searchProgressController: SearchProgressController!
     
+    var isFilterClicked = false
+    
+    let BAR_COLOR = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
+    let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
     let ALGOLIA_APP_ID = "latency"
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
     let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
@@ -32,7 +38,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        navigationController?.navigationBar.barTintColor = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
+        navigationController?.navigationBar.barTintColor = BAR_COLOR
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        topBarView.backgroundColor = TABLE_COLOR
+        tableView.backgroundColor = TABLE_COLOR
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(filterClicked))
+        singleTap.numberOfTapsRequired = 1 // you can change this value
+        arrowImageView.isUserInteractionEnabled = true
+        arrowImageView.addGestureRecognizer(singleTap)
+        
         configureSearchController()
         
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
@@ -48,6 +64,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searcher.search()
     }
 
+    @IBAction func filterClicked(_ sender: Any) {
+        arrowImageView.image = isFilterClicked ? UIImage(named: "arrow_down_flat") : UIImage(named: "arrow_up_flat")
+        isFilterClicked = !isFilterClicked
+    }
+    
     
     func handleResults(results: SearchResults?, error: Error?) {
         guard let results = results else { return }
@@ -88,6 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         cell.item = ItemRecord(json: hits[indexPath.row])
+        cell.backgroundColor = TABLE_COLOR
         
         return cell
     }
@@ -106,6 +128,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchController.searchBar.sizeToFit()
         
         searchBarNavigationItem.titleView = searchController.searchBar
+        //tableView.tableHeaderView = searchController.searchBar
     }
     
     // MARK: UISearchResultsUpdating delegate function

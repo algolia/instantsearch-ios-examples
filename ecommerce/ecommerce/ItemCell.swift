@@ -48,8 +48,6 @@ class ItemCell: UITableViewCell {
             } else {
                 itemImageView.image = ItemCell.placeholder
             }
-            
-            backgroundColor = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
         }
     }
 }
