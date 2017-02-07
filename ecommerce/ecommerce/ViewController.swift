@@ -71,7 +71,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         isFilterClicked = !isFilterClicked
     }
     
-    
     func handleResults(results: SearchResults?, error: Error?) {
         guard let results = results else { return }
         if results.page == 0 {
@@ -137,6 +136,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchController.searchBar.clipsToBounds = true
         searchBarView.addSubview(searchController.searchBar)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "FacetSegue") {
+            
+            let facetTableViewController = segue.destination as! FacetTableViewController
+            facetTableViewController.facets = ["facet1", "facet2"]
+        }
     }
     
     // MARK: UISearchResultsUpdating delegate function
