@@ -193,7 +193,7 @@
             </objects>
             <point key="canvasLocation" x="-1983.2" y="8.5457271364317844"/>
         </scene>
-        <!--Facet Table View Controller-->
+        <!--Category-->
         <scene sceneID="dt1-PX-aje">
             <objects>
                 <tableViewController id="tkh-FR-QdK" customClass="FacetTableViewController" customModule="ecommerce" customModuleProvider="target" sceneMemberID="viewController">
@@ -232,11 +232,11 @@
                             <outlet property="delegate" destination="tkh-FR-QdK" id="GJ5-U8-g9h"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="xLd-j3-xbQ"/>
+                    <navigationItem key="navigationItem" title="Category" id="xLd-j3-xbQ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uv4-Pj-zzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1177" y="8"/>
+            <point key="canvasLocation" x="-1178.4000000000001" y="7.6461769115442282"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hjq-c0-3QC">

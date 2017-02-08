@@ -15,7 +15,6 @@ class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
     var categoryFacets: [FacetValue] = []
     
     let FACET_NAME = "category"
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
