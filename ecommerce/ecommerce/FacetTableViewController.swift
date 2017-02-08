@@ -18,7 +18,7 @@ class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
-        categoryFacets = searchCoordinator.categoryFacets
+        categoryFacets = searchCoordinator.facetResults["category"] ?? []
         searchCoordinator.facetDataSource = self
     }
 

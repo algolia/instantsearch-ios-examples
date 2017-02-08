@@ -23,7 +23,7 @@ import AlgoliaSearch
 //TODO: Make all private methods method..
 class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     var searcher: Searcher!
-    var categoryFacets: [FacetValue] = []
+    var facetResults: [String: [FacetValue]] = [:]
     private var hits: [JSONObject] = []
     
     let ALGOLIA_APP_ID = "latency"
@@ -69,12 +69,16 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             hits.append(contentsOf: results.hits)
         }
         
-        categoryFacets = getFacets(with: results, andFacetName: "category")
+        if let facets = searcher.params.facets {
+            for facet in facets {
+                facetResults[facet] = getFacets(with: results, andFacetName: facet)
+            }
+        }
         
         hitDataSource?.handle?(results: results, error: error)
         hitDataSource?.handle(hits: hits)
         facetDataSource?.handle?(results: results, error: error)
-        facetDataSource?.handle(facets: ["category" : categoryFacets])
+        facetDataSource?.handle(facets: facetResults)
     }
     
     func getFacets(with results: SearchResults!, andFacetName facetName:String) -> [FacetValue] {
