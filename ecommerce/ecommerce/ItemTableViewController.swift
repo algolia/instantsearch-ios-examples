@@ -25,32 +25,47 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let BAR_COLOR = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
     let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
+    
     var searchCoordinator: SearchCoordinator!
     var itemsToShow: [JSONObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        configureNavBar()
+        configureToolBar()
+        configureSearchController()
+        configureTable()
+        configureSearchCoordinator()
+    }
+    
+    func configureSearchCoordinator() {
+        searchCoordinator = SearchCoordinator(searchController: searchController)
+        searchCoordinator.hitDataSource = self
+    }
+    
+    func configureTable() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
+        tableView.backgroundColor = TABLE_COLOR
+    }
+    
+    func configureNavBar() {
         navigationController?.navigationBar.barTintColor = BAR_COLOR
         navigationController?.navigationBar.isTranslucent = false
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
-        topBarView.backgroundColor = TABLE_COLOR
-        tableView.backgroundColor = TABLE_COLOR
-        
+    }
+    
+    func configureToolBar() {
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(filterClicked))
         singleTap.numberOfTapsRequired = 1 // you can change this value
         arrowImageView.isUserInteractionEnabled = true
         arrowImageView.addGestureRecognizer(singleTap)
-        
-        configureSearchController()
-        searchCoordinator = SearchCoordinator(searchController: searchController)
-        searchCoordinator.hitDataSource = self
+        topBarView.backgroundColor = TABLE_COLOR
     }
+    
+    // MARK: AlgoliaHitDataSource Datasource functions
     
     func handle(hits: [JSONObject]) {
         itemsToShow = hits
@@ -65,12 +80,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         arrowImageView.image = isFilterClicked ? UIImage(named: "arrow_down_flat") : UIImage(named: "arrow_up_flat")
         isFilterClicked = !isFilterClicked
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     // MARK: UITableView Delegate and Datasource functions
     

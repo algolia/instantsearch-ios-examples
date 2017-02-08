@@ -13,19 +13,21 @@ class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
     
     var searchCoordinator: SearchCoordinator!
     var categoryFacets: [FacetValue] = []
+    
+    let FACET_NAME = "category"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
-        categoryFacets = searchCoordinator.facetResults["category"] ?? []
+        categoryFacets = searchCoordinator.facetResults[FACET_NAME] ?? []
         searchCoordinator.facetDataSource = self
     }
 
     // MARK: - Table view data source
 
     func handle(facets: [String : [FacetValue]]) {
-        categoryFacets = facets["category"]!
+        //categoryFacets = facets[FACET_NAME]!
         tableView.reloadData()
     }
     
@@ -44,19 +46,17 @@ class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
         let facet = categoryFacets[indexPath.row]
         cell.textLabel?.text = facet.value
         cell.detailTextLabel?.text = "\(facet.count)"
+        if searchCoordinator.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value) {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        searchCoordinator.toggleFacetRefinement(name: "category", value: categoryFacets[indexPath.item].value)
+        searchCoordinator.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
     }
 }

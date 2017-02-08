@@ -51,6 +51,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
         searcher.params.attributesToHighlight = ["name", "category"]
         searcher.params.facets = ["category"]
+        searcher.params.setFacet(withName: "category", disjunctive: true)
         searcher.search()
     }
     
