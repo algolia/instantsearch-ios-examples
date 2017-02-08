@@ -164,6 +164,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let facetTableViewController = segue.destination as! FacetTableViewController
             facetTableViewController.facets = categoryFacets
             facetTableViewController.searcher = searcher
+            searcher.addResultHandler(facetTableViewController.handleResults)
         }
     }
     
