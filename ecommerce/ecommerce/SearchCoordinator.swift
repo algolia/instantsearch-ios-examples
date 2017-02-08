@@ -10,23 +10,29 @@ import Foundation
 import InstantSearchCore
 import AlgoliaSearch
 
-@objc protocol AlgoliaDataSource {
+@objc protocol AlgoliaHitDataSource {
     @objc optional func handle(results: SearchResults, error: Error?)
-    @objc optional func handle(hits: [JSONObject])
-    @objc optional func handle(facets: [String: [FacetValue]])
+    func handle(hits: [JSONObject])
 }
 
+@objc protocol AlgoliaFacetDataSource {
+    @objc optional func handle(results: SearchResults, error: Error?)
+    func handle(facets: [String: [FacetValue]])
+}
+
+//TODO: Make all private methods method..
 class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     var searcher: Searcher!
     var categoryFacets: [FacetValue] = []
-    var hits: [JSONObject] = []
+    private var hits: [JSONObject] = []
     
     let ALGOLIA_APP_ID = "latency"
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
     let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
     var searchProgressController: SearchProgressController!
     
-    var delegate: AlgoliaDataSource! // TODO: Might want to initialise this in the init method.
+    var hitDataSource: AlgoliaHitDataSource? // TODO: Might want to initialise this in the init method.
+    var facetDataSource: AlgoliaFacetDataSource?
     
     init(searchController: UISearchController) {
         super.init()
@@ -63,10 +69,12 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             hits.append(contentsOf: results.hits)
         }
         
-        delegate.handle?(results: results, error: error)
-        delegate.handle?(hits: hits)
         categoryFacets = getFacets(with: results, andFacetName: "category")
-        delegate.handle?(facets: ["category" : categoryFacets])
+        
+        hitDataSource?.handle?(results: results, error: error)
+        hitDataSource?.handle(hits: hits)
+        facetDataSource?.handle?(results: results, error: error)
+        facetDataSource?.handle(facets: ["category" : categoryFacets])
     }
     
     func getFacets(with results: SearchResults!, andFacetName facetName:String) -> [FacetValue] {
@@ -95,6 +103,11 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         }
         
         searcher.params.query = searchString
+        searcher.search()
+    }
+    
+    func toggleFacetRefinement(name: String, value: String) {
+        searcher.params.toggleFacetRefinement(name: name, value: value)
         searcher.search()
     }
     

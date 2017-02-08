@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AlgoliaDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AlgoliaHitDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -49,7 +49,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         configureSearchController()
         searchCoordinator = SearchCoordinator(searchController: searchController)
-        searchCoordinator.delegate = self
+        searchCoordinator.hitDataSource = self
     }
     
     func handle(hits: [JSONObject]) {
@@ -115,13 +115,11 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if(segue.identifier == "FacetSegue") {
-//            
-//            let facetTableViewController = segue.destination as! FacetTableViewController
-//            facetTableViewController.facets = categoryFacets
-//            facetTableViewController.searcher = searcher
-//            searcher.addResultHandler(facetTableViewController.handleResults)
-//        }
+        if(segue.identifier == "FacetSegue") {
+            
+            let facetTableViewController = segue.destination as! FacetTableViewController
+            facetTableViewController.searchCoordinator = searchCoordinator
+        }
     }
 }
 

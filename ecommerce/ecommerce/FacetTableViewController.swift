@@ -9,41 +9,24 @@
 import InstantSearchCore
 import UIKit
 
-class FacetTableViewController: UITableViewController {
+class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
     
-    var facets: [FacetValue] = []
-    var searcher: Searcher!
+    var searchCoordinator: SearchCoordinator!
+    var categoryFacets: [FacetValue] = []
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO: This should be done in a better way.
+        categoryFacets = searchCoordinator.categoryFacets
+        searchCoordinator.facetDataSource = self
     }
 
     // MARK: - Table view data source
 
-    func handleResults(results: SearchResults?, error: Error?) {
-        guard let results = results else { return }
-
-        facets = getFacets(with: results, andFacetName: "category")
-        
+    func handle(facets: [String : [FacetValue]]) {
+        categoryFacets = facets["category"]!
         tableView.reloadData()
-    }
-    
-    func getFacets(with results: SearchResults!, andFacetName facetName:String) -> [FacetValue] {
-        // Sort facets: first selected facets, then by decreasing count, then by name.
-        return FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
-            // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
-            // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
-            let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
-            let lhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: lhs.value)
-            let rhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: rhs.value)
-            if !disjunctiveFaceting && lhsChecked != rhsChecked {
-                return lhsChecked
-            } else if lhs.count != rhs.count {
-                return lhs.count > rhs.count
-            } else {
-                return lhs.value < rhs.value
-            }
-        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,12 +36,12 @@ class FacetTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return facets.count
+        return categoryFacets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath)
-        let facet = facets[indexPath.row]
+        let facet = categoryFacets[indexPath.row]
         cell.textLabel?.text = facet.value
         cell.detailTextLabel?.text = "\(facet.count)"
 
@@ -73,8 +56,7 @@ class FacetTableViewController: UITableViewController {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-        searcher.params.toggleFacetRefinement(name: "category", value: facets[indexPath.item].value)
-        searcher.search()
-        tableView.reloadData()
+        
+        searchCoordinator.toggleFacetRefinement(name: "category", value: categoryFacets[indexPath.item].value)
     }
 }
