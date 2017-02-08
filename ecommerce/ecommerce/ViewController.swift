@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
     let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
     var searcher: Searcher!
+    var categoryFacets: [FacetValue] = []
     var hits: [JSONObject] = []
     
     override func viewDidLoad() {
@@ -63,6 +64,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searcher.params.query = searchController.searchBar.text
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
         searcher.params.attributesToHighlight = ["name", "category"]
+        searcher.params.facets = ["category"]
         searcher.search()
     }
 
@@ -80,8 +82,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         nbHitsLabel.text = "\(results.nbHits) results"
-
+        categoryFacets = getFacets(with: results, andFacetName: "category")
+        
         self.tableView.reloadData()
+    }
+    
+    func getFacets(with results: SearchResults!, andFacetName facetName:String) -> [FacetValue] {
+        // Sort facets: first selected facets, then by decreasing count, then by name.
+        return FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
+            // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
+            // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
+            let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
+            let lhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: lhs.value)
+            let rhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: rhs.value)
+            if !disjunctiveFaceting && lhsChecked != rhsChecked {
+                return lhsChecked
+            } else if lhs.count != rhs.count {
+                return lhs.count > rhs.count
+            } else {
+                return lhs.value < rhs.value
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,7 +119,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(hits)
         return hits.count
     }
     
@@ -142,7 +162,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if(segue.identifier == "FacetSegue") {
             
             let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.facets = ["facet1", "facet2"]
+            facetTableViewController.facets = categoryFacets
+            facetTableViewController.searcher = searcher
         }
     }
     

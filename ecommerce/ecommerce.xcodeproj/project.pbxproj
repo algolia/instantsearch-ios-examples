@@ -147,16 +147,12 @@
 		E219FAA01E4382B2006D9CFC /* ecommerce */ = {
 			isa = PBXGroup;
 			children = (
-				E219FADB1E4880ED006D9CFC /* Helpers.swift */,
-				E219FAA11E4382B2006D9CFC /* AppDelegate.swift */,
-				E219FAD71E44C710006D9CFC /* ItemRecord.swift */,
-				E219FAD91E44DB20006D9CFC /* ItemCell.swift */,
-				E219FAA31E4382B2006D9CFC /* ViewController.swift */,
-				E219FADF1E49F982006D9CFC /* TopBarView.swift */,
-				E219FAA51E4382B2006D9CFC /* Main.storyboard */,
-				E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */,
+				E219FAE31E4B0EAD006D9CFC /* Helpers */,
+				E219FAE61E4B0F1E006D9CFC /* Model */,
+				E219FAE51E4B0ED9006D9CFC /* Views */,
+				E219FAE41E4B0EC1006D9CFC /* Controllers */,
 				E219FAA81E4382B2006D9CFC /* Assets.xcassets */,
-				E219FAAA1E4382B2006D9CFC /* LaunchScreen.storyboard */,
+				E219FAA11E4382B2006D9CFC /* AppDelegate.swift */,
 				E219FAAD1E4382B2006D9CFC /* Info.plist */,
 			);
 			path = ecommerce;
@@ -178,6 +174,42 @@
 				E219FAC31E4382B2006D9CFC /* Info.plist */,
 			);
 			path = ecommerceUITests;
+			sourceTree = "<group>";
+		};
+		E219FAE31E4B0EAD006D9CFC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E219FADB1E4880ED006D9CFC /* Helpers.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E219FAE41E4B0EC1006D9CFC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E219FAA31E4382B2006D9CFC /* ViewController.swift */,
+				E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E219FAE51E4B0ED9006D9CFC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E219FAAA1E4382B2006D9CFC /* LaunchScreen.storyboard */,
+				E219FAA51E4382B2006D9CFC /* Main.storyboard */,
+				E219FAD91E44DB20006D9CFC /* ItemCell.swift */,
+				E219FADF1E49F982006D9CFC /* TopBarView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E219FAE61E4B0F1E006D9CFC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E219FAD71E44C710006D9CFC /* ItemRecord.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

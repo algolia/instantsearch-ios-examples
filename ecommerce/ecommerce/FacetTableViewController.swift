@@ -6,11 +6,13 @@
 //  Copyright © 2017 Guy Daher. All rights reserved.
 //
 
+import InstantSearchCore
 import UIKit
 
 class FacetTableViewController: UITableViewController {
     
-    var facets: [String] = []
+    var facets: [FacetValue] = []
+    var searcher: Searcher!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,8 @@ class FacetTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath)
         let facet = facets[indexPath.row]
-        cell.textLabel?.text = facet
+        cell.textLabel?.text = facet.value
+        cell.detailTextLabel?.text = "\(facet.count)"
 
         return cell
     }
@@ -44,5 +47,8 @@ class FacetTableViewController: UITableViewController {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+        searcher.params.toggleFacetRefinement(name: "category", value: facets[indexPath.item].value)
+        searcher.search()
+        tableView.reloadData()
     }
 }
