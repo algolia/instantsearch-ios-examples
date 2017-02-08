@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		47BE6C0C67B9C51881F502E6 /* Pods_ecommerce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4E63DA74F493C2E0ACD2B5 /* Pods_ecommerce.framework */; };
 		E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAA11E4382B2006D9CFC /* AppDelegate.swift */; };
-		E219FAA41E4382B2006D9CFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAA31E4382B2006D9CFC /* ViewController.swift */; };
+		E219FAA41E4382B2006D9CFC /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAA31E4382B2006D9CFC /* ItemTableViewController.swift */; };
 		E219FAA71E4382B2006D9CFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E219FAA51E4382B2006D9CFC /* Main.storyboard */; };
 		E219FAA91E4382B2006D9CFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E219FAA81E4382B2006D9CFC /* Assets.xcassets */; };
 		E219FAAC1E4382B2006D9CFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E219FAAA1E4382B2006D9CFC /* LaunchScreen.storyboard */; };
@@ -52,7 +52,7 @@
 		BBE7CDF0FDF54F69B06F8961 /* Pods-ecommerce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce.debug.xcconfig"; sourceTree = "<group>"; };
 		E219FA9E1E4382B2006D9CFC /* ecommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ecommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E219FAA11E4382B2006D9CFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E219FAA31E4382B2006D9CFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E219FAA31E4382B2006D9CFC /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		E219FAA61E4382B2006D9CFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E219FAA81E4382B2006D9CFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E219FAAB1E4382B2006D9CFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		E219FAE41E4B0EC1006D9CFC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E219FAA31E4382B2006D9CFC /* ViewController.swift */,
+				E219FAA31E4382B2006D9CFC /* ItemTableViewController.swift */,
 				E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */,
 			);
 			name = Controllers;
@@ -504,7 +504,7 @@
 				E219FAD81E44C710006D9CFC /* ItemRecord.swift in Sources */,
 				E219FAE01E49F982006D9CFC /* TopBarView.swift in Sources */,
 				E219FAE81E4B1864006D9CFC /* SearchCoordinator.swift in Sources */,
-				E219FAA41E4382B2006D9CFC /* ViewController.swift in Sources */,
+				E219FAA41E4382B2006D9CFC /* ItemTableViewController.swift in Sources */,
 				E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
 			);

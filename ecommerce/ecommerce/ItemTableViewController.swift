@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AlgoliaDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AlgoliaDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
