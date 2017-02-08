@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SearchProgressDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AlgoliaDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -20,18 +20,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var nbHitsLabel: UILabel!
     
     var searchController: UISearchController!
-    var searchProgressController: SearchProgressController!
     
     var isFilterClicked = false
     
     let BAR_COLOR = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
     let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
-    let ALGOLIA_APP_ID = "latency"
-    let ALGOLIA_INDEX_NAME = "bestbuy_promo"
-    let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
-    var searcher: Searcher!
-    var categoryFacets: [FacetValue] = []
-    var hits: [JSONObject] = []
+    var searchCoordinator: SearchCoordinator!
+    var itemsToShow: [JSONObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,56 +48,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         arrowImageView.addGestureRecognizer(singleTap)
         
         configureSearchController()
-        
-        let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
-        let index = client.index(withName: ALGOLIA_INDEX_NAME)
-        searcher = Searcher(index: index, resultHandler: self.handleResults)
-        searcher.params.hitsPerPage = 15
-        
-        searchProgressController = SearchProgressController(searcher: searcher)
-        searchProgressController.delegate = self
-        searcher.params.query = searchController.searchBar.text
-        searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
-        searcher.params.attributesToHighlight = ["name", "category"]
-        searcher.params.facets = ["category"]
-        searcher.search()
+        searchCoordinator = SearchCoordinator(searchController: searchController)
+        searchCoordinator.delegate = self
+    }
+    
+    func handle(hits: [JSONObject]) {
+        itemsToShow = hits
+        tableView.reloadData()
+    }
+    
+    func handle(results: SearchResults, error: Error?) {
+        nbHitsLabel.text = "\(results.nbHits) results"
     }
 
     @IBAction func filterClicked(_ sender: Any) {
         arrowImageView.image = isFilterClicked ? UIImage(named: "arrow_down_flat") : UIImage(named: "arrow_up_flat")
         isFilterClicked = !isFilterClicked
-    }
-    
-    func handleResults(results: SearchResults?, error: Error?) {
-        guard let results = results else { return }
-        if results.page == 0 {
-            hits = results.hits
-        } else {
-            hits.append(contentsOf: results.hits)
-        }
-        
-        nbHitsLabel.text = "\(results.nbHits) results"
-        categoryFacets = getFacets(with: results, andFacetName: "category")
-        
-        self.tableView.reloadData()
-    }
-    
-    func getFacets(with results: SearchResults!, andFacetName facetName:String) -> [FacetValue] {
-        // Sort facets: first selected facets, then by decreasing count, then by name.
-        return FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
-            // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
-            // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
-            let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
-            let lhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: lhs.value)
-            let rhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: rhs.value)
-            if !disjunctiveFaceting && lhsChecked != rhsChecked {
-                return lhsChecked
-            } else if lhs.count != rhs.count {
-                return lhs.count > rhs.count
-            } else {
-                return lhs.value < rhs.value
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,19 +80,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hits.count
+        return itemsToShow.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
-        // Load more?
-        if indexPath.row + 5 >= hits.count {
-            searcher.loadMore()
-        }
+        searchCoordinator.loadMoreIfNecessary(rowNumber: indexPath.row)
         
-        cell.item = ItemRecord(json: hits[indexPath.row])
+        cell.item = ItemRecord(json: itemsToShow[indexPath.row])
         cell.backgroundColor = TABLE_COLOR
         
         return cell
@@ -140,8 +98,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
-        
-        searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
 
         searchController.dimsBackgroundDuringPresentation = false
@@ -159,34 +115,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "FacetSegue") {
-            
-            let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.facets = categoryFacets
-            facetTableViewController.searcher = searcher
-            searcher.addResultHandler(facetTableViewController.handleResults)
-        }
-    }
-    
-    // MARK: UISearchResultsUpdating delegate function
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchString = searchController.searchBar.text else {
-            return
-        }
-        
-        searcher.params.query = searchString
-        searcher.search()
-    }
-    
-    // MARK: - SearchProgressDelegate
-    
-    func searchDidStart(_ searchProgressController: SearchProgressController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-    
-    func searchDidStop(_ searchProgressController: SearchProgressController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        if(segue.identifier == "FacetSegue") {
+//            
+//            let facetTableViewController = segue.destination as! FacetTableViewController
+//            facetTableViewController.facets = categoryFacets
+//            facetTableViewController.searcher = searcher
+//            searcher.addResultHandler(facetTableViewController.handleResults)
+//        }
     }
 }
 
