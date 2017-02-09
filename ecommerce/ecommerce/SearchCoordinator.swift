@@ -17,13 +17,13 @@ import AlgoliaSearch
 
 @objc protocol AlgoliaFacetDataSource {
     @objc optional func handle(results: SearchResults, error: Error?)
-    func handle(facets: [String: [FacetValue]])
+    func handle(facetRecords: [FacetRecord])
 }
 
 //TODO: Make all private methods method..
 class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     var searcher: Searcher!
-    var facetResults: [String: [FacetValue]] = [:]
+    var facetResults: [String: [FacetRecord]] = [:]
     var nbHits = 0
     private var hits: [JSONObject] = []
     
@@ -36,6 +36,18 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
     var hitDataSource: AlgoliaHitDataSource? // TODO: Might want to initialise this in the init method.
     var facetDataSource: AlgoliaFacetDataSource?
     
+    var hitSearchController: UISearchController! {
+        didSet {
+            hitSearchController.searchResultsUpdater = self
+        }
+    }
+    
+    var facetSearchController: UISearchController! {
+        didSet {
+            facetSearchController.searchResultsUpdater = self
+        }
+    }
+    
     init(searchController: UISearchController) {
         super.init()
         
@@ -46,15 +58,22 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         
         
         searchProgressController = SearchProgressController(searcher: searcher)
-        searchController.searchResultsUpdater = self
         searchProgressController.delegate = self
         
-        searcher.params.query = searchController.searchBar.text
+        searcher.params.query = ""
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
         searcher.params.attributesToHighlight = ["name", "category"]
         searcher.params.facets = ["category"]
         searcher.params.setFacet(withName: "category", disjunctive: true)
         searcher.search()
+        
+        defer {
+            hitSearchController = searchController
+        }
+    }
+    
+    func set(facetSearchController: UISearchController) {
+        self.facetSearchController = facetSearchController
     }
     
     func loadMoreIfNecessary(rowNumber: Int) {
@@ -74,7 +93,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         
         if let facets = searcher.params.facets {
             for facet in facets {
-                facetResults[facet] = getFacets(with: results, andFacetName: facet)
+                facetResults[facet] = getFacetRecords(with: results, andFacetName: facet)
             }
         }
         
@@ -83,12 +102,11 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         hitDataSource?.handle?(results: results, error: error)
         hitDataSource?.handle(hits: hits)
         facetDataSource?.handle?(results: results, error: error)
-        facetDataSource?.handle(facets: facetResults)
     }
     
-    func getFacets(with results: SearchResults!, andFacetName facetName:String) -> [FacetValue] {
+    func getFacetRecords(with results: SearchResults!, andFacetName facetName:String) -> [FacetRecord] {
         // Sort facets: first selected facets, then by decreasing count, then by name.
-        return FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
+        let facetValues = FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
             // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
             // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
             let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
@@ -102,6 +120,8 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
                 return lhs.value < rhs.value
             }
         }
+        
+        return facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted: "") }
     }
     
     // MARK: UISearchResultsUpdating delegate function
@@ -111,9 +131,23 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             return
         }
         
-        searcher.params.query = searchString
-        searcher.search()
+        switch searchController {
+        case hitSearchController:
+            searcher.params.query = searchString
+            searcher.search()
+        case facetSearchController:
+            searcher.searchForFacetValues(of: "category", matching: searchString) {
+                content, error in
+                let facetHits = content?["facetHits"] as? [[String: Any]]
+                let categoryFacets = facetHits?.map { (facetHit) in
+                    return FacetRecord(value: facetHit["value"] as! String, count: facetHit["count"] as! Int, highlighted: facetHit["highlighted"] as! String)
+                    } ?? []
+                self.facetDataSource?.handle(facetRecords: categoryFacets)
+            }
+        default: break
+        }
     }
+    
     
     func toggleFacetRefinement(name: String, value: String) {
         searcher.params.toggleFacetRefinement(name: name, value: value)

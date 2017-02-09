@@ -9,7 +9,7 @@
 import InstantSearchCore
 import UIKit
 
-class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, AlgoliaFacetDataSource {
+class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaFacetDataSource {
     
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
@@ -22,7 +22,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     var searchController: UISearchController!
     let FACET_NAME = "category"
     var searchCoordinator: SearchCoordinator!
-    var categoryFacets: [(value: String, count: Int)] = []
+    var categoryFacets: [FacetRecord] = []
     var nbHits = 0 {
         didSet {
             nbHitsLabel.text = "\(nbHits) results"
@@ -33,7 +33,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         // TODO: This should be done in a better way.
         categoryFacets = searchCoordinator.facetResults[FACET_NAME]?.map { facetValue in
-                return (facetValue.value, facetValue.count)
+            return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted:"")
             }  ?? []
         
         nbHits = searchCoordinator.nbHits
@@ -41,8 +41,8 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         topBarView.backgroundColor = TABLE_COLOR
         configureSearchController()
         configureTable()
+        searchCoordinator.set(facetSearchController: searchController)
         searchCoordinator.facetDataSource = self
-        searchController.searchResultsUpdater = self
     }
 
     // MARK: - Table view data source
@@ -51,8 +51,8 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         nbHits = results.nbHits
     }
     
-    func handle(facets: [String : [FacetValue]]) {
-        //categoryFacets = facets[FACET_NAME]!
+    func handle(facetRecords: [FacetRecord]) {
+        categoryFacets = facetRecords
         tableView.reloadData()
     }
     
@@ -80,23 +80,6 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.backgroundColor = TABLE_COLOR
         
         return cell
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchString = searchController.searchBar.text else {
-            return
-        }
-        
-        searchCoordinator.searcher.searchForFacetValues(of: "category", matching: searchString) {
-            content, error in
-            
-            let facetHits = content?["facetHits"] as? [[String: Any]]
-            self.categoryFacets = facetHits?.map { (facetHit) in
-                return (facetHit["value"] as! String, facetHit["count"] as! Int)
-            } ?? []
-            
-            self.tableView.reloadData()
-        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
