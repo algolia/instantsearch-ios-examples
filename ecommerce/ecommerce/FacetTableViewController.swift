@@ -9,18 +9,21 @@
 import InstantSearchCore
 import UIKit
 
-class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
+class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaFacetDataSource {
     
+    @IBOutlet weak var tableView: UITableView!
     var searchCoordinator: SearchCoordinator!
     var categoryFacets: [FacetValue] = []
     
     let FACET_NAME = "category"
+    let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
         categoryFacets = searchCoordinator.facetResults[FACET_NAME] ?? []
         searchCoordinator.facetDataSource = self
+        configureTable()
     }
 
     // MARK: - Table view data source
@@ -30,17 +33,17 @@ class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
         tableView.reloadData()
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return categoryFacets.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath)
         let facet = categoryFacets[indexPath.row]
         cell.textLabel?.text = facet.value
@@ -54,8 +57,16 @@ class FacetTableViewController: UITableViewController, AlgoliaFacetDataSource {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         searchCoordinator.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
+    }
+    
+    func configureTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100.0
+        tableView.backgroundColor = TABLE_COLOR
     }
 }
