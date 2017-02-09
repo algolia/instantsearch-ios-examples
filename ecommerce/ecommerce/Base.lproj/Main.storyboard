@@ -274,7 +274,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nbHitsLabel" destination="Upm-8Q-jLS" id="MWr-KI-TWM"/>
+                        <outlet property="searchBarView" destination="rnG-Ks-eub" id="LiV-8Q-inf"/>
                         <outlet property="tableView" destination="9ZT-Dj-XFu" id="qBS-eb-FMm"/>
+                        <outlet property="topBarView" destination="Wsb-dH-Voy" id="vBZ-0N-tYa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jla-1p-1Pl" userLabel="First Responder" sceneMemberID="firstResponder"/>

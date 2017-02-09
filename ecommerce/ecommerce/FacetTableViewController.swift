@@ -11,23 +11,41 @@ import UIKit
 
 class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaFacetDataSource {
     
+    @IBOutlet weak var searchBarView: UIView!
+    @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var nbHitsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
+    let BAR_COLOR = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
+    
+    var searchController: UISearchController!
+    let FACET_NAME = "category"
     var searchCoordinator: SearchCoordinator!
     var categoryFacets: [FacetValue] = []
-    
-    let FACET_NAME = "category"
-    let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
+    var nbHits = 0 {
+        didSet {
+            nbHitsLabel.text = "\(nbHits) results"
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
         categoryFacets = searchCoordinator.facetResults[FACET_NAME] ?? []
-        searchCoordinator.facetDataSource = self
+        configureNavBar()
+        topBarView.backgroundColor = TABLE_COLOR
+        configureSearchController()
         configureTable()
+        searchCoordinator.facetDataSource = self
     }
 
     // MARK: - Table view data source
 
+    func handle(results: SearchResults, error: Error?) {
+        nbHits = results.nbHits
+    }
+    
     func handle(facets: [String : [FacetValue]]) {
         //categoryFacets = facets[FACET_NAME]!
         tableView.reloadData()
@@ -68,5 +86,28 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = TABLE_COLOR
+    }
+    
+    func configureNavBar() {
+        navigationController?.navigationBar.barTintColor = BAR_COLOR
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+    }
+    
+    func configureSearchController() {
+        // Initialize and perform a minimum configuration to the search controller.
+        searchController = UISearchController(searchResultsController: nil)
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        searchController.searchBar.placeholder = "Search items"
+        searchController.searchBar.sizeToFit()
+        
+        searchController.searchBar.barTintColor = BAR_COLOR
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.layer.cornerRadius = 1.0
+        searchController.searchBar.clipsToBounds = true
+        searchBarView.addSubview(searchController.searchBar)
     }
 }
