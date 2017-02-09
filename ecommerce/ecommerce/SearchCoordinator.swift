@@ -102,6 +102,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         hitDataSource?.handle?(results: results, error: error)
         hitDataSource?.handle(hits: hits)
         facetDataSource?.handle?(results: results, error: error)
+        facetDataSource?.handle(facetRecords: facetResults["category"]!)
     }
     
     func getFacetRecords(with results: SearchResults!, andFacetName facetName:String) -> [FacetRecord] {
