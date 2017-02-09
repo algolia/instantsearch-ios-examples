@@ -24,7 +24,9 @@ import AlgoliaSearch
 class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     var searcher: Searcher!
     var facetResults: [String: [FacetValue]] = [:]
+    var nbHits = 0
     private var hits: [JSONObject] = []
+    
     
     let ALGOLIA_APP_ID = "latency"
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
@@ -75,6 +77,8 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
                 facetResults[facet] = getFacets(with: results, andFacetName: facet)
             }
         }
+        
+        nbHits = results.nbHits
         
         hitDataSource?.handle?(results: results, error: error)
         hitDataSource?.handle(hits: hits)

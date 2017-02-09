@@ -12,7 +12,7 @@ import AlgoliaSearch
 
 class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaHitDataSource {
     
-    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarView: UIView! 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
