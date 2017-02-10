@@ -32,7 +32,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
-        categoryFacets = searchCoordinator.getFacetRecords(withFacetName: FACET_NAME)
+        categoryFacets = searchCoordinator.getSearchFacetRecords(withFacetName: FACET_NAME)!
         
         nbHits = searchCoordinator.nbHits
         configureNavBar()
@@ -49,8 +49,8 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         nbHits = results.nbHits
     }
     
-    func handle(facetRecords: [FacetRecord]) {
-        categoryFacets = facetRecords
+    func handle(facetRecords: [FacetRecord]?) {
+        categoryFacets = facetRecords!
         tableView.reloadData()
     }
     

@@ -17,7 +17,7 @@ import AlgoliaSearch
 
 @objc protocol AlgoliaFacetDataSource {
     @objc optional func handle(results: SearchResults, error: Error?)
-    func handle(facetRecords: [FacetRecord])
+    func handle(facetRecords: [FacetRecord]?)
 }
 
 //TODO: Make all private methods method..
@@ -85,12 +85,14 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         self.facetSearchController = facetSearchController
     }
     
-    func getFacetRecords(with results: SearchResults!, andFacetName facetName:String) -> [FacetRecord] {
+    // This comes from Searcher.searchForFacetValues. 
+    // TODO: Change naming because it is confusing. Also do a small diagram of the flow to visualise all these functions and delegates.
+    func getFacetRecords(with results: SearchResults?, facetCounts: [String: Int]?, andFacetName facetName:String) -> [FacetRecord]? {
         // Sort facets: first selected facets, then by decreasing count, then by name.
-        let facetValues = FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
+        let facetValues = FacetValue.listFrom(facetCounts: facetCounts, refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
             // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
             // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
-            let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
+            let disjunctiveFaceting = false
             let lhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: lhs.value)
             let rhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: rhs.value)
             if !disjunctiveFaceting && lhsChecked != rhsChecked {
@@ -102,13 +104,14 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             }
         }
         
-        return facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted: "") }
+        facetResults[facetName] = facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted: "") }
+
+        return facetResults[facetName]
     }
     
-    func getFacetRecords(withFacetName facetName: String)  -> [FacetRecord] {
-        return facetResults[facetName]?.map { facetValue in
-            return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted:"")
-            }  ?? []
+    // This comes from Searcher.search() results
+    func getSearchFacetRecords(withFacetName facetName: String)  -> [FacetRecord]? {
+        return facetResults[facetName]
     }
     
     // Searcher Delegate functions
@@ -123,7 +126,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         
         if let facets = searcher.params.facets {
             for facet in facets {
-                facetResults[facet] = getFacetRecords(with: results, andFacetName: facet)
+                facetResults[facet] = getFacetRecords(with: results, facetCounts:results.facets(name: facet), andFacetName: facet)
             }
         }
         
@@ -148,16 +151,22 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             searcher.search()
         case facetSearchController:
             if (searchString.isEmpty) {
-                self.facetDataSource?.handle(facetRecords: getFacetRecords(withFacetName: "category"))
+                self.facetDataSource?.handle(facetRecords: getSearchFacetRecords(withFacetName: "category"))
                 break
             }
             searcher.searchForFacetValues(of: "category", matching: searchString) {
                 content, error in
                 let facetHits = content?["facetHits"] as? [[String: Any]]
-                let categoryFacets = facetHits?.map { (facetHit) in
-                    return FacetRecord(value: facetHit["value"] as! String, count: facetHit["count"] as! Int, highlighted: facetHit["highlighted"] as! String)
-                    } ?? []
-                self.facetDataSource?.handle(facetRecords: categoryFacets)
+                var facetCounts: [String: Int] = [:]
+                _ = facetHits?.map { (facetHit) in
+                    let value = facetHit["value"] as! String
+                    let count = facetHit["count"] as! Int
+                    facetCounts[value] = count
+                    }
+                
+                self.facetResults["category"] = self.getFacetRecords(with: nil, facetCounts:facetCounts, andFacetName: "category")
+                
+                self.facetDataSource?.handle(facetRecords: self.facetResults["category"])
             }
         default: break
         }
