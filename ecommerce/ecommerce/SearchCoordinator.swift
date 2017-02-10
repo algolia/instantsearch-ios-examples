@@ -137,6 +137,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         hitDataSource?.handle(hits: hits)
         facetDataSource?.handle?(results: results, error: error)
         facetDataSource?.handle(facetRecords: facetResults["category"]!)
+        facetSearchController?.searchBar.text = ""
     }
     
     // MARK: UISearchResultsUpdating delegate function
