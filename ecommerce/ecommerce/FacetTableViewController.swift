@@ -72,8 +72,8 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath)
         let facet = categoryFacets[indexPath.row]
         cell.textLabel?.text = facet.value
-        cell.detailTextLabel?.text = "\(facet.count)"
-        if searchCoordinator.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value) {
+        cell.detailTextLabel?.text = "\(facet.count ?? 0)"
+        if searchCoordinator.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -86,7 +86,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        searchCoordinator.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
+        searchCoordinator.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!)
     }
     
     func configureTable() {

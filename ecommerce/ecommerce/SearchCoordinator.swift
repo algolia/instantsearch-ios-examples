@@ -105,7 +105,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             }
         }
         
-        facetResults[facetName] = facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted: "") }
+        facetResults[facetName] = facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count) }
 
         return facetResults[facetName]
     }
@@ -160,10 +160,9 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
                 let facetHits = content?["facetHits"] as? [[String: Any]]
                 var facetCounts: [String: Int] = [:]
                 _ = facetHits?.map { (facetHit) in
-                    let value = facetHit["value"] as! String
-                    let count = facetHit["count"] as! Int
-                    facetCounts[value] = count
-                    }
+                    let facetRecord = FacetRecord(json: facetHit)
+                    facetCounts[facetRecord.value!] = facetRecord.count!
+                }
                 
                 self.facetResults["category"] = self.getFacetRecords(with: nil, facetCounts:facetCounts, andFacetName: "category")
                 
