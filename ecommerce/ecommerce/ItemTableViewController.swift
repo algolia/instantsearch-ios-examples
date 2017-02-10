@@ -78,7 +78,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: Helper methods for configuring each component of the table
     
     func configureSearchCoordinator() {
-        searchCoordinator = SearchCoordinator(searchController: searchController)
+        searchCoordinator = SearchCoordinator(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
         searchCoordinator.hitDataSource = self
     }
     

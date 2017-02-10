@@ -24,10 +24,6 @@ import AlgoliaSearch
 class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     // MARK: Members: Algolia Specific
-    
-    let ALGOLIA_APP_ID = "latency"
-    let ALGOLIA_INDEX_NAME = "bestbuy_promo"
-    let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
     var searcher: Searcher!
     
     var facetResults: [String: [FacetRecord]] = [:]
@@ -57,23 +53,15 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
     
     // MARK: Init setters and getters
     
-    init(searchController: UISearchController) {
+    init(algoliaSearchProtocol: AlgoliaSearchProtocol, searchController: UISearchController) {
         super.init()
-        
-        let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
-        let index = client.index(withName: ALGOLIA_INDEX_NAME)
-        searcher = Searcher(index: index, resultHandler: self.handleResults)
-        searcher.params.hitsPerPage = 15
-        
+        searcher = algoliaSearchProtocol.searcher
+        searcher.addResultHandler(self.handleResults)
         
         searchProgressController = SearchProgressController(searcher: searcher)
         searchProgressController.delegate = self
         
         searcher.params.query = ""
-        searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
-        searcher.params.attributesToHighlight = ["name", "category"]
-        searcher.params.facets = ["category"]
-        searcher.params.setFacet(withName: "category", disjunctive: true)
         searcher.search()
         
         defer {
