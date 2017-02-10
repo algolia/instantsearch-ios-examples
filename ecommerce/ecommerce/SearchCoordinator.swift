@@ -90,6 +90,7 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
     func getFacetRecords(with results: SearchResults?, facetCounts: [String: Int]?, andFacetName facetName:String) -> [FacetRecord]? {
         // Sort facets: first selected facets, then by decreasing count, then by name.
         let facetValues = FacetValue.listFrom(facetCounts: facetCounts, refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
+            // TODO: Change to false always. Need to decide on that later on.
             // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
             // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
             let disjunctiveFaceting = false

@@ -42,6 +42,10 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         searchCoordinator.set(facetSearchController: searchController)
         searchCoordinator.facetDataSource = self
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        searchController.isActive = false
+    }
 
     // MARK: - Table view data source
 

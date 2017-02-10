@@ -130,7 +130,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "FacetSegue") {
-            
+            searchController.isActive = false
             let facetTableViewController = segue.destination as! FacetTableViewController
             facetTableViewController.searchCoordinator = searchCoordinator
         }
