@@ -22,19 +22,26 @@ import AlgoliaSearch
 
 //TODO: Make all private methods method..
 class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
-    var searcher: Searcher!
-    var facetResults: [String: [FacetRecord]] = [:]
-    var nbHits = 0
-    private var hits: [JSONObject] = []
     
+    // MARK: Members: Algolia Specific
     
     let ALGOLIA_APP_ID = "latency"
     let ALGOLIA_INDEX_NAME = "bestbuy_promo"
     let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
-    var searchProgressController: SearchProgressController!
+    var searcher: Searcher!
+    
+    var facetResults: [String: [FacetRecord]] = [:]
+    var nbHits = 0
+    private var hits: [JSONObject] = []
+    
+    // MARK: Members: Delegate
     
     var hitDataSource: AlgoliaHitDataSource? // TODO: Might want to initialise this in the init method.
     var facetDataSource: AlgoliaFacetDataSource?
+    
+    // MARK: Members: Controller
+    
+    var searchProgressController: SearchProgressController!
     
     var hitSearchController: UISearchController! {
         didSet {
@@ -47,6 +54,8 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             facetSearchController.searchResultsUpdater = self
         }
     }
+    
+    // MARK: Init setters and getters
     
     init(searchController: UISearchController) {
         super.init()
@@ -76,12 +85,33 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         self.facetSearchController = facetSearchController
     }
     
-    func loadMoreIfNecessary(rowNumber: Int) {
-        // TODO: this '5' should be exposed as customisation
-        if rowNumber + 5 >= hits.count {
-            searcher.loadMore()
+    func getFacetRecords(with results: SearchResults!, andFacetName facetName:String) -> [FacetRecord] {
+        // Sort facets: first selected facets, then by decreasing count, then by name.
+        let facetValues = FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
+            // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
+            // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
+            let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
+            let lhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: lhs.value)
+            let rhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: rhs.value)
+            if !disjunctiveFaceting && lhsChecked != rhsChecked {
+                return lhsChecked
+            } else if lhs.count != rhs.count {
+                return lhs.count > rhs.count
+            } else {
+                return lhs.value < rhs.value
+            }
         }
+        
+        return facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted: "") }
     }
+    
+    func getFacetRecords(withFacetName facetName: String)  -> [FacetRecord] {
+        return facetResults[facetName]?.map { facetValue in
+            return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted:"")
+            }  ?? []
+    }
+    
+    // Searcher Delegate functions
     
     func handleResults(results: SearchResults?, error: Error?) {
         guard let results = results else { return }
@@ -105,26 +135,6 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         facetDataSource?.handle(facetRecords: facetResults["category"]!)
     }
     
-    func getFacetRecords(with results: SearchResults!, andFacetName facetName:String) -> [FacetRecord] {
-        // Sort facets: first selected facets, then by decreasing count, then by name.
-        let facetValues = FacetValue.listFrom(facetCounts: results.facets(name: facetName), refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
-            // When using cunjunctive faceting ("AND"), all refined facet values are displayed first.
-            // But when using disjunctive faceting ("OR"), refined facet values are left where they are.
-            let disjunctiveFaceting = results.disjunctiveFacets.contains(facetName)
-            let lhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: lhs.value)
-            let rhsChecked = searcher.params.hasFacetRefinement(name: facetName, value: rhs.value)
-            if !disjunctiveFaceting && lhsChecked != rhsChecked {
-                return lhsChecked
-            } else if lhs.count != rhs.count {
-                return lhs.count > rhs.count
-            } else {
-                return lhs.value < rhs.value
-            }
-        }
-        
-        return facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted: "") }
-    }
-    
     // MARK: UISearchResultsUpdating delegate function
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -137,6 +147,10 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
             searcher.params.query = searchString
             searcher.search()
         case facetSearchController:
+            if (searchString.isEmpty) {
+                self.facetDataSource?.handle(facetRecords: getFacetRecords(withFacetName: "category"))
+                break
+            }
             searcher.searchForFacetValues(of: "category", matching: searchString) {
                 content, error in
                 let facetHits = content?["facetHits"] as? [[String: Any]]
@@ -149,6 +163,14 @@ class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelega
         }
     }
     
+    // MARK: Search Helper Functions
+    
+    func loadMoreIfNecessary(rowNumber: Int) {
+        // TODO: this '5' should be exposed as customisation
+        if rowNumber + 5 >= hits.count {
+            searcher.loadMore()
+        }
+    }
     
     func toggleFacetRefinement(name: String, value: String) {
         searcher.params.toggleFacetRefinement(name: name, value: value)

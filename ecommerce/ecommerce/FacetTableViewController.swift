@@ -32,9 +32,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
-        categoryFacets = searchCoordinator.facetResults[FACET_NAME]?.map { facetValue in
-            return FacetRecord(value: facetValue.value, count: facetValue.count, highlighted:"")
-            }  ?? []
+        categoryFacets = searchCoordinator.getFacetRecords(withFacetName: FACET_NAME)
         
         nbHits = searchCoordinator.nbHits
         configureNavBar()
