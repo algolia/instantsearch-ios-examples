@@ -12,5 +12,6 @@ import AlgoliaSearch
 
 protocol InstantSearchProtocol {
     var searcher: Searcher { get }
+    var instantSearchParameters: InstantSearchParameters { get }
     // TODO: Potentially a tableView. And can create another protocol for a CollectionView, and then a custom View...
 }

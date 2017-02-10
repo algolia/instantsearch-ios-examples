@@ -14,12 +14,13 @@ class AlgoliaSearchManager: InstantSearchProtocol {
     /// The singleton instance.
     static let instance = AlgoliaSearchManager()
     
-    let ALGOLIA_APP_ID = "latency"
-    let ALGOLIA_INDEX_NAME = "bestbuy_promo"
-    let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
+    private let ALGOLIA_APP_ID = "latency"
+    private let ALGOLIA_INDEX_NAME = "bestbuy_promo"
+    private let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
+    private let index: Index
     
     var searcher: Searcher
-    let index: Index
+    var instantSearchParameters = InstantSearchParameters()
     
     private init() {
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
@@ -30,5 +31,7 @@ class AlgoliaSearchManager: InstantSearchProtocol {
         searcher.params.attributesToHighlight = ["name", "category"]
         searcher.params.facets = ["category"]
         searcher.params.setFacet(withName: "category", disjunctive: true)
+        
+        instantSearchParameters.remainingItemsBeforeLoading = 5
     }
 }

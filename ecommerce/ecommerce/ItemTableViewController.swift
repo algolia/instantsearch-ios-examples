@@ -54,11 +54,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: UITableView Delegate and Datasource functions
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemsToShow.count
     }

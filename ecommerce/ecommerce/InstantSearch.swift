@@ -26,6 +26,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     // MARK: Members: Algolia Specific
     var searcher: Searcher!
     
+    var instantSearchParameters = InstantSearchParameters()
     var facetResults: [String: [FacetRecord]] = [:]
     var nbHits = 0
     private var hits: [JSONObject] = []
@@ -55,6 +56,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     init(algoliaSearchProtocol: InstantSearchProtocol, searchController: UISearchController) {
         super.init()
+        instantSearchParameters = algoliaSearchProtocol.instantSearchParameters
         searcher = algoliaSearchProtocol.searcher
         searcher.addResultHandler(self.handleResults)
         
@@ -164,8 +166,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     // MARK: Search Helper Functions
     
     func loadMoreIfNecessary(rowNumber: Int) {
-        // TODO: this '5' should be exposed as customisation
-        if rowNumber + 5 >= hits.count {
+        if rowNumber + instantSearchParameters.remainingItemsBeforeLoading >= hits.count {
             searcher.loadMore()
         }
     }
