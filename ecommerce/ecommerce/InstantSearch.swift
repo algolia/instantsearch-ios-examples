@@ -53,7 +53,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     // MARK: Init setters and getters
     
-    init(algoliaSearchProtocol: AlgoliaSearchProtocol, searchController: UISearchController) {
+    init(algoliaSearchProtocol: InstantSearchProtocol, searchController: UISearchController) {
         super.init()
         searcher = algoliaSearchProtocol.searcher
         searcher.addResultHandler(self.handleResults)

@@ -10,7 +10,7 @@ import Foundation
 import InstantSearchCore
 import AlgoliaSearch
 
-class AlgoliaSearchManager: AlgoliaSearchProtocol {
+class AlgoliaSearchManager: InstantSearchProtocol {
     /// The singleton instance.
     static let instance = AlgoliaSearchManager()
     

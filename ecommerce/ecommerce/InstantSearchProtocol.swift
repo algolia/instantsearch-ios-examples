@@ -1,5 +1,5 @@
 //
-//  AlgoliaSearchProtocol.swift
+//  InstantSearchProtocol.swift
 //  ecommerce
 //
 //  Created by Guy Daher on 10/02/2017.
@@ -10,7 +10,7 @@ import Foundation
 import InstantSearchCore
 import AlgoliaSearch
 
-protocol AlgoliaSearchProtocol {
+protocol InstantSearchProtocol {
     var searcher: Searcher { get }
     // TODO: Potentially a tableView. And can create another protocol for a CollectionView, and then a custom View...
 }
