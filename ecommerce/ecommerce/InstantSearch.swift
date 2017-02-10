@@ -1,5 +1,5 @@
 //
-//  SearchCoordinator.swift
+//  InstantSearch.swift
 //  ecommerce
 //
 //  Created by Guy Daher on 08/02/2017.
@@ -21,7 +21,7 @@ import AlgoliaSearch
 }
 
 //TODO: Make all private methods method..
-class SearchCoordinator: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
+class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     // MARK: Members: Algolia Specific
     var searcher: Searcher!

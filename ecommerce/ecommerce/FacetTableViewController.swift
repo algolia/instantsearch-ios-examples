@@ -21,7 +21,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var searchController: UISearchController!
     let FACET_NAME = "category"
-    var searchCoordinator: SearchCoordinator!
+    var instantSearch: InstantSearch!
     var categoryFacets: [FacetRecord] = []
     var nbHits = 0 {
         didSet {
@@ -32,15 +32,15 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
-        categoryFacets = searchCoordinator.getSearchFacetRecords(withFacetName: FACET_NAME)!
+        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
         
-        nbHits = searchCoordinator.nbHits
+        nbHits = instantSearch.nbHits
         configureNavBar()
         topBarView.backgroundColor = TABLE_COLOR
         configureSearchController()
         configureTable()
-        searchCoordinator.set(facetSearchController: searchController)
-        searchCoordinator.facetDataSource = self
+        instantSearch.set(facetSearchController: searchController)
+        instantSearch.facetDataSource = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,7 +73,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let facet = categoryFacets[indexPath.row]
         cell.textLabel?.text = facet.value
         cell.detailTextLabel?.text = "\(facet.count ?? 0)"
-        if searchCoordinator.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!) {
+        if instantSearch.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -86,7 +86,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        searchCoordinator.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!)
+        instantSearch.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!)
     }
     
     func configureTable() {

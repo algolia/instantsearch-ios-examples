@@ -24,7 +24,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var searchController: UISearchController!
     var isFilterClicked = false
-    var searchCoordinator: SearchCoordinator!
+    var instantSearch: InstantSearch!
     var itemsToShow: [JSONObject] = []
     var nbHits = 0 {
         didSet {
@@ -38,7 +38,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureToolBar()
         configureSearchController()
         configureTable()
-        configureSearchCoordinator()
+        configureInstantSearch()
     }
     
     // MARK: AlgoliaHitDataSource Datasource functions
@@ -67,7 +67,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
-        searchCoordinator.loadMoreIfNecessary(rowNumber: indexPath.row)
+        instantSearch.loadMoreIfNecessary(rowNumber: indexPath.row)
         
         cell.item = ItemRecord(json: itemsToShow[indexPath.row])
         cell.backgroundColor = TABLE_COLOR
@@ -77,9 +77,9 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: Helper methods for configuring each component of the table
     
-    func configureSearchCoordinator() {
-        searchCoordinator = SearchCoordinator(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
-        searchCoordinator.hitDataSource = self
+    func configureInstantSearch() {
+        instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
+        instantSearch.hitDataSource = self
     }
     
     func configureTable() {
@@ -132,7 +132,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if(segue.identifier == "FacetSegue") {
             searchController.isActive = false
             let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.searchCoordinator = searchCoordinator
+            facetTableViewController.instantSearch = instantSearch
         }
     }
 }
