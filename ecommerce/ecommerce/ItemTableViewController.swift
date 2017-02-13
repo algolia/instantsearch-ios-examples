@@ -62,8 +62,10 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
+        // TODO: Needs to be removed by offering it in the library
         instantSearch.loadMoreIfNecessary(rowNumber: indexPath.row)
         
+        // TODO: Solve it better with data binding techniques
         cell.item = ItemRecord(json: itemsToShow[indexPath.row])
         cell.backgroundColor = TABLE_COLOR
         
