@@ -21,28 +21,30 @@ class ItemCell: UITableViewCell {
     
     var item: ItemRecord? {
         didSet {
-            nameLabel.highlightedText = item?.name_highlighted
+            guard let item = item else { return }
+            
+            nameLabel.highlightedText = item.name_highlighted
             nameLabel.highlightedTextColor = UIColor.black
             nameLabel.highlightedBackgroundColor = UIColor.orange
-            categoryLabel.highlightedText = item?.category_highlighted
+            categoryLabel.highlightedText = item.category_highlighted
             categoryLabel.highlightedTextColor = UIColor.black
             categoryLabel.highlightedBackgroundColor = UIColor.yellow
             
-            if let manufacturer = item?.manufacturer {
+            if let manufacturer = item.manufacturer {
                 manufacturerLabel.text = "by \(manufacturer)"
             }
             
-            if let price = item?.price {
+            if let price = item.price {
                 priceLabel.text = "$\(String(describing: price))"
             }
             
-            if let customerReviewCount = item?.customerReviewCount {
+            if let customerReviewCount = item.customerReviewCount {
                 reviewCountLabel.text = "(\(String(describing: customerReviewCount)))"
             }
             
             itemImageView.cancelImageDownloadTask()
             
-            if let url = item?.imageUrl {
+            if let url = item.imageUrl {
                 itemImageView.contentMode = .scaleAspectFit
                 itemImageView.setImageWith(url, placeholderImage: ItemCell.placeholder)
             } else {
