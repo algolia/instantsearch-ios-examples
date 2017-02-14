@@ -13,6 +13,7 @@ import AlgoliaSearch
 public class FacetRecord: NSObject {
     private var _value: String?
     private var _count: Int?
+    public var isRefined: Bool = false
 //    var highlighted: String
     
     private var json: JSONObject?

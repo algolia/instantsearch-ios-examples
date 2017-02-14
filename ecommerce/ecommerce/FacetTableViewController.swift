@@ -69,16 +69,10 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
         let facet = categoryFacets[indexPath.row]
-        cell.textLabel?.text = facet.value
-        cell.detailTextLabel?.text = "\(facet.count ?? 0)"
-        if instantSearch.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!) {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-
+        facet.isRefined = instantSearch.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!)
+        cell.facet = facet
         cell.backgroundColor = TABLE_COLOR
         
         return cell

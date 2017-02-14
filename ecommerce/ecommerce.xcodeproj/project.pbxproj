@@ -26,6 +26,7 @@
 		E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */; };
 		E219FAF81E4DFA5A006D9CFC /* InstanSearchTableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */; };
 		E219FAFA1E4E02BD006D9CFC /* InstantSearchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF91E4E02BD006D9CFC /* InstantSearchParameters.swift */; };
+		E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */; };
 		F61B94FE5A83AAEF4FBD3C8E /* Pods_ecommerceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC5F93DE8716F3E9C97AADE /* Pods_ecommerceTests.framework */; };
 		FD5D736B46847FDA1C00BCBE /* Pods_ecommerceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A716D6C39742184A7A37A33 /* Pods_ecommerceUITests.framework */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaSearchManager.swift; sourceTree = "<group>"; };
 		E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanSearchTableStorage.swift; sourceTree = "<group>"; };
 		E219FAF91E4E02BD006D9CFC /* InstantSearchParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchParameters.swift; sourceTree = "<group>"; };
+		E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetCategoryCell.swift; sourceTree = "<group>"; };
 		E3C12E07E23E9A50BC9A32ED /* Pods-ecommerceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EF8DE04E87BDFD0B3B86E68B /* Pods-ecommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +161,7 @@
 		E219FAA01E4382B2006D9CFC /* ecommerce */ = {
 			isa = PBXGroup;
 			children = (
+				E219FB021E534A94006D9CFC /* InstantSearch */,
 				E219FAE31E4B0EAD006D9CFC /* Helpers */,
 				E219FAE61E4B0F1E006D9CFC /* Model */,
 				E219FAE51E4B0ED9006D9CFC /* Views */,
@@ -211,6 +214,7 @@
 				E219FAAA1E4382B2006D9CFC /* LaunchScreen.storyboard */,
 				E219FAA51E4382B2006D9CFC /* Main.storyboard */,
 				E219FAD91E44DB20006D9CFC /* ItemCell.swift */,
+				E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */,
 				E219FADF1E49F982006D9CFC /* TopBarView.swift */,
 			);
 			name = Views;
@@ -219,15 +223,22 @@
 		E219FAE61E4B0F1E006D9CFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */,
 				E219FAD71E44C710006D9CFC /* ItemRecord.swift */,
 				E219FAF01E4CC026006D9CFC /* FacetRecord.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E219FB021E534A94006D9CFC /* InstantSearch */ = {
+			isa = PBXGroup;
+			children = (
 				E219FAE71E4B1864006D9CFC /* InstantSearch.swift */,
 				E219FAF91E4E02BD006D9CFC /* InstantSearchParameters.swift */,
 				E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */,
 				E219FAF21E4DD1FB006D9CFC /* InstantSearchProtocol.swift */,
-				E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */,
 			);
-			name = Model;
+			name = InstantSearch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -523,6 +534,7 @@
 				E219FAE81E4B1864006D9CFC /* InstantSearch.swift in Sources */,
 				E219FAA41E4382B2006D9CFC /* ItemTableViewController.swift in Sources */,
 				E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */,
+				E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
 				E219FAF81E4DFA5A006D9CFC /* InstanSearchTableStorage.swift in Sources */,
 				E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */,
