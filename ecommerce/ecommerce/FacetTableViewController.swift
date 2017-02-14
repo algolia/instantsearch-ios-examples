@@ -110,7 +110,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-        searchController.searchBar.placeholder = "Search items"
+        searchController.searchBar.placeholder = "Search categories"
         searchController.searchBar.sizeToFit()
         
         searchController.searchBar.barTintColor = BAR_COLOR
