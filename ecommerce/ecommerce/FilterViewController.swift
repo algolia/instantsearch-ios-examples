@@ -14,6 +14,12 @@ class FilterViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem?.target = self
+        navigationItem.leftBarButtonItem?.action = #selector(cancelClicked(_:))
+        
+        navigationItem.rightBarButtonItem?.target = self
+        navigationItem.rightBarButtonItem?.action = #selector(searchClicked(_:))
+        
         form +++ Section("Section1")
             <<< TextRow() { row in
                 row.title = "Row Title"
@@ -28,6 +34,15 @@ class FilterViewController: FormViewController {
                 $0.title = "Date Riw"
                 $0.value = Date(timeIntervalSinceReferenceDate: 0)
         }
+    }
+    
+    func cancelClicked(_ barButtonItem: UIBarButtonItem) {
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func searchClicked(_ barButtonItem: UIBarButtonItem) {
+        // TODO: Save the filters here before exiting!
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
 

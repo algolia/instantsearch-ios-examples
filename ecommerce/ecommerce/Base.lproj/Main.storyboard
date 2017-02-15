@@ -326,10 +326,10 @@
             </objects>
             <point key="canvasLocation" x="-2922" y="9"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Filter View Navigation Controller-->
         <scene sceneID="3hz-4h-0v8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="80H-py-BPS" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="80H-py-BPS" customClass="FilterViewNavigationController" customModule="ecommerce" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eJE-vF-bGP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
