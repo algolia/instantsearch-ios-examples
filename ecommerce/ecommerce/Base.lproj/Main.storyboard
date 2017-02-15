@@ -112,8 +112,24 @@
                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahZ-Ot-SQI">
+                                        <rect key="frame" x="296" y="7" width="7" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9PF-o6-o3A">
+                                        <rect key="frame" x="313" y="8.5" width="42" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Facet">
+                                            <color key="titleColor" red="0.35401895642280579" green="0.35431191325187683" blue="0.35406431555747986" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="kfM-8D-dnf" kind="show" identifier="FacetSegue" id="Cpd-Au-cOh"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txO-NW-9ag">
-                                        <rect key="frame" x="288" y="8.5" width="39" height="33"/>
+                                        <rect key="frame" x="221" y="8.5" width="39" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Filter">
                                             <color key="titleColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -123,37 +139,21 @@
                                         </connections>
                                     </button>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down_flat" translatesAutoresizingMaskIntoConstraints="NO" id="mKK-uB-P5u">
-                                        <rect key="frame" x="330" y="13" width="25" height="25"/>
+                                        <rect key="frame" x="263" y="12.5" width="25" height="25"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahZ-Ot-SQI">
-                                        <rect key="frame" x="277" y="7.5" width="7" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9PF-o6-o3A">
-                                        <rect key="frame" x="227" y="9" width="42" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Facet">
-                                            <color key="titleColor" red="0.35401895642280579" green="0.35431191325187683" blue="0.35406431555747986" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="kfM-8D-dnf" kind="show" identifier="FacetSegue" id="Cpd-Au-cOh"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tMk-It-YbN" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="1fp-2P-Tt7"/>
-                                    <constraint firstItem="ahZ-Ot-SQI" firstAttribute="centerY" secondItem="txO-NW-9ag" secondAttribute="centerY" id="44T-4e-jFg"/>
-                                    <constraint firstItem="ahZ-Ot-SQI" firstAttribute="leading" secondItem="9PF-o6-o3A" secondAttribute="trailing" constant="8" id="503-Yl-kYM"/>
-                                    <constraint firstAttribute="trailing" secondItem="mKK-uB-P5u" secondAttribute="trailing" constant="20" id="9nf-HU-QoP"/>
+                                    <constraint firstItem="9PF-o6-o3A" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="2ma-Dw-nYw"/>
+                                    <constraint firstAttribute="trailing" secondItem="9PF-o6-o3A" secondAttribute="trailing" constant="20" id="4NQ-jd-Iml"/>
+                                    <constraint firstItem="9PF-o6-o3A" firstAttribute="leading" secondItem="ahZ-Ot-SQI" secondAttribute="trailing" constant="10" id="FSQ-x9-Wb2"/>
                                     <constraint firstAttribute="height" constant="50" id="Ibm-N4-eYT"/>
                                     <constraint firstItem="tMk-It-YbN" firstAttribute="leading" secondItem="YAA-Ez-PoB" secondAttribute="leading" constant="8" id="Jmr-Br-DNy"/>
-                                    <constraint firstItem="9PF-o6-o3A" firstAttribute="centerY" secondItem="ahZ-Ot-SQI" secondAttribute="centerY" id="TMh-E4-mRl"/>
+                                    <constraint firstItem="txO-NW-9ag" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="cH9-gF-jsV"/>
+                                    <constraint firstItem="ahZ-Ot-SQI" firstAttribute="leading" secondItem="mKK-uB-P5u" secondAttribute="trailing" constant="8" id="dBA-dB-T4C"/>
                                     <constraint firstItem="mKK-uB-P5u" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="hYY-Qt-3cf"/>
-                                    <constraint firstItem="txO-NW-9ag" firstAttribute="centerY" secondItem="mKK-uB-P5u" secondAttribute="centerY" id="jdu-xw-L3b"/>
-                                    <constraint firstItem="txO-NW-9ag" firstAttribute="leading" secondItem="ahZ-Ot-SQI" secondAttribute="trailing" constant="4" id="tcG-mf-znR"/>
+                                    <constraint firstItem="ahZ-Ot-SQI" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="lXG-5M-OX2"/>
                                     <constraint firstItem="mKK-uB-P5u" firstAttribute="leading" secondItem="txO-NW-9ag" secondAttribute="trailing" constant="3" id="tfY-64-pBV"/>
                                 </constraints>
                             </view>
