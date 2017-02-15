@@ -21,40 +21,39 @@ class FilterViewController: FormViewController {
         navigationItem.rightBarButtonItem?.action = #selector(searchClicked(_:))
         
         form +++ Section("Original Price")
-            <<< SliderRow { slider in
+            <<< SliderRow("MinimumOriginalPrice") { slider in
                 slider.title = "Minimum Price"
-                slider.value = 1
+                slider.value = 0
                 slider.minimumValue = 1
                 slider.maximumValue = 100 // TODO: Set correct values
             }
-            <<< SliderRow() { slider in
+            <<< SliderRow("MaximumOriginalPrice") { slider in
                 slider.title = "Maximum Price"
-                slider.value = 100
+                slider.value = 0
                 slider.maximumValue = 1
                 slider.maximumValue = 100
             }
             +++ Section("Promoted Price")
-            <<< StepperRow { stepper in
+            <<< StepperRow("MinimumPromotedPrice") { stepper in
                 stepper.title = "Minimum Price"
-                stepper.value = 1
             }
-            <<< StepperRow() { stepper in
+            <<< StepperRow("MaximumPromotedPrice") { stepper in
                 stepper.title = "Maximum Price"
-                stepper.value = 100
             }
             +++ Section("Perks")
-            <<< CheckRow() { check in
+            <<< CheckRow("HasDiscount") { check in
                 check.title = "Has Discount?"
-                check.value = false
             }
-            <<< SwitchRow() { check in
+            <<< SwitchRow("HasFreeShipping") { check in
                 check.title = "Free Shipping?"
-                check.value = false
             }
             +++ Section("Quality")
-            <<< IntRow() { intRow in
+            <<< IntRow("MinimumReviews") { intRow in
                 intRow.title = "Minimum number of reviews"
-                intRow.value = 0
+            }
+            <<< SegmentedRow<String>("Ratings") { segmentedRow in
+                segmentedRow.title = "Ratings"
+                segmentedRow.options = ["1", "2", "3", "4", "5"]
             }
         
     }
@@ -64,7 +63,7 @@ class FilterViewController: FormViewController {
     }
     
     func searchClicked(_ barButtonItem: UIBarButtonItem) {
-        // TODO: Save the filters here before exiting!
+        print(form.values())
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
