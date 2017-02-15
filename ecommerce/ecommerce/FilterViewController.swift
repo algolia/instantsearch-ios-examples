@@ -20,7 +20,14 @@ class FilterViewController: FormViewController {
         navigationItem.rightBarButtonItem?.target = self
         navigationItem.rightBarButtonItem?.action = #selector(searchClicked(_:))
         
-        form +++ Section("Original Price")
+        form
+            +++ Section()
+            <<< ButtonRow() { button in
+                button.title = "Clear all filters"
+            }.onCellSelection { cell, row in
+                
+            }
+            +++ Section("Original Price")
             <<< SliderRow("MinimumOriginalPrice") { slider in
                 slider.title = "Minimum Price"
                 slider.value = 0
