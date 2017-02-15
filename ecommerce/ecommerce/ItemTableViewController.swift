@@ -123,6 +123,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func filterClicked(_ sender: Any) {
         arrowImageView.image = isFilterClicked ? UIImage(named: "arrow_down_flat") : UIImage(named: "arrow_up_flat")
         isFilterClicked = !isFilterClicked
+        performSegue(withIdentifier: "FilterSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

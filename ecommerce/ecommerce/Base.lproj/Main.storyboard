@@ -187,11 +187,34 @@
                         <outlet property="searchBarView" destination="2C1-MB-EIr" id="gDL-xq-RuS"/>
                         <outlet property="tableView" destination="Ro2-2Z-Loj" id="GDg-Ry-JRy"/>
                         <outlet property="topBarView" destination="YAA-Ez-PoB" id="5e8-4t-ccn"/>
+                        <segue destination="80H-py-BPS" kind="presentation" identifier="FilterSegue" id="2cK-bZ-z1L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1983.2" y="8.5457271364317844"/>
+        </scene>
+        <!--Filters-->
+        <scene sceneID="Zpc-9m-zXb">
+            <objects>
+                <viewController id="Qi6-95-g1T" customClass="FilterViewController" customModule="ecommerce" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7qO-n7-gIB"/>
+                        <viewControllerLayoutGuide type="bottom" id="WQ7-Ld-Uoc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dih-Vm-Jtm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Filters" id="cIg-ni-ia0">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="cI3-1Q-pyJ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="q23-e3-AgV"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8UI-px-4dF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1681" y="773"/>
         </scene>
         <!--Facet Table View Controller-->
         <scene sceneID="dwv-lG-Ytm">
@@ -302,6 +325,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6U-6Z-fDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2922" y="9"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3hz-4h-0v8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="80H-py-BPS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eJE-vF-bGP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qi6-95-g1T" kind="relationship" relationship="rootViewController" id="5Ih-DD-Hfu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qaa-DY-QqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2663" y="774"/>
         </scene>
     </scenes>
     <resources>
