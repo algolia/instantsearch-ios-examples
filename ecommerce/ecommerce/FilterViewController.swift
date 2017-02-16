@@ -9,6 +9,35 @@
 import UIKit
 import Eureka
 
+struct FilterTags {
+    static let minimumOriginalPrice = "MinimumOriginalPrice"
+    static let maximumOriginalPrice = "MaximumOriginalPrice"
+    static let minimumPromotedPrice = "MinimumPromotedPrice"
+    static let maximumPromotedPrice = "MaximumPromotedPrice"
+    static let hasDiscount = "HasDiscount"
+    static let hasFreeShipping = "HasFreeShipping"
+    static let minimumReviews = "MinimumReviews"
+    static let ratings = "Ratings"
+}
+
+struct FilterSectionTitles {
+    static let noTitle = ""
+    static let originalPrice = "Original Price"
+    static let promotedPrice = "Promoted Price"
+    static let perks = "Perks"
+    static let quality = "Quality"
+}
+
+struct FilterRowTitles {
+    static let clearAll = "Clear all filters"
+    static let minimumPrice = "Minimum Price"
+    static let maximumPrice = "Maximum Price"
+    static let hasDiscount = "Has Discount?"
+    static let freeShipping = "Free Shipping?"
+    static let minimumReviews = "Minimum number of reviews"
+    static let ratings = "Ratings"
+}
+
 class FilterViewController: FormViewController {
     
     override func viewDidLoad() {
@@ -22,47 +51,48 @@ class FilterViewController: FormViewController {
         
         form
             +++ Section()
-            <<< ButtonRow() { button in
-                button.title = "Clear all filters"
+            <<< ButtonRow(FilterSectionTitles.noTitle) { button in
+                button.title = FilterRowTitles.clearAll
             }.onCellSelection { cell, row in
-                
+                print((self.form.rowBy(tag: "MinimumOriginalPrice") as? SliderRow)?.value)
+                (self.form.rowBy(tag: "MinimumOriginalPrice") as? SliderRow)?.value = 5.0
+                (self.form.rowBy(tag: "MinimumOriginalPrice") as? SliderRow)?.reload()
             }
-            +++ Section("Original Price")
-            <<< SliderRow("MinimumOriginalPrice") { slider in
-                slider.title = "Minimum Price"
+            +++ Section(FilterSectionTitles.originalPrice)
+            <<< SliderRow(FilterTags.minimumOriginalPrice) { slider in
+                slider.title = FilterRowTitles.minimumPrice
                 slider.value = 0
                 slider.minimumValue = 1
                 slider.maximumValue = 100 // TODO: Set correct values
             }
-            <<< SliderRow("MaximumOriginalPrice") { slider in
-                slider.title = "Maximum Price"
+            <<< SliderRow(FilterTags.maximumOriginalPrice) { slider in
+                slider.title = FilterRowTitles.maximumPrice
                 slider.value = 0
                 slider.maximumValue = 1
                 slider.maximumValue = 100
             }
-            +++ Section("Promoted Price")
-            <<< StepperRow("MinimumPromotedPrice") { stepper in
-                stepper.title = "Minimum Price"
+            +++ Section(FilterSectionTitles.promotedPrice)
+            <<< StepperRow(FilterTags.minimumPromotedPrice) { stepper in
+                stepper.title = FilterRowTitles.minimumPrice
             }
-            <<< StepperRow("MaximumPromotedPrice") { stepper in
-                stepper.title = "Maximum Price"
+            <<< StepperRow(FilterTags.maximumPromotedPrice) { stepper in
+                stepper.title = FilterRowTitles.maximumPrice
             }
-            +++ Section("Perks")
-            <<< CheckRow("HasDiscount") { check in
-                check.title = "Has Discount?"
+            +++ Section(FilterSectionTitles.perks)
+            <<< CheckRow(FilterTags.hasDiscount) { check in
+                check.title = FilterRowTitles.hasDiscount
             }
-            <<< SwitchRow("HasFreeShipping") { check in
-                check.title = "Free Shipping?"
+            <<< SwitchRow(FilterTags.hasFreeShipping) { check in
+                check.title = FilterRowTitles.freeShipping
             }
-            +++ Section("Quality")
-            <<< IntRow("MinimumReviews") { intRow in
-                intRow.title = "Minimum number of reviews"
+            +++ Section(FilterSectionTitles.quality)
+            <<< IntRow(FilterTags.minimumReviews) { intRow in
+                intRow.title = FilterRowTitles.minimumReviews
             }
-            <<< SegmentedRow<String>("Ratings") { segmentedRow in
-                segmentedRow.title = "Ratings"
+            <<< SegmentedRow<String>(FilterTags.ratings) { segmentedRow in
+                segmentedRow.title = FilterRowTitles.ratings
                 segmentedRow.options = ["1", "2", "3", "4", "5"]
             }
-        
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {
