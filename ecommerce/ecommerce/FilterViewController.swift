@@ -53,10 +53,8 @@ class FilterViewController: FormViewController {
             +++ Section()
             <<< ButtonRow(FilterSectionTitles.noTitle) { button in
                 button.title = FilterRowTitles.clearAll
-            }.onCellSelection { cell, row in
-                print((self.form.rowBy(tag: "MinimumOriginalPrice") as? SliderRow)?.value)
-                (self.form.rowBy(tag: "MinimumOriginalPrice") as? SliderRow)?.value = 5.0
-                (self.form.rowBy(tag: "MinimumOriginalPrice") as? SliderRow)?.reload()
+            }.onCellSelection { _, _ in
+                self.resetAllFiltersWith(form: self.form)
             }
             +++ Section(FilterSectionTitles.originalPrice)
             <<< SliderRow(FilterTags.minimumOriginalPrice) { slider in
@@ -93,6 +91,42 @@ class FilterViewController: FormViewController {
                 segmentedRow.title = FilterRowTitles.ratings
                 segmentedRow.options = ["1", "2", "3", "4", "5"]
             }
+    }
+    
+    //TODO: Need to find a better way to clear all of these. for .. in self.form.values() was not working, so invetigate more there.
+    func resetAllFiltersWith(form: Form) {
+        let minimumOriginalPrice: SliderRow! = self.form.rowBy(tag: FilterTags.minimumOriginalPrice)
+        minimumOriginalPrice.value = 0.0
+        minimumOriginalPrice.reload()
+        
+        let maximumOriginalPrice: SliderRow! = self.form.rowBy(tag: FilterTags.maximumOriginalPrice)
+        maximumOriginalPrice.value = 0.0
+        maximumOriginalPrice.reload()
+        
+        let minimumPromotedPrice: StepperRow! = self.form.rowBy(tag: FilterTags.minimumPromotedPrice)
+        minimumPromotedPrice.value = nil
+        minimumPromotedPrice.reload()
+        
+        let maximumPromotedPrice: StepperRow! = self.form.rowBy(tag: FilterTags.maximumPromotedPrice)
+        maximumPromotedPrice.value = nil
+        maximumPromotedPrice.reload()
+        
+        let hasDiscount: CheckRow! = self.form.rowBy(tag: FilterTags.hasDiscount)
+        hasDiscount.value = nil
+        hasDiscount.reload()
+        
+        let hasFreeShipping: SwitchRow! = self.form.rowBy(tag: FilterTags.hasFreeShipping)
+        hasFreeShipping.value = nil
+        hasFreeShipping.reload()
+        
+        let minimumReviews: IntRow! = self.form.rowBy(tag: FilterTags.minimumReviews)
+        minimumReviews.value = nil
+        minimumReviews.reload()
+        
+        let ratings: SegmentedRow<String>! = self.form.rowBy(tag: FilterTags.ratings)
+        ratings.value = nil
+        ratings.reload()
+        
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {
