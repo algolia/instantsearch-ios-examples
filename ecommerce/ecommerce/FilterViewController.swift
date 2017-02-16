@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import InstantSearchCore
 import Eureka
 
 struct FilterTags {
@@ -39,6 +40,8 @@ struct FilterRowTitles {
 }
 
 class FilterViewController: FormViewController {
+    
+    var searcher: Searcher?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +96,8 @@ class FilterViewController: FormViewController {
             }
     }
     
-    //TODO: Need to find a better way to clear all of these. for .. in self.form.values() was not working, so invetigate more there.
+    // TODO: Need to find a better way to clear all of these. for .. in self.form.values() was not working, so invetigate more there.
+    // Also there is a bug in the Eureka library leading to weird slider row placement, hence the temp fix of assigning a value of 0.
     func resetAllFiltersWith(form: Form) {
         let minimumOriginalPrice: SliderRow! = self.form.rowBy(tag: FilterTags.minimumOriginalPrice)
         minimumOriginalPrice.value = 0.0
@@ -127,6 +131,7 @@ class FilterViewController: FormViewController {
         ratings.value = nil
         ratings.reload()
         
+        searcher?.params.clearNumericRefinements()
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {
@@ -134,7 +139,24 @@ class FilterViewController: FormViewController {
     }
     
     func searchClicked(_ barButtonItem: UIBarButtonItem) {
-        print(form.values())
+        let allValues = form.values()
+        
+        if let minimumOriginalPrice = allValues[FilterTags.minimumOriginalPrice] as? Float {
+            if minimumOriginalPrice >= 1 {
+                searcher?.params.addNumericRefinement("salePrice", .greaterThanOrEqual, Double(minimumOriginalPrice))
+            }
+        }
+        
+        if let maximumOriginalPrice = allValues[FilterTags.maximumOriginalPrice] as? Float {
+            if maximumOriginalPrice >= 1 {
+                searcher?.params.addNumericRefinement("salePrice", .lessThanOrEqual, Double(maximumOriginalPrice))
+            }
+        }
+        
+        if let minimumReviews = allValues[FilterTags.minimumReviews] as? Int {
+            searcher?.params.addNumericRefinement("customerReviewCount", .greaterThanOrEqual, Int(minimumReviews))
+        }
+        
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
