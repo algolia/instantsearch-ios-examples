@@ -137,6 +137,9 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
             filterViewController.searcher = instantSearch.searcher
+            filterViewController.didDismiss = {
+                self.instantSearch.searcher.search()
+            }
         }
     }
 }

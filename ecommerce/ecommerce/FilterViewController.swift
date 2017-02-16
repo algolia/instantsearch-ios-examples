@@ -42,6 +42,7 @@ struct FilterRowTitles {
 class FilterViewController: FormViewController {
     
     var searcher: Searcher?
+    var didDismiss: (() -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,6 +159,7 @@ class FilterViewController: FormViewController {
         }
         
         navigationController?.dismiss(animated: true, completion: nil)
+        didDismiss?()
     }
     
     
