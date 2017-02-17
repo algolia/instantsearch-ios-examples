@@ -10,35 +10,6 @@ import UIKit
 import InstantSearchCore
 import Eureka
 
-struct FilterTags {
-    static let minimumOriginalPrice = "MinimumOriginalPrice"
-    static let maximumOriginalPrice = "MaximumOriginalPrice"
-    static let minimumPromotedPrice = "MinimumPromotedPrice"
-    static let maximumPromotedPrice = "MaximumPromotedPrice"
-    static let hasDiscount = "HasDiscount"
-    static let hasFreeShipping = "HasFreeShipping"
-    static let minimumReviews = "MinimumReviews"
-    static let minimumRatings = "Ratings"
-}
-
-struct FilterSectionTitles {
-    static let noTitle = ""
-    static let originalPrice = "Original Price"
-    static let promotedPrice = "Promoted Price"
-    static let perks = "Perks"
-    static let quality = "Quality"
-}
-
-struct FilterRowTitles {
-    static let clearAll = "Clear all filters"
-    static let minimumPrice = "Minimum Price"
-    static let maximumPrice = "Maximum Price"
-    static let hasDiscount = "Has Discount?"
-    static let freeShipping = "Free Shipping?"
-    static let minimumReviews = "Minimum number of reviews"
-    static let ratings = "Minimum Ratings"
-}
-
 class FilterViewController: FormViewController {
     
     var searcher: Searcher?
@@ -46,6 +17,7 @@ class FilterViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigationBar()
         setupResultButton()
         
@@ -95,7 +67,8 @@ class FilterViewController: FormViewController {
     }
     
     func setupResultButton() {
-        let button = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: self.view.frame.width, height: 50))
+        
+        let button = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 114, width: self.view.frame.width, height: 50))
         button.backgroundColor = ColorConstants.barBackgroundColor
         button.setTitle("100 Results", for: .normal)
         button.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
@@ -112,7 +85,7 @@ class FilterViewController: FormViewController {
         navigationItem.rightBarButtonItem?.tintColor = ColorConstants.barTextColor
         
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
-        //navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorConstants.barTextColor]
     }
     
@@ -155,7 +128,7 @@ class FilterViewController: FormViewController {
         ratings.value = nil
         ratings.reload()
         
-        searcher?.params.clearNumericRefinements()
+        searcher?.params.clearRefinements()
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {
@@ -167,38 +140,39 @@ class FilterViewController: FormViewController {
         
         if let minimumOriginalPrice = allValues[FilterTags.minimumOriginalPrice] as? Float {
             if minimumOriginalPrice >= 1 {
-                searcher?.params.addNumericRefinement("salePrice", .greaterThanOrEqual, Double(minimumOriginalPrice))
+                searcher?.params.addNumericRefinement(RefinementParameters.salePrice, .greaterThanOrEqual, Double(minimumOriginalPrice))
             }
         }
         
         if let maximumOriginalPrice = allValues[FilterTags.maximumOriginalPrice] as? Float {
             if maximumOriginalPrice >= 1 {
-                searcher?.params.addNumericRefinement("salePrice", .lessThanOrEqual, Double(maximumOriginalPrice))
+                searcher?.params.addNumericRefinement(RefinementParameters.salePrice, .lessThanOrEqual, Double(maximumOriginalPrice))
             }
         }
         
         if let minimumPromotedPrice = allValues[FilterTags.minimumPromotedPrice] as? Float {
-            searcher?.params.addNumericRefinement("promoPrice", .greaterThanOrEqual, Double(minimumPromotedPrice))
+            searcher?.params.addNumericRefinement(RefinementParameters.promoPrice, .greaterThanOrEqual, Double(minimumPromotedPrice))
         }
         
         if let maximumPromotedPrice = allValues[FilterTags.maximumPromotedPrice] as? Float {
-            searcher?.params.addNumericRefinement("promoPrice", .lessThanOrEqual, Double(maximumPromotedPrice))
+            searcher?.params.addNumericRefinement(RefinementParameters.promoPrice, .lessThanOrEqual, Double(maximumPromotedPrice))
         }
         
         if let hasDicount = allValues[FilterTags.hasDiscount] as? Bool {
-            searcher?.params.addFacetRefinement(name: "promoted", value: String(hasDicount))
+            searcher?.params.addFacetRefinement(name: RefinementParameters.promoted, value: String(hasDicount))
         }
         
         if let _ = allValues[FilterTags.hasFreeShipping] as? Bool {
-            searcher?.params.addFacetRefinement(name: "shipping", value: "Free shipping")
+            searcher?.params.addFacetRefinement(name: RefinementParameters.shipping, value: "Free shipping")
         }
         
         if let minimumRatings = allValues[FilterTags.minimumRatings] as? Int {
-            searcher?.params.addNumericRefinement("bestSellingRank", .lessThanOrEqual, (6 - minimumRatings) * 6000)
+            // TODO: This conversion is hacky and temporary. Need to map to the correct rating (check ItemRecord)
+            searcher?.params.addNumericRefinement(RefinementParameters.bestSellingRank, .lessThanOrEqual, (6 - minimumRatings) * 6000)
         }
         
         if let minimumReviews = allValues[FilterTags.minimumReviews] as? Int {
-            searcher?.params.addNumericRefinement("customerReviewCount", .greaterThanOrEqual, Int(minimumReviews))
+            searcher?.params.addNumericRefinement(RefinementParameters.customerReviewCount, .greaterThanOrEqual, Int(minimumReviews))
         }
         
         navigationController?.dismiss(animated: true, completion: nil)
