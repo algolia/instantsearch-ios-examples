@@ -46,13 +46,8 @@ class FilterViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupResultButton()
-        
-        navigationItem.leftBarButtonItem?.target = self
-        navigationItem.leftBarButtonItem?.action = #selector(cancelClicked(_:))
-        
-        navigationItem.rightBarButtonItem?.target = self
-        navigationItem.rightBarButtonItem?.action = #selector(searchClicked(_:))
         
         form
             +++ Section()
@@ -101,10 +96,24 @@ class FilterViewController: FormViewController {
     
     func setupResultButton() {
         let button = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: self.view.frame.width, height: 50))
-        button.backgroundColor = ColorConstants.barColor
+        button.backgroundColor = ColorConstants.barBackgroundColor
         button.setTitle("100 Results", for: .normal)
         button.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         self.view.addSubview(button)
+    }
+    
+    func setupNavigationBar() {
+        navigationItem.leftBarButtonItem?.target = self
+        navigationItem.leftBarButtonItem?.action = #selector(cancelClicked(_:))
+        navigationItem.leftBarButtonItem?.tintColor = ColorConstants.barTextColor
+        
+        navigationItem.rightBarButtonItem?.target = self
+        navigationItem.rightBarButtonItem?.action = #selector(searchClicked(_:))
+        navigationItem.rightBarButtonItem?.tintColor = ColorConstants.barTextColor
+        
+        navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
+        //navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorConstants.barTextColor]
     }
     
     func buttonClicked() {

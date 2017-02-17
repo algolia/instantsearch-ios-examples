@@ -85,9 +85,9 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func configureNavBar() {
-        navigationController?.navigationBar.barTintColor = ColorConstants.barColor
+        navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : ColorConstants.barTextColor]
     }
     
     func configureToolBar() {
@@ -108,7 +108,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         searchController.searchBar.placeholder = "Search items"
         searchController.searchBar.sizeToFit()
         
-        searchController.searchBar.barTintColor = ColorConstants.barColor
+        searchController.searchBar.barTintColor = ColorConstants.barBackgroundColor
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true
