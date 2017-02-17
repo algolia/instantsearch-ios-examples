@@ -71,7 +71,7 @@ class FilterViewController: FormViewController {
         let button = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 114, width: self.view.frame.width, height: 50))
         button.backgroundColor = ColorConstants.barBackgroundColor
         button.setTitle("100 Results", for: .normal)
-        button.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.searchClicked(_:)), for: .touchUpInside)
         self.view.addSubview(button)
     }
     
@@ -87,10 +87,6 @@ class FilterViewController: FormViewController {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorConstants.barTextColor]
-    }
-    
-    func buttonClicked() {
-        print("Button Clicked")
     }
     
     // TODO: Need to find a better way to clear all of these. for .. in self.form.values() was not working, so invetigate more there.

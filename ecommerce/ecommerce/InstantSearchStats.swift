@@ -21,8 +21,7 @@ extension UITextField: InstantSearchStats {}
 
 extension InstantSearch {
     func addWidget(stats: InstantSearchStats) {
-        self.stats.array.append(stats)
-        updateAllWidgets()
+        self.stats.append(stats)
     }
 }
 
@@ -34,7 +33,7 @@ struct ArrayAppendObserver<T> {
     var elementChangedHandler: (() -> ())?
     var array: [T] = []
     
-    mutating func append(newElement: T) {
+    mutating func append(_ newElement: T) {
         self.array.append(newElement)
         elementChangedHandler?()
     }

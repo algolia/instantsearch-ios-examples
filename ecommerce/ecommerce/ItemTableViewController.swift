@@ -32,13 +32,13 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureTable()
         configureInstantSearch()
         instantSearch.addWidget(stats: nbHitsLabel)
+        instantSearch.addWidget(hits: tableView)
     }
     
     // MARK: AlgoliaHitDataSource Datasource functions
     
     func handle(hits: [JSONObject]) {
         itemsToShow = hits
-        tableView.reloadData()
     }
     
     // MARK: UITableView Delegate and Datasource functions
@@ -126,9 +126,12 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
             filterViewController.searcher = instantSearch.searcher
+            
+            //TODO: Need to remove this logic once all filters are hooked to InstantSearch since reload will be done automatically behind the scenes.
             filterViewController.didDismiss = {
                 self.instantSearch.searcher.search()
             }
+
         }
     }
 }

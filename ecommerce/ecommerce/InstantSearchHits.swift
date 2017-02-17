@@ -17,5 +17,7 @@ extension UITableView: InstantSearchHits {}
 extension UICollectionView: InstantSearchHits {}
 
 extension InstantSearch {
-    
+    func addWidget(hits: InstantSearchHits) {
+        self.hits.append(hits)
+    }
 }

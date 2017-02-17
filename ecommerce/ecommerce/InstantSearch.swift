@@ -30,7 +30,9 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     private var allHits: [JSONObject] = []
     private var results: SearchResults?
     
+    // TODO: Can have a 2D array of widgets, which has all the below widgets.
     internal var stats = ArrayAppendObserver<InstantSearchStats?>()
+    internal var hits = ArrayAppendObserver<InstantSearchHits?>()
     
     // MARK: Members: Delegate
     
@@ -58,6 +60,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     init(algoliaSearchProtocol: InstantSearchProtocol, searchController: UISearchController) {
         super.init()
         stats.elementChangedHandler = updateAllWidgets
+        hits.elementChangedHandler = updateAllWidgets
         
         instantSearchParameters = algoliaSearchProtocol.instantSearchParameters
         searcher = algoliaSearchProtocol.searcher
@@ -76,8 +79,13 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     func updateAllWidgets() {
         guard let results = results else { return }
+        
         for var stat in stats.array {
             stat?.text = "\(results.nbHits) results"
+        }
+        
+        for hit in hits.array {
+            hit?.reloadData()
         }
     }
     
@@ -132,14 +140,14 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
                 facetResults[facet] = getFacetRecords(with: results, facetCounts:results.facets(name: facet), andFacetName: facet)
             }
         }
-        
-        updateAllWidgets()
             
         hitDataSource?.handle?(results: results, error: error)
         hitDataSource?.handle(hits: allHits)
         facetDataSource?.handle?(results: results, error: error)
         facetDataSource?.handle(facetRecords: facetResults["category"]!)
         facetSearchController?.searchBar.text = ""
+        
+        updateAllWidgets()
     }
     
     // MARK: UISearchResultsUpdating delegate function
