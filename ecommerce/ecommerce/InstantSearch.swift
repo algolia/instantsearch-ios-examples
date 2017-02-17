@@ -25,11 +25,12 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     // MARK: Members: Algolia Specific
     var searcher: Searcher!
-    
     var instantSearchParameters = InstantSearchParameters()
     var facetResults: [String: [FacetRecord]] = [:]
-    var nbHits = 0
-    private var hits: [JSONObject] = []
+    private var allHits: [JSONObject] = []
+    private var results: SearchResults?
+    
+    internal var stats = ArrayAppendObserver<InstantSearchStats?>()
     
     // MARK: Members: Delegate
     
@@ -56,6 +57,8 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     init(algoliaSearchProtocol: InstantSearchProtocol, searchController: UISearchController) {
         super.init()
+        stats.elementChangedHandler = updateAllWidgets
+        
         instantSearchParameters = algoliaSearchProtocol.instantSearchParameters
         searcher = algoliaSearchProtocol.searcher
         searcher.addResultHandler(self.handleResults)
@@ -68,6 +71,13 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
         
         defer {
             hitSearchController = searchController
+        }
+    }
+    
+    func updateAllWidgets() {
+        guard let results = results else { return }
+        for var stat in stats.array {
+            stat?.text = "\(results.nbHits) results"
         }
     }
     
@@ -109,10 +119,12 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     func handleResults(results: SearchResults?, error: Error?) {
         guard let results = results else { return }
+        self.results = results
+        
         if results.page == 0 {
-            hits = results.hits
+            allHits = results.hits
         } else {
-            hits.append(contentsOf: results.hits)
+            allHits.append(contentsOf: results.hits)
         }
         
         if let facets = searcher.params.facets {
@@ -121,10 +133,10 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
             }
         }
         
-        nbHits = results.nbHits
-        
+        updateAllWidgets()
+            
         hitDataSource?.handle?(results: results, error: error)
-        hitDataSource?.handle(hits: hits)
+        hitDataSource?.handle(hits: allHits)
         facetDataSource?.handle?(results: results, error: error)
         facetDataSource?.handle(facetRecords: facetResults["category"]!)
         facetSearchController?.searchBar.text = ""
@@ -166,7 +178,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     // MARK: Search Helper Functions
     
     func loadMoreIfNecessary(rowNumber: Int) {
-        if rowNumber + instantSearchParameters.remainingItemsBeforeLoading >= hits.count {
+        if rowNumber + instantSearchParameters.remainingItemsBeforeLoading >= allHits.count {
             searcher.loadMore()
         }
     }

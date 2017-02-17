@@ -20,18 +20,13 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let FACET_NAME = "category"
     var instantSearch: InstantSearch!
     var categoryFacets: [FacetRecord] = []
-    var nbHits = 0 {
-        didSet {
-            nbHitsLabel.text = "\(nbHits) results"
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
         categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
         
-        nbHits = instantSearch.nbHits
+        instantSearch.add(statsWidget: nbHitsLabel)
         configureNavBar()
         topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()
@@ -47,7 +42,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - Table view data source
 
     func handle(results: SearchResults, error: Error?) {
-        nbHits = results.nbHits
+        
     }
     
     func handle(facetRecords: [FacetRecord]?) {
@@ -109,5 +104,9 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true
         searchBarView.addSubview(searchController.searchBar)
+    }
+    
+    deinit {
+        self.searchController?.view.removeFromSuperview()
     }
 }
