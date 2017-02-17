@@ -25,7 +25,7 @@ extension InstantSearch {
     }
 }
 
-// TODO: We want to be able to observe when elements are added to act on them. 
+// TODO: We want to be able to observe when elements are added to act on them.
 // The proper way is use something like Bond but it is a bit advanced. So for now, use this temp workaround.
 // http://five.agency/solving-the-binding-problem-with-swift/
 struct ArrayAppendObserver<T> {
