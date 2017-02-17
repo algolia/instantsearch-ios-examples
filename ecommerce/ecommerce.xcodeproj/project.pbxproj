@@ -207,8 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				E219FAA31E4382B2006D9CFC /* ItemTableViewController.swift */,
-				E219FB401E54B555006D9CFC /* FilterViewController.swift */,
 				E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */,
+				E219FB401E54B555006D9CFC /* FilterViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

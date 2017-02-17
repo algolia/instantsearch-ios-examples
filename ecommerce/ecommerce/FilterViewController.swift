@@ -18,7 +18,7 @@ struct FilterTags {
     static let hasDiscount = "HasDiscount"
     static let hasFreeShipping = "HasFreeShipping"
     static let minimumReviews = "MinimumReviews"
-    static let ratings = "Ratings"
+    static let minimumRatings = "Ratings"
 }
 
 struct FilterSectionTitles {
@@ -36,7 +36,7 @@ struct FilterRowTitles {
     static let hasDiscount = "Has Discount?"
     static let freeShipping = "Free Shipping?"
     static let minimumReviews = "Minimum number of reviews"
-    static let ratings = "Ratings"
+    static let ratings = "Minimum Ratings"
 }
 
 class FilterViewController: FormViewController {
@@ -87,9 +87,9 @@ class FilterViewController: FormViewController {
             <<< IntRow(FilterTags.minimumReviews) { intRow in
                 intRow.title = FilterRowTitles.minimumReviews
             }
-            <<< SegmentedRow<String>(FilterTags.ratings) { segmentedRow in
+            <<< SegmentedRow<Int>(FilterTags.minimumRatings) { segmentedRow in
                 segmentedRow.title = FilterRowTitles.ratings
-                segmentedRow.options = ["1", "2", "3", "4", "5"]
+                segmentedRow.options = [1,2,3,4,5]
             }
             +++ Section(FilterSectionTitles.noTitle)
     }
@@ -151,7 +151,7 @@ class FilterViewController: FormViewController {
         minimumReviews.value = nil
         minimumReviews.reload()
         
-        let ratings: SegmentedRow<String>! = self.form.rowBy(tag: FilterTags.ratings)
+        let ratings: SegmentedRow<Int>! = self.form.rowBy(tag: FilterTags.minimumRatings)
         ratings.value = nil
         ratings.reload()
         
@@ -175,6 +175,26 @@ class FilterViewController: FormViewController {
             if maximumOriginalPrice >= 1 {
                 searcher?.params.addNumericRefinement("salePrice", .lessThanOrEqual, Double(maximumOriginalPrice))
             }
+        }
+        
+        if let minimumPromotedPrice = allValues[FilterTags.minimumPromotedPrice] as? Float {
+            searcher?.params.addNumericRefinement("promoPrice", .greaterThanOrEqual, Double(minimumPromotedPrice))
+        }
+        
+        if let maximumPromotedPrice = allValues[FilterTags.maximumPromotedPrice] as? Float {
+            searcher?.params.addNumericRefinement("promoPrice", .lessThanOrEqual, Double(maximumPromotedPrice))
+        }
+        
+        if let hasDicount = allValues[FilterTags.hasDiscount] as? Bool {
+            searcher?.params.addFacetRefinement(name: "promoted", value: String(hasDicount))
+        }
+        
+        if let _ = allValues[FilterTags.hasFreeShipping] as? Bool {
+            searcher?.params.addFacetRefinement(name: "shipping", value: "Free shipping")
+        }
+        
+        if let minimumRatings = allValues[FilterTags.minimumRatings] as? Int {
+            searcher?.params.addNumericRefinement("bestSellingRank", .lessThanOrEqual, (6 - minimumRatings) * 6000)
         }
         
         if let minimumReviews = allValues[FilterTags.minimumReviews] as? Int {
