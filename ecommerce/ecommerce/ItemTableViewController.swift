@@ -19,9 +19,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var nbHitsLabel: UILabel!
     
-    let BAR_COLOR = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
-    let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
-    
     var searchController: UISearchController!
     var isFilterClicked = false
     var instantSearch: InstantSearch!
@@ -67,7 +64,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // TODO: Solve it better with data binding techniques
         cell.item = ItemRecord(json: itemsToShow[indexPath.row])
-        cell.backgroundColor = TABLE_COLOR
+        cell.backgroundColor = ColorConstants.tableColor
         
         return cell
     }
@@ -84,11 +81,11 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        tableView.backgroundColor = TABLE_COLOR
+        tableView.backgroundColor = ColorConstants.tableColor
     }
     
     func configureNavBar() {
-        navigationController?.navigationBar.barTintColor = BAR_COLOR
+        navigationController?.navigationBar.barTintColor = ColorConstants.barColor
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
@@ -98,7 +95,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         singleTap.numberOfTapsRequired = 1 // you can change this value
         arrowImageView.isUserInteractionEnabled = true
         arrowImageView.addGestureRecognizer(singleTap)
-        topBarView.backgroundColor = TABLE_COLOR
+        topBarView.backgroundColor = ColorConstants.tableColor
     }
     
     func configureSearchController() {
@@ -111,7 +108,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         searchController.searchBar.placeholder = "Search items"
         searchController.searchBar.sizeToFit()
         
-        searchController.searchBar.barTintColor = BAR_COLOR
+        searchController.searchBar.barTintColor = ColorConstants.barColor
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true

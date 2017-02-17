@@ -16,9 +16,6 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var nbHitsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    let TABLE_COLOR = UIColor(red: 248/256, green: 246/256, blue: 252/256, alpha: 1)
-    let BAR_COLOR = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
-    
     var searchController: UISearchController!
     let FACET_NAME = "category"
     var instantSearch: InstantSearch!
@@ -36,7 +33,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         nbHits = instantSearch.nbHits
         configureNavBar()
-        topBarView.backgroundColor = TABLE_COLOR
+        topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()
         configureTable()
         instantSearch.set(facetSearchController: searchController)
@@ -73,7 +70,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let facet = categoryFacets[indexPath.row]
         facet.isRefined = instantSearch.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value!)
         cell.facet = facet
-        cell.backgroundColor = TABLE_COLOR
+        cell.backgroundColor = ColorConstants.tableColor
         
         return cell
     }
@@ -88,11 +85,11 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        tableView.backgroundColor = TABLE_COLOR
+        tableView.backgroundColor = ColorConstants.tableColor
     }
     
     func configureNavBar() {
-        navigationController?.navigationBar.barTintColor = BAR_COLOR
+        navigationController?.navigationBar.barTintColor = ColorConstants.barColor
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
@@ -107,7 +104,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         searchController.searchBar.placeholder = "Search categories"
         searchController.searchBar.sizeToFit()
         
-        searchController.searchBar.barTintColor = BAR_COLOR
+        searchController.searchBar.barTintColor = ColorConstants.barColor
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true

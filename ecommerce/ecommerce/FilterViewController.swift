@@ -46,6 +46,7 @@ class FilterViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupResultButton()
         
         navigationItem.leftBarButtonItem?.target = self
         navigationItem.leftBarButtonItem?.action = #selector(cancelClicked(_:))
@@ -95,6 +96,19 @@ class FilterViewController: FormViewController {
                 segmentedRow.title = FilterRowTitles.ratings
                 segmentedRow.options = ["1", "2", "3", "4", "5"]
             }
+            +++ Section(FilterSectionTitles.noTitle)
+    }
+    
+    func setupResultButton() {
+        let button = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: self.view.frame.width, height: 50))
+        button.backgroundColor = ColorConstants.barColor
+        button.setTitle("100 Results", for: .normal)
+        button.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        self.view.addSubview(button)
+    }
+    
+    func buttonClicked() {
+        print("Button Clicked")
     }
     
     // TODO: Need to find a better way to clear all of these. for .. in self.form.values() was not working, so invetigate more there.
