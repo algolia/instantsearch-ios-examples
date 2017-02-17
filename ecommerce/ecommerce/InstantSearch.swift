@@ -94,7 +94,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
         self.facetSearchController = facetSearchController
     }
     
-    // This comes from Searcher.searchForFacetValues. 
+    // This comes from Searcher.searchForFacetValues.
     // TODO: Change naming because it is confusing. Also do a small diagram of the flow to visualise all these functions and delegates.
     func getFacetRecords(with results: SearchResults?, facetCounts: [String: Int]?, andFacetName facetName:String) -> [FacetRecord]? {
         // Sort facets: first selected facets, then by decreasing count, then by name.
@@ -115,7 +115,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
         }
         
         facetResults[facetName] = facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count) }
-
+        
         return facetResults[facetName]
     }
     
@@ -141,7 +141,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
                 facetResults[facet] = getFacetRecords(with: results, facetCounts:results.facets(name: facet), andFacetName: facet)
             }
         }
-            
+        
         hitDataSource?.handle?(results: results, error: error)
         hitDataSource?.handle(hits: allHits)
         facetDataSource?.handle?(results: results, error: error)

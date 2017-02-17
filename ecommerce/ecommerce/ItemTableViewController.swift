@@ -12,7 +12,7 @@ import AlgoliaSearch
 
 class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaHitDataSource {
     
-    @IBOutlet weak var topBarView: UIView! 
+    @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
@@ -93,7 +93,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
-
+        
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
@@ -131,7 +131,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
             filterViewController.didDismiss = {
                 self.instantSearch.searcher.search()
             }
-
+            
         }
     }
 }

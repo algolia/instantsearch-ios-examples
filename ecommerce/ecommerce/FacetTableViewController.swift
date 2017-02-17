@@ -38,9 +38,9 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillDisappear(_ animated: Bool) {
         searchController.isActive = false
     }
-
+    
     // MARK: - Table view data source
-
+    
     func handle(results: SearchResults, error: Error?) {
         
     }
@@ -54,12 +54,12 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return categoryFacets.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
         let facet = categoryFacets[indexPath.row]

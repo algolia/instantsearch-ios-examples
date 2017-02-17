@@ -14,7 +14,7 @@ public class FacetRecord: NSObject {
     private var _value: String?
     private var _count: Int?
     public var isRefined: Bool = false
-//    var highlighted: String
+    //    var highlighted: String
     
     private var json: JSONObject?
     
@@ -40,7 +40,7 @@ public class FacetRecord: NSObject {
     }
     
     
-//    public var value_highlighted: String? {
-//        return SearchResults.highlightResult(hit: json, path: "highlighted")?.value
-//    }
+    //    public var value_highlighted: String? {
+    //        return SearchResults.highlightResult(hit: json, path: "highlighted")?.value
+    //    }
 }
