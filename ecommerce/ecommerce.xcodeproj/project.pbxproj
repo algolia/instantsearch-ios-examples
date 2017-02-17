@@ -31,6 +31,7 @@
 		E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB431E56F4C9006D9CFC /* Constants.swift */; };
 		E219FB461E574443006D9CFC /* InstantSearchStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB451E574443006D9CFC /* InstantSearchStats.swift */; };
 		E219FB481E575255006D9CFC /* InstantSearchHits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB471E575255006D9CFC /* InstantSearchHits.swift */; };
+		E219FB841E576B4A006D9CFC /* InstantSearchClearFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */; };
 		F61B94FE5A83AAEF4FBD3C8E /* Pods_ecommerceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC5F93DE8716F3E9C97AADE /* Pods_ecommerceTests.framework */; };
 		FD5D736B46847FDA1C00BCBE /* Pods_ecommerceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A716D6C39742184A7A37A33 /* Pods_ecommerceUITests.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		E219FB431E56F4C9006D9CFC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E219FB451E574443006D9CFC /* InstantSearchStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchStats.swift; sourceTree = "<group>"; };
 		E219FB471E575255006D9CFC /* InstantSearchHits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchHits.swift; sourceTree = "<group>"; };
+		E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchClearFilters.swift; sourceTree = "<group>"; };
 		E3C12E07E23E9A50BC9A32ED /* Pods-ecommerceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EF8DE04E87BDFD0B3B86E68B /* Pods-ecommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +248,7 @@
 				E219FAE71E4B1864006D9CFC /* InstantSearch.swift */,
 				E219FB451E574443006D9CFC /* InstantSearchStats.swift */,
 				E219FB471E575255006D9CFC /* InstantSearchHits.swift */,
+				E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */,
 				E219FAF91E4E02BD006D9CFC /* InstantSearchParameters.swift */,
 				E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */,
 				E219FAF21E4DD1FB006D9CFC /* InstantSearchProtocol.swift */,
@@ -555,6 +558,7 @@
 				E219FB481E575255006D9CFC /* InstantSearchHits.swift in Sources */,
 				E219FB461E574443006D9CFC /* InstantSearchStats.swift in Sources */,
 				E219FAF31E4DD1FB006D9CFC /* InstantSearchProtocol.swift in Sources */,
+				E219FB841E576B4A006D9CFC /* InstantSearchClearFilters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

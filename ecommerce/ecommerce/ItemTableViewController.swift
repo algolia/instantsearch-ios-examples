@@ -125,7 +125,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.identifier == "FilterSegue" {
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
-            filterViewController.searcher = instantSearch.searcher
+            filterViewController.instantSearch = instantSearch
             
             //TODO: Need to remove this logic once all filters are hooked to InstantSearch since reload will be done automatically behind the scenes.
             filterViewController.didDismiss = {

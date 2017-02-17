@@ -12,7 +12,7 @@ import Eureka
 
 class FilterViewController: FormViewController {
     
-    var searcher: Searcher?
+    var instantSearch: InstantSearch?
     var didDismiss: (() -> ())?
     
     override func viewDidLoad() {
@@ -124,7 +124,7 @@ class FilterViewController: FormViewController {
         ratings.value = nil
         ratings.reload()
         
-        searcher?.params.clearRefinements()
+        instantSearch?.searcher.params.clearRefinements()
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {
@@ -136,39 +136,39 @@ class FilterViewController: FormViewController {
         
         if let minimumOriginalPrice = allValues[FilterTags.minimumOriginalPrice] as? Float {
             if minimumOriginalPrice >= 1 {
-                searcher?.params.addNumericRefinement(RefinementParameters.salePrice, .greaterThanOrEqual, Double(minimumOriginalPrice))
+                instantSearch?.searcher.params.addNumericRefinement(RefinementParameters.salePrice, .greaterThanOrEqual, Double(minimumOriginalPrice))
             }
         }
         
         if let maximumOriginalPrice = allValues[FilterTags.maximumOriginalPrice] as? Float {
             if maximumOriginalPrice >= 1 {
-                searcher?.params.addNumericRefinement(RefinementParameters.salePrice, .lessThanOrEqual, Double(maximumOriginalPrice))
+                instantSearch?.searcher.params.addNumericRefinement(RefinementParameters.salePrice, .lessThanOrEqual, Double(maximumOriginalPrice))
             }
         }
         
         if let minimumPromotedPrice = allValues[FilterTags.minimumPromotedPrice] as? Float {
-            searcher?.params.addNumericRefinement(RefinementParameters.promoPrice, .greaterThanOrEqual, Double(minimumPromotedPrice))
+            instantSearch?.searcher.params.addNumericRefinement(RefinementParameters.promoPrice, .greaterThanOrEqual, Double(minimumPromotedPrice))
         }
         
         if let maximumPromotedPrice = allValues[FilterTags.maximumPromotedPrice] as? Float {
-            searcher?.params.addNumericRefinement(RefinementParameters.promoPrice, .lessThanOrEqual, Double(maximumPromotedPrice))
+            instantSearch?.searcher.params.addNumericRefinement(RefinementParameters.promoPrice, .lessThanOrEqual, Double(maximumPromotedPrice))
         }
         
         if let hasDicount = allValues[FilterTags.hasDiscount] as? Bool {
-            searcher?.params.addFacetRefinement(name: RefinementParameters.promoted, value: String(hasDicount))
+            instantSearch?.searcher.params.addFacetRefinement(name: RefinementParameters.promoted, value: String(hasDicount))
         }
         
         if let _ = allValues[FilterTags.hasFreeShipping] as? Bool {
-            searcher?.params.addFacetRefinement(name: RefinementParameters.shipping, value: "Free shipping")
+            instantSearch?.searcher.params.addFacetRefinement(name: RefinementParameters.shipping, value: "Free shipping")
         }
         
         if let minimumRatings = allValues[FilterTags.minimumRatings] as? Int {
             // TODO: This conversion is hacky and temporary. Need to map to the correct rating (check ItemRecord)
-            searcher?.params.addNumericRefinement(RefinementParameters.bestSellingRank, .lessThanOrEqual, (6 - minimumRatings) * 6000)
+            instantSearch?.searcher.params.addNumericRefinement(RefinementParameters.bestSellingRank, .lessThanOrEqual, (6 - minimumRatings) * 6000)
         }
         
         if let minimumReviews = allValues[FilterTags.minimumReviews] as? Int {
-            searcher?.params.addNumericRefinement(RefinementParameters.customerReviewCount, .greaterThanOrEqual, Int(minimumReviews))
+            instantSearch?.searcher.params.addNumericRefinement(RefinementParameters.customerReviewCount, .greaterThanOrEqual, Int(minimumReviews))
         }
         
         navigationController?.dismiss(animated: true, completion: nil)
