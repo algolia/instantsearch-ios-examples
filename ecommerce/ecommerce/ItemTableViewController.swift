@@ -23,11 +23,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var isFilterClicked = false
     var instantSearch: InstantSearch!
     var itemsToShow: [JSONObject] = []
-    var nbHits = 0 {
-        didSet {
-            nbHitsLabel.text = "\(nbHits) results"
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +31,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureSearchController()
         configureTable()
         configureInstantSearch()
+        instantSearch.addWidget(stats: nbHitsLabel)
     }
     
     // MARK: AlgoliaHitDataSource Datasource functions
@@ -43,10 +39,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func handle(hits: [JSONObject]) {
         itemsToShow = hits
         tableView.reloadData()
-    }
-    
-    func handle(results: SearchResults, error: Error?) {
-        nbHits = results.nbHits
     }
     
     // MARK: UITableView Delegate and Datasource functions

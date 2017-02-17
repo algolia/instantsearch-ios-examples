@@ -26,7 +26,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         // TODO: This should be done in a better way.
         categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
         
-        instantSearch.add(statsWidget: nbHitsLabel)
+        instantSearch.addWidget(stats: nbHitsLabel)
         configureNavBar()
         topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()

@@ -20,8 +20,8 @@ extension UILabel: InstantSearchStats {}
 extension UITextField: InstantSearchStats {}
 
 extension InstantSearch {
-    func add(statsWidget: InstantSearchStats) {
-        stats.array.append(statsWidget)
+    func addWidget(stats: InstantSearchStats) {
+        self.stats.array.append(stats)
         updateAllWidgets()
     }
 }
