@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 extension InstantSearch {
-    func addWidget(clearFilter: UIButton) {
+    func addWidget(clearFilter: UIControl, for controlEvent: UIControlEvents) {
         clearFilters.append(clearFilter)
-        clearFilter.addTarget(self, action: #selector(self.clearFilter), for: .touchUpInside)
+        clearFilter.addTarget(self, action: #selector(self.clearFilter), for: controlEvent)
+        reloadAllWidgets()
     }
     
     internal func clearFilter() {
