@@ -25,6 +25,7 @@ class FilterViewController: FormViewController {
             +++ Section()
             <<< ButtonRow(FilterSectionTitles.noTitle) { button in
                 button.title = FilterRowTitles.clearAll
+                
             }.onCellSelection { _, _ in
                 self.resetAllFiltersWith(form: self.form)
             }
@@ -91,6 +92,7 @@ class FilterViewController: FormViewController {
     
     // TODO: Need to find a better way to clear all of these. for .. in self.form.values() was not working, so invetigate more there.
     // Also there is a bug in the Eureka library leading to weird slider row placement, hence the temp fix of assigning a value of 0.
+    // can reload all cells with a for in or something..
     func resetAllFiltersWith(form: Form) {
         let minimumOriginalPrice: SliderRow! = self.form.rowBy(tag: FilterTags.minimumOriginalPrice)
         minimumOriginalPrice.value = 0.0
