@@ -31,8 +31,8 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     private var results: SearchResults?
     
     // TODO: Can have a 2D array of widgets, which has all the below widgets.
-    internal var stats = ArrayAppendObserver<InstantSearchStats?>()
-    internal var hits = ArrayAppendObserver<InstantSearchHits?>()
+    internal var stats: [InstantSearchStats?] = []
+    internal var hits: [InstantSearchHits?] = []
     internal var clearFilters: [UIButton?] = []
     
     // MARK: Members: Delegate
@@ -60,8 +60,6 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     init(algoliaSearchProtocol: InstantSearchProtocol, searchController: UISearchController) {
         super.init()
-        stats.elementChangedHandler = reloadAllWidgets
-        hits.elementChangedHandler = reloadAllWidgets
         
         instantSearchParameters = algoliaSearchProtocol.instantSearchParameters
         searcher = algoliaSearchProtocol.searcher
@@ -81,11 +79,11 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     func reloadAllWidgets() {
         guard let results = results else { return }
         
-        for var stat in stats.array {
+        for var stat in stats {
             stat?.text = "\(results.nbHits) results"
         }
         
-        for hit in hits.array {
+        for hit in hits {
             hit?.reloadData()
         }
     }

@@ -22,34 +22,6 @@ extension UITextField: InstantSearchStats {}
 extension InstantSearch {
     func addWidget(stats: InstantSearchStats) {
         self.stats.append(stats)
-    }
-}
-
-// TODO: We want to be able to observe when elements are added to act on them.
-// The proper way is use something like Bond but it is a bit advanced. So for now, use this temp workaround.
-// http://five.agency/solving-the-binding-problem-with-swift/
-struct ArrayAppendObserver<T> {
-    
-    var elementChangedHandler: (() -> ())?
-    var array: [T] = []
-    
-    mutating func append(_ newElement: T) {
-        self.array.append(newElement)
-        elementChangedHandler?()
-    }
-    
-    mutating func removeAtIndex(index: Int) {
-        self.array.remove(at: index)
-        elementChangedHandler?()
-    }
-    
-    subscript(index: Int) -> T {
-        set {
-            print("Set object from \(self.array[index]) to \(newValue) at index \(index)")
-            self.array[index] = newValue
-        }
-        get {
-            return self.array[index]
-        }
+        reloadAllWidgets()
     }
 }
