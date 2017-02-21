@@ -9,6 +9,6 @@
 import Foundation
 import Eureka
 
-extension RowOf: Valuable {
+extension RowOf {
 
 }

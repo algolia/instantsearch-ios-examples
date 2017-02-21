@@ -14,6 +14,7 @@ class FilterViewController: FormViewController {
     
     var instantSearch: InstantSearch?
     var didDismiss: (() -> ())?
+    var resultButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,11 +70,18 @@ class FilterViewController: FormViewController {
     
     func setupResultButton() {
         
-        let button = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 114, width: self.view.frame.width, height: 50))
-        button.backgroundColor = ColorConstants.barBackgroundColor
-        button.setTitle("100 Results", for: .normal)
-        button.addTarget(self, action: #selector(self.searchClicked(_:)), for: .touchUpInside)
-        self.view.addSubview(button)
+        resultButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 114, width: self.view.frame.width, height: 50))
+        resultButton.backgroundColor = ColorConstants.barBackgroundColor
+        resultButton.setTitle("Fetching number of results...", for: .normal)
+        resultButton.titleLabel?.layoutIfNeeded()
+        resultButton.titleLabel?.textAlignment = .center
+        resultButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        resultButton.addTarget(self, action: #selector(self.searchClicked(_:)), for: .touchUpInside)
+        self.view.addSubview(resultButton)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        instantSearch?.addWidget(stats: resultButton.titleLabel!)
     }
     
     func setupNavigationBar() {
@@ -127,6 +135,7 @@ class FilterViewController: FormViewController {
         ratings.reload()
         
         instantSearch?.searcher.params.clearRefinements()
+        instantSearch?.reloadAllWidgets()
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {
