@@ -34,6 +34,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
     internal var clearFilters: [UIControl?] = []
+    internal var numericFilters: [String:NumericFilter] = [:]
     
     // MARK: Members: Delegate
     
@@ -60,7 +61,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     init(algoliaSearchProtocol: InstantSearchProtocol, searchController: UISearchController) {
         super.init()
-        
+
         instantSearchParameters = algoliaSearchProtocol.instantSearchParameters
         searcher = algoliaSearchProtocol.searcher
         searcher.addResultHandler(self.handleResults)
