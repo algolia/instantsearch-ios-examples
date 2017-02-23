@@ -12,12 +12,20 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var tableView: UITableView!
     
+    var controls: [UIControl] = []
+    var titles: [String] = ["switch", "slider", "stepper"]
+    
+    let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 50)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         automaticallyAdjustsScrollViewInsets = false
-        // Do any additional setup after loading the view.
+        
+        controls.append(createSwitch())
+        controls.append(createSlider())
+        controls.append(createStepper())
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,23 +33,37 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    private func createSlider() -> UISlider {
+        let slider = UISlider(frame: defaultFrame)
+        slider.maximumValue = 50
+        slider.minimumValue = 0
+        slider.value = 25
+        
+        return slider
+    }
+    
+    private func createSwitch() -> UISwitch {
+        return UISwitch(frame: defaultFrame)
+    }
+    
+    private func createStepper() -> UIStepper {
+        let stepper = UIStepper(frame: defaultFrame)
+        stepper.stepValue = 1
+        
+        return stepper
+    }
+    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return controls.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
         
-        cell.textLabel?.text = "Hi"
-        
-        let mySwitch = UISlider(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        mySwitch.maximumValue = 50
-        mySwitch.minimumValue = 0
-        mySwitch.value = 25
-        var control = UIControl()
-        control = mySwitch
-        cell.accessoryView = control
+        cell.detailTextLabel?.text = "text"
+        cell.textLabel?.text = titles[indexPath.row]
+        cell.accessoryView = controls[indexPath.row]
         
         return cell
     }
