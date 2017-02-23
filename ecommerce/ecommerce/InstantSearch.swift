@@ -34,7 +34,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
     internal var clearFilters: [UIControl?] = []
-    internal var numericFilters: [String:NumericFilter] = [:]
+    internal var numericFilters: [String:UIControl] = [:]
     
     // MARK: Members: Delegate
     
