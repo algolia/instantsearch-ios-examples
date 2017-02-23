@@ -13,7 +13,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     var controls: [UIControl] = []
-    var titles: [String] = ["switch", "slider", "stepper"]
+    var titles: [String] = ["switch", "slider", "stepper", "segmented"]
     
     let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 50)
     
@@ -26,6 +26,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         controls.append(createSwitch())
         controls.append(createSlider())
         controls.append(createStepper())
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +52,12 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         stepper.stepValue = 1
         
         return stepper
+    }
+    
+    private func createSegmentedControl() -> UISegmentedControl {
+        let segmentedControl = UISegmentedControl(items: [1,2,3])
+        return segmentedControl
+        
     }
     
 
