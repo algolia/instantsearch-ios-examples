@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import Eureka
 
-class FilterViewController: FormViewController {
+class FilterEurekaViewController: FormViewController {
     
     var instantSearch: InstantSearch?
     var didDismiss: (() -> ())?
