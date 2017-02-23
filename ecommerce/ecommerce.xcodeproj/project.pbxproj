@@ -27,7 +27,7 @@
 		E219FAF81E4DFA5A006D9CFC /* InstanSearchTableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */; };
 		E219FAFA1E4E02BD006D9CFC /* InstantSearchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF91E4E02BD006D9CFC /* InstantSearchParameters.swift */; };
 		E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */; };
-		E219FB411E54B555006D9CFC /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB401E54B555006D9CFC /* FilterViewController.swift */; };
+		E219FB411E54B555006D9CFC /* FilterEurekaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB401E54B555006D9CFC /* FilterEurekaViewController.swift */; };
 		E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB431E56F4C9006D9CFC /* Constants.swift */; };
 		E219FB461E574443006D9CFC /* InstantSearchStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB451E574443006D9CFC /* InstantSearchStats.swift */; };
 		E219FB481E575255006D9CFC /* InstantSearchHits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB471E575255006D9CFC /* InstantSearchHits.swift */; };
@@ -88,7 +88,7 @@
 		E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanSearchTableStorage.swift; sourceTree = "<group>"; };
 		E219FAF91E4E02BD006D9CFC /* InstantSearchParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchParameters.swift; sourceTree = "<group>"; };
 		E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetCategoryCell.swift; sourceTree = "<group>"; };
-		E219FB401E54B555006D9CFC /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		E219FB401E54B555006D9CFC /* FilterEurekaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterEurekaViewController.swift; sourceTree = "<group>"; };
 		E219FB431E56F4C9006D9CFC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E219FB451E574443006D9CFC /* InstantSearchStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchStats.swift; sourceTree = "<group>"; };
 		E219FB471E575255006D9CFC /* InstantSearchHits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchHits.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 			children = (
 				E219FAA31E4382B2006D9CFC /* ItemTableViewController.swift */,
 				E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */,
-				E219FB401E54B555006D9CFC /* FilterViewController.swift */,
+				E219FB401E54B555006D9CFC /* FilterEurekaViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -557,7 +557,7 @@
 				E219FAA41E4382B2006D9CFC /* ItemTableViewController.swift in Sources */,
 				E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */,
 				E22B90061E5AF99B00059F95 /* InstantSearchNumericFilters.swift in Sources */,
-				E219FB411E54B555006D9CFC /* FilterViewController.swift in Sources */,
+				E219FB411E54B555006D9CFC /* FilterEurekaViewController.swift in Sources */,
 				E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */,
 				E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
