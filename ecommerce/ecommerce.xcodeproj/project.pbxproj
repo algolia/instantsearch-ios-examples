@@ -34,6 +34,7 @@
 		E219FB841E576B4A006D9CFC /* InstantSearchClearFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */; };
 		E22B90061E5AF99B00059F95 /* InstantSearchNumericFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22B90051E5AF99B00059F95 /* InstantSearchNumericFilters.swift */; };
 		E22B900A1E5EF17B00059F95 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22B90091E5EF17B00059F95 /* FilterCell.swift */; };
+		E25104D51E5EF9AF00F3B18C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25104D41E5EF9AF00F3B18C /* FilterViewController.swift */; };
 		F61B94FE5A83AAEF4FBD3C8E /* Pods_ecommerceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC5F93DE8716F3E9C97AADE /* Pods_ecommerceTests.framework */; };
 		FD5D736B46847FDA1C00BCBE /* Pods_ecommerceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A716D6C39742184A7A37A33 /* Pods_ecommerceUITests.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +96,7 @@
 		E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchClearFilters.swift; sourceTree = "<group>"; };
 		E22B90051E5AF99B00059F95 /* InstantSearchNumericFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchNumericFilters.swift; sourceTree = "<group>"; };
 		E22B90091E5EF17B00059F95 /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		E25104D41E5EF9AF00F3B18C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		E3C12E07E23E9A50BC9A32ED /* Pods-ecommerceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EF8DE04E87BDFD0B3B86E68B /* Pods-ecommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.release.xcconfig"; path = "Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,6 +221,7 @@
 				E219FAA31E4382B2006D9CFC /* ItemTableViewController.swift */,
 				E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */,
 				E219FB401E54B555006D9CFC /* FilterEurekaViewController.swift */,
+				E25104D41E5EF9AF00F3B18C /* FilterViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
 				E219FAF81E4DFA5A006D9CFC /* InstanSearchTableStorage.swift in Sources */,
+				E25104D51E5EF9AF00F3B18C /* FilterViewController.swift in Sources */,
 				E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */,
 				E219FB481E575255006D9CFC /* InstantSearchHits.swift in Sources */,
 				E219FB461E574443006D9CFC /* InstantSearchStats.swift in Sources */,

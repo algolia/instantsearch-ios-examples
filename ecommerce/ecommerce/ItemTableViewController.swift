@@ -112,7 +112,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func filterClicked(_ sender: Any) {
         arrowImageView.image = isFilterClicked ? UIImage(named: "arrow_down_flat") : UIImage(named: "arrow_up_flat")
         isFilterClicked = !isFilterClicked
-        performSegue(withIdentifier: "FilterEurekaSegue", sender: self)
+        //performSegue(withIdentifier: "FilterEurekaSegue", sender: self)
+        performSegue(withIdentifier: "FilterSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -132,6 +133,11 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.instantSearch.searcher.search()
             }
             
+        }
+        
+        if segue.identifier == "FilterSegue" {
+//            let navigationController = segue.destination as! UINavigationController
+//            let filterViewController = navigationController.topViewController as! FilterViewController
         }
     }
 }
