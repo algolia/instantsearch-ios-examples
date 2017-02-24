@@ -32,11 +32,29 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         controls.append(createSlider())
         controls.append(createStepper())
         controls.append(createSegmentedControl())
+        
+        for (index, control) in controls.enumerated() {
+            control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
+            control.tag = index
+        }
+    }
+    
+    func valueChanged(control: UIControl) {
+        switch control {
+        case let slider as InstantSearchSlider:
+            let cell = tableView.cellForRow(at: IndexPath(row: slider.tag, section: 0))
+            cell?.detailTextLabel?.text = "\(slider.value)"
+        default: print("none!")
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        instantSearch?.addWidget(stats: resultButton.titleLabel!)
     }
     
     func setupResultButton() {
@@ -45,6 +63,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         resultButton.setTitle("Fetching number of results...", for: .normal)
         resultButton.titleLabel?.textAlignment = .center
         resultButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        resultButton.setTitleColor(ColorConstants.barTextColor, for: .normal)
         resultButton.addTarget(self, action: #selector(self.searchClicked(_:)), for: .touchUpInside)
     }
     
@@ -53,11 +72,10 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         didDismiss?()
     }
     
-    private func createSlider() -> UISlider {
-        let slider = UISlider(frame: defaultFrame)
+    private func createSlider() -> InstantSearchSlider {
+        let slider = InstantSearchSlider(frame: defaultFrame)
         slider.maximumValue = 50
         slider.minimumValue = 0
-        slider.value = 25
         
         return slider
     }
