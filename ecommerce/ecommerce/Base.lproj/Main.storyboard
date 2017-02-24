@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JL1-ca-zgd" id="7Vr-Yg-Yeq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X2m-F2-JUW">
@@ -230,7 +230,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6tn-JU-Z81">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="filterCell" textLabel="hEv-zB-nHb" detailTextLabel="ifg-kh-7Zo" style="IBUITableViewCellStyleSubtitle" id="o6e-e7-vpL">
@@ -259,17 +259,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpf-Fj-7BK">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ieu-9f-X6B"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6tn-JU-Z81" secondAttribute="trailing" id="2ke-hG-oVk"/>
+                            <constraint firstItem="Mpf-Fj-7BK" firstAttribute="leading" secondItem="rpz-U0-ptg" secondAttribute="leading" id="770-F3-hxO"/>
+                            <constraint firstAttribute="trailing" secondItem="Mpf-Fj-7BK" secondAttribute="trailing" id="79Z-ke-bWF"/>
                             <constraint firstItem="6tn-JU-Z81" firstAttribute="leading" secondItem="rpz-U0-ptg" secondAttribute="leading" id="RRv-gv-SpT"/>
-                            <constraint firstItem="3ke-ma-EcC" firstAttribute="top" secondItem="6tn-JU-Z81" secondAttribute="bottom" id="S6E-au-3Te"/>
+                            <constraint firstItem="Mpf-Fj-7BK" firstAttribute="top" secondItem="6tn-JU-Z81" secondAttribute="bottom" id="cH3-dB-ms2"/>
+                            <constraint firstItem="3ke-ma-EcC" firstAttribute="top" secondItem="Mpf-Fj-7BK" secondAttribute="bottom" id="k7d-ph-vYX"/>
                             <constraint firstItem="6tn-JU-Z81" firstAttribute="top" secondItem="mob-05-FsZ" secondAttribute="bottom" id="shy-as-tG9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="t5A-9c-mIA"/>
                     <connections>
+                        <outlet property="resultButton" destination="Mpf-Fj-7BK" id="Phz-2h-7Qs"/>
                         <outlet property="tableView" destination="6tn-JU-Z81" id="UsV-sr-GaA"/>
                     </connections>
                 </viewController>

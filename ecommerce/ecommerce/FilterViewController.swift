@@ -10,6 +10,7 @@ import UIKit
 
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var instantSearch: InstantSearch?
@@ -24,6 +25,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.delegate = self
         automaticallyAdjustsScrollViewInsets = false
+        setupResultButton()
         
         controls.append(createButton())
         controls.append(createSwitch())
@@ -35,6 +37,20 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupResultButton() {
+        
+        resultButton.backgroundColor = ColorConstants.barBackgroundColor
+        resultButton.setTitle("Fetching number of results...", for: .normal)
+        resultButton.titleLabel?.textAlignment = .center
+        resultButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        resultButton.addTarget(self, action: #selector(self.searchClicked(_:)), for: .touchUpInside)
+    }
+    
+    func searchClicked(_ barButtonItem: UIBarButtonItem) {
+        navigationController?.dismiss(animated: true, completion: nil)
+        didDismiss?()
     }
     
     private func createSlider() -> UISlider {
