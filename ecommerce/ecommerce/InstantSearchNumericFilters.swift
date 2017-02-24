@@ -47,7 +47,8 @@ class InstantSearchDatePicker : UIDatePicker, InstantSearchNumericFilter {
 
 extension InstantSearch {
     
-    func addWidget(numericFilter: UIControl, forRefinement name: String) {
+    func addWidget(numericFilter: UIControl) {
+        numericFilters.append(numericFilter)
         numericFilter.addTarget(self, action: #selector(numericFilterValueChanged(sender:)), for: .valueChanged)
         reloadAllWidgets()
     }
@@ -56,7 +57,10 @@ extension InstantSearch {
     internal func numericFilterValueChanged(sender: UIControl) {
         switch sender {
         case let slider as InstantSearchSlider:
-            print(slider.value)
+            // TODO: Don't force unwrap... fix that once POC is done.
+            searcher.params.addNumericRefinement(slider.filterName!, slider.op!, Double(slider.value))
+            searcher.search()
+            reloadAllWidgets()
         case let mySwitch as InstantSearchSwitch:
             print(mySwitch.isOn)
         case let stepper as InstantSearchStepper:

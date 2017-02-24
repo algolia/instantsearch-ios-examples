@@ -34,7 +34,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
     internal var clearFilters: [UIControl?] = []
-    internal var numericFilters: [String:UIControl?] = [:]
+    internal var numericFilters: [UIControl?] = []
     
     // MARK: Members: Delegate
     
@@ -86,6 +86,15 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
         
         for hit in hits {
             hit?.reloadData()
+        }
+        
+        for control in numericFilters {
+            switch control {
+            case let slider as InstantSearchSlider:
+                // TODO: Needs huge cleanup cause right now it is super hacky. 
+                slider.value = searcher.params.hasNumericRefinements(name: slider.filterName!) ? searcher.params.numericRefinements[slider.filterName!]![0].value.floatValue : 0
+            default: break
+            }
         }
     }
     
