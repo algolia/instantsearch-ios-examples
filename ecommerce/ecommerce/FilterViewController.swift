@@ -15,9 +15,9 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var instantSearch: InstantSearch?
     var didDismiss: (() -> ())?
     var controls: [UIControl] = []
-    var titles: [String] = ["switch", "slider", "stepper", "segmented"]
+    var titles: [String] = ["button", "switch", "slider", "stepper", "segmented"]
     
-    let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 50)
+    let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 40)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +25,11 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         automaticallyAdjustsScrollViewInsets = false
         
+        controls.append(createButton())
         controls.append(createSwitch())
         controls.append(createSlider())
         controls.append(createStepper())
         controls.append(createSegmentedControl())
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +63,14 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         segmentedControl.frame = CGRect(x: 10, y: 10, width: 200, height: 30)
         return segmentedControl
         
+    }
+    
+    private func createButton() -> UIButton {
+        let button = UIButton(frame: defaultFrame)
+        button.backgroundColor = UIColor.red
+        button.setTitle("clear", for: .normal)
+        
+        return button
     }
     
 
