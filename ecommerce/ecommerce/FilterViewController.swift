@@ -26,6 +26,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         controls.append(createSwitch())
         controls.append(createSlider())
         controls.append(createStepper())
+        controls.append(createSegmentedControl())
         
     }
 
@@ -55,7 +56,9 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     private func createSegmentedControl() -> UISegmentedControl {
-        let segmentedControl = UISegmentedControl(items: [1,2,3])
+        let items = ["one", "two", "three"]
+        let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.frame = CGRect(x: 10, y: 10, width: 200, height: 30)
         return segmentedControl
         
     }
