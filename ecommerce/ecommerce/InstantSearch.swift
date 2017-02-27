@@ -36,6 +36,9 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     internal var clearFilters: [UIControl?] = []
     internal var numericFilters: [UIControl?] = []
     
+    // TODO: Make this debouncer customisable (expose it)
+    internal var numericFiltersDebouncer = Debouncer(delay: 0.2)
+    
     // MARK: Members: Delegate
     
     var hitDataSource: AlgoliaHitDataSource? // TODO: Might want to initialise this in the init method.

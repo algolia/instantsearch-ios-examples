@@ -55,23 +55,29 @@ extension InstantSearch {
     
     // TODO: Change the filter value and trigger a search! 
     internal func numericFilterValueChanged(sender: UIControl) {
-        switch sender {
-        case let slider as InstantSearchSlider:
-            // TODO: Don't force unwrap... fix that once POC is done.
-            searcher.params.addNumericRefinement(slider.filterName!, slider.op!, Double(slider.value))
-            searcher.search()
-            reloadAllWidgets()
-        case let mySwitch as InstantSearchSwitch:
-            print(mySwitch.isOn)
-        case let stepper as InstantSearchStepper:
-            print(stepper.value)
-        case let segmentedControl as InstantSearchSegmentedControl:
-            print(segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!)
-        case let datePicker as InstantSearchDatePicker:
-            print(datePicker.date.timeIntervalSince1970)
-        default: print("none!")
+        numericFiltersDebouncer.call {
+            switch sender {
+            case let slider as InstantSearchSlider:
+                // TODO: Don't force unwrap... fix that once POC is done.
+                if let numericValue = self.searcher.params.numericRefinements[slider.filterName!]?.first(where: { $0.op == slider.op }) {
+                    numericValue.value = NSNumber(value: slider.value)
+                } else {
+                    self.searcher.params.addNumericRefinement(slider.filterName!, slider.op!, Double(slider.value))
+                }
+                
+                self.searcher.search()
+                self.reloadAllWidgets()
+            case let mySwitch as InstantSearchSwitch:
+                print(mySwitch.isOn)
+            case let stepper as InstantSearchStepper:
+                print(stepper.value)
+            case let segmentedControl as InstantSearchSegmentedControl:
+                print(segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!)
+            case let datePicker as InstantSearchDatePicker:
+                print(datePicker.date.timeIntervalSince1970)
+            default: print("none!")
+            }
         }
-
     }
     // TODO: Need to have setValueForWidget...
 }
