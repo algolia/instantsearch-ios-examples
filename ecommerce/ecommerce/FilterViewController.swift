@@ -41,7 +41,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func valueChanged(control: UIControl) {
         switch control {
-        case let slider as InstantSearchSlider:
+        case let slider as UISlider:
             let cell = tableView.cellForRow(at: IndexPath(row: slider.tag, section: 0))
             cell?.detailTextLabel?.text = "\(slider.value)"
         default: print("none!")
@@ -72,13 +72,13 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         didDismiss?()
     }
     
-    private func createSlider() -> InstantSearchSlider {
-        let slider = InstantSearchSlider(frame: defaultFrame)
+    private func createSlider() -> UISlider {
+        let slider = UISlider(frame: defaultFrame)
         slider.maximumValue = 50
         slider.minimumValue = 0
-        slider.filterName = RefinementParameters.salePrice
-        slider.op = .greaterThanOrEqual
-        instantSearch?.addWidget(numericFilter: slider)
+//        slider.filterName = RefinementParameters.salePrice
+//        slider.op = .greaterThanOrEqual
+        instantSearch?.addWidget(numericFilter: slider, withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
         
         return slider
     }

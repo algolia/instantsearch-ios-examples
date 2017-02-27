@@ -34,10 +34,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
     internal var clearFilters: [UIControl?] = []
-    internal var numericFilters: [UIControl?] = []
-    
-    // TODO: Make this debouncer customisable (expose it)
-    internal var numericFiltersDebouncer = Debouncer(delay: 0.2)
+    internal var numericFilters: [InstantSearchControl?] = []
     
     // MARK: Members: Delegate
     
@@ -91,11 +88,11 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
             hit?.reloadData()
         }
         
-        for control in numericFilters {
-            switch control {
-            case let slider as InstantSearchSlider:
+        for instantSearchControl in numericFilters {
+            switch instantSearchControl!.control { // TODO: Remove this force unwrap, and safely unveil. Same for below when doing instantSearchControl!
+            case let slider as UISlider:
                 // TODO: Needs huge cleanup cause right now it is super hacky. 
-                slider.value = searcher.params.hasNumericRefinements(name: slider.filterName!) ? searcher.params.numericRefinements[slider.filterName!]![0].value.floatValue : 0
+                slider.value = searcher.params.hasNumericRefinements(name: instantSearchControl!.filterName!) ? searcher.params.numericRefinements[instantSearchControl!.filterName!]![0].value.floatValue : 0
             default: break
             }
         }
