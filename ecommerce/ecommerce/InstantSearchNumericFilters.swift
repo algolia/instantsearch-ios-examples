@@ -30,6 +30,7 @@ class InstantSearchNumericControl {
     internal var numericFiltersDebouncer = Debouncer(delay: 0.2)
     
     required init(_ control: UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ valueChanged: @escaping NumericFilterValueChanged, inclusive: Bool = true) {
+        // TODO: Will be able to remove that control (and in facetFilters) since just use notifications and target action to react to things.
         self.control = control
         self.filterName = filterName
         self.op = op
@@ -51,9 +52,6 @@ class InstantSearchFacetControl {
     var inclusive: Bool = true
     var valueChanged: FacetFilterValueChanged
     
-    // TODO: Make this debouncer customisable (expose it)
-    internal var numericFiltersDebouncer = Debouncer(delay: 0.2)
-    
     required init(_ control: UIControl, _ filterName: String, _ valueChanged: @escaping FacetFilterValueChanged, inclusive: Bool = true) {
         self.control = control
         self.filterName = filterName
@@ -64,9 +62,7 @@ class InstantSearchFacetControl {
     
     // TODO: Need to use weak self.
     @objc internal func numericFilterValueChanged(sender: UIControl) {
-        numericFiltersDebouncer.call {
-            self.valueChanged(sender, self.filterName, self.inclusive)
-        }
+        self.valueChanged(sender, self.filterName, self.inclusive)
     }
 }
 
