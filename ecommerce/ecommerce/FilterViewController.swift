@@ -84,7 +84,9 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     private func createSwitch() -> UISwitch {
-        return UISwitch(frame: defaultFrame)
+        let mySwitch = UISwitch(frame: defaultFrame)
+        instantSearch?.addWidget(facetControl: mySwitch, withFilterName: RefinementParameters.promoted)
+        return mySwitch
     }
     
     private func createStepper() -> UIStepper {

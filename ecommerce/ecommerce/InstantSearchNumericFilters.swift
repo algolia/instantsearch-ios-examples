@@ -62,6 +62,7 @@ class InstantSearchFacetControl {
         control.addTarget(self, action: #selector(numericFilterValueChanged(sender:)), for: .valueChanged)
     }
     
+    // TODO: Need to use weak self.
     @objc internal func numericFilterValueChanged(sender: UIControl) {
         numericFiltersDebouncer.call {
             self.valueChanged(sender, self.filterName, self.inclusive)
@@ -71,6 +72,7 @@ class InstantSearchFacetControl {
 
 extension InstantSearch {
     
+    // TODO: Can make 3 different ones for the different controls that we support. In that case, have control over safety since we know which UIControl we support.
     func addWidget(facetControl: UIControl, withFilterName filterName: String, inclusive: Bool = true) {
         let instantSearchControl = InstantSearchFacetControl(facetControl, filterName, facetFilterValueChanged, inclusive: inclusive)
         
@@ -78,8 +80,27 @@ extension InstantSearch {
         reloadAllWidgets()
     }
     
-    internal func facetFilterValueChanged(_ control: UIControl, _ filterName: String, _ inclusive: Bool) {
-        // TODO: Do the same idea numeric filter, but add facetRefinements instead.
+    internal func facetFilterValueChanged(_ control: UIControl, _ filterName: String, _ inclusive: Bool = true) {
+        var value = String()
+        
+        switch control {
+        case let slider as UISlider:
+            value = String(slider.value)
+        case let stepper as UIStepper:
+            value = String(stepper.value)
+        case let datePicker as UIDatePicker:
+            value = String(datePicker.date.timeIntervalSince1970)
+        case let mySwitch as UISwitch: // TODO: Accept param which changes the value on true or false?
+            value = String(mySwitch.isOn)
+        case let segmentedControl as UISegmentedControl:
+            value = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!
+        default: print("Control sent to InstantSearch is not supported, so nothing is updated")
+            return
+        }
+        
+        searcher.params.updateFacetRefinement(name: filterName, value: value, inclusive: inclusive)
+        searcher.search()
+        reloadAllWidgets()
     }
     
     func addWidget(numericControl: UIControl, withFilterName filterName: String, operation op: NumericRefinement.Operator, inclusive: Bool = true) {
@@ -92,7 +113,7 @@ extension InstantSearch {
     
     
     
-    internal func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool) {
+    internal func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool = true) {
         var value = NSNumber()
         
         switch control {
@@ -111,7 +132,7 @@ extension InstantSearch {
             return
         }
         
-        searcher.params.updateNumericRefinement(filterName, op, value)
+        searcher.params.updateNumericRefinement(filterName, op, value, inclusive)
         searcher.search()
         reloadAllWidgets()
     }
@@ -120,11 +141,19 @@ extension InstantSearch {
 }
 
 extension SearchParameters {
-    func updateNumericRefinement(_ filterName: String, _ op: NumericRefinement.Operator, _ value: NSNumber) {
-        if let numericValue = numericRefinements[filterName]?.first(where: { $0.op == op }) {
+    func updateNumericRefinement(_ filterName: String, _ op: NumericRefinement.Operator, _ value: NSNumber, _ inclusive: Bool = true) {
+        if let numericValue = numericRefinements[filterName]?.first(where: { $0.op == op }) { // TODO: Should we also check for inclusive value? same for facet refinements
             numericValue.value = value
         } else {
-            addNumericRefinement(filterName, op, value)
+            addNumericRefinement(filterName, op, value, inclusive: inclusive)
+        }
+    }
+    
+    func updateFacetRefinement(name filterName: String, value: String, inclusive: Bool = true) {
+        if let facetValue = facetRefinements[filterName]?.first {
+            facetValue.value = value
+        } else {
+            addFacetRefinement(name: filterName, value: value, inclusive: inclusive)
         }
     }
 }
