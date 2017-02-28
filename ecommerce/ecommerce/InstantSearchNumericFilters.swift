@@ -93,21 +93,25 @@ extension InstantSearch {
     
     
     internal func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool) {
+        var value = NSNumber()
+        
         switch control {
         case let slider as UISlider:
-            searcher.params.updateNumericRefinement(filterName, op, NSNumber(value: slider.value))
-//        case let mySwitch as InstantSearchSwitch:
-//            print(mySwitch.isOn)
-//        case let stepper as InstantSearchStepper:
-//            print(stepper.value)
-//        case let segmentedControl as InstantSearchSegmentedControl:
-//            print(segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!)
-//        case let datePicker as InstantSearchDatePicker:
-//            print(datePicker.date.timeIntervalSince1970)
+            value = NSNumber(value:slider.value)
+        case let stepper as UIStepper:
+            value = NSNumber(value: stepper.value)
+        case let datePicker as UIDatePicker:
+            value = NSNumber(value: datePicker.date.timeIntervalSince1970)
+//        case let mySwitch as UISwitch:
+//            value = NSNumber(value: mySwitch.isOn)
+            //        case let segmentedControl as UISegmentedControl:
+            //            searcher.params.updateNumericRefinement(filterName, op, NSNumber(value: segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!))
+        //            print(segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!)
         default: print("Control sent to InstantSearch is not supported, so nothing is updated")
             return
         }
         
+        searcher.params.updateNumericRefinement(filterName, op, value)
         searcher.search()
         reloadAllWidgets()
     }
