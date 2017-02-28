@@ -35,12 +35,29 @@ class InstantSearchNumericControl {
         self.inclusive = inclusive
         self.valueChanged = valueChanged
         control.addTarget(self, action: #selector(numericFilterValueChanged(sender:)), for: .valueChanged)
+        control.clearInstantSearchFilter()
     }
     
     @objc internal func numericFilterValueChanged(sender: UIControl) {
         numericFiltersDebouncer.call {
             self.valueChanged(sender, self.filterName, self.op, self.inclusive)
         }
+    }
+}
+
+extension UIControl {
+    func clearInstantSearchFilter() {
+        // TODO: should we use nil for queue (OperationQueue) synchronous or not? Check..
+        NotificationCenter.default.addObserver(forName: clearAllFiltersNotification, object: nil, queue: nil, using: clearControl)
+    }
+    
+    open func clearControl(notification: Notification) {}
+}
+
+extension UISlider {
+    override open func clearControl(notification: Notification) {
+        setValue(minimumValue, animated: true)
+        sendActions(for: .valueChanged)
     }
 }
 

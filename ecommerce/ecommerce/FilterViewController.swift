@@ -108,7 +108,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let button = UIButton(frame: defaultFrame)
         button.backgroundColor = UIColor.red
         button.setTitle("clear", for: .normal)
-        
+        instantSearch?.addWidget(clearFilter: button, for: .touchUpInside)
         return button
     }
     

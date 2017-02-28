@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNotification")
+
 extension InstantSearch {
     func addWidget(clearFilter: UIControl, for controlEvent: UIControlEvents) {
         clearFilters.append(clearFilter)
@@ -18,6 +20,7 @@ extension InstantSearch {
     
     internal func clearFilter() {
         searcher.params.clearRefinements()
+        NotificationCenter.default.post(name: clearAllFiltersNotification, object: nil)
         searcher.search()
         reloadAllWidgets()
     }
