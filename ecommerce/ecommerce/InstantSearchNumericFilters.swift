@@ -16,6 +16,8 @@ protocol InstantSearchNumericFilter {
 }
 
 typealias NumericFilterValueChanged = (UIControl,String,NumericRefinement.Operator,Bool) -> ()
+typealias FacetFilterValueChanged = (UIControl,String,Bool) -> ()
+
 
 class InstantSearchNumericControl {
     var control: UIControl
@@ -43,10 +45,41 @@ class InstantSearchNumericControl {
     }
 }
 
+class InstantSearchFacetControl {
+    var control: UIControl
+    var filterName: String
+    var inclusive: Bool = true
+    var valueChanged: FacetFilterValueChanged
+    
+    // TODO: Make this debouncer customisable (expose it)
+    internal var numericFiltersDebouncer = Debouncer(delay: 0.2)
+    
+    required init(_ control: UIControl, _ filterName: String, _ valueChanged: @escaping FacetFilterValueChanged, inclusive: Bool = true) {
+        self.control = control
+        self.filterName = filterName
+        self.inclusive = inclusive
+        self.valueChanged = valueChanged
+        control.addTarget(self, action: #selector(numericFilterValueChanged(sender:)), for: .valueChanged)
+    }
+    
+    @objc internal func numericFilterValueChanged(sender: UIControl) {
+        numericFiltersDebouncer.call {
+            self.valueChanged(sender, self.filterName, self.inclusive)
+        }
+    }
+}
+
 extension InstantSearch {
     
     func addWidget(facetControl: UIControl, withFilterName filterName: String, inclusive: Bool = true) {
+        let instantSearchControl = InstantSearchFacetControl(facetControl, filterName, facetFilterValueChanged, inclusive: inclusive)
         
+        facetFilters.append(instantSearchControl)
+        reloadAllWidgets()
+    }
+    
+    internal func facetFilterValueChanged(_ control: UIControl, _ filterName: String, _ inclusive: Bool) {
+        // TODO: Do the same idea numeric filter, but add facetRefinements instead.
     }
     
     func addWidget(numericControl: UIControl, withFilterName filterName: String, operation op: NumericRefinement.Operator, inclusive: Bool = true) {
@@ -56,6 +89,8 @@ extension InstantSearch {
         numericFilters.append(instantSearchControl)
         reloadAllWidgets()
     }
+    
+    
     
     internal func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool) {
         switch control {
