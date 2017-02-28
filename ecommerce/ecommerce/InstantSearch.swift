@@ -88,15 +88,6 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
         for hit in hits {
             hit?.reloadData()
         }
-        
-        for instantSearchControl in numericFilters {
-            switch instantSearchControl!.control { // TODO: Remove this force unwrap, and safely unveil. Same for below when doing instantSearchControl!
-            case let slider as UISlider:
-                // TODO: Needs huge cleanup cause right now it is super hacky. 
-                slider.value = searcher.params.hasNumericRefinements(name: instantSearchControl!.filterName) ? searcher.params.numericRefinements[instantSearchControl!.filterName]![0].value.floatValue : 0
-            default: break
-            }
-        }
     }
     
     func set(facetSearchController: UISearchController) {

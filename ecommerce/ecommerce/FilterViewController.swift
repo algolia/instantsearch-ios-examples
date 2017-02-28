@@ -76,8 +76,6 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let slider = UISlider(frame: defaultFrame)
         slider.maximumValue = 50
         slider.minimumValue = 0
-//        slider.filterName = RefinementParameters.salePrice
-//        slider.op = .greaterThanOrEqual
         instantSearch?.addWidget(numericControl: slider, withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
         
         return slider

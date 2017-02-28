@@ -35,7 +35,7 @@ class InstantSearchNumericControl {
         self.inclusive = inclusive
         self.valueChanged = valueChanged
         control.addTarget(self, action: #selector(numericFilterValueChanged(sender:)), for: .valueChanged)
-        control.clearInstantSearchFilter()
+        control.subscribeToClearAllFilter()
     }
     
     @objc internal func numericFilterValueChanged(sender: UIControl) {
@@ -46,7 +46,7 @@ class InstantSearchNumericControl {
 }
 
 extension UIControl {
-    func clearInstantSearchFilter() {
+    func subscribeToClearAllFilter() {
         // TODO: should we use nil for queue (OperationQueue) synchronous or not? Check..
         NotificationCenter.default.addObserver(forName: clearAllFiltersNotification, object: nil, queue: nil, using: clearControl)
     }
@@ -56,15 +56,16 @@ extension UIControl {
 
 extension UISlider {
     override open func clearControl(notification: Notification) {
-        setValue(minimumValue, animated: true)
-        sendActions(for: .valueChanged)
+        self.setValue(minimumValue, animated:false)
+        print("clearr")
     }
 }
 
 extension InstantSearch {
     func addWidget(numericControl: UIControl, withFilterName filterName: String, operation op: NumericRefinement.Operator, inclusive: Bool = true) {
-        
         let instantSearchControl = InstantSearchNumericControl(numericControl, filterName, op, numericFilterValueChanged, inclusive: inclusive)
+        let slider = numericControl as? UISlider
+        slider?.value = searcher.params.hasNumericRefinements(name: filterName) ? searcher.params.numericRefinements[filterName]![0].value.floatValue : 0
         numericFilters.append(instantSearchControl)
         reloadAllWidgets()
     }
@@ -92,9 +93,14 @@ extension InstantSearch {
 }
 
 extension SearchParameters {
+    
+    func getNumericRefinement(name filterName: String, op: NumericRefinement.Operator, inclusive: Bool = true) -> NumericRefinement? {
+        return numericRefinements[filterName]?.first(where: { $0.op == op && $0.inclusive == inclusive})
+    }
+    
     func updateNumericRefinement(_ filterName: String, _ op: NumericRefinement.Operator, _ value: NSNumber, _ inclusive: Bool = true) {
-        if let numericValue = numericRefinements[filterName]?.first(where: { $0.op == op }) { // TODO: Should we also check for inclusive value? same for facet refinements
-            numericValue.value = value
+        if let numericRefinement = getNumericRefinement(name: filterName, op: op, inclusive: inclusive)  {
+            numericRefinement.value = value
         } else {
             addNumericRefinement(filterName, op, value, inclusive: inclusive)
         }
