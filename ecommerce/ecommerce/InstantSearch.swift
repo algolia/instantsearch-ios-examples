@@ -27,11 +27,11 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     var searcher: Searcher!
     var instantSearchParameters = InstantSearchParameters()
     var facetResults: [String: [FacetRecord]] = [:]
-    private var allHits: [JSONObject] = []
-    private var results: SearchResults?
+    //TODO: Is allHits still needed? since we have it in results..
+    internal var allHits: [JSONObject] = []
+    internal var results: SearchResults?
     
     // TODO: Can have a 2D array of widgets, which has all the below widgets.
-    internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
     internal var numericFilters: [InstantSearchNumericControl?] = []
     internal var facetFilters: [InstantSearchFacetControl?] = []
@@ -80,10 +80,6 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     func reloadAllWidgets() {
         guard let results = results else { return }
         
-        for var stat in stats {
-            stat?.text = "\(results.nbHits) results"
-        }
-        
         for hit in hits {
             hit?.reloadData()
         }
@@ -127,6 +123,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     func handleResults(results: SearchResults?, error: Error?) {
         guard let results = results else { return }
+        
         self.results = results
         
         if results.page == 0 {
