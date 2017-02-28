@@ -95,15 +95,7 @@ extension InstantSearch {
     internal func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool) {
         switch control {
         case let slider as UISlider:
-            // TODO: Don't force unwrap... fix that once POC is done.
-            if let numericValue = self.searcher.params.numericRefinements[filterName]?.first(where: { $0.op == op }) {
-                numericValue.value = NSNumber(value: slider.value)
-            } else {
-                self.searcher.params.addNumericRefinement(filterName, op, Double(slider.value))
-            }
-            
-            self.searcher.search()
-            self.reloadAllWidgets()
+            searcher.params.updateNumericRefinement(filterName, op, NSNumber(value: slider.value))
 //        case let mySwitch as InstantSearchSwitch:
 //            print(mySwitch.isOn)
 //        case let stepper as InstantSearchStepper:
@@ -112,9 +104,23 @@ extension InstantSearch {
 //            print(segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!)
 //        case let datePicker as InstantSearchDatePicker:
 //            print(datePicker.date.timeIntervalSince1970)
-        default: print("none!")
+        default: print("Control sent to InstantSearch is not supported, so nothing is updated")
+            return
         }
+        
+        searcher.search()
+        reloadAllWidgets()
     }
     
     // TODO: Need to have setValueForWidget...
+}
+
+extension SearchParameters {
+    func updateNumericRefinement(_ filterName: String, _ op: NumericRefinement.Operator, _ value: NSNumber) {
+        if let numericValue = numericRefinements[filterName]?.first(where: { $0.op == op }) {
+            numericValue.value = value
+        } else {
+            addNumericRefinement(filterName, op, value)
+        }
+    }
 }
