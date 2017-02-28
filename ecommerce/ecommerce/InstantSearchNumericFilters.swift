@@ -10,35 +10,31 @@ import Foundation
 import InstantSearchCore
 import UIKit
 
-protocol InstantSearchNumericFilter {
-    var filterName: String? { get set }
-    var inclusive: Bool { get set }
+protocol InstantSearchNumericFilterDelegate: class {
+    func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool)
 }
-
-typealias NumericFilterValueChanged = (UIControl,String,NumericRefinement.Operator,Bool) -> ()
 
 class InstantSearchNumericControl {
     var filterName: String
     var op: NumericRefinement.Operator
     var inclusive: Bool = true
-    var valueChanged: NumericFilterValueChanged
+    weak var valueChangedDelegate: InstantSearchNumericFilterDelegate?
     
     // TODO: Make this debouncer customisable (expose it)
     internal var numericFiltersDebouncer = Debouncer(delay: 0.2)
     
-    required init(_ control: UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ valueChanged: @escaping NumericFilterValueChanged, inclusive: Bool = true) {
+    required init(_ control: UIControl, _ filterName: String, _ op: NumericRefinement.Operator, inclusive: Bool = true) {
         // TODO: Will be able to remove that control (and in facetFilters) since just use notifications and target action to react to things.
         self.filterName = filterName
         self.op = op
         self.inclusive = inclusive
-        self.valueChanged = valueChanged
         control.addTarget(self, action: #selector(numericFilterValueChanged(sender:)), for: .valueChanged)
         control.subscribeToClearAllFilter()
     }
     
     @objc internal func numericFilterValueChanged(sender: UIControl) {
         numericFiltersDebouncer.call {
-            self.valueChanged(sender, self.filterName, self.op, self.inclusive)
+            self.valueChangedDelegate?.numericFilterValueChanged(sender, self.filterName, self.op, self.inclusive)
         }
     }
 }
@@ -59,9 +55,10 @@ extension UISlider {
     }
 }
 
-extension InstantSearch {
+extension InstantSearch : InstantSearchNumericFilterDelegate {
     func addWidget(numericControl: UIControl, withFilterName filterName: String, operation op: NumericRefinement.Operator, inclusive: Bool = true) {
-        let instantSearchControl = InstantSearchNumericControl(numericControl, filterName, op, numericFilterValueChanged, inclusive: inclusive)
+        let instantSearchControl = InstantSearchNumericControl(numericControl, filterName, op, inclusive: inclusive)
+        instantSearchControl.valueChangedDelegate = self
         
         let slider = numericControl as? UISlider
         if let numericRefinement = searcher.params.getNumericRefinement(name: filterName, op: op, inclusive: inclusive) {
@@ -69,11 +66,10 @@ extension InstantSearch {
             slider?.sendActions(for: .valueChanged)
         }
         
+        // This is just to keep a strong reference, or else it won't work. But can find a better solution for sure..
         numericFilters.append(instantSearchControl)
         reloadAllWidgets()
     }
-    
-    
     
     internal func numericFilterValueChanged(_ control:UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ inclusive: Bool = true) {
         var value = NSNumber()

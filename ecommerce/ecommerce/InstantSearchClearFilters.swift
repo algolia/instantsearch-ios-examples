@@ -20,6 +20,7 @@ extension InstantSearch {
     internal func clearFilter() {
         searcher.params.clearRefinements()
         NotificationCenter.default.post(name: clearAllFiltersNotification, object: nil)
+        print("Button Pressed")
         searcher.search()
         reloadAllWidgets()
     }

@@ -22,7 +22,7 @@ import AlgoliaSearch
 
 //TODO: Make all private methods method..
 class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
-    
+
     // MARK: Members: Algolia Specific
     var searcher: Searcher!
     var instantSearchParameters = InstantSearchParameters()
