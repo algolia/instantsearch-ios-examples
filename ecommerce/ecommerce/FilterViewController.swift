@@ -55,6 +55,8 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidAppear(_ animated: Bool) {
         instantSearch?.addWidget(stats: resultButton.titleLabel!)
+        instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        instantSearch?.addWidget(facetControl: controls[1], withFilterName: RefinementParameters.promoted)
     }
     
     func setupResultButton() {
@@ -76,14 +78,12 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let slider = UISlider(frame: defaultFrame)
         slider.maximumValue = 50
         slider.minimumValue = 0
-        instantSearch?.addWidget(numericControl: slider, withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
         
         return slider
     }
     
     private func createSwitch() -> UISwitch {
         let mySwitch = UISwitch(frame: defaultFrame)
-        instantSearch?.addWidget(facetControl: mySwitch, withFilterName: RefinementParameters.promoted)
         return mySwitch
     }
     
@@ -118,7 +118,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
         
-        cell.detailTextLabel?.text = "text"
+        //cell.detailTextLabel?.text = "text"
         cell.textLabel?.text = titles[indexPath.row]
         cell.accessoryView = controls[indexPath.row]
         

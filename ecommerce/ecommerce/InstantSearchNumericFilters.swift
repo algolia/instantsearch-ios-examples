@@ -64,8 +64,13 @@ extension UISlider {
 extension InstantSearch {
     func addWidget(numericControl: UIControl, withFilterName filterName: String, operation op: NumericRefinement.Operator, inclusive: Bool = true) {
         let instantSearchControl = InstantSearchNumericControl(numericControl, filterName, op, numericFilterValueChanged, inclusive: inclusive)
+        
         let slider = numericControl as? UISlider
-        slider?.value = searcher.params.hasNumericRefinements(name: filterName) ? searcher.params.numericRefinements[filterName]![0].value.floatValue : 0
+        if let numericRefinement = searcher.params.getNumericRefinement(name: filterName, op: op, inclusive: inclusive) {
+            slider?.setValue(numericRefinement.value.floatValue, animated: false)
+            slider?.sendActions(for: .valueChanged)
+        }
+        
         numericFilters.append(instantSearchControl)
         reloadAllWidgets()
     }
