@@ -125,7 +125,6 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    
     /*
     // MARK: - Navigation
 

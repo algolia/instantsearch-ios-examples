@@ -42,7 +42,7 @@ class InstantSearchNumericControl {
 extension UIControl {
     func subscribeToClearAllFilter() {
         // TODO: should we use nil for queue (OperationQueue) synchronous or not? Check..
-        NotificationCenter.default.addObserver(forName: clearAllFiltersNotification, object: nil, queue: nil, using: clearControl)
+        NotificationCenter.default.addObserver(self, selector: #selector(clearControl(notification:)), name: clearAllFiltersNotification, object: nil)
     }
     
     open func clearControl(notification: Notification) {}
@@ -51,7 +51,7 @@ extension UIControl {
 extension UISlider {
     override open func clearControl(notification: Notification) {
         self.setValue(minimumValue, animated:false)
-        print("clearr")
+        print("clear all filters")
     }
 }
 
