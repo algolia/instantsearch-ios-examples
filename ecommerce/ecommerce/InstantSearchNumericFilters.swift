@@ -18,7 +18,6 @@ protocol InstantSearchNumericFilter {
 typealias NumericFilterValueChanged = (UIControl,String,NumericRefinement.Operator,Bool) -> ()
 
 class InstantSearchNumericControl {
-    var control: UIControl
     var filterName: String
     var op: NumericRefinement.Operator
     var inclusive: Bool = true
@@ -29,7 +28,6 @@ class InstantSearchNumericControl {
     
     required init(_ control: UIControl, _ filterName: String, _ op: NumericRefinement.Operator, _ valueChanged: @escaping NumericFilterValueChanged, inclusive: Bool = true) {
         // TODO: Will be able to remove that control (and in facetFilters) since just use notifications and target action to react to things.
-        self.control = control
         self.filterName = filterName
         self.op = op
         self.inclusive = inclusive

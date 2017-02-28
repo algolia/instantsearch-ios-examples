@@ -13,13 +13,11 @@ import InstantSearchCore
 typealias FacetFilterValueChanged = (UIControl,String,Bool) -> ()
 
 class InstantSearchFacetControl {
-    var control: UIControl
     var filterName: String
     var inclusive: Bool = true
     var valueChanged: FacetFilterValueChanged
     
     required init(_ control: UIControl, _ filterName: String, _ valueChanged: @escaping FacetFilterValueChanged, inclusive: Bool = true) {
-        self.control = control
         self.filterName = filterName
         self.inclusive = inclusive
         self.valueChanged = valueChanged
