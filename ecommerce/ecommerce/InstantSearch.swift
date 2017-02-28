@@ -34,7 +34,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
     internal var clearFilters: [UIControl?] = []
-    internal var numericFilters: [InstantSearchControl?] = []
+    internal var numericFilters: [InstantSearchNumericControl?] = []
     
     // MARK: Members: Delegate
     
@@ -92,7 +92,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
             switch instantSearchControl!.control { // TODO: Remove this force unwrap, and safely unveil. Same for below when doing instantSearchControl!
             case let slider as UISlider:
                 // TODO: Needs huge cleanup cause right now it is super hacky. 
-                slider.value = searcher.params.hasNumericRefinements(name: instantSearchControl!.filterName!) ? searcher.params.numericRefinements[instantSearchControl!.filterName!]![0].value.floatValue : 0
+                slider.value = searcher.params.hasNumericRefinements(name: instantSearchControl!.filterName) ? searcher.params.numericRefinements[instantSearchControl!.filterName]![0].value.floatValue : 0
             default: break
             }
         }
