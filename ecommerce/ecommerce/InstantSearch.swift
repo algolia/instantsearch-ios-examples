@@ -33,7 +33,6 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     // TODO: Can have a 2D array of widgets, which has all the below widgets.
     internal var stats: [InstantSearchStats?] = []
     internal var hits: [InstantSearchHits?] = []
-    internal var clearFilters: [UIControl?] = []
     internal var numericFilters: [InstantSearchNumericControl?] = []
     internal var facetFilters: [InstantSearchFacetControl?] = []
     

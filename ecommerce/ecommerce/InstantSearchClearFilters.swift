@@ -13,7 +13,6 @@ let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNo
 
 extension InstantSearch {
     func addWidget(clearFilter: UIControl, for controlEvent: UIControlEvents) {
-        clearFilters.append(clearFilter)
         clearFilter.addTarget(self, action: #selector(self.clearFilter), for: controlEvent)
         reloadAllWidgets()
     }
