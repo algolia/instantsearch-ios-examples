@@ -23,17 +23,16 @@
 
 import InstantSearchCore
 import UIKit
-import ObjectiveC
 
-private var xoAssociationKey: UInt8 = 0
+private var highlightedBackgroundColorKey: Void?
 
 extension UILabel {
     var highlightedBackgroundColor: UIColor? {
         get {
-            return objc_getAssociatedObject(self, &xoAssociationKey) as? UIColor
+            return objc_getAssociatedObject(self, &highlightedBackgroundColorKey) as? UIColor
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &highlightedBackgroundColorKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     

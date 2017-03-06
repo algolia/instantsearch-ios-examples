@@ -11,10 +11,21 @@ import UIKit
 
 public protocol InstantSearchHits {
     func reloadData()
+    func scrollToFirstRow()
 }
 
-extension UITableView: InstantSearchHits {}
-extension UICollectionView: InstantSearchHits {}
+extension UITableView: InstantSearchHits {
+    public func scrollToFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        scrollToRow(at: indexPath, at: .top, animated: true)
+    }
+}
+extension UICollectionView: InstantSearchHits {
+    public func scrollToFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        scrollToItem(at: indexPath, at: .top, animated: true)
+    }
+}
 
 extension InstantSearch {
     func addWidget(hits: InstantSearchHits) {

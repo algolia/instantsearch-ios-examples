@@ -21,7 +21,7 @@ import AlgoliaSearch
 }
 
 //TODO: Make all private methods method..
-class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
+class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelegate, SearchProgressDelegate {
 
     // MARK: Members: Algolia Specific
     var searcher: Searcher!
@@ -48,6 +48,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     var hitSearchController: UISearchController! {
         didSet {
             hitSearchController.searchResultsUpdater = self
+            hitSearchController.delegate = self
         }
     }
     
@@ -121,8 +122,12 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
     
     // Searcher Delegate functions
     
-    func handleResults(results: SearchResults?, error: Error?) {
+    func handleResults(results: SearchResults?, error: Error?, userInfo: JSONObject) {
         guard let results = results else { return }
+        
+        let isLoadingMore = userInfo[Searcher.notificationIsLoadingMoreKey] as? Bool
+        print(isLoadingMore)
+        print(searcher.hits?.count)
         
         self.results = results
         
@@ -180,6 +185,20 @@ class InstantSearch: NSObject, UISearchResultsUpdating, SearchProgressDelegate {
         }
     }
     
+    // MARK: UISearchControllerDelegate functions 
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        for hit in hits {
+            hit?.scrollToFirstRow()
+        }
+    }
+    
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        for hit in hits {
+            hit?.scrollToFirstRow()
+        }
+    }
     // MARK: Search Helper Functions
     
     func loadMoreIfNecessary(rowNumber: Int) {
