@@ -85,7 +85,7 @@ extension InstantSearch : InstantSearchNumericFilterDelegate {
             return
         }
         
-        searcher.params.updateNumericRefinement(filterName, op, value, inclusive)
+        searcher.params.updateNumericRefinement(filterName, op, value, inclusive: inclusive)
         searcher.search()
         reloadAllWidgets()
     }
@@ -95,13 +95,5 @@ extension SearchParameters {
     
     func getNumericRefinement(name filterName: String, op: NumericRefinement.Operator, inclusive: Bool = true) -> NumericRefinement? {
         return numericRefinements[filterName]?.first(where: { $0.op == op && $0.inclusive == inclusive})
-    }
-    
-    func updateNumericRefinement(_ filterName: String, _ op: NumericRefinement.Operator, _ value: NSNumber, _ inclusive: Bool = true) {
-        if let numericRefinement = getNumericRefinement(name: filterName, op: op, inclusive: inclusive)  {
-            numericRefinement.value = value
-        } else {
-            addNumericRefinement(filterName, op, value, inclusive: inclusive)
-        }
     }
 }

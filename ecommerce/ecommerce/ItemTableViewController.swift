@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaHitDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching, AlgoliaHitDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -47,7 +47,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         return itemsToShow.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
@@ -55,7 +54,9 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         instantSearch.loadMoreIfNecessary(rowNumber: indexPath.row)
         
         // TODO: Solve it better with data binding techniques
-        cell.item = ItemRecord(json: itemsToShow[indexPath.row])
+        if indexPath.row < itemsToShow.count {
+            cell.item = ItemRecord(json: itemsToShow[indexPath.row])
+        }
         cell.backgroundColor = ColorConstants.tableColor
         
         return cell
@@ -68,9 +69,15 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         instantSearch.hitDataSource = self
     }
     
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print(indexPaths)
+        //instantSearch.prefetchMoreIfNecessary(indexPaths: indexPaths)
+    }
+    
     func configureTable() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor

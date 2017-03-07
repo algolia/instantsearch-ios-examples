@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import InstantSearchCore
 
 class FacetCategoryCell: UITableViewCell {
     
-    var facet: FacetRecord? {
+    var facet: FacetValue? {
         didSet {
             guard let facet = facet else { return }
             
             textLabel?.text = facet.value
-            detailTextLabel?.text = "\(facet.count ?? 0)"
-            accessoryType = facet.isRefined ? .checkmark : .none
+            detailTextLabel?.text = "\(facet.count)"
+        }
+    }
+    
+    var isRefined: Bool = false {
+        didSet {
+            accessoryType = isRefined ? .checkmark : .none
         }
     }
 }

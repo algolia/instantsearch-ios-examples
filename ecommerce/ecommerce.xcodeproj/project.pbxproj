@@ -21,7 +21,6 @@
 		E219FAE01E49F982006D9CFC /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FADF1E49F982006D9CFC /* TopBarView.swift */; };
 		E219FAE21E4A1E16006D9CFC /* FacetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */; };
 		E219FAE81E4B1864006D9CFC /* InstantSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAE71E4B1864006D9CFC /* InstantSearch.swift */; };
-		E219FAF11E4CC026006D9CFC /* FacetRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF01E4CC026006D9CFC /* FacetRecord.swift */; };
 		E219FAF31E4DD1FB006D9CFC /* InstantSearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF21E4DD1FB006D9CFC /* InstantSearchProtocol.swift */; };
 		E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */; };
 		E219FAF81E4DFA5A006D9CFC /* InstanSearchTableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */; };
@@ -84,7 +83,6 @@
 		E219FADF1E49F982006D9CFC /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetTableViewController.swift; sourceTree = "<group>"; };
 		E219FAE71E4B1864006D9CFC /* InstantSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearch.swift; sourceTree = "<group>"; };
-		E219FAF01E4CC026006D9CFC /* FacetRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetRecord.swift; sourceTree = "<group>"; };
 		E219FAF21E4DD1FB006D9CFC /* InstantSearchProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchProtocol.swift; sourceTree = "<group>"; };
 		E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaSearchManager.swift; sourceTree = "<group>"; };
 		E219FAF71E4DFA5A006D9CFC /* InstanSearchTableStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanSearchTableStorage.swift; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 			children = (
 				E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */,
 				E219FAD71E44C710006D9CFC /* ItemRecord.swift */,
-				E219FAF01E4CC026006D9CFC /* FacetRecord.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -556,7 +553,6 @@
 				E219FAE21E4A1E16006D9CFC /* FacetTableViewController.swift in Sources */,
 				E219FADA1E44DB20006D9CFC /* ItemCell.swift in Sources */,
 				E219FAD81E44C710006D9CFC /* ItemRecord.swift in Sources */,
-				E219FAF11E4CC026006D9CFC /* FacetRecord.swift in Sources */,
 				E219FAE01E49F982006D9CFC /* TopBarView.swift in Sources */,
 				E219FAE81E4B1864006D9CFC /* InstantSearch.swift in Sources */,
 				E22B900A1E5EF17B00059F95 /* FilterCell.swift in Sources */,

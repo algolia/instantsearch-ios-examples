@@ -17,7 +17,7 @@ import AlgoliaSearch
 
 @objc protocol AlgoliaFacetDataSource {
     @objc optional func handle(results: SearchResults, error: Error?)
-    func handle(facetRecords: [FacetRecord]?)
+    func handle(facetRecords: [FacetValue]?)
 }
 
 //TODO: Make all private methods method..
@@ -26,7 +26,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
     // MARK: Members: Algolia Specific
     var searcher: Searcher!
     var instantSearchParameters = InstantSearchParameters()
-    var facetResults: [String: [FacetRecord]] = [:]
+    var facetResults: [String: [FacetValue]] = [:]
     //TODO: Is allHits still needed? since we have it in results..
     internal var allHits: [JSONObject] = []
     internal var results: SearchResults?
@@ -92,7 +92,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
     
     // This comes from Searcher.searchForFacetValues.
     // TODO: Change naming because it is confusing. Also do a small diagram of the flow to visualise all these functions and delegates.
-    func getFacetRecords(with results: SearchResults?, facetCounts: [String: Int]?, andFacetName facetName:String) -> [FacetRecord]? {
+    func getFacetRecords(with results: SearchResults?, facetCounts: [String: Int]?, andFacetName facetName:String) -> [FacetValue]? {
         // Sort facets: first selected facets, then by decreasing count, then by name.
         let facetValues = FacetValue.listFrom(facetCounts: facetCounts, refinements: searcher.params.buildFacetRefinements()[facetName]).sorted() { (lhs, rhs) in
             // TODO: Change to false always. Need to decide on that later on.
@@ -110,13 +110,13 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
             }
         }
         
-        facetResults[facetName] = facetValues.map { facetValue in return FacetRecord(value: facetValue.value, count: facetValue.count) }
+        facetResults[facetName] = facetValues
         
         return facetResults[facetName]
     }
     
     // This comes from Searcher.search() results
-    func getSearchFacetRecords(withFacetName facetName: String)  -> [FacetRecord]? {
+    func getSearchFacetRecords(withFacetName facetName: String)  -> [FacetValue]? {
         return facetResults[facetName]
     }
     
@@ -173,8 +173,8 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
                 let facetHits = content?["facetHits"] as? [[String: Any]]
                 var facetCounts: [String: Int] = [:]
                 _ = facetHits?.map { (facetHit) in
-                    let facetRecord = FacetRecord(json: facetHit)
-                    facetCounts[facetRecord.value!] = facetRecord.count!
+                    let facetRecord = FacetResults(json: facetHit)
+                    facetCounts[facetRecord.value!] = facetRecord.count
                 }
                 
                 self.facetResults["category"] = self.getFacetRecords(with: nil, facetCounts:facetCounts, andFacetName: "category")
@@ -204,6 +204,20 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
     func loadMoreIfNecessary(rowNumber: Int) {
         if rowNumber + instantSearchParameters.remainingItemsBeforeLoading >= allHits.count {
             searcher.loadMore()
+        }
+    }
+    
+    func prefetchMoreIfNecessary(indexPaths: [IndexPath]) {
+        let lastRowNumberToFetchOptional = indexPaths.map { $0.row }.max()
+        
+        guard let lastRowNumberToFetch = lastRowNumberToFetchOptional else {
+            print("woah")
+            return
+        }
+        
+        if lastRowNumberToFetch >= allHits.count {
+            searcher.loadMore()
+            return
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import InstantSearchCore
 
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,7 +17,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var instantSearch: InstantSearch?
     var didDismiss: (() -> ())?
     var controls: [UIControl] = []
-    var titles: [String] = ["button", "switch", "slider", "stepper", "segmented"]
+    var titles: [String] = ["button", "switch", "slider", "slider2", "stepper", "segmented"]
     
     let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 40)
     
@@ -30,6 +31,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         controls.append(createButton())
         controls.append(createSwitch())
         controls.append(createSlider())
+        controls.append(createSlider2())
         controls.append(createStepper())
         controls.append(createSegmentedControl())
         
@@ -37,6 +39,16 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
             control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
             control.tag = index
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onRefinementNotification(notification:)), name: Searcher.RefinementChangeNotification, object: nil)
+    }
+    
+    func onRefinementNotification(notification: Notification) {
+        let numericRefinements =  notification.userInfo?[Searcher.notificationNumericRefinementChangeKey] as? [String: [NumericRefinement]]
+        let facetRefinements =  notification.userInfo?[Searcher.notificationFacetRefinementChangeKey] as? [String: [FacetRefinement]]
+        
+        print(numericRefinements)
+        print(facetRefinements)
     }
     
     func valueChanged(control: UIControl) {
@@ -56,6 +68,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidAppear(_ animated: Bool) {
         instantSearch?.addWidget(stats: resultButton.titleLabel!)
         instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
         instantSearch?.addWidget(facetControl: controls[1], withFilterName: RefinementParameters.promoted)
     }
     
@@ -75,6 +88,14 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     private func createSlider() -> UISlider {
+        let slider = UISlider(frame: defaultFrame)
+        slider.maximumValue = 50
+        slider.minimumValue = 0
+        
+        return slider
+    }
+    
+    private func createSlider2() -> UISlider {
         let slider = UISlider(frame: defaultFrame)
         slider.maximumValue = 50
         slider.minimumValue = 0
