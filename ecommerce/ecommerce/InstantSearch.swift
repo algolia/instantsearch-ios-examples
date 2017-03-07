@@ -139,7 +139,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
         
         if let facets = searcher.params.facets {
             for facet in facets {
-                facetResults[facet] = getFacetRecords(with: results, facetCounts:results.facets(name: facet), andFacetName: facet)
+                facetResults[facet] = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: true)
             }
         }
         
@@ -177,7 +177,7 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
                     facetCounts[facetRecord.value!] = facetRecord.count
                 }
                 
-                self.facetResults["category"] = self.getFacetRecords(with: nil, facetCounts:facetCounts, andFacetName: "category")
+                self.facetResults["category"] = self.searcher.getRefinementList(facetCounts: facetCounts, andFacetName: "category", transformRefinementList: .countDesc, areRefinedValuesFirst: false)
                 
                 self.facetDataSource?.handle(facetRecords: self.facetResults["category"])
             }
