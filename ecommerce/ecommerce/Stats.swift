@@ -32,12 +32,18 @@ import InstantSearchCore
     }
     
     func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
-        text = resultTemplate?.replacingOccurrences(of: "{hitsPerPage}", with: "\(results?.hitsPerPage)")
-            .replacingOccurrences(of: "{processingTimeMS}", with: "\(results?.processingTimeMS)")
-            .replacingOccurrences(of: "{nbHits}", with: "\(results?.nbHits)")
-            .replacingOccurrences(of: "{nbPages}", with: "\(results?.nbPages)")
-            .replacingOccurrences(of: "{page}", with: "\(results?.page)")
-            .replacingOccurrences(of: "{query}", with: "\(results?.query)")
+        if let results = results {
+        text = resultTemplate?.replacingOccurrences(of: "{hitsPerPage}", with: "\(results.hitsPerPage)")
+            .replacingOccurrences(of: "{processingTimeMS}", with: "\(results.processingTimeMS)")
+            .replacingOccurrences(of: "{nbHits}", with: "\(results.nbHits)")
+            .replacingOccurrences(of: "{nbPages}", with: "\(results.nbPages)")
+            .replacingOccurrences(of: "{page}", with: "\(results.page)")
+            .replacingOccurrences(of: "{query}", with: "\(results.query)")
+        }
+        
+        if error != nil {
+            text = "Error in fetching results"
+        }
     }
     
     func onReset() {

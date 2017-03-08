@@ -17,11 +17,12 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
-    @IBOutlet weak var nbHitsLabel: UILabel!
+    @IBOutlet weak var nbHitsLabel: Stats!
     
     var searchController: UISearchController!
     var isFilterClicked = false
     var instantSearch: InstantSearch!
+    var instantSearchPresenter: InstantSearchPresenter!
     var itemsToShow: [JSONObject] = []
     
     override func viewDidLoad() {
@@ -31,7 +32,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureSearchController()
         configureTable()
         configureInstantSearch()
-        instantSearch.addWidget(stats: nbHitsLabel)
+//        instantSearch.addWidget(stats: nbHitsLabel)
+        instantSearchPresenter.add(widget: nbHitsLabel)
         instantSearch.addWidget(hits: tableView)
     }
     
@@ -67,6 +69,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func configureInstantSearch() {
         instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
         instantSearch.hitDataSource = self
+        
+        instantSearchPresenter = InstantSearchPresenter(searcher: instantSearch.searcher)
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
