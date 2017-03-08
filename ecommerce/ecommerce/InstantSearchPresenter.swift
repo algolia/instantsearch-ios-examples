@@ -89,8 +89,8 @@ import InstantSearchCore
     
     private func callGeneralRefinementChanges(numericRefinementMap:[String: [NumericRefinement]]?, facetRefinementMap: [String: [FacetRefinement]]?) {
         for refinementControlWidget in refinementControlWidgets {
-            refinementControlWidget.onRefinementChange?(numerics: numericRefinementMap)
-            refinementControlWidget.onRefinementChange?(facets: facetRefinementMap)
+            refinementControlWidget.onRefinementChange?(numericMap: numericRefinementMap)
+            refinementControlWidget.onRefinementChange?(facetMap: facetRefinementMap)
         }
     }
     
@@ -99,7 +99,7 @@ import InstantSearchCore
             for (refinementName, numericRefinement) in numericRefinementMap {
                 if let widgets = refinementWidgetMap[refinementName] {
                     for widget in widgets {
-                        widget.onRefinementChange?(numeric: numericRefinement)
+                        widget.onRefinementChange?(numerics: numericRefinement)
                     }
                 }
             }
@@ -111,7 +111,7 @@ import InstantSearchCore
             for (refinementName, facetRefinement) in facetRefinementMap {
                 if let widgets = refinementWidgetMap[refinementName] {
                     for widget in widgets {
-                        widget.onRefinementChange?(facet: facetRefinement)
+                        widget.onRefinementChange?(facets: facetRefinement)
                     }
                 }
             }

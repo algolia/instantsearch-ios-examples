@@ -20,6 +20,8 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var titles: [String] = ["button", "switch", "slider", "slider2", "stepper", "segmented"]
     
     let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 40)
+    var slider1: Slider?
+    var slider2: Slider?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +48,6 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func onRefinementNotification(notification: Notification) {
         let numericRefinements =  notification.userInfo?[Searcher.notificationNumericRefinementChangeKey] as? [String: [NumericRefinement]]
         let facetRefinements =  notification.userInfo?[Searcher.notificationFacetRefinementChangeKey] as? [String: [FacetRefinement]]
-        
-        print(numericRefinements)
-        print(facetRefinements)
     }
     
     func valueChanged(control: UIControl) {
@@ -66,9 +65,21 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        instantSearch?.addWidget(stats: resultButton.titleLabel!)
-        instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
-        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
+        //instantSearch?.addWidget(stats: resultButton.titleLabel!)
+//        instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+//        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
+        let instantSearchPresenter = InstantSearchPresenter(searcher: instantSearch!.searcher)
+        
+        let stats = Stats(label: resultButton.titleLabel!)
+        slider1 = Slider(slider: controls[2] as! UISlider, attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        //slider1?.valueLabel = resultButton.titleLabel!
+        
+        slider2 = Slider(slider: controls[3] as! UISlider, attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        
+        instantSearchPresenter.addRefinementControl(widget: slider1!)
+        instantSearchPresenter.addRefinementControl(widget: slider2!)
+        instantSearchPresenter.add(widget: stats)
+        
         instantSearch?.addWidget(facetControl: controls[1], withFilterName: RefinementParameters.promoted)
     }
     
@@ -139,7 +150,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
         
-        //cell.detailTextLabel?.text = "text"
+        cell.detailTextLabel?.text = "text"
         cell.textLabel?.text = titles[indexPath.row]
         cell.accessoryView = controls[indexPath.row]
         

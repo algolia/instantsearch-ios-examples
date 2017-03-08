@@ -17,7 +17,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
-    @IBOutlet weak var nbHitsLabel: Stats!
+    @IBOutlet weak var nbHitsLabel: UILabel!
     
     var searchController: UISearchController!
     var isFilterClicked = false
@@ -33,8 +33,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureTable()
         configureInstantSearch()
 //        instantSearch.addWidget(stats: nbHitsLabel)
-        nbHitsLabel.resultTemplate = "{nbHits} results in {processingTimeMS} ms"
-        instantSearchPresenter.add(widget: nbHitsLabel)
+        let stat = Stats(label: nbHitsLabel, resultTemplate: "{nbHits} results in {processingTimeMS} ms")
+        instantSearchPresenter.add(widget: stat)
         instantSearch.addWidget(hits: tableView)
     }
     
