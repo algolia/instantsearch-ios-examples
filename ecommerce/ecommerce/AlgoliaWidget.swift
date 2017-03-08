@@ -17,5 +17,6 @@ import InstantSearchCore
 
 @objc protocol RefinementControlWidget: AlgoliaWidget {
     @objc func registerValueChangedAction()
-    @objc func onRefinementChange(numerics: [String: [NumericRefinement]], facets: [String: [FacetRefinement]])
+    @objc optional func onRefinementChange(numerics: [String: [NumericRefinement]]?)
+    @objc optional func onRefinementChange(facets: [String: [FacetRefinement]]?)
 }
