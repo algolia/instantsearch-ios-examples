@@ -49,18 +49,14 @@ import InstantSearchCore
         widget.registerValueChangedAction()
         algoliaWidgets.append(widget)
         refinementControlWidgets.append(widget)
-    }
-    
-    @objc public func addRefinementControl(widget: RefinementControlWidget, associatedWithRefinement refinementName: String) {
-        guard !refinementControlWidgets.contains(where: { $0 === widget } ) else { return }
         
-        addRefinementControl(widget: widget)
+        guard let attributeName = widget.getAttributeName?() else { return }
         
-        if refinementWidgetMap[refinementName] == nil {
-            refinementWidgetMap[refinementName] = []
+        if refinementWidgetMap[attributeName] == nil {
+            refinementWidgetMap[attributeName] = []
         }
         
-        refinementWidgetMap[refinementName]!.append(widget)
+        refinementWidgetMap[attributeName]!.append(widget)
     }
     
     // MARK: - Notification Observers

@@ -256,8 +256,9 @@
 		E219FB021E534A94006D9CFC /* InstantSearch */ = {
 			isa = PBXGroup;
 			children = (
-				E219FAE71E4B1864006D9CFC /* InstantSearch.swift */,
 				E22212E21E700D9E00C16B31 /* InstantSearchPresenter.swift */,
+				E22212E41E7035DF00C16B31 /* views */,
+				E219FAE71E4B1864006D9CFC /* InstantSearch.swift */,
 				E22212E01E70039200C16B31 /* AlgoliaWidget.swift */,
 				E219FB451E574443006D9CFC /* InstantSearchStats.swift */,
 				E22B90051E5AF99B00059F95 /* InstantSearchNumericFilters.swift */,
@@ -269,6 +270,13 @@
 				E219FAF21E4DD1FB006D9CFC /* InstantSearchProtocol.swift */,
 			);
 			name = InstantSearch;
+			sourceTree = "<group>";
+		};
+		E22212E41E7035DF00C16B31 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
