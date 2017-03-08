@@ -14,12 +14,3 @@ import InstantSearchCore
     @objc func on(results: SearchResults?, error: Error?, userInfo: [String: Any])
     @objc func onReset()
 }
-
-@objc protocol RefinementControlWidget: AlgoliaWidget {
-    @objc func registerValueChangedAction()
-    @objc optional func getAttributeName() -> String
-    @objc optional func onRefinementChange(numerics: [String: [NumericRefinement]]?)
-    @objc optional func onRefinementChange(facets: [String: [FacetRefinement]]?)
-    @objc optional func onRefinementChange(facet: [FacetRefinement])
-    @objc optional func onRefinementChange(numeric: [NumericRefinement])
-}
