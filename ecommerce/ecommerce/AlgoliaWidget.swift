@@ -19,4 +19,6 @@ import InstantSearchCore
     @objc func registerValueChangedAction()
     @objc optional func onRefinementChange(numerics: [String: [NumericRefinement]]?)
     @objc optional func onRefinementChange(facets: [String: [FacetRefinement]]?)
+    @objc optional func onRefinementChange(facet: [FacetRefinement])
+    @objc optional func onRefinementChange(numeric: [NumericRefinement])
 }

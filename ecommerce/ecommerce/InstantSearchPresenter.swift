@@ -17,6 +17,8 @@ import InstantSearchCore
     // Note: Wish we could do a Set, but Swift doesn't support Set<GenericProtocol> for now.
     private var algoliaWidgets: [AlgoliaWidget] = []
     private var refinementControlWidgets: [RefinementControlWidget] = []
+    private var refinementWidgetMap: [String: [RefinementControlWidget]] = [:]
+    
     private var searcher: Searcher
     
     // MARK: - Init
@@ -31,7 +33,7 @@ import InstantSearchCore
         NotificationCenter.default.addObserver(self, selector: #selector(onRefinementNotification(notification:)), name: Searcher.RefinementChangeNotification, object: nil)
     }
     
-    // MARK: Add widgetmethods
+    // MARK: Add widget methods
     
     @objc public func add(widget: AlgoliaWidget) {
         guard !algoliaWidgets.contains(where: { $0 === widget } ) else { return }
@@ -49,6 +51,18 @@ import InstantSearchCore
         refinementControlWidgets.append(widget)
     }
     
+    @objc public func addRefinementControl(widget: RefinementControlWidget, associatedWithRefinement refinementName: String) {
+        guard !refinementControlWidgets.contains(where: { $0 === widget } ) else { return }
+        
+        addRefinementControl(widget: widget)
+        
+        if refinementWidgetMap[refinementName] == nil {
+            refinementWidgetMap[refinementName] = []
+        }
+        
+        refinementWidgetMap[refinementName]!.append(widget)
+    }
+    
     // MARK: - Notification Observers
     
     func onReset(notification: Notification) {
@@ -58,13 +72,12 @@ import InstantSearchCore
     }
     
     func onRefinementNotification(notification: Notification) {
-        let numericRefinements =  notification.userInfo?[Searcher.notificationNumericRefinementChangeKey] as? [String: [NumericRefinement]]
-        let facetRefinements =  notification.userInfo?[Searcher.notificationFacetRefinementChangeKey] as? [String: [FacetRefinement]]
+        let numericRefinementMap =  notification.userInfo?[Searcher.notificationNumericRefinementChangeKey] as? [String: [NumericRefinement]]
+        let facetRefinementMap =  notification.userInfo?[Searcher.notificationFacetRefinementChangeKey] as? [String: [FacetRefinement]]
         
-        for refinementControlWidget in refinementControlWidgets {
-            refinementControlWidget.onRefinementChange?(numerics: numericRefinements)
-            refinementControlWidget.onRefinementChange?(facets: facetRefinements)
-        }
+        callGeneralRefinementChanges(numericRefinementMap: numericRefinementMap, facetRefinementMap: facetRefinementMap)
+        callSpecificNumericChanges(numericRefinementMap: numericRefinementMap)
+        callSpecificFacetChanges(facetRefinementMap: facetRefinementMap)
     }
     
     
@@ -73,6 +86,39 @@ import InstantSearchCore
     internal func searcher(_ searcher: Searcher, didReceive results: SearchResults?, error: Error?, userInfo: [String : Any]) {
         for algoliaWidget in algoliaWidgets {
             algoliaWidget.on(results: results, error: error, userInfo: userInfo)
+        }
+    }
+    
+    // MARK: - Helper methods
+    
+    private func callGeneralRefinementChanges(numericRefinementMap:[String: [NumericRefinement]]?, facetRefinementMap: [String: [FacetRefinement]]?) {
+        for refinementControlWidget in refinementControlWidgets {
+            refinementControlWidget.onRefinementChange?(numerics: numericRefinementMap)
+            refinementControlWidget.onRefinementChange?(facets: facetRefinementMap)
+        }
+    }
+    
+    private func callSpecificNumericChanges(numericRefinementMap:[String: [NumericRefinement]]?) {
+        if let numericRefinementMap = numericRefinementMap {
+            for (refinementName, numericRefinement) in numericRefinementMap {
+                if let widgets = refinementWidgetMap[refinementName] {
+                    for widget in widgets {
+                        widget.onRefinementChange?(numeric: numericRefinement)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func callSpecificFacetChanges(facetRefinementMap:[String: [FacetRefinement]]?) {
+        if let facetRefinementMap = facetRefinementMap {
+            for (refinementName, facetRefinement) in facetRefinementMap {
+                if let widgets = refinementWidgetMap[refinementName] {
+                    for widget in widgets {
+                        widget.onRefinementChange?(facet: facetRefinement)
+                    }
+                }
+            }
         }
     }
 }
