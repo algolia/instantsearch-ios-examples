@@ -24,7 +24,10 @@ import InstantSearchCore
     
     func initWith(searcher: Searcher) {
         self.searcher = searcher
-        self.resultTemplate = defaultResultTemplate
+        
+        if resultTemplate == nil {
+            self.resultTemplate = defaultResultTemplate
+        }
         
         searchProgressController = SearchProgressController(searcher: searcher)
         searchProgressController?.graceDelay = 0.01
@@ -46,14 +49,10 @@ import InstantSearchCore
         }
     }
     
-    func onReset() {
-        text = "GONE"
-    }
-    
     // MARK: - SearchProgressDelegate
     
     func searchDidStart(_ searchProgressController: SearchProgressController) {
-        text = "Hey I am searching"
+        text = "searching..."
     }
     
     func searchDidStop(_ searchProgressController: SearchProgressController) {

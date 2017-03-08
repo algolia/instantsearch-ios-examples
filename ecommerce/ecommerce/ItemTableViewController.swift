@@ -10,7 +10,7 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching, AlgoliaHitDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaHitDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -33,6 +33,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureTable()
         configureInstantSearch()
 //        instantSearch.addWidget(stats: nbHitsLabel)
+        nbHitsLabel.resultTemplate = "{nbHits} results in {processingTimeMS} ms"
         instantSearchPresenter.add(widget: nbHitsLabel)
         instantSearch.addWidget(hits: tableView)
     }
@@ -73,15 +74,9 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         instantSearchPresenter = InstantSearchPresenter(searcher: instantSearch.searcher)
     }
     
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print(indexPaths)
-        //instantSearch.prefetchMoreIfNecessary(indexPaths: indexPaths)
-    }
-    
     func configureTable() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor

@@ -63,7 +63,7 @@ import InstantSearchCore
     
     func onReset(notification: Notification) {
         for algoliaWidget in algoliaWidgets {
-            algoliaWidget.onReset()
+            algoliaWidget.onReset?()
         }
     }
     
