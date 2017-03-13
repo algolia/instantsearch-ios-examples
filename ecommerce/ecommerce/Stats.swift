@@ -12,7 +12,7 @@ import InstantSearchCore
 
 @objc class Stats: NSObject, AlgoliaWidget, SearchProgressDelegate {
     var label: UILabel
-    var searcher: Searcher?
+    private var searcher: Searcher?
     var searchProgressController: SearchProgressController?
     
     public var resultTemplate: String

@@ -35,7 +35,10 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
 //        instantSearch.addWidget(stats: nbHitsLabel)
         let stat = Stats(label: nbHitsLabel, resultTemplate: "{nbHits} results in {processingTimeMS} ms")
         instantSearchPresenter.add(widget: stat)
-        instantSearch.addWidget(hits: tableView)
+        let hits = Hits(tableView: tableView)
+        hits.hitDataSource = self
+        instantSearchPresenter.add(widget: hits)
+        //instantSearch.addWidget(hits: tableView)
     }
     
     // MARK: AlgoliaHitDataSource Datasource functions

@@ -12,7 +12,7 @@ import UIKit
 
 @objc class Slider: NSObject, RefinementControlWidget {
     
-    var searcher: Searcher?
+    private var searcher: Searcher?
     var valueLabel: UILabel?
     var slider: UISlider
     
