@@ -7,15 +7,34 @@
 //
 
 import UIKit
+import InstantSearchCore
 
-class ActivityIndicatorView: UIActivityIndicatorView {
+class ActivityIndicatorView: UIActivityIndicatorView, AlgoliaWidget, SearchProgressDelegate {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var searchProgressController: SearchProgressController?
+    
+    // MARK: - AlgoliaWidget methods
+    
+    func initWith(searcher: Searcher) {
+        searchProgressController = SearchProgressController(searcher: searcher)
+        searchProgressController?.graceDelay = 0.01
+        searchProgressController?.delegate = self
     }
-    */
+    
+    func on(results: SearchResults?, error: Error?, userInfo: [String : Any]) {
+        
+    }
+    
+    // MARK: - SearchProgressDelegate methods
+    
+    func searchDidStart(_ searchProgressController: SearchProgressController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        startAnimating()
+    }
+    
+    func searchDidStop(_ searchProgressController: SearchProgressController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        stopAnimating()
+    }
 
 }

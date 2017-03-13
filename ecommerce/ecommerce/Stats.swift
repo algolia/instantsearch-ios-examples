@@ -10,10 +10,9 @@ import Foundation
 import UIKit
 import InstantSearchCore
 
-@objc class Stats: NSObject, AlgoliaWidget, SearchProgressDelegate {
+@objc class Stats: NSObject, AlgoliaWidget {
     var label: UILabel
     private var searcher: Searcher?
-    var searchProgressController: SearchProgressController?
     
     public var resultTemplate: String
     public var errorTemplate: String?
@@ -37,10 +36,6 @@ import InstantSearchCore
         if let results = searcher.results {
             label.text = applyTemplate(resultTemplate: resultTemplate, results: results)
         }
-        
-        searchProgressController = SearchProgressController(searcher: searcher)
-        searchProgressController?.graceDelay = 0.01
-        searchProgressController?.delegate = self
     }
     
     func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
@@ -52,17 +47,7 @@ import InstantSearchCore
             label.text = "Error in fetching results"
         }
     }
-    
-    // MARK: - SearchProgressDelegate
-    
-    func searchDidStart(_ searchProgressController: SearchProgressController) {
-        label.text = "searching..."
-    }
-    
-    func searchDidStop(_ searchProgressController: SearchProgressController) {
-        
-    }
-    
+
     // MARK: - Helper methods
     
     private func applyTemplate(resultTemplate: String, results: SearchResults) -> String{
