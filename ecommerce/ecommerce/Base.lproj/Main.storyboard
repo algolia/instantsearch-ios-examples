@@ -111,6 +111,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="resultTemplate" value="{nbHits} Bobs found in {processingTimeMS} ms"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahZ-Ot-SQI">
                                         <rect key="frame" x="296" y="7" width="7" height="36"/>
@@ -141,17 +144,23 @@
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down_flat" translatesAutoresizingMaskIntoConstraints="NO" id="mKK-uB-P5u">
                                         <rect key="frame" x="263" y="12.5" width="25" height="25"/>
                                     </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="P0S-Ip-Uxj" customClass="ActivityIndicatorView" customModule="ecommerce" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="8" width="20" height="2"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tMk-It-YbN" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="1fp-2P-Tt7"/>
                                     <constraint firstItem="9PF-o6-o3A" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="2ma-Dw-nYw"/>
+                                    <constraint firstItem="tMk-It-YbN" firstAttribute="top" secondItem="P0S-Ip-Uxj" secondAttribute="bottom" constant="5" id="3P7-TU-iEz"/>
                                     <constraint firstAttribute="trailing" secondItem="9PF-o6-o3A" secondAttribute="trailing" constant="20" id="4NQ-jd-Iml"/>
                                     <constraint firstItem="9PF-o6-o3A" firstAttribute="leading" secondItem="ahZ-Ot-SQI" secondAttribute="trailing" constant="10" id="FSQ-x9-Wb2"/>
                                     <constraint firstAttribute="height" constant="50" id="Ibm-N4-eYT"/>
+                                    <constraint firstItem="P0S-Ip-Uxj" firstAttribute="top" secondItem="YAA-Ez-PoB" secondAttribute="top" constant="8" id="Jff-X0-vjE"/>
                                     <constraint firstItem="tMk-It-YbN" firstAttribute="leading" secondItem="YAA-Ez-PoB" secondAttribute="leading" constant="8" id="Jmr-Br-DNy"/>
                                     <constraint firstItem="txO-NW-9ag" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="cH9-gF-jsV"/>
                                     <constraint firstItem="ahZ-Ot-SQI" firstAttribute="leading" secondItem="mKK-uB-P5u" secondAttribute="trailing" constant="8" id="dBA-dB-T4C"/>
+                                    <constraint firstItem="P0S-Ip-Uxj" firstAttribute="leading" secondItem="YAA-Ez-PoB" secondAttribute="leading" constant="8" id="ePY-Hk-GHu"/>
                                     <constraint firstItem="mKK-uB-P5u" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="hYY-Qt-3cf"/>
                                     <constraint firstItem="ahZ-Ot-SQI" firstAttribute="centerY" secondItem="YAA-Ez-PoB" secondAttribute="centerY" id="lXG-5M-OX2"/>
                                     <constraint firstItem="mKK-uB-P5u" firstAttribute="leading" secondItem="txO-NW-9ag" secondAttribute="trailing" constant="3" id="tfY-64-pBV"/>

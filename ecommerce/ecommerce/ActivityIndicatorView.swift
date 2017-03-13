@@ -35,6 +35,7 @@ class ActivityIndicatorView: UIActivityIndicatorView, AlgoliaWidget, SearchProgr
     func searchDidStop(_ searchProgressController: SearchProgressController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         stopAnimating()
+        
     }
 
 }

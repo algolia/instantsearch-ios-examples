@@ -9,10 +9,11 @@
 import UIKit
 import InstantSearchCore
 
+@IBDesignable
 @objc class StatsLabel: UILabel, AlgoliaWidget {
     private var searcher: Searcher?
     
-    public var resultTemplate: String! // TODO: Unsafe, fix that
+    @IBInspectable public var resultTemplate: String! // TODO: Unsafe, fix that
     public var errorTemplate: String?
     
     private let defaultResultTemplate = "{nbHits} results found in {processingTimeMS} ms"
