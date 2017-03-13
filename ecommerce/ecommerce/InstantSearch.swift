@@ -126,8 +126,8 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
         guard let results = results else { return }
         
         let isLoadingMore = userInfo[Searcher.notificationIsLoadingMoreKey] as? Bool
-        print(isLoadingMore)
-        print(searcher.hits?.count)
+        //print(isLoadingMore)
+        //print(searcher.hits?.count)
         
         self.results = results
         

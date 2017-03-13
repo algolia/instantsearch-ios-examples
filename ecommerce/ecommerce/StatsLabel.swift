@@ -7,15 +7,47 @@
 //
 
 import UIKit
+import InstantSearchCore
 
-class StatsLabel: UILabel {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+@objc class StatsLabel: UILabel, AlgoliaWidget {
+    private var searcher: Searcher?
+    
+    public var resultTemplate: String! // TODO: Unsafe, fix that
+    public var errorTemplate: String?
+    
+    private let defaultResultTemplate = "{nbHits} results found in {processingTimeMS} ms"
+    
+    
+    func initWith(searcher: Searcher) {
+        self.searcher = searcher
+        
+        if self.resultTemplate == nil {
+            self.resultTemplate = defaultResultTemplate
+        }
+        
+        if let results = searcher.results {
+            text = applyTemplate(resultTemplate: resultTemplate, results: results)
+        }
     }
-    */
-
+    
+    func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
+        if let results = results {
+            text = applyTemplate(resultTemplate: resultTemplate, results: results)
+        }
+        
+        if error != nil {
+            text = "Error in fetching results"
+        }
+    }
+    
+    // MARK: - Helper methods
+    
+    private func applyTemplate(resultTemplate: String, results: SearchResults) -> String{
+        return resultTemplate.replacingOccurrences(of: "{hitsPerPage}", with: "\(results.hitsPerPage)")
+            .replacingOccurrences(of: "{processingTimeMS}", with: "\(results.processingTimeMS)")
+            .replacingOccurrences(of: "{nbHits}", with: "\(results.nbHits)")
+            .replacingOccurrences(of: "{nbPages}", with: "\(results.nbPages)")
+            .replacingOccurrences(of: "{page}", with: "\(results.page)")
+            .replacingOccurrences(of: "{query}", with: "\(results.query)")
+    }
 }

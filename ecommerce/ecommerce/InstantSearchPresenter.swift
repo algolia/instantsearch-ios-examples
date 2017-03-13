@@ -35,6 +35,38 @@ import InstantSearchCore
     
     // MARK: Add widget methods
     
+    @objc public func addAllWidgets(in view: UIView) {
+        addSubviewsOf(view: view)
+    }
+    
+    // Recursively iterate the sub views.
+    private func addSubviewsOf(view: UIView){
+        
+        // Get the subviews of the view
+        let subviews = view.subviews
+        
+        // Return if there are no subviews
+        if subviews.count == 0 {
+            return
+        }
+        
+        for subView in subviews as [UIView] {
+            
+            if let algoliaWidget = subView as? AlgoliaWidget {
+                add(widget: algoliaWidget)
+                print("bob widget")
+            }
+            
+            if let refinementControlWidget = subView as? RefinementControlWidget {
+                addRefinementControl(widget: refinementControlWidget)
+                print("bob control")
+            }
+            
+            // List the subviews of subview
+            addSubviewsOf(view: subView)
+        }
+    }
+    
     @objc public func add(widget: AlgoliaWidget) {
         guard !algoliaWidgets.contains(where: { $0 === widget } ) else { return }
         

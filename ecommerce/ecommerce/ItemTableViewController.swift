@@ -34,7 +34,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureInstantSearch()
 //        instantSearch.addWidget(stats: nbHitsLabel)
         let stat = Stats(label: nbHitsLabel, resultTemplate: "{nbHits} results in {processingTimeMS} ms")
-        instantSearchPresenter.add(widget: stat)
+        instantSearchPresenter.addAllWidgets(in: self.view)
+        //instantSearchPresenter.add(widget: stat)
         let hits = Hits(tableView: tableView)
         hits.hitDataSource = self
         instantSearchPresenter.add(widget: hits)
