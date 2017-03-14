@@ -19,7 +19,7 @@ import InstantSearchCore
     private var refinementControlWidgets: [RefinementControlWidget] = []
     private var refinementWidgetMap: [String: [RefinementControlWidget]] = [:]
     
-    private var searcher: Searcher
+    public var searcher: Searcher
     
     // MARK: - Init
     
@@ -54,12 +54,10 @@ import InstantSearchCore
             
             if let algoliaWidget = subView as? AlgoliaWidget {
                 add(widget: algoliaWidget)
-                print("bob widget")
             }
             
             if let refinementControlWidget = subView as? RefinementControlWidget {
                 addRefinementControl(widget: refinementControlWidget)
-                print("bob control")
             }
             
             // List the subviews of subview
