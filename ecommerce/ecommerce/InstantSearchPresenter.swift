@@ -147,4 +147,32 @@ import InstantSearchCore
             }
         }
     }
+    
+    public func searchInPresenter(searchText: String) {
+        searcher.params.query = searchText
+        searcher.search()
+    }
+}
+
+extension InstantSearchPresenter: UISearchResultsUpdating {
+    
+    @objc public func add(searchController: UISearchController) {
+        searchController.searchResultsUpdater = self
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        
+        searchInPresenter(searchText: searchText)
+    }
+}
+
+extension InstantSearchPresenter: UISearchBarDelegate {
+    @objc public func add(searchBar: UISearchBar) {
+        searchBar.delegate = self
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchInPresenter(searchText: searchText)
+    }
 }
