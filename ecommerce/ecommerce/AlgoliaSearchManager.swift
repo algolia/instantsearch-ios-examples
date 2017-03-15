@@ -29,7 +29,7 @@ class AlgoliaSearchManager: InstantSearchProtocol {
         searcher.params.hitsPerPage = 15
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
         searcher.params.attributesToHighlight = ["name", "category"]
-        searcher.params.facets = ["category"]
+        searcher.params.facets = ["category", "manufacturer"]
         searcher.params.setFacet(withName: "category", disjunctive: true)
         
         instantSearchParameters.remainingItemsBeforeLoading = 5
