@@ -153,6 +153,12 @@ import InstantSearchCore
         searcher.params.query = searchText
         searcher.search()
     }
+    
+    // TODO: Move that away to RefinementList component
+    func toggleFacetRefinement(name: String, value: String) {
+        searcher.params.toggleFacetRefinement(name: name, value: value)
+        searcher.search()
+    }
 }
 
 extension InstantSearchPresenter: UISearchResultsUpdating {

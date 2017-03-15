@@ -309,7 +309,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Dj-XFu">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Dj-XFu" customClass="RefinementListView" customModule="ecommerce" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="158" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -338,6 +338,9 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="facet" value="category"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnG-Ks-eub">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
@@ -349,7 +352,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wsb-dH-Voy" customClass="TopBarView" customModule="ecommerce" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="108" width="375" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upm-8Q-jLS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upm-8Q-jLS" customClass="StatsLabel" customModule="ecommerce" customModuleProvider="target">
                                         <rect key="frame" x="8" y="15" width="58" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -381,7 +384,7 @@
                     <connections>
                         <outlet property="nbHitsLabel" destination="Upm-8Q-jLS" id="MWr-KI-TWM"/>
                         <outlet property="searchBarView" destination="rnG-Ks-eub" id="LiV-8Q-inf"/>
-                        <outlet property="tableView" destination="9ZT-Dj-XFu" id="qBS-eb-FMm"/>
+                        <outlet property="tableView" destination="9ZT-Dj-XFu" id="B8n-50-7dy"/>
                         <outlet property="topBarView" destination="Wsb-dH-Voy" id="vBZ-0N-tYa"/>
                     </connections>
                 </viewController>

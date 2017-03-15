@@ -14,34 +14,29 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var nbHitsLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: RefinementListView!
+    
     
     var searchController: UISearchController!
     let FACET_NAME = "category"
-    var instantSearch: InstantSearch!
+//    var instantSearch: InstantSearch!
+    var instantSearchPresenter: InstantSearchPresenter!
     var categoryFacets: [FacetValue] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: This should be done in a better way.
-        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
-        
-        instantSearch.addWidget(stats: nbHitsLabel)
+        tableView.facetDataSource = self
+        instantSearchPresenter.addAllWidgets(in: self.view)
+//        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
+//        
+//        instantSearch.addWidget(stats: nbHitsLabel)
         configureNavBar()
         topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()
         configureTable()
-        instantSearch.set(facetSearchController: searchController)
-        instantSearch.facetDataSource = self
-        NotificationCenter.default.addObserver(self, selector: #selector(onRefinementNotification(notification:)), name: Searcher.RefinementChangeNotification, object: nil)
-    }
-    
-    func onRefinementNotification(notification: Notification) {
-        let numericRefinements =  notification.userInfo?[Searcher.notificationNumericRefinementChangeKey] as? [String: [NumericRefinement]]
-        let facetRefinements =  notification.userInfo?[Searcher.notificationFacetRefinementChangeKey] as? [String: [FacetRefinement]]
-        
-//        print(numericRefinements)
-//        print(facetRefinements)
+//        instantSearch.set(facetSearchController: searchController)
+//        instantSearch.facetDataSource = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,7 +67,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
         let facet = categoryFacets[indexPath.row]
-        cell.isRefined = instantSearch.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
+        cell.isRefined = instantSearchPresenter.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
         cell.facet = facet
         cell.backgroundColor = ColorConstants.tableColor
         
@@ -81,7 +76,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        instantSearch.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
+        instantSearchPresenter.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
     }
     
     func configureTable() {

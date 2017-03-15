@@ -37,7 +37,7 @@
 		E22212E81E70383400C16B31 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E71E70383400C16B31 /* Stats.swift */; };
 		E22212EA1E70385500C16B31 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E91E70385500C16B31 /* Slider.swift */; };
 		E22212EC1E70386200C16B31 /* Hits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212EB1E70386200C16B31 /* Hits.swift */; };
-		E22212EE1E70387000C16B31 /* RefinementList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212ED1E70387000C16B31 /* RefinementList.swift */; };
+		E22212EE1E70387000C16B31 /* RefinementListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212ED1E70387000C16B31 /* RefinementListView.swift */; };
 		E22212F01E704B5C00C16B31 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212EF1E704B5C00C16B31 /* SearchBar.swift */; };
 		E22212F21E71867600C16B31 /* StatsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212F11E71867600C16B31 /* StatsLabel.swift */; };
 		E22212F41E76919C00C16B31 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212F31E76919C00C16B31 /* ActivityIndicatorView.swift */; };
@@ -111,7 +111,7 @@
 		E22212E71E70383400C16B31 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		E22212E91E70385500C16B31 /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		E22212EB1E70386200C16B31 /* Hits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hits.swift; sourceTree = "<group>"; };
-		E22212ED1E70387000C16B31 /* RefinementList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementList.swift; sourceTree = "<group>"; };
+		E22212ED1E70387000C16B31 /* RefinementListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementListView.swift; sourceTree = "<group>"; };
 		E22212EF1E704B5C00C16B31 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E22212F11E71867600C16B31 /* StatsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsLabel.swift; sourceTree = "<group>"; };
 		E22212F31E76919C00C16B31 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 				E22212E91E70385500C16B31 /* Slider.swift */,
 				E22212EB1E70386200C16B31 /* Hits.swift */,
 				E222131A1E796C2900C16B31 /* HitsTableView.swift */,
-				E22212ED1E70387000C16B31 /* RefinementList.swift */,
+				E22212ED1E70387000C16B31 /* RefinementListView.swift */,
 				E22212EF1E704B5C00C16B31 /* SearchBar.swift */,
 			);
 			name = views;
@@ -621,7 +621,7 @@
 				E25104D51E5EF9AF00F3B18C /* FilterViewController.swift in Sources */,
 				E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */,
 				E22212F21E71867600C16B31 /* StatsLabel.swift in Sources */,
-				E22212EE1E70387000C16B31 /* RefinementList.swift in Sources */,
+				E22212EE1E70387000C16B31 /* RefinementListView.swift in Sources */,
 				E22212F41E76919C00C16B31 /* ActivityIndicatorView.swift in Sources */,
 				E219FB481E575255006D9CFC /* InstantSearchHits.swift in Sources */,
 				E219FB461E574443006D9CFC /* InstantSearchStats.swift in Sources */,

@@ -116,6 +116,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTab
         if segue.identifier == "FacetSegue" {
             searchController.isActive = false
             let facetTableViewController = segue.destination as! FacetTableViewController
+            facetTableViewController.instantSearchPresenter = instantSearchPresenter
             //facetTableViewController.instantSearch = instantSearch
         }
         
