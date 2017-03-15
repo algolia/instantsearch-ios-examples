@@ -31,7 +31,7 @@ extension UICollectionView: HitsWidget {
 public class Hits: AlgoliaWidget {
     
     var hits: HitsWidget
-    var searcher: Searcher?
+    var searcher: Searcher!
     var hitDataSource: AlgoliaHitDataSource?
     
     public init(hits: HitsWidget) {
@@ -48,11 +48,18 @@ public class Hits: AlgoliaWidget {
     
     @objc func initWith(searcher: Searcher) {
         self.searcher = searcher
+        
+        if let hits = searcher.hits {
+            hitDataSource?.handle(hits: hits) // Make the handle function optional.
+            self.hits.reloadData()
+        }
     }
     
     @objc func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
         // TODO: Work on that...
-        hitDataSource?.handle(hits: (searcher?.hits)!)
+        if let hits = searcher.hits {
+            hitDataSource?.handle(hits: hits) // Make the handle function optional.
+        }
         hits.reloadData()
         // TODO: Use that efficiently
         //hits.scrollToFirstRow()

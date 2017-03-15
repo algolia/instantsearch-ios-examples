@@ -21,7 +21,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var searchController: UISearchController!
     var isFilterClicked = false
-    var instantSearch: InstantSearch!
+    //var instantSearch: InstantSearch!
     var instantSearchPresenter: InstantSearchPresenter!
     var itemsToShow: [JSONObject] = []
     
@@ -32,14 +32,11 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureSearchController()
         configureTable()
         configureInstantSearch()
-//        instantSearch.addWidget(stats: nbHitsLabel)
-        let stat = Stats(label: nbHitsLabel, resultTemplate: "{nbHits} results in {processingTimeMS} ms")
+        
         instantSearchPresenter.addAllWidgets(in: self.view)
-        //instantSearchPresenter.add(widget: stat)
         let hits = Hits(tableView: tableView)
         hits.hitDataSource = self
-        instantSearchPresenter.add(widget: hits)
-        //instantSearch.addWidget(hits: tableView)
+        self.instantSearchPresenter.add(widget: hits)
     }
     
     // MARK: AlgoliaHitDataSource Datasource functions
@@ -58,7 +55,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
         // TODO: Needs to be removed by offering it in the library
-        instantSearch.loadMoreIfNecessary(rowNumber: indexPath.row)
+        instantSearchPresenter.loadMoreIfNecessary(rowNumber: indexPath.row)
         
         // TODO: Solve it better with data binding techniques
         if indexPath.row < itemsToShow.count {
@@ -72,10 +69,11 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: Helper methods for configuring each component of the table
     
     func configureInstantSearch() {
-        instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
-        instantSearch.hitDataSource = self
+        //instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
+        //instantSearch.hitDataSource = self
         
-        instantSearchPresenter = InstantSearchPresenter(searcher: instantSearch.searcher)
+        instantSearchPresenter = InstantSearchPresenter(searcher: AlgoliaSearchManager.instance.searcher)
+        instantSearchPresenter.add(searchController: searchController)
     }
     
     func configureTable() {
@@ -130,17 +128,17 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.identifier == "FacetSegue" {
             searchController.isActive = false
             let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.instantSearch = instantSearch
+            //facetTableViewController.instantSearch = instantSearch
         }
         
         if segue.identifier == "FilterEurekaSegue" {
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterEurekaViewController
-            filterViewController.instantSearch = instantSearch
+            //filterViewController.instantSearch = instantSearch
             
             //TODO: Need to remove this logic once all filters are hooked to InstantSearch since reload will be done automatically behind the scenes.
             filterViewController.didDismiss = {
-                self.instantSearch.searcher.search()
+               // self.instantSearch.searcher.search()
             }
             
         }
@@ -148,9 +146,9 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.identifier == "FilterSegue" {
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
-            filterViewController.instantSearch = instantSearch
+           // filterViewController.instantSearch = instantSearch
             filterViewController.didDismiss = {
-                self.instantSearch.searcher.search()
+                //self.instantSearch.searcher.search()
             }
         }
     }

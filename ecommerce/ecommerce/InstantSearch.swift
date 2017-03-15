@@ -47,8 +47,8 @@ class InstantSearch: NSObject, UISearchResultsUpdating, UISearchControllerDelega
     
     var hitSearchController: UISearchController! {
         didSet {
-            hitSearchController.searchResultsUpdater = self
-            hitSearchController.delegate = self
+            //hitSearchController.searchResultsUpdater = self
+            //hitSearchController.delegate = self
         }
     }
     

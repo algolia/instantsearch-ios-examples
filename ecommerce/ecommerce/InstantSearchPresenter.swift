@@ -31,6 +31,7 @@ import InstantSearchCore
         // TODO: should we use nil for queue (OperationQueue) synchronous or not? Check..
         NotificationCenter.default.addObserver(self, selector: #selector(onReset(notification:)), name: clearAllFiltersNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRefinementNotification(notification:)), name: Searcher.RefinementChangeNotification, object: nil)
+        searcher.search()
     }
     
     // MARK: Add widget methods
@@ -62,6 +63,12 @@ import InstantSearchCore
             
             // List the subviews of subview
             addSubviewsOf(view: subView)
+        }
+    }
+    
+    func loadMoreIfNecessary(rowNumber: Int) {
+        if rowNumber + 5 >= searcher.hits!.count {
+            searcher.loadMore()
         }
     }
     
