@@ -26,6 +26,8 @@ import InstantSearchCore
             self.resultTemplate = defaultResultTemplate
         }
         
+        // Initial value of label in case a search was made.
+        // If a search wasn't made yet and it is still ongoing, then the label will get initialized in the onResult method
         if let results = searcher.results {
             text = applyTemplate(resultTemplate: resultTemplate, results: results)
         }
