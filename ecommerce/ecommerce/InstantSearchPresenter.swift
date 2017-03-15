@@ -66,12 +66,6 @@ import InstantSearchCore
         }
     }
     
-    func loadMoreIfNecessary(rowNumber: Int) {
-        if rowNumber + 5 >= searcher.hits!.count {
-            searcher.loadMore()
-        }
-    }
-    
     @objc public func add(widget: AlgoliaWidget) {
         guard !algoliaWidgets.contains(where: { $0 === widget } ) else { return }
         

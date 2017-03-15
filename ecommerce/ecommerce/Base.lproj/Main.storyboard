@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ro2-2Z-Loj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ro2-2Z-Loj" customClass="HitsTableView" customModule="ecommerce" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="158" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -194,7 +194,7 @@
                         <outlet property="nbHitsLabel" destination="tMk-It-YbN" id="h8C-p5-2Wr"/>
                         <outlet property="searchBarNavigationItem" destination="aOp-fQ-1rc" id="PMq-5W-tB7"/>
                         <outlet property="searchBarView" destination="2C1-MB-EIr" id="gDL-xq-RuS"/>
-                        <outlet property="tableView" destination="Ro2-2Z-Loj" id="GDg-Ry-JRy"/>
+                        <outlet property="tableView" destination="Ro2-2Z-Loj" id="Xet-PJ-uWn"/>
                         <outlet property="topBarView" destination="YAA-Ez-PoB" id="5e8-4t-ccn"/>
                         <segue destination="80H-py-BPS" kind="presentation" identifier="FilterEurekaSegue" id="2cK-bZ-z1L"/>
                         <segue destination="LbJ-CV-7dl" kind="presentation" identifier="FilterSegue" id="oOB-c1-ePu"/>

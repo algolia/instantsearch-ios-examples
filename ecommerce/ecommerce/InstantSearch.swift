@@ -10,9 +10,13 @@ import Foundation
 import InstantSearchCore
 import AlgoliaSearch
 
-@objc protocol AlgoliaHitDataSource {
+@objc protocol AlgoliaHitDataSource: class {
     @objc optional func handle(results: SearchResults, error: Error?)
     func handle(hits: [JSONObject])
+}
+
+@objc protocol AlgoliaTableHitDataSource: class {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withHit hit: JSONObject) -> UITableViewCell
 }
 
 @objc protocol AlgoliaFacetDataSource {

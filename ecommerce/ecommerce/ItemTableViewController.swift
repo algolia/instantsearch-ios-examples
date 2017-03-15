@@ -10,10 +10,10 @@ import UIKit
 import InstantSearchCore
 import AlgoliaSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaHitDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTableHitDataSource {
     
     @IBOutlet weak var topBarView: UIView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: HitsTableView!
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
     @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
@@ -34,9 +34,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureInstantSearch()
         
         instantSearchPresenter.addAllWidgets(in: self.view)
-        let hits = Hits(tableView: tableView)
-        hits.hitDataSource = self
-        self.instantSearchPresenter.add(widget: hits)
+        tableView.hitDataSource = self
     }
     
     // MARK: AlgoliaHitDataSource Datasource functions
@@ -45,22 +43,12 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         itemsToShow = hits
     }
     
-    // MARK: UITableView Delegate and Datasource functions
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsToShow.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withHit hit: JSONObject) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
-        // TODO: Needs to be removed by offering it in the library
-        instantSearchPresenter.loadMoreIfNecessary(rowNumber: indexPath.row)
-        
         // TODO: Solve it better with data binding techniques
-        if indexPath.row < itemsToShow.count {
-            cell.item = ItemRecord(json: itemsToShow[indexPath.row])
-        }
+        cell.item = ItemRecord(json: hit)
+        
         cell.backgroundColor = ColorConstants.tableColor
         
         return cell
@@ -78,7 +66,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func configureTable() {
         tableView.delegate = self
-        tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor
