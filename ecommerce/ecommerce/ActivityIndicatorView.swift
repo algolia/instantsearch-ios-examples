@@ -11,14 +11,20 @@ import InstantSearchCore
 
 class ActivityIndicatorView: UIActivityIndicatorView, AlgoliaWidget, SearchProgressDelegate {
 
-    var searchProgressController: SearchProgressController?
+    var searchProgressController: SearchProgressController!
     
     // MARK: - AlgoliaWidget methods
     
     func initWith(searcher: Searcher) {
         searchProgressController = SearchProgressController(searcher: searcher)
-        searchProgressController?.graceDelay = 0.01
-        searchProgressController?.delegate = self
+        
+//        if searcher.hits == nil {
+//            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//            startAnimating()
+//        }
+        
+        searchProgressController.graceDelay = 0.01
+        searchProgressController.delegate = self
     }
     
     func on(results: SearchResults?, error: Error?, userInfo: [String : Any]) {

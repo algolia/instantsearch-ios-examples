@@ -34,6 +34,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTab
         configureInstantSearch()
         
         instantSearchPresenter.addAllWidgets(in: self.view)
+        tableView.tableDataSource = self
         tableView.hitDataSource = self
     }
     
@@ -141,3 +142,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTab
     }
 }
 
+extension ItemTableViewController: AlgoliaTableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 40
+//    }
+}
