@@ -29,6 +29,28 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         automaticallyAdjustsScrollViewInsets = false
         setupResultButton()
+        
+        slider1 = Slider()
+        slider1.attributeName = RefinementParameters.salePrice
+        slider1.op = .greaterThanOrEqual
+        slider1.inclusive = true
+        slider1.maximumValue = 50
+        slider1.minimumValue = 0
+        //slider1?.valueLabel = resultButton.titleLabel!
+        
+        slider2 = Slider()
+        slider2.attributeName = RefinementParameters.salePrice
+        slider2.op = .greaterThanOrEqual
+        slider2.inclusive = true
+        slider2.maximumValue = 50
+        slider2.minimumValue = 0
+        
+        controls.append(createButton())
+        controls.append(createSwitch())
+        controls.append(slider1)
+        controls.append(slider2)
+        controls.append(createStepper())
+        controls.append(createSegmentedControl())
     }
     
     func valueChanged(control: UIControl) {
@@ -52,32 +74,11 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let stats = Stats(label: resultButton.titleLabel!)
         //slider1 = Slider(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
-        slider1 = Slider()
-        slider1.attributeName = RefinementParameters.salePrice
-        slider1.op = .greaterThanOrEqual
-        slider1.inclusive = true
-        slider1.maximumValue = 50
-        slider1.minimumValue = 0
-        //slider1?.valueLabel = resultButton.titleLabel!
-        
-        slider2 = Slider()
-        slider2.attributeName = RefinementParameters.salePrice
-        slider2.op = .greaterThanOrEqual
-        slider2.inclusive = true
-        slider2.maximumValue = 50
-        slider2.minimumValue = 0
+
         
         instantSearchPresenter.addRefinementControl(widget: slider1!)
         instantSearchPresenter.addRefinementControl(widget: slider2!)
         instantSearchPresenter.add(widget: stats)
-        
-        controls.append(createButton())
-        controls.append(createSwitch())
-        controls.append(slider1)
-        controls.append(slider2)
-        controls.append(createStepper())
-        controls.append(createSegmentedControl())
-        tableView.reloadData()
         
         for (index, control) in controls.enumerated() {
             control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
