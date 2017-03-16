@@ -15,10 +15,6 @@ import AlgoliaSearch
     func handle(hits: [JSONObject])
 }
 
-@objc protocol AlgoliaTableHitDataSource: class {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withHit hit: JSONObject) -> UITableViewCell
-}
-
 @objc protocol AlgoliaFacetDataSource {
     @objc optional func handle(results: SearchResults, error: Error?)
     func handle(facetRecords: [FacetValue]?)

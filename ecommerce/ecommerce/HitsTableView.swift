@@ -9,6 +9,10 @@
 import Foundation
 import InstantSearchCore
 
+@objc protocol AlgoliaTableHitDataSource: class {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withHit hit: [String: Any]) -> UITableViewCell
+}
+
 public class HitsTableView: UITableView, AlgoliaWidget {
     
     var searcher: Searcher!

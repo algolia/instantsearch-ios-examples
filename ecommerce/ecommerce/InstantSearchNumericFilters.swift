@@ -90,10 +90,3 @@ extension InstantSearch : InstantSearchNumericFilterDelegate {
         reloadAllWidgets()
     }
 }
-
-extension SearchParameters {
-    
-    func getNumericRefinement(name filterName: String, op: NumericRefinement.Operator, inclusive: Bool = true) -> NumericRefinement? {
-        return numericRefinements[filterName]?.first(where: { $0.op == op && $0.inclusive == inclusive})
-    }
-}

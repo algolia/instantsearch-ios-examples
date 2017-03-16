@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNotification")
-
 extension InstantSearch {
     func addWidget(clearFilter: UIControl, for controlEvent: UIControlEvents) {
         clearFilter.addTarget(self, action: #selector(self.clearFilter), for: controlEvent)

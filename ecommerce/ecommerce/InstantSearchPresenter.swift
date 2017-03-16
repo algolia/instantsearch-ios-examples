@@ -9,6 +9,8 @@
 import Foundation
 import InstantSearchCore
 
+let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNotification")
+
 @objc class InstantSearchPresenter : NSObject, SearcherDelegate {
     
     // MARK: - Properties
