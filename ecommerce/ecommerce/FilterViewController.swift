@@ -54,7 +54,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //slider1 = Slider(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
         slider1 = Slider()
         slider1.attributeName = RefinementParameters.salePrice
-        slider1.operation = .greaterThanOrEqual
+        slider1.op = .greaterThanOrEqual
         slider1.inclusive = true
         slider1.maximumValue = 50
         slider1.minimumValue = 0
@@ -62,7 +62,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         slider2 = Slider()
         slider2.attributeName = RefinementParameters.salePrice
-        slider2.operation = .greaterThanOrEqual
+        slider2.op = .greaterThanOrEqual
         slider2.inclusive = true
         slider2.maximumValue = 50
         slider2.minimumValue = 0
