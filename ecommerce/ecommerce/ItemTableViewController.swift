@@ -23,7 +23,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTab
     var isFilterClicked = false
     //var instantSearch: InstantSearch!
     var instantSearchPresenter: InstantSearchPresenter!
-    var itemsToShow: [JSONObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +35,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTab
         instantSearchPresenter.addAllWidgets(in: self.view)
         tableView.tableDataSource = self
         tableView.hitDataSource = self
-    }
-    
-    // MARK: AlgoliaHitDataSource Datasource functions
-    
-    func handle(hits: [JSONObject]) {
-        itemsToShow = hits
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withHit hit: JSONObject) -> UITableViewCell {
@@ -135,7 +128,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, AlgoliaTab
         if segue.identifier == "FilterSegue" {
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
-           // filterViewController.instantSearch = instantSearch
+            filterViewController.instantSearchPresenter = instantSearchPresenter
             filterViewController.didDismiss = {
                 //self.instantSearch.searcher.search()
             }

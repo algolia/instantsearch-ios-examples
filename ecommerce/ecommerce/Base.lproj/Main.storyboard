@@ -339,7 +339,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="facet" value="manufacturer"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="facet" value="category"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnG-Ks-eub">

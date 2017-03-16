@@ -9,7 +9,7 @@
 import InstantSearchCore
 import UIKit
 
-class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlgoliaFacetDataSource {
+class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
@@ -21,12 +21,9 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let FACET_NAME = "category"
 //    var instantSearch: InstantSearch!
     var instantSearchPresenter: InstantSearchPresenter!
-    var categoryFacets: [FacetValue] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: This should be done in a better way.
-        tableView.facetDataSource = self
         instantSearchPresenter.addAllWidgets(in: self.view)
 //        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
 //        
@@ -49,11 +46,6 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    func handle(facetRecords: [FacetValue]?) {
-        categoryFacets = facetRecords!
-        tableView.reloadData()
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -61,14 +53,14 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return categoryFacets.count
+        return self.tableView.numberOfRows(in: section)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
-        let facet = categoryFacets[indexPath.row]
-        cell.isRefined = instantSearchPresenter.searcher.params.hasFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
-        cell.facet = facet
+        cell.facet = self.tableView.facetForRow(at: indexPath)
+        cell.isRefined = self.tableView.isRefined(at: indexPath)
         cell.backgroundColor = ColorConstants.tableColor
         
         return cell
@@ -76,7 +68,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        instantSearchPresenter.toggleFacetRefinement(name: FACET_NAME, value: categoryFacets[indexPath.item].value)
+        self.tableView.didSelectRow(at: indexPath)
     }
     
     func configureTable() {

@@ -14,14 +14,14 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var instantSearch: InstantSearch?
+    var instantSearchPresenter: InstantSearchPresenter!
     var didDismiss: (() -> ())?
     var controls: [UIControl] = []
     var titles: [String] = ["button", "switch", "slider", "slider2", "stepper", "segmented"]
     
     let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 40)
-    var slider1: Slider?
-    var slider2: Slider?
+    var slider1: Slider!
+    var slider2: Slider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,25 +29,6 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         automaticallyAdjustsScrollViewInsets = false
         setupResultButton()
-        
-        controls.append(createButton())
-        controls.append(createSwitch())
-        controls.append(createSlider())
-        controls.append(createSlider2())
-        controls.append(createStepper())
-        controls.append(createSegmentedControl())
-        
-        for (index, control) in controls.enumerated() {
-            control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
-            control.tag = index
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onRefinementNotification(notification:)), name: Searcher.RefinementChangeNotification, object: nil)
-    }
-    
-    func onRefinementNotification(notification: Notification) {
-        let numericRefinements =  notification.userInfo?[Searcher.notificationNumericRefinementChangeKey] as? [String: [NumericRefinement]]
-        let facetRefinements =  notification.userInfo?[Searcher.notificationFacetRefinementChangeKey] as? [String: [FacetRefinement]]
     }
     
     func valueChanged(control: UIControl) {
@@ -68,19 +49,43 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //instantSearch?.addWidget(stats: resultButton.titleLabel!)
 //        instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
 //        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
-        let instantSearchPresenter = InstantSearchPresenter(searcher: instantSearch!.searcher)
         
         let stats = Stats(label: resultButton.titleLabel!)
-        slider1 = Slider(slider: controls[2] as! UISlider, attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        //slider1 = Slider(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        slider1 = Slider()
+        slider1.attributeName = RefinementParameters.salePrice
+        slider1.operation = .greaterThanOrEqual
+        slider1.inclusive = true
+        slider1.maximumValue = 50
+        slider1.minimumValue = 0
         //slider1?.valueLabel = resultButton.titleLabel!
         
-        slider2 = Slider(slider: controls[3] as! UISlider, attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        slider2 = Slider()
+        slider2.attributeName = RefinementParameters.salePrice
+        slider2.operation = .greaterThanOrEqual
+        slider2.inclusive = true
+        slider2.maximumValue = 50
+        slider2.minimumValue = 0
         
         instantSearchPresenter.addRefinementControl(widget: slider1!)
         instantSearchPresenter.addRefinementControl(widget: slider2!)
         instantSearchPresenter.add(widget: stats)
         
-        instantSearch?.addWidget(facetControl: controls[1], withFilterName: RefinementParameters.promoted)
+        controls.append(createButton())
+        controls.append(createSwitch())
+        controls.append(slider1)
+        controls.append(slider2)
+        controls.append(createStepper())
+        controls.append(createSegmentedControl())
+        tableView.reloadData()
+        
+        for (index, control) in controls.enumerated() {
+            control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
+            control.tag = index
+        }
+        
+        
+        //instantSearchPresenter?.addWidget(facetControl: controls[1], withFilterName: RefinementParameters.promoted)
     }
     
     func setupResultButton() {
@@ -138,7 +143,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let button = UIButton(frame: defaultFrame)
         button.backgroundColor = UIColor.red
         button.setTitle("clear", for: .normal)
-        instantSearch?.addWidget(clearFilter: button, for: .touchUpInside)
+        //instantSearch?.addWidget(clearFilter: button, for: .touchUpInside)
         return button
     }
     
