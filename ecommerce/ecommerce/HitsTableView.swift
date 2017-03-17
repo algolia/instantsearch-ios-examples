@@ -27,7 +27,7 @@ public class HitsTableView: UITableView, AlgoliaWidget, AlgoliaTableHitDataSourc
             reloadData()
         }
         
-        if results?.page == 0 {
+        if searcher.hits != nil && searcher.hits!.count != 0 && results?.page == 0 {
             let indexPath = IndexPath(row: 0, section: 0)
             scrollToRow(at: indexPath, at: .top, animated: true)
         }
