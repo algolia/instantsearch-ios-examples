@@ -19,6 +19,7 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
     func initWith(searcher: Searcher) {
         self.searcher = searcher
         
+        // TODO: Make the countDesc and refinedFirst customisable ofc. 
         if let facet = facet, let results = searcher.results, let hits = searcher.hits, hits.count > 0 {
             facetResults = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: true)
             
@@ -27,7 +28,10 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
     }
     
     func on(results: SearchResults?, error: Error?, userInfo: [String : Any]) {
-        guard let facet = facet, searcher.params.hasFacetRefinements(name: facet) else { return }
+        guard let facet = facet
+            // TODO: Fix that cause for some reason, can't find the facet refinement.
+            //,searcher.params.hasFacetRefinements(name: facet)
+            else { return }
         
         facetResults = searcher.getRefinementList(facetCounts: results?.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: true)
         reloadData()

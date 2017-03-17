@@ -27,8 +27,10 @@ public class HitsCollectionView: UICollectionView, AlgoliaWidget, AlgoliaTableHi
             reloadData()
         }
         
-        // TODO: Use that efficiently
-        //hits.scrollToFirstRow()
+        if results?.page == 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
     
     func loadMoreIfNecessary(rowNumber: Int) {

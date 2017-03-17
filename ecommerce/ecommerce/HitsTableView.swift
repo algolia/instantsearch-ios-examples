@@ -27,8 +27,10 @@ public class HitsTableView: UITableView, AlgoliaWidget, AlgoliaTableHitDataSourc
             reloadData()
         }
         
-        // TODO: Use that efficiently
-        //hits.scrollToFirstRow()
+        if results?.page == 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     func loadMoreIfNecessary(rowNumber: Int) {
