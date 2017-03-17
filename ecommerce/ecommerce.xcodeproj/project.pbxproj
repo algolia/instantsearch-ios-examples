@@ -43,6 +43,7 @@
 		E22212F41E76919C00C16B31 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212F31E76919C00C16B31 /* ActivityIndicatorView.swift */; };
 		E22213181E782AA800C16B31 /* InstantSearchMultiplePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22213171E782AA800C16B31 /* InstantSearchMultiplePresenter.swift */; };
 		E222131B1E796C2900C16B31 /* HitsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222131A1E796C2900C16B31 /* HitsTableView.swift */; };
+		E222133D1E7BE02000C16B31 /* HitsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222133C1E7BE02000C16B31 /* HitsCollectionView.swift */; };
 		E22B90061E5AF99B00059F95 /* InstantSearchNumericFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22B90051E5AF99B00059F95 /* InstantSearchNumericFilters.swift */; };
 		E22B900A1E5EF17B00059F95 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22B90091E5EF17B00059F95 /* FilterCell.swift */; };
 		E25104D51E5EF9AF00F3B18C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25104D41E5EF9AF00F3B18C /* FilterViewController.swift */; };
@@ -117,6 +118,7 @@
 		E22212F31E76919C00C16B31 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E22213171E782AA800C16B31 /* InstantSearchMultiplePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchMultiplePresenter.swift; sourceTree = "<group>"; };
 		E222131A1E796C2900C16B31 /* HitsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitsTableView.swift; sourceTree = "<group>"; };
+		E222133C1E7BE02000C16B31 /* HitsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitsCollectionView.swift; sourceTree = "<group>"; };
 		E22B90051E5AF99B00059F95 /* InstantSearchNumericFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchNumericFilters.swift; sourceTree = "<group>"; };
 		E22B90091E5EF17B00059F95 /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		E25104D41E5EF9AF00F3B18C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				E22212E91E70385500C16B31 /* Slider.swift */,
 				E22212EB1E70386200C16B31 /* Hits.swift */,
 				E222131A1E796C2900C16B31 /* HitsTableView.swift */,
+				E222133C1E7BE02000C16B31 /* HitsCollectionView.swift */,
 				E22212ED1E70387000C16B31 /* RefinementListView.swift */,
 				E22212EF1E704B5C00C16B31 /* SearchBar.swift */,
 			);
@@ -605,6 +608,7 @@
 				E219FAE81E4B1864006D9CFC /* InstantSearch.swift in Sources */,
 				E22212E61E7037D600C16B31 /* RefinementControlWidget.swift in Sources */,
 				E22B900A1E5EF17B00059F95 /* FilterCell.swift in Sources */,
+				E222133D1E7BE02000C16B31 /* HitsCollectionView.swift in Sources */,
 				E219FAA41E4382B2006D9CFC /* ItemTableViewController.swift in Sources */,
 				E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */,
 				E22212EC1E70386200C16B31 /* Hits.swift in Sources */,
