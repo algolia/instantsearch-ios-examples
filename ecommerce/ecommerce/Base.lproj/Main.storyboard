@@ -144,7 +144,7 @@
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down_flat" translatesAutoresizingMaskIntoConstraints="NO" id="mKK-uB-P5u">
                                         <rect key="frame" x="263" y="12.5" width="25" height="25"/>
                                     </imageView>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="P0S-Ip-Uxj" customClass="ActivityIndicatorView" customModule="ecommerce" customModuleProvider="target">
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="P0S-Ip-Uxj" customClass="ActivityIndicatorView" customModule="ecommerce" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="20" height="2"/>
                                     </activityIndicatorView>
                                 </subviews>
