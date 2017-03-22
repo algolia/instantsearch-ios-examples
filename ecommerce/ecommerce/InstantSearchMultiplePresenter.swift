@@ -10,14 +10,14 @@ import Foundation
 import InstantSearchCore
 
 @objc class InstantSearchMultiplePresenter: NSObject {
-    @objc var instantSearchPresenters: [InstantSearchPresenter] = []
+    @objc var instantSearchPresenters: [InstantSearchBinder] = []
     
     @objc init(searcher: Searcher) {
-        instantSearchPresenters = [InstantSearchPresenter(searcher: searcher)]
+        instantSearchPresenters = [InstantSearchBinder(searcher: searcher)]
     }
     
     @objc public func add(searcher: Searcher) {
-        instantSearchPresenters.append(InstantSearchPresenter(searcher: searcher))
+        instantSearchPresenters.append(InstantSearchBinder(searcher: searcher))
     }
     
     internal func searchInAllPresenters(searchText: String) {

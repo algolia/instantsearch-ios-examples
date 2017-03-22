@@ -11,7 +11,7 @@ import InstantSearchCore
 
 let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNotification")
 
-@objc class InstantSearchPresenter : NSObject, SearcherDelegate {
+@objc class InstantSearchBinder : NSObject, SearcherDelegate {
     
     // MARK: - Properties
     
@@ -163,7 +163,7 @@ let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNo
     }
 }
 
-extension InstantSearchPresenter: UISearchResultsUpdating {
+extension InstantSearchBinder: UISearchResultsUpdating {
     
     @objc public func add(searchController: UISearchController) {
         searchController.searchResultsUpdater = self
@@ -176,7 +176,7 @@ extension InstantSearchPresenter: UISearchResultsUpdating {
     }
 }
 
-extension InstantSearchPresenter: UISearchBarDelegate {
+extension InstantSearchBinder: UISearchBarDelegate {
     @objc public func add(searchBar: UISearchBar) {
         searchBar.delegate = self
     }

@@ -26,6 +26,7 @@
 		E2674B521E8279CE00F3316E /* InstantSearchMultiplePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B441E8279CE00F3316E /* InstantSearchMultiplePresenter.swift */; };
 		E2674B531E8279CE00F3316E /* RefinementControlWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B451E8279CE00F3316E /* RefinementControlWidget.swift */; };
 		E2674B541E8279CE00F3316E /* AlgoliaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B461E8279CE00F3316E /* AlgoliaWidget.swift */; };
+		E2674B571E82933200F3316E /* AlgoliaSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B561E82933200F3316E /* AlgoliaSearchManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		E2674B441E8279CE00F3316E /* InstantSearchMultiplePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchMultiplePresenter.swift; sourceTree = "<group>"; };
 		E2674B451E8279CE00F3316E /* RefinementControlWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementControlWidget.swift; sourceTree = "<group>"; };
 		E2674B461E8279CE00F3316E /* AlgoliaWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaWidget.swift; sourceTree = "<group>"; };
+		E2674B561E82933200F3316E /* AlgoliaSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaSearchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				E2674B551E82902400F3316E /* InstantSearch Lib */,
 				E2674B271E82795800F3316E /* AppDelegate.swift */,
 				E2674B291E82795800F3316E /* ViewController.swift */,
+				E2674B561E82933200F3316E /* AlgoliaSearchManager.swift */,
 				E2674B2B1E82795800F3316E /* Main.storyboard */,
 				E2674B2E1E82795800F3316E /* Assets.xcassets */,
 				E2674B301E82795800F3316E /* LaunchScreen.storyboard */,
@@ -274,6 +277,7 @@
 				E2674B481E8279CE00F3316E /* HitsCollectionView.swift in Sources */,
 				E2674B281E82795800F3316E /* AppDelegate.swift in Sources */,
 				E2674B521E8279CE00F3316E /* InstantSearchMultiplePresenter.swift in Sources */,
+				E2674B571E82933200F3316E /* AlgoliaSearchManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

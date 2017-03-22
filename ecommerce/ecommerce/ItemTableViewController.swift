@@ -22,7 +22,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var searchController: UISearchController!
     var isFilterClicked = false
     //var instantSearch: InstantSearch!
-    var instantSearchPresenter: InstantSearchPresenter!
+    var instantSearchPresenter: InstantSearchBinder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         //instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
         //instantSearch.hitDataSource = self
         
-        instantSearchPresenter = InstantSearchPresenter(searcher: AlgoliaSearchManager.instance.searcher)
+        instantSearchPresenter = InstantSearchBinder(searcher: AlgoliaSearchManager.instance.searcher)
         instantSearchPresenter.add(searchController: searchController)
     }
     

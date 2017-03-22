@@ -14,7 +14,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var instantSearchPresenter: InstantSearchPresenter!
+    var instantSearchPresenter: InstantSearchBinder!
     var didDismiss: (() -> ())?
     var controls: [UIControl] = []
     var titles: [String] = ["button", "switch", "slider", "slider2", "stepper", "segmented"]

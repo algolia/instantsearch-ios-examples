@@ -20,7 +20,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     var searchController: UISearchController!
     let FACET_NAME = "category"
 //    var instantSearch: InstantSearch!
-    var instantSearchPresenter: InstantSearchPresenter!
+    var instantSearchPresenter: InstantSearchBinder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
