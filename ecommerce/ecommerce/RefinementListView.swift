@@ -65,8 +65,8 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        searcher.params.toggleFacetRefinement(name: facet, value: facetResults[indexPath.item].value)
         searcher.params.setFacet(withName: facet, disjunctive: isDisjunctive)
+        searcher.params.toggleFacetRefinement(name: facet, value: facetResults[indexPath.item].value)
         searcher.search()
     }
 }
