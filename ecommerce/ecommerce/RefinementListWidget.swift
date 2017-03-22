@@ -11,7 +11,7 @@ import UIKit
 import InstantSearchCore
 
 @IBDesignable
-class RefinementListWidget: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, AlgoliaFacetDelegate {
+class RefinementListWidget: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, AlgoliaFacetDelegate, UITableViewDataSource, UITableViewDelegate {
     private var searcher: Searcher!
     @IBInspectable var facet: String = ""
     @IBInspectable var areRefinedValuesFirst: Bool = true
@@ -27,10 +27,12 @@ class RefinementListWidget: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2,
     }
     
     var facetResults: [FacetValue] = []
+    weak var facetDataSource: FacetDataSource?
     
     func initWith(searcher: Searcher) {
         self.searcher = searcher
-        
+        delegate = self
+        dataSource = self
         // TODO: Make the countDesc and refinedFirst customisable ofc. 
         if let results = searcher.results, let hits = searcher.hits, hits.count > 0 {
             facetResults = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: transformRefinementList, areRefinedValuesFirst: areRefinedValuesFirst)
@@ -69,6 +71,21 @@ class RefinementListWidget: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2,
         searcher.params.toggleFacetRefinement(name: facet, value: facetResults[indexPath.item].value)
         searcher.search()
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let facetValue = facetForRow(at: indexPath)
+        let isRefined = self.isRefined(at: indexPath)
+        return facetDataSource?.cellFor(facetValue: facetValue, isRefined: isRefined, at: indexPath) ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberOfRows(in: section)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        deselectRow(at: indexPath, animated: true)
+        didSelectRow(at: indexPath)
+    }
 }
 
 protocol AlgoliaFacetDataSource2 {
@@ -79,4 +96,8 @@ protocol AlgoliaFacetDataSource2 {
 
 protocol AlgoliaFacetDelegate {
     func didSelectRow(at indexPath: IndexPath)
+}
+
+protocol FacetDataSource: class {
+    func cellFor(facetValue: FacetValue, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell
 }

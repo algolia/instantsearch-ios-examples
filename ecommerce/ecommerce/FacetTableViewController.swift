@@ -9,7 +9,7 @@
 import InstantSearchCore
 import UIKit
 
-class FacetTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FacetTableViewController: UIViewController, FacetDataSource {
     
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
@@ -46,34 +46,17 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.tableView.numberOfRows(in: section)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func cellFor(facetValue: FacetValue, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
-        cell.facet = self.tableView.facetForRow(at: indexPath)
-        cell.isRefined = self.tableView.isRefined(at: indexPath)
+        cell.facet = facetValue
+        cell.isRefined = isRefined
         cell.backgroundColor = ColorConstants.tableColor
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.tableView.didSelectRow(at: indexPath)
-    }
-    
     func configureTable() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.facetDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor
