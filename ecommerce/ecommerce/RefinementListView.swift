@@ -17,6 +17,15 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
     @IBInspectable var areRefinedValuesFirst: Bool = true
     @IBInspectable var isDisjunctive: Bool = true
     
+    var transformRefinementList = TransformRefinementList.countDesc
+    
+    @available(*, unavailable, message: "This property is reserved for Interface Builder. Use 'transformRefinementList' instead.")
+    @IBInspectable var sorting: String? {
+        willSet {
+            transformRefinementList = TransformRefinementList(named: newValue?.lowercased() ?? "")
+        }
+    }
+    
     var facetResults: [FacetValue] = []
     
     func initWith(searcher: Searcher) {
@@ -24,7 +33,7 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
         
         // TODO: Make the countDesc and refinedFirst customisable ofc. 
         if let results = searcher.results, let hits = searcher.hits, hits.count > 0 {
-            facetResults = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: areRefinedValuesFirst)
+            facetResults = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: transformRefinementList, areRefinedValuesFirst: areRefinedValuesFirst)
             
             reloadData()
         }
@@ -35,7 +44,7 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
             //,searcher.params.hasFacetRefinements(name: facet)
             // else { return }
         
-        facetResults = searcher.getRefinementList(facetCounts: results?.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: areRefinedValuesFirst)
+        facetResults = searcher.getRefinementList(facetCounts: results?.facets(name: facet), andFacetName: facet, transformRefinementList: transformRefinementList, areRefinedValuesFirst: areRefinedValuesFirst)
         reloadData()
     }
     

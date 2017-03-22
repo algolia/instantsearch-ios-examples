@@ -342,6 +342,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="facet" value="manufacturer"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="areRefinedValuesFirst" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isDisjunctive" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="countDesc"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnG-Ks-eub">
