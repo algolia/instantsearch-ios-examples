@@ -14,7 +14,7 @@ class FacetTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var nbHitsLabel: UILabel!
-    @IBOutlet weak var tableView: RefinementListView!
+    @IBOutlet weak var tableView: RefinementListWidget!
     
     
     var searchController: UISearchController!

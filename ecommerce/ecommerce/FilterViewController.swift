@@ -20,8 +20,8 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var titles: [String] = ["button", "switch", "slider", "slider2", "stepper", "segmented"]
     
     let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 40)
-    var slider1: Slider!
-    var slider2: Slider!
+    var slider1: SliderWidget!
+    var slider2: SliderWidget!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         automaticallyAdjustsScrollViewInsets = false
         setupResultButton()
         
-        slider1 = Slider()
+        slider1 = SliderWidget()
         slider1.attributeName = RefinementParameters.salePrice
         slider1.op = .greaterThanOrEqual
         slider1.inclusive = true
@@ -38,7 +38,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         slider1.minimumValue = 0
         //slider1?.valueLabel = resultButton.titleLabel!
         
-        slider2 = Slider()
+        slider2 = SliderWidget()
         slider2.attributeName = RefinementParameters.salePrice
         slider2.op = .greaterThanOrEqual
         slider2.inclusive = true
@@ -73,7 +73,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
         
         let stats = Stats(label: resultButton.titleLabel!)
-        //slider1 = Slider(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        //slider1 = SliderWidget(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
 
         
         instantSearchPresenter.addRefinementControl(widget: slider1!)
