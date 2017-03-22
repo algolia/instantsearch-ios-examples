@@ -9,7 +9,7 @@
 import Foundation
 import InstantSearchCore
 
-public class HitsTableWidget: UITableView, AlgoliaWidget, AlgoliaTableHitDataSource {
+public class HitsTableWidget: UITableView, UITableViewDataSource, AlgoliaWidget, AlgoliaTableHitDataSource {
     
     var searcher: Searcher!
     @IBInspectable var hitsPerPage: UInt = 20
@@ -19,11 +19,14 @@ public class HitsTableWidget: UITableView, AlgoliaWidget, AlgoliaTableHitDataSou
     @objc func initWith(searcher: Searcher) {
         self.searcher = searcher
         searcher.params.hitsPerPage = hitsPerPage
+        dataSource = self
         
         if searcher.hits != nil {
             reloadData()
         }
     }
+    
+    weak var hitDataSource: HitDataSource?
     
     @objc func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
         // TODO: Work on that...
@@ -56,6 +59,19 @@ public class HitsTableWidget: UITableView, AlgoliaWidget, AlgoliaTableHitDataSou
         loadMoreIfNecessary(rowNumber: indexPath.row)
         return searcher.hits![indexPath.row]
     }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberOfRows(in: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let hit = hitForRow(at: indexPath)
+        return hitDataSource?.cellFor(hit: hit, at: indexPath) ?? UITableViewCell()
+    }
+}
+
+protocol HitDataSource: class {
+    func cellFor(hit: [String: Any], at indexPath: IndexPath) -> UITableViewCell
 }
 
 protocol AlgoliaTableHitDataSource {
