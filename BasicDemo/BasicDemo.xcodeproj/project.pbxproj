@@ -12,6 +12,20 @@
 		E2674B2D1E82795800F3316E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2674B2B1E82795800F3316E /* Main.storyboard */; };
 		E2674B2F1E82795800F3316E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2674B2E1E82795800F3316E /* Assets.xcassets */; };
 		E2674B321E82795800F3316E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2674B301E82795800F3316E /* LaunchScreen.storyboard */; };
+		E2674B471E8279CE00F3316E /* HitsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B391E8279CE00F3316E /* HitsTableView.swift */; };
+		E2674B481E8279CE00F3316E /* HitsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B3A1E8279CE00F3316E /* HitsCollectionView.swift */; };
+		E2674B491E8279CE00F3316E /* ClearAllWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B3B1E8279CE00F3316E /* ClearAllWidget.swift */; };
+		E2674B4A1E8279CE00F3316E /* RefinementListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B3C1E8279CE00F3316E /* RefinementListView.swift */; };
+		E2674B4B1E8279CE00F3316E /* StatsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B3D1E8279CE00F3316E /* StatsLabel.swift */; };
+		E2674B4C1E8279CE00F3316E /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B3E1E8279CE00F3316E /* Stats.swift */; };
+		E2674B4D1E8279CE00F3316E /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B3F1E8279CE00F3316E /* Slider.swift */; };
+		E2674B4E1E8279CE00F3316E /* Hits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B401E8279CE00F3316E /* Hits.swift */; };
+		E2674B4F1E8279CE00F3316E /* InstantSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B411E8279CE00F3316E /* InstantSearchPresenter.swift */; };
+		E2674B501E8279CE00F3316E /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B421E8279CE00F3316E /* ActivityIndicatorView.swift */; };
+		E2674B511E8279CE00F3316E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B431E8279CE00F3316E /* SearchBar.swift */; };
+		E2674B521E8279CE00F3316E /* InstantSearchMultiplePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B441E8279CE00F3316E /* InstantSearchMultiplePresenter.swift */; };
+		E2674B531E8279CE00F3316E /* RefinementControlWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B451E8279CE00F3316E /* RefinementControlWidget.swift */; };
+		E2674B541E8279CE00F3316E /* AlgoliaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B461E8279CE00F3316E /* AlgoliaWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +36,20 @@
 		E2674B2E1E82795800F3316E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2674B311E82795800F3316E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2674B331E82795800F3316E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2674B391E8279CE00F3316E /* HitsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitsTableView.swift; sourceTree = "<group>"; };
+		E2674B3A1E8279CE00F3316E /* HitsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitsCollectionView.swift; sourceTree = "<group>"; };
+		E2674B3B1E8279CE00F3316E /* ClearAllWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearAllWidget.swift; sourceTree = "<group>"; };
+		E2674B3C1E8279CE00F3316E /* RefinementListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementListView.swift; sourceTree = "<group>"; };
+		E2674B3D1E8279CE00F3316E /* StatsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsLabel.swift; sourceTree = "<group>"; };
+		E2674B3E1E8279CE00F3316E /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		E2674B3F1E8279CE00F3316E /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		E2674B401E8279CE00F3316E /* Hits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hits.swift; sourceTree = "<group>"; };
+		E2674B411E8279CE00F3316E /* InstantSearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchPresenter.swift; sourceTree = "<group>"; };
+		E2674B421E8279CE00F3316E /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		E2674B431E8279CE00F3316E /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		E2674B441E8279CE00F3316E /* InstantSearchMultiplePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchMultiplePresenter.swift; sourceTree = "<group>"; };
+		E2674B451E8279CE00F3316E /* RefinementControlWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementControlWidget.swift; sourceTree = "<group>"; };
+		E2674B461E8279CE00F3316E /* AlgoliaWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +83,20 @@
 			isa = PBXGroup;
 			children = (
 				E2674B271E82795800F3316E /* AppDelegate.swift */,
+				E2674B391E8279CE00F3316E /* HitsTableView.swift */,
+				E2674B3A1E8279CE00F3316E /* HitsCollectionView.swift */,
+				E2674B3B1E8279CE00F3316E /* ClearAllWidget.swift */,
+				E2674B3C1E8279CE00F3316E /* RefinementListView.swift */,
+				E2674B3D1E8279CE00F3316E /* StatsLabel.swift */,
+				E2674B3E1E8279CE00F3316E /* Stats.swift */,
+				E2674B3F1E8279CE00F3316E /* Slider.swift */,
+				E2674B401E8279CE00F3316E /* Hits.swift */,
+				E2674B411E8279CE00F3316E /* InstantSearchPresenter.swift */,
+				E2674B421E8279CE00F3316E /* ActivityIndicatorView.swift */,
+				E2674B431E8279CE00F3316E /* SearchBar.swift */,
+				E2674B441E8279CE00F3316E /* InstantSearchMultiplePresenter.swift */,
+				E2674B451E8279CE00F3316E /* RefinementControlWidget.swift */,
+				E2674B461E8279CE00F3316E /* AlgoliaWidget.swift */,
 				E2674B291E82795800F3316E /* ViewController.swift */,
 				E2674B2B1E82795800F3316E /* Main.storyboard */,
 				E2674B2E1E82795800F3316E /* Assets.xcassets */,
@@ -137,8 +179,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2674B511E8279CE00F3316E /* SearchBar.swift in Sources */,
 				E2674B2A1E82795800F3316E /* ViewController.swift in Sources */,
+				E2674B491E8279CE00F3316E /* ClearAllWidget.swift in Sources */,
+				E2674B471E8279CE00F3316E /* HitsTableView.swift in Sources */,
+				E2674B501E8279CE00F3316E /* ActivityIndicatorView.swift in Sources */,
+				E2674B4B1E8279CE00F3316E /* StatsLabel.swift in Sources */,
+				E2674B4D1E8279CE00F3316E /* Slider.swift in Sources */,
+				E2674B531E8279CE00F3316E /* RefinementControlWidget.swift in Sources */,
+				E2674B4A1E8279CE00F3316E /* RefinementListView.swift in Sources */,
+				E2674B4C1E8279CE00F3316E /* Stats.swift in Sources */,
+				E2674B4F1E8279CE00F3316E /* InstantSearchPresenter.swift in Sources */,
+				E2674B541E8279CE00F3316E /* AlgoliaWidget.swift in Sources */,
+				E2674B481E8279CE00F3316E /* HitsCollectionView.swift in Sources */,
 				E2674B281E82795800F3316E /* AppDelegate.swift in Sources */,
+				E2674B521E8279CE00F3316E /* InstantSearchMultiplePresenter.swift in Sources */,
+				E2674B4E1E8279CE00F3316E /* Hits.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
