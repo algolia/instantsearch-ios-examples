@@ -12,9 +12,13 @@ import InstantSearchCore
 public class HitsTableView: UITableView, AlgoliaWidget, AlgoliaTableHitDataSource {
     
     var searcher: Searcher!
+    @IBInspectable var hitsPerPage: UInt = 20
+    @IBInspectable var infiniteScrolling: Bool = true
+    @IBInspectable var remainingItemsBeforeLoading: UInt = 5
     
     @objc func initWith(searcher: Searcher) {
         self.searcher = searcher
+        searcher.params.hitsPerPage = hitsPerPage
         
         if searcher.hits != nil {
             reloadData()
@@ -34,8 +38,8 @@ public class HitsTableView: UITableView, AlgoliaWidget, AlgoliaTableHitDataSourc
     }
     
     func loadMoreIfNecessary(rowNumber: Int) {
-        guard let hits = searcher.hits else { return }
-        if rowNumber + 5 >= hits.count {
+        guard infiniteScrolling, let hits = searcher.hits else { return }
+        if rowNumber + Int(remainingItemsBeforeLoading) >= hits.count {
             searcher.loadMore()
         }
     }

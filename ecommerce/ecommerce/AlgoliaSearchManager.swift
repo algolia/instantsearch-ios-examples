@@ -26,7 +26,6 @@ class AlgoliaSearchManager: InstantSearchProtocol {
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
         index = client.index(withName: ALGOLIA_INDEX_NAME)
         searcher = Searcher(index: index)
-        searcher.params.hitsPerPage = 15
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
         searcher.params.attributesToHighlight = ["name", "category"]
         searcher.params.facets = ["category", "manufacturer"]

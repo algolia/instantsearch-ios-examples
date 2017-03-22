@@ -33,7 +33,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         configureInstantSearch()
         
         tableView.dataSource = self
-        instantSearchPresenter.addAllWidgets(in: self.view)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,7 +58,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, UITableVie
         //instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
         //instantSearch.hitDataSource = self
         
-        instantSearchPresenter = InstantSearchBinder(searcher: AlgoliaSearchManager.instance.searcher)
+        instantSearchPresenter = InstantSearchBinder(searcher: AlgoliaSearchManager.instance.searcher, view: self.view)
         instantSearchPresenter.add(searchController: searchController)
     }
     
