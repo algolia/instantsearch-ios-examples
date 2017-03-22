@@ -13,27 +13,29 @@ import InstantSearchCore
 @IBDesignable
 class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, AlgoliaFacetDelegate {
     private var searcher: Searcher!
-    @IBInspectable var facet: String?
+    @IBInspectable var facet: String = ""
+    @IBInspectable var areRefinedValuesFirst: Bool = true
+    @IBInspectable var isDisjunctive: Bool = true
+    
     var facetResults: [FacetValue] = []
     
     func initWith(searcher: Searcher) {
         self.searcher = searcher
         
         // TODO: Make the countDesc and refinedFirst customisable ofc. 
-        if let facet = facet, let results = searcher.results, let hits = searcher.hits, hits.count > 0 {
-            facetResults = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: true)
+        if let results = searcher.results, let hits = searcher.hits, hits.count > 0 {
+            facetResults = searcher.getRefinementList(facetCounts: results.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: areRefinedValuesFirst)
             
             reloadData()
         }
     }
     
     func on(results: SearchResults?, error: Error?, userInfo: [String : Any]) {
-        guard let facet = facet
             // TODO: Fix that cause for some reason, can't find the facet refinement.
             //,searcher.params.hasFacetRefinements(name: facet)
-            else { return }
+            // else { return }
         
-        facetResults = searcher.getRefinementList(facetCounts: results?.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: true)
+        facetResults = searcher.getRefinementList(facetCounts: results?.facets(name: facet), andFacetName: facet, transformRefinementList: .countDesc, areRefinedValuesFirst: areRefinedValuesFirst)
         reloadData()
     }
     
@@ -42,7 +44,7 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return searcher.results?.facets(name: facet!)?.count ?? 0
+        return searcher.results?.facets(name: facet)?.count ?? 0
     }
     
     func facetForRow(at indexPath: IndexPath) -> FacetValue {
@@ -50,11 +52,12 @@ class RefinementListView: UITableView, AlgoliaWidget, AlgoliaFacetDataSource2, A
     }
     
     func isRefined(at indexPath: IndexPath) -> Bool {
-        return searcher.params.hasFacetRefinement(name: facet!, value: facetResults[indexPath.item].value)
+        return searcher.params.hasFacetRefinement(name: facet, value: facetResults[indexPath.item].value)
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        searcher.params.toggleFacetRefinement(name: facet!, value: facetResults[indexPath.item].value)
+        searcher.params.toggleFacetRefinement(name: facet, value: facetResults[indexPath.item].value)
+        searcher.params.setFacet(withName: facet, disjunctive: isDisjunctive)
         searcher.search()
     }
 }

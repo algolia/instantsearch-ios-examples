@@ -339,7 +339,9 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="facet" value="category"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="facet" value="manufacturer"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="areRefinedValuesFirst" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isDisjunctive" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnG-Ks-eub">
