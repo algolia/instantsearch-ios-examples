@@ -8,18 +8,24 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
+    
+    var instantSearchBinder: InstantSearchBinder = InstantSearchBinder(searcher: AlgoliaSearchManager.instance.searcher)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        instantSearchBinder.addAllWidgets(in: self.view)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
