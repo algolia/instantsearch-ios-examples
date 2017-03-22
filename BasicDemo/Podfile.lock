@@ -1,0 +1,39 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - AlgoliaSearch-Client-Swift (4.7)
+  - InstantSearch-Core-Swift (1.0):
+    - AlgoliaSearch-Client-Swift (~> 4.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - AlgoliaSearch-Client-Swift (from `../../algoliasearch-client-swift`)
+  - InstantSearch-Core-Swift (from `../../instantsearch-core-swift`)
+
+EXTERNAL SOURCES:
+  AlgoliaSearch-Client-Swift:
+    :path: ../../algoliasearch-client-swift
+  InstantSearch-Core-Swift:
+    :path: ../../instantsearch-core-swift
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AlgoliaSearch-Client-Swift: f0773eb0a50abf100eb195bae43bf0d7a63220f5
+  InstantSearch-Core-Swift: c0c088acabf2da91b14d138677128cec689c2e77
+
+PODFILE CHECKSUM: 7b03a93d89df84407d926eb8f3c4cd782bcf4dd5
+
+COCOAPODS: 1.2.0
