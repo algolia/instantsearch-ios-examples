@@ -25,6 +25,7 @@
 		E2674B6B1E82DA4100F3316E /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B601E82DA4100F3316E /* ActivityIndicatorView.swift */; };
 		E2674B6C1E82DA4100F3316E /* RefinementControlWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B611E82DA4100F3316E /* RefinementControlWidget.swift */; };
 		E2674B6D1E82DA4100F3316E /* AlgoliaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B621E82DA4100F3316E /* AlgoliaWidget.swift */; };
+		E2674B6F1E83CCA600F3316E /* FacetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2674B6E1E83CCA600F3316E /* FacetController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E2674B601E82DA4100F3316E /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E2674B611E82DA4100F3316E /* RefinementControlWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementControlWidget.swift; sourceTree = "<group>"; };
 		E2674B621E82DA4100F3316E /* AlgoliaWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaWidget.swift; sourceTree = "<group>"; };
+		E2674B6E1E83CCA600F3316E /* FacetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				E2674B551E82902400F3316E /* InstantSearch Lib */,
 				E2674B271E82795800F3316E /* AppDelegate.swift */,
 				E2674B291E82795800F3316E /* ViewController.swift */,
+				E2674B6E1E83CCA600F3316E /* FacetController.swift */,
 				E2674B561E82933200F3316E /* AlgoliaSearchManager.swift */,
 				E2674B2B1E82795800F3316E /* Main.storyboard */,
 				E2674B2E1E82795800F3316E /* Assets.xcassets */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2674B6A1E82DA4100F3316E /* ClearAllWidget.swift in Sources */,
+				E2674B6F1E83CCA600F3316E /* FacetController.swift in Sources */,
 				E2674B2A1E82795800F3316E /* ViewController.swift in Sources */,
 				E2674B661E82DA4100F3316E /* SearchBarWidget.swift in Sources */,
 				E2674B6D1E82DA4100F3316E /* AlgoliaWidget.swift in Sources */,

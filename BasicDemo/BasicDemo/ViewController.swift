@@ -1,9 +1,8 @@
 import UIKit
 import InstantSearchCore
 
-class ViewController: UIViewController, HitDataSource, FacetDataSource {
+class ViewController: UIViewController, HitDataSource {
     @IBOutlet weak var hitsTable: HitsTableWidget!
-    @IBOutlet weak var refinementList: RefinementListWidget!
     
     var instantSearchBinder: InstantSearchBinder!
 
@@ -11,7 +10,6 @@ class ViewController: UIViewController, HitDataSource, FacetDataSource {
         super.viewDidLoad()
         
         hitsTable.hitDataSource = self
-        refinementList.facetDataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -27,13 +25,8 @@ class ViewController: UIViewController, HitDataSource, FacetDataSource {
         return cell
     }
     
-    func cellFor(facetValue: FacetValue, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell {
-        let cell = refinementList.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath)
-        
-        cell.textLabel?.text = facetValue.value
-        cell.detailTextLabel?.text = String(facetValue.count)
-        cell.accessoryType = isRefined ? .checkmark : .none
-        
-        return cell
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let facetController = segue.destination as! FacetController
+        facetController.instantSearchBinder = instantSearchBinder
     }
 }
