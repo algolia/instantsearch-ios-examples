@@ -1,53 +1,48 @@
 //
-//  Stats.swift
+//  StatsWidget.swift
 //  ecommerce
 //
-//  Created by Guy Daher on 08/03/2017.
+//  Created by Guy Daher on 09/03/2017.
 //  Copyright © 2017 Guy Daher. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import InstantSearchCore
 
-@objc class Stats: NSObject, AlgoliaWidget {
-    var label: UILabel
+@IBDesignable
+@objc class StatsWidget: UILabel, AlgoliaWidget {
     private var searcher: Searcher?
     
-    public var resultTemplate: String
+    @IBInspectable public var resultTemplate: String! // TODO: Unsafe, fix that
     public var errorTemplate: String?
     
     private let defaultResultTemplate = "{nbHits} results found in {processingTimeMS} ms"
     
-    // MARK: - AlgoliaWidget
-    init(label: UILabel) {
-        self.label = label
-        self.resultTemplate = defaultResultTemplate
-    }
-    
-    init(label: UILabel, resultTemplate: String) {
-        self.label = label
-        self.resultTemplate = resultTemplate
-    }
     
     func initWith(searcher: Searcher) {
         self.searcher = searcher
         
+        if self.resultTemplate == nil {
+            self.resultTemplate = defaultResultTemplate
+        }
+        
+        // Initial value of label in case a search was made.
+        // If a search wasn't made yet and it is still ongoing, then the label will get initialized in the onResult method
         if let results = searcher.results {
-            label.text = applyTemplate(resultTemplate: resultTemplate, results: results)
+            text = applyTemplate(resultTemplate: resultTemplate, results: results)
         }
     }
     
     func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
         if let results = results {
-            label.text = applyTemplate(resultTemplate: resultTemplate, results: results)
+            text = applyTemplate(resultTemplate: resultTemplate, results: results)
         }
         
         if error != nil {
-            label.text = "Error in fetching results"
+            text = "Error in fetching results"
         }
     }
-
+    
     // MARK: - Helper methods
     
     private func applyTemplate(resultTemplate: String, results: SearchResults) -> String{

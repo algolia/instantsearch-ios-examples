@@ -1,5 +1,5 @@
 //
-//  InstantSearchBinder.swift
+//  InstantSearchPresenter.swift
 //  ecommerce
 //
 //  Created by Guy Daher on 08/03/2017.
@@ -25,7 +25,7 @@ let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNo
     
     // MARK: - Init
     
-    @objc public init(searcher: Searcher) {
+    @objc public init(searcher: Searcher, view: UIView? = nil) {
         self.searcher = searcher
         super.init()
         self.searcher.delegate = self
@@ -33,6 +33,11 @@ let clearAllFiltersNotification = Notification.Name(rawValue: "clearAllFiltersNo
         // TODO: should we use nil for queue (OperationQueue) synchronous or not? Check..
         NotificationCenter.default.addObserver(self, selector: #selector(onReset(notification:)), name: clearAllFiltersNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRefinementNotification(notification:)), name: Searcher.RefinementChangeNotification, object: nil)
+        
+        if let view = view {
+            addAllWidgets(in: view)
+        }
+        
         searcher.search()
     }
     
