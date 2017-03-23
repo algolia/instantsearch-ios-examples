@@ -96,9 +96,9 @@
                     <navigationItem key="navigationItem" id="gxj-nt-Nm7">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="gii-be-WHm">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gyr-Jp-J3e">
-                                <rect key="frame" x="313" y="7" width="46" height="30"/>
+                                <rect key="frame" x="317" y="7" width="42" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Facets"/>
+                                <state key="normal" title="Filters"/>
                                 <connections>
                                     <segue destination="8lo-zt-ub9" kind="show" id="THN-sx-nNc"/>
                                 </connections>

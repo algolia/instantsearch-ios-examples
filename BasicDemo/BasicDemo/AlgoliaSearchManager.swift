@@ -24,11 +24,13 @@ class AlgoliaSearchManager {
     var searcher: Searcher
     
     private init() {
+        
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
         index = client.index(withName: ALGOLIA_INDEX_NAME)
         searcher = Searcher(index: index)
-        searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
-        searcher.params.attributesToHighlight = ["name", "category"]
+        
+        searcher.params.attributesToRetrieve = ["name", "salePrice"]
+        searcher.params.attributesToHighlight = ["name"]
         searcher.params.facets = ["category", "manufacturer"]
     }
 }

@@ -17,9 +17,6 @@ class FacetController: UIViewController, FacetDataSource {
     
     override func viewDidLoad() {
         refinementList.facetDataSource = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         instantSearchBinder.add(widget: refinementList)
     }
     
