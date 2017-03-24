@@ -14,10 +14,12 @@ class FacetController: UIViewController, FacetDataSource {
     
     var instantSearchBinder: InstantSearchBinder!
     @IBOutlet weak var refinementList: RefinementListWidget!
+    @IBOutlet weak var statLabel: StatsWidget!
     
     override func viewDidLoad() {
         refinementList.facetDataSource = self
         instantSearchBinder.add(widget: refinementList)
+        instantSearchBinder.add(widget: statLabel)
     }
     
     func cellFor(facetValue: FacetValue, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell {
