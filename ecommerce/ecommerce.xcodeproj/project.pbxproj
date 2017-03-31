@@ -32,7 +32,7 @@
 		E219FB481E575255006D9CFC /* InstantSearchHits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB471E575255006D9CFC /* InstantSearchHits.swift */; };
 		E219FB841E576B4A006D9CFC /* InstantSearchClearFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */; };
 		E22212E11E70039200C16B31 /* AlgoliaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E01E70039200C16B31 /* AlgoliaWidget.swift */; };
-		E22212E31E700D9E00C16B31 /* InstantSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E21E700D9E00C16B31 /* InstantSearchPresenter.swift */; };
+		E22212E31E700D9E00C16B31 /* InstantSearchBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E21E700D9E00C16B31 /* InstantSearchBinder.swift */; };
 		E22212E61E7037D600C16B31 /* RefinementControlWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E51E7037D600C16B31 /* RefinementControlWidget.swift */; };
 		E22212E81E70383400C16B31 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E71E70383400C16B31 /* Stats.swift */; };
 		E22212EA1E70385500C16B31 /* SliderWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22212E91E70385500C16B31 /* SliderWidget.swift */; };
@@ -108,7 +108,7 @@
 		E219FB471E575255006D9CFC /* InstantSearchHits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchHits.swift; sourceTree = "<group>"; };
 		E219FB831E576B4A006D9CFC /* InstantSearchClearFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchClearFilters.swift; sourceTree = "<group>"; };
 		E22212E01E70039200C16B31 /* AlgoliaWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaWidget.swift; sourceTree = "<group>"; };
-		E22212E21E700D9E00C16B31 /* InstantSearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchPresenter.swift; sourceTree = "<group>"; };
+		E22212E21E700D9E00C16B31 /* InstantSearchBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSearchBinder.swift; sourceTree = "<group>"; };
 		E22212E51E7037D600C16B31 /* RefinementControlWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementControlWidget.swift; sourceTree = "<group>"; };
 		E22212E71E70383400C16B31 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		E22212E91E70385500C16B31 /* SliderWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderWidget.swift; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 		E219FB021E534A94006D9CFC /* InstantSearch */ = {
 			isa = PBXGroup;
 			children = (
-				E22212E21E700D9E00C16B31 /* InstantSearchPresenter.swift */,
+				E22212E21E700D9E00C16B31 /* InstantSearchBinder.swift */,
 				E22213171E782AA800C16B31 /* InstantSearchMultiplePresenter.swift */,
 				E22212E01E70039200C16B31 /* AlgoliaWidget.swift */,
 				E22212E51E7037D600C16B31 /* RefinementControlWidget.swift */,
@@ -620,7 +620,7 @@
 				E219FB411E54B555006D9CFC /* FilterEurekaViewController.swift in Sources */,
 				E22212F01E704B5C00C16B31 /* SearchBarWidget.swift in Sources */,
 				E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */,
-				E22212E31E700D9E00C16B31 /* InstantSearchPresenter.swift in Sources */,
+				E22212E31E700D9E00C16B31 /* InstantSearchBinder.swift in Sources */,
 				E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */,
 				E22213181E782AA800C16B31 /* InstantSearchMultiplePresenter.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
