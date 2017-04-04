@@ -6,6 +6,7 @@ target ‘BasicDemo’ do
   use_frameworks!
   pod 'InstantSearch-Core-Swift', :path => ‘../../instantsearch-core-swift’
   pod 'AlgoliaSearch-Client-Swift', :path => ‘../../algoliasearch-client-swift’
+  pod 'InstantSearch', :path => '/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios'
   pod 'AFNetworking', '~> 3.0'
 
 end

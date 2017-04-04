@@ -1,5 +1,6 @@
 import UIKit
 import InstantSearchCore
+import InstantSearch
 
 class ViewController: UIViewController, HitDataSource {
     

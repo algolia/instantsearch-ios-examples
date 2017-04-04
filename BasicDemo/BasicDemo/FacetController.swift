@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import InstantSearchCore
+import InstantSearch
 
 class FacetController: UIViewController, FacetDataSource {
     
@@ -30,5 +31,9 @@ class FacetController: UIViewController, FacetDataSource {
         cell.accessoryType = isRefined ? .checkmark : .none
         
         return cell
+    }
+    
+    deinit {
+        print("I am gone!")
     }
 }
