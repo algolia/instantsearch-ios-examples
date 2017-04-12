@@ -14,22 +14,38 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AlgoliaSearch-Client-Swift (4.6.1)
-  - Eureka (2.0.0-beta.1)
+  - AlgoliaSearch-Client-Swift (4.8)
+  - Eureka (2.0.1)
+  - InstantSearch (1.0.0):
+    - InstantSearch-Core-Swift (~> 1.0)
   - InstantSearch-Core-Swift (1.0):
     - AlgoliaSearch-Client-Swift (~> 4.0)
+  - Nimble (6.1.0)
+  - Quick (1.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Eureka (~> 2.0.0-beta.1)
-  - InstantSearch-Core-Swift (~> 1.0)
+  - InstantSearch (from `/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios`)
+  - InstantSearch-Core-Swift (from `../../instantsearch-core-swift`)
+  - Nimble
+  - Quick
+
+EXTERNAL SOURCES:
+  InstantSearch:
+    :path: /Users/guydaher/Developer/Algolia/iOS/instantsearch-ios
+  InstantSearch-Core-Swift:
+    :path: ../../instantsearch-core-swift
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AlgoliaSearch-Client-Swift: cd88a599e43b753874001a7d40eeb3999f137f5f
-  Eureka: d014adf16406745e1a78d5790ea37ed130a0a8e5
-  InstantSearch-Core-Swift: 7fcdf313c2d8f2fea9edc975319a7b4626e50e53
+  AlgoliaSearch-Client-Swift: 03af7c37bd8a9cf7a92ea9498a9e79862c3d455b
+  Eureka: ae837bb1dfae0c07bc1bda7aeef87876eeb537c2
+  InstantSearch: 4b855b1e8bb756b561aeafb2b02b2758212cc5fc
+  InstantSearch-Core-Swift: c0c088acabf2da91b14d138677128cec689c2e77
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
 
-PODFILE CHECKSUM: 13491f0bd5e0877495e851901ff404fdda46743f
+PODFILE CHECKSUM: e53794312fb1306a331179bd54b70b8686701ccf
 
 COCOAPODS: 1.2.0

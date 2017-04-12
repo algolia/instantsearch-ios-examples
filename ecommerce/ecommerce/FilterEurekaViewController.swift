@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import InstantSearchCore
+import InstantSearch
 import Eureka
 
 class FilterEurekaViewController: FormViewController {
     
-    var instantSearch: InstantSearch?
+    var instantSearch: InstantSearchBinder!
     var didDismiss: (() -> ())?
     var resultButton: UIButton!
     
@@ -81,7 +81,7 @@ class FilterEurekaViewController: FormViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        instantSearch?.addWidget(stats: resultButton.titleLabel!)
+        //instantSearch.addWidget(resultButton.titleLabel)
     }
     
     func setupNavigationBar() {
@@ -134,8 +134,7 @@ class FilterEurekaViewController: FormViewController {
         ratings.value = nil
         ratings.reload()
         
-        instantSearch?.searcher.params.clearRefinements()
-        instantSearch?.reloadAllWidgets()
+        instantSearch.searcher.params.clearRefinements()
     }
     
     func cancelClicked(_ barButtonItem: UIBarButtonItem) {

@@ -10,7 +10,7 @@ import Foundation
 import InstantSearchCore
 import AlgoliaSearch
 
-class AlgoliaSearchManager: InstantSearchProtocol {
+class AlgoliaSearchManager {
     /// The singleton instance.
     static let instance = AlgoliaSearchManager()
     
@@ -20,14 +20,14 @@ class AlgoliaSearchManager: InstantSearchProtocol {
     private let index: Index
     
     var searcher: Searcher
-    var instantSearchParameters = InstantSearchParameters()
     
     private init() {
+        
         let client = Client(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY)
         index = client.index(withName: ALGOLIA_INDEX_NAME)
         searcher = Searcher(index: index)
+        
         searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
         searcher.params.attributesToHighlight = ["name", "category"]
-        searcher.params.facets = ["category", "manufacturer"]
     }
 }

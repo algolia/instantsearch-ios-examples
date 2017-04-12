@@ -6,7 +6,7 @@
 //  Copyright © 2017 Guy Daher. All rights reserved.
 //
 
-import InstantSearchCore
+import InstantSearch
 import UIKit
 
 class FacetTableViewController: UIViewController, FacetDataSource {
@@ -42,13 +42,10 @@ class FacetTableViewController: UIViewController, FacetDataSource {
     
     // MARK: - Table view data source
     
-    func handle(results: SearchResults, error: Error?) {
-        
-    }
-    
-    func cellFor(facetValue: FacetValue, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell {
+    func cellFor(facet: String, count: Int, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
-        cell.facet = facetValue
+        cell.facet = facet
+        cell.count = count
         cell.isRefined = isRefined
         cell.backgroundColor = ColorConstants.tableColor
         

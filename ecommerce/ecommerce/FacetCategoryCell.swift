@@ -11,12 +11,17 @@ import InstantSearchCore
 
 class FacetCategoryCell: UITableViewCell {
     
-    var facet: FacetValue? {
+    var facet: String? {
         didSet {
             guard let facet = facet else { return }
-            
-            textLabel?.text = facet.value
-            detailTextLabel?.text = "\(facet.count)"
+            textLabel?.text = facet
+        }
+    }
+    
+    var count: Int? {
+        didSet {
+            guard let count = count else { return }
+            detailTextLabel?.text = "\(count)"
         }
     }
     

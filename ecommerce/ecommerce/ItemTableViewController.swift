@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import InstantSearchCore
+import InstantSearch
 import AlgoliaSearch
 
 class ItemTableViewController: UIViewController, UITableViewDelegate, HitDataSource {

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import InstantSearchCore
+import InstantSearch
 
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -32,7 +32,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         slider1 = SliderWidget()
         slider1.attributeName = RefinementParameters.salePrice
-        slider1.op = .greaterThanOrEqual
+        slider1.operation = "greaterThanOrEqual"
         slider1.inclusive = true
         slider1.maximumValue = 50
         slider1.minimumValue = 0
@@ -40,7 +40,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         slider2 = SliderWidget()
         slider2.attributeName = RefinementParameters.salePrice
-        slider2.op = .greaterThanOrEqual
+        slider2.operation = "greaterThanOrEqual"
         slider2.inclusive = true
         slider2.maximumValue = 50
         slider2.minimumValue = 0
@@ -72,13 +72,11 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
 //        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
         
-        let stats = Stats(label: resultButton.titleLabel!)
+        instantSearchPresenter.addAllWidgets(in: self.view)
+        // let stats = Stats(label: resultButton.titleLabel!)
         //slider1 = SliderWidget(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
 
-        
-        instantSearchPresenter.addRefinementControl(widget: slider1!)
-        instantSearchPresenter.addRefinementControl(widget: slider2!)
-        instantSearchPresenter.add(widget: stats)
+//        instantSearchPresenter.add(widget: stats)
         
         for (index, control) in controls.enumerated() {
             control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
