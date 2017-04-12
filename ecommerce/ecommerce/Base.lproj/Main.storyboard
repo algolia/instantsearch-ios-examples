@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JL1-ca-zgd" id="7Vr-Yg-Yeq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X2m-F2-JUW">
@@ -347,10 +347,13 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="facet" value="category"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="areRefinedValuesFirst" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isDisjunctive" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="count:desc"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="attribute" value="category"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="refinedFirst" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="operator" value="or"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="sortBy" value="count:asc"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="limit">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnG-Ks-eub">
