@@ -41,7 +41,7 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AlgoliaSearch-Client-Swift: 03af7c37bd8a9cf7a92ea9498a9e79862c3d455b
   Eureka: ae837bb1dfae0c07bc1bda7aeef87876eeb537c2
-  InstantSearch: 4b855b1e8bb756b561aeafb2b02b2758212cc5fc
+  InstantSearch: c8233aafa1069b80de604a353dd4d961af6b350f
   InstantSearch-Core-Swift: c0c088acabf2da91b14d138677128cec689c2e77
   Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
