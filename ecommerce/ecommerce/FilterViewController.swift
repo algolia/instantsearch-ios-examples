@@ -11,7 +11,7 @@ import InstantSearch
 
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var resultButton: UIButton!
+    @IBOutlet weak var resultButton: ButtonStatsWidget!
     @IBOutlet weak var tableView: UITableView!
     
     var instantSearchPresenter: InstantSearchBinder!
@@ -75,8 +75,6 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         instantSearchPresenter.addAllWidgets(in: self.view)
         // let stats = Stats(label: resultButton.titleLabel!)
         //slider1 = SliderWidget(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
-
-//        instantSearchPresenter.add(widget: stats)
         
         for (index, control) in controls.enumerated() {
             control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
