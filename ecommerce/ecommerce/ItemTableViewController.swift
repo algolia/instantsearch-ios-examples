@@ -10,7 +10,7 @@ import UIKit
 import InstantSearch
 import AlgoliaSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, HitDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableViewDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: HitsTableWidget!
@@ -35,7 +35,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitDataSou
         tableView.hitDataSource = self
     }
     
-    func cellFor(hit: [String : Any], at indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
         // TODO: Solve it better with data binding techniques
