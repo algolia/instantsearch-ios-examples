@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bB7-xE-IpO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F54b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bB7-xE-IpO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -317,7 +317,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Dj-XFu" customClass="RefinementListWidget" customModule="InstantSearch">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Dj-XFu" customClass="RefinementTableWidget" customModule="InstantSearch">
                                 <rect key="frame" x="0.0" y="158" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -350,7 +350,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="attribute" value="category"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="refinedFirst" value="YES"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="operator" value="or"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="sortBy" value="count:asc"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="sortBy" value="count:desc"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="limit">
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>

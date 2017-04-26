@@ -9,13 +9,14 @@
 import InstantSearch
 import UIKit
 
-class FacetTableViewController: UIViewController, FacetDataSource {
+class FacetTableViewController: UIViewController, RefinementTableViewDataSource {
     
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var nbHitsLabel: UILabel!
-    @IBOutlet weak var tableView: RefinementListWidget!
+    @IBOutlet weak var tableView: RefinementTableWidget!
     
+    var refinementViewController: RefinementViewController!
     
     var searchController: UISearchController!
     let FACET_NAME = "category"
@@ -24,6 +25,11 @@ class FacetTableViewController: UIViewController, FacetDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refinementViewController = RefinementViewController(table: tableView)
+        tableView.dataSource = refinementViewController
+        tableView.delegate = refinementViewController
+        refinementViewController.tableDataSource = self
+
         instantSearchPresenter.addAllWidgets(in: self.view)
 //        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
 //        
@@ -42,18 +48,17 @@ class FacetTableViewController: UIViewController, FacetDataSource {
     
     // MARK: - Table view data source
     
-    func cellFor(facet: String, count: Int, isRefined: Bool, at indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing facet: String, with count: Int, is refined: Bool)  -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facetCell", for: indexPath) as! FacetCategoryCell
         cell.facet = facet
         cell.count = count
-        cell.isRefined = isRefined
+        cell.isRefined = refined
         cell.backgroundColor = ColorConstants.tableColor
         
         return cell
     }
     
     func configureTable() {
-        tableView.facetDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor
