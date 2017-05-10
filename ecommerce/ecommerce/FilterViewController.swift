@@ -11,7 +11,7 @@ import InstantSearch
 
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var resultButton: ButtonStatsWidget!
+    @IBOutlet weak var resultButton: StatsButtonWidget!
     @IBOutlet weak var tableView: UITableView!
     
     var instantSearchPresenter: InstantSearchBinder!
