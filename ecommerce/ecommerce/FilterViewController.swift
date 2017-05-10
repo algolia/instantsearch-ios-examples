@@ -32,7 +32,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         slider1 = SliderWidget()
         slider1.attributeName = RefinementParameters.salePrice
-        slider1.operation = "<"
+        slider1.operation = ">"
         slider1.inclusive = true
         slider1.maximumValue = 50
         slider1.minimumValue = 0
@@ -40,7 +40,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         slider2 = SliderWidget()
         slider2.attributeName = RefinementParameters.salePrice
-        slider2.operation = "<"
+        slider2.operation = ">"
         slider2.inclusive = true
         slider2.maximumValue = 50
         slider2.minimumValue = 0
