@@ -20,7 +20,6 @@
 		E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FADB1E4880ED006D9CFC /* Helpers.swift */; };
 		E219FAE01E49F982006D9CFC /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FADF1E49F982006D9CFC /* TopBarView.swift */; };
 		E219FAE21E4A1E16006D9CFC /* FacetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */; };
-		E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */; };
 		E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */; };
 		E219FB411E54B555006D9CFC /* FilterEurekaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB401E54B555006D9CFC /* FilterEurekaViewController.swift */; };
 		E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB431E56F4C9006D9CFC /* Constants.swift */; };
@@ -73,7 +72,6 @@
 		E219FADB1E4880ED006D9CFC /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		E219FADF1E49F982006D9CFC /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetTableViewController.swift; sourceTree = "<group>"; };
-		E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgoliaSearchManager.swift; sourceTree = "<group>"; };
 		E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetCategoryCell.swift; sourceTree = "<group>"; };
 		E219FB401E54B555006D9CFC /* FilterEurekaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterEurekaViewController.swift; sourceTree = "<group>"; };
 		E219FB431E56F4C9006D9CFC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 		E219FAE61E4B0F1E006D9CFC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E219FAF41E4DD29D006D9CFC /* AlgoliaSearchManager.swift */,
 				E219FAD71E44C710006D9CFC /* ItemRecord.swift */,
 			);
 			name = Model;
@@ -526,7 +523,6 @@
 				E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */,
 				E219FAA21E4382B2006D9CFC /* AppDelegate.swift in Sources */,
 				E25104D51E5EF9AF00F3B18C /* FilterViewController.swift in Sources */,
-				E219FAF51E4DD29D006D9CFC /* AlgoliaSearchManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

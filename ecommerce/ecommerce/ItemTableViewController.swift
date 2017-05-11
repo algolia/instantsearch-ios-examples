@@ -24,8 +24,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableVi
     
     var searchController: UISearchController!
     var isFilterClicked = false
-    //var instantSearch: InstantSearch!
-    var instantSearchPresenter: InstantSearchBinder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +56,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableVi
         //instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
         //instantSearch.hitDataSource = self
         
-        instantSearchPresenter = InstantSearchBinder(searcher: AlgoliaSearchManager.instance.searcher, view: self.view)
-        instantSearchPresenter.add(searchController: searchController)
+        InstantSearch.reference.add(searchController: searchController)
+        InstantSearch.reference.addAllWidgets(in: self.view)
     }
     
     func configureTable() {
@@ -113,7 +111,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableVi
         if segue.identifier == "FacetSegue" {
             searchController.isActive = false
             let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.instantSearchPresenter = instantSearchPresenter
+            facetTableViewController.instantSearchPresenter = InstantSearch.reference
             //facetTableViewController.instantSearch = instantSearch
         }
         
@@ -132,7 +130,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableVi
         if segue.identifier == "FilterSegue" {
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
-            filterViewController.instantSearchPresenter = instantSearchPresenter
+            filterViewController.instantSearchPresenter = InstantSearch.reference
             filterViewController.didDismiss = {
                 //self.instantSearch.searcher.search()
             }

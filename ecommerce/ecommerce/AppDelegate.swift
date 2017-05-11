@@ -7,15 +7,23 @@
 //
 
 import UIKit
+import InstantSearch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let ALGOLIA_APP_ID = "latency"
+    private let ALGOLIA_INDEX_NAME = "bestbuy_promo"
+    private let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
+    
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        InstantSearch.reference.configure(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY, index: ALGOLIA_INDEX_NAME)
+        InstantSearch.reference.searcher.params.attributesToRetrieve = ["name", "manufacturer", "category", "salePrice", "bestSellingRank", "customerReviewCount", "image"]
+        InstantSearch.reference.searcher.params.attributesToHighlight = ["name", "category"]
+        
         return true
     }
 
