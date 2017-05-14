@@ -21,7 +21,7 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
     var searchController: UISearchController!
     let FACET_NAME = "category"
 //    var instantSearch: InstantSearch!
-    var instantSearchPresenter: InstantSearchBinder!
+    var instantSearchPresenter: InstantSearch!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,7 +12,7 @@ import Eureka
 
 class FilterEurekaViewController: FormViewController {
     
-    var instantSearch: InstantSearchBinder!
+    var instantSearch: InstantSearch!
     var didDismiss: (() -> ())?
     var resultButton: UIButton!
     

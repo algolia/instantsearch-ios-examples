@@ -14,13 +14,13 @@ import AlgoliaSearch
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {
-        describe("InstantSearchBinder") {
+        describe("InstantSearch") {
             it("has everything you need to get started") {
                 let x = 5
                 let client = Client(appID: "aa", apiKey: "bb")
                 let index = client.index(withName: "cc")
-                let instantSearchBinder = InstantSearchBinder(searcher: Searcher(index: index))
-                expect(instantSearchBinder).toNot(beNil())
+                let instantSearch = InstantSearch(searcher: Searcher(index: index))
+                expect(instantSearch).toNot(beNil())
                 expect(x).to(equal(5))
             }
             
