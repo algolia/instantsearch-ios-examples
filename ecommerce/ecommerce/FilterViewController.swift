@@ -31,16 +31,16 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         setupResultButton()
         
         slider1 = SliderWidget()
-        slider1.attributeName = RefinementParameters.salePrice
-        slider1.operation = ">"
+        slider1.attribute = RefinementParameters.salePrice
+        slider1.operator = ">"
         slider1.inclusive = true
         slider1.maximumValue = 50
         slider1.minimumValue = 0
         //slider1?.valueLabel = resultButton.titleLabel!
         
         slider2 = SliderWidget()
-        slider2.attributeName = RefinementParameters.salePrice
-        slider2.operation = ">"
+        slider2.attribute = RefinementParameters.salePrice
+        slider2.operator = ">"
         slider2.inclusive = true
         slider2.maximumValue = 50
         slider2.minimumValue = 0
@@ -74,7 +74,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         instantSearchPresenter.addAllWidgets(in: self.view)
         // let stats = Stats(label: resultButton.titleLabel!)
-        //slider1 = SliderWidget(attributeName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
+        //slider1 = SliderWidget(attribute: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
         
         for (index, control) in controls.enumerated() {
             control.addTarget(self, action: #selector(valueChanged(control:)), for: .valueChanged)
