@@ -16,7 +16,7 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
     @IBOutlet weak var nbHitsLabel: UILabel!
     @IBOutlet weak var tableView: RefinementTableWidget!
     
-    var refinementViewController: RefinementViewController!
+    var refinementController: RefinementController!
     
     var searchController: UISearchController!
     let FACET_NAME = "category"
@@ -25,10 +25,10 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refinementViewController = RefinementViewController(table: tableView)
-        tableView.dataSource = refinementViewController
-        tableView.delegate = refinementViewController
-        refinementViewController.tableDataSource = self
+        refinementController = RefinementController(table: tableView)
+        tableView.dataSource = refinementController
+        tableView.delegate = refinementController
+        refinementController.tableDataSource = self
 
         instantSearchPresenter.addAllWidgets(in: self.view)
 //        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!

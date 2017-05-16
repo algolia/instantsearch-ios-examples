@@ -19,7 +19,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableVi
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var nbHitsLabel: UILabel!
     
-    var hitsViewController: HitsViewController!
+    var hitsController: HitsController!
 
     
     var searchController: UISearchController!
@@ -33,10 +33,10 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableVi
         configureTable()
         configureInstantSearch()
         
-        hitsViewController = HitsViewController(table: tableView)
-        tableView.dataSource = hitsViewController
-        tableView.delegate = hitsViewController
-        hitsViewController.tableDataSource = self
+        hitsController = HitsController(table: tableView)
+        tableView.dataSource = hitsController
+        tableView.delegate = hitsController
+        hitsController.tableDataSource = self
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
