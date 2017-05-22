@@ -10,7 +10,7 @@ import UIKit
 import InstantSearch
 import AlgoliaSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, HitTableViewDataSource {
+class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableViewDataSource {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: HitsTableWidget!
