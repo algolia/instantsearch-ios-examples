@@ -14,43 +14,43 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AlgoliaSearch-Client-Swift (4.8)
+  - AlgoliaSearch-Client-Swift (4.8.1)
   - Eureka (2.0.1)
-  - InstantSearch (1.0.0):
-    - InstantSearch/InstantSearch (= 1.0.0)
-  - InstantSearch-Core-Swift (1.0):
+  - InstantSearch-Core-Swift (2.0.0-beta1):
     - AlgoliaSearch-Client-Swift (~> 4.0)
-  - InstantSearch/CustomWidgets (1.0.0):
-    - InstantSearch-Core-Swift (~> 1.0)
-  - InstantSearch/InstantSearch (1.0.0):
-    - InstantSearch-Core-Swift (~> 1.0)
+  - InstantSearch-Swift (1.0.0-beta1):
+    - InstantSearch-Swift/InstantSearch-Swift (= 1.0.0-beta1)
+  - InstantSearch-Swift/CustomWidgets (1.0.0-beta1):
+    - InstantSearch-Core-Swift (~> 2.0.0-beta1)
+  - InstantSearch-Swift/InstantSearch-Swift (1.0.0-beta1):
+    - InstantSearch-Core-Swift (~> 2.0.0-beta1)
   - Nimble (6.1.0)
   - Quick (1.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Eureka (~> 2.0.0-beta.1)
-  - InstantSearch (from `/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios`)
   - InstantSearch-Core-Swift (from `../../instantsearch-core-swift`)
-  - InstantSearch/CustomWidgets (from `/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios`)
+  - InstantSearch-Swift (from `/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios`)
+  - InstantSearch-Swift/CustomWidgets (from `/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios`)
   - Nimble
   - Quick
 
 EXTERNAL SOURCES:
-  InstantSearch:
-    :path: /Users/guydaher/Developer/Algolia/iOS/instantsearch-ios
   InstantSearch-Core-Swift:
     :path: ../../instantsearch-core-swift
+  InstantSearch-Swift:
+    :path: /Users/guydaher/Developer/Algolia/iOS/instantsearch-ios
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AlgoliaSearch-Client-Swift: 03af7c37bd8a9cf7a92ea9498a9e79862c3d455b
+  AlgoliaSearch-Client-Swift: 5bdfbc8727f203773245e2410edd7a9c8e831637
   Eureka: ae837bb1dfae0c07bc1bda7aeef87876eeb537c2
-  InstantSearch: 33f35a1f2064a9d340523ec76622357733c57197
-  InstantSearch-Core-Swift: c0c088acabf2da91b14d138677128cec689c2e77
+  InstantSearch-Core-Swift: 61afeb3c5933b5d208fe9852fee68edef9663d29
+  InstantSearch-Swift: 37abb28063ddf43fe879477bec6e7a49e6cb73d5
   Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
 
-PODFILE CHECKSUM: 4fb7cc99e9b8916ae421d9e62f8cbace5fae709b
+PODFILE CHECKSUM: 73f0e344b93acc6fb00b5e20db024b134ddf2c2c
 
 COCOAPODS: 1.2.0
