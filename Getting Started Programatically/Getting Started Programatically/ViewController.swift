@@ -11,6 +11,7 @@ import InstantSearch
 
 class ViewController: HitsTableViewController {
     
+    // Create your widgets
     let searchBar = SearchBarWidget(frame: .zero)
     let stats = StatsLabelWidget(frame: .zero)
     let tableView = HitsTableWidget(frame: .zero)
@@ -37,21 +38,19 @@ class ViewController: HitsTableViewController {
     }
     
     func initUI() {
-        // Create SearchBar, Stats and TableView
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        stats.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Add them to the main view
+        // Add the declared views to the main view
         self.view.addSubview(searchBar)
         self.view.addSubview(stats)
         self.view.addSubview(tableView)
         
-        // Add autolayour constraints
+        // Add autolayout constraints
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        stats.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
         let views = ["searchBar": searchBar, "stats": stats, "tableView": tableView]
         var constraints = [NSLayoutConstraint]()
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[searchBar]-10-[stats]-10-[tableView]-|", options: [], metrics:
-            nil, views:views)
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[searchBar]-10-[stats]-10-[tableView]-|", options: [], metrics: nil, views:views)
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-25-[searchBar]-25-|", options: [], metrics: nil, views:views)
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-25-[stats]-25-|", options: [], metrics: nil, views:views)
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[tableView]-|", options: [], metrics: nil, views:views)
