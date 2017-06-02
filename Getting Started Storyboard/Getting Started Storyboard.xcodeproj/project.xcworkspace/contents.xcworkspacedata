@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Getting Started.xcodeproj">
+      location = "self:Getting Started Storyboard.xcodeproj">
    </FileRef>
 </Workspace>

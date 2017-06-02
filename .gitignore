@@ -45,7 +45,8 @@ playground.xcworkspace
 #
 ecommerce/Pods/
 ecommerce/ecommerce.xcworkspace/
-Getting Started/Pods/
+Getting Started Programatically/Pods/
+Getting Started Storyboard/Pods/
 
 # Carthage
 #
