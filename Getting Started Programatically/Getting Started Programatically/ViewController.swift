@@ -32,7 +32,6 @@ class ViewController: HitsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hitCell", for: indexPath)
         
         cell.textLabel?.text = hit["name"] as? String
-        cell.detailTextLabel?.text = String(hit["salePrice"] as! Double)
         
         return cell
     }

@@ -8,9 +8,12 @@
 
 import UIKit
 import InstantSearch
+import InstantSearchCore
 
-class ViewController: HitsTableViewController {
-
+class ViewController: HitsTableViewController, UICollectionViewDataSource {
+    
+    
+    
     @IBOutlet weak var tableView: HitsTableWidget!
     
     override func viewDidLoad() {
@@ -26,7 +29,9 @@ class ViewController: HitsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hitCell", for: indexPath)
         
         cell.textLabel?.text = hit["name"] as? String
-        cell.detailTextLabel?.text = String(hit["salePrice"] as! Double)
+        cell.textLabel?.highlightedTextColor = .blue
+        cell.textLabel?.highlightedBackgroundColor = .yellow
+        cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value
         
         return cell
     }
