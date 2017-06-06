@@ -10,10 +10,8 @@ import UIKit
 import InstantSearch
 import InstantSearchCore
 
-class ViewController: HitsTableViewController, UICollectionViewDataSource {
-    
-    
-    
+class ViewController: HitsTableViewController {
+
     @IBOutlet weak var tableView: HitsTableWidget!
     
     override func viewDidLoad() {
