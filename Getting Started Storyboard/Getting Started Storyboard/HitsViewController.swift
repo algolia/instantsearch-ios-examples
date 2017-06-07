@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HitsViewController.swift
 //  Getting Started Storyboard
 //
 //  Created by Guy Daher on 01/06/2017.
@@ -10,7 +10,7 @@ import UIKit
 import InstantSearch
 import InstantSearchCore
 
-class ViewController: HitsTableViewController {
+class HitsViewController: HitsTableViewController {
 
     @IBOutlet weak var tableView: HitsTableWidget!
     
@@ -33,12 +33,6 @@ class ViewController: HitsTableViewController {
         
         return cell
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

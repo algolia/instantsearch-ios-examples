@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E258C9091EE036830076097D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258C9081EE036830076097D /* AppDelegate.swift */; };
-		E258C90B1EE036830076097D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258C90A1EE036830076097D /* ViewController.swift */; };
+		E258C90B1EE036830076097D /* HitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E258C90A1EE036830076097D /* HitsViewController.swift */; };
 		E258C90E1EE036830076097D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E258C90C1EE036830076097D /* Main.storyboard */; };
 		E258C9101EE036830076097D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E258C90F1EE036830076097D /* Assets.xcassets */; };
 		E258C9131EE036830076097D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E258C9111EE036830076097D /* LaunchScreen.storyboard */; };
 		E25AF83AC4FC38AD96210B36 /* Pods_Getting_Started_Storyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446E7A389BD6D7E4767FA9BE /* Pods_Getting_Started_Storyboard.framework */; };
+		E2C50CC31EE7E85E0030247C /* RefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C50CC21EE7E85E0030247C /* RefinementViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,11 +22,12 @@
 		D891F5A77C138C01A5CC701E /* Pods-Getting Started Storyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Getting Started Storyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Getting Started Storyboard/Pods-Getting Started Storyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		E258C9051EE036830076097D /* Getting Started Storyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Getting Started Storyboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E258C9081EE036830076097D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E258C90A1EE036830076097D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E258C90A1EE036830076097D /* HitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsViewController.swift; sourceTree = "<group>"; };
 		E258C90D1EE036830076097D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E258C90F1EE036830076097D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E258C9121EE036830076097D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E258C9141EE036830076097D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2C50CC21EE7E85E0030247C /* RefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				E258C9081EE036830076097D /* AppDelegate.swift */,
-				E258C90A1EE036830076097D /* ViewController.swift */,
+				E258C90A1EE036830076097D /* HitsViewController.swift */,
+				E2C50CC21EE7E85E0030247C /* RefinementViewController.swift */,
 				E258C90C1EE036830076097D /* Main.storyboard */,
 				E258C90F1EE036830076097D /* Assets.xcassets */,
 				E258C9111EE036830076097D /* LaunchScreen.storyboard */,
@@ -212,7 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E258C90B1EE036830076097D /* ViewController.swift in Sources */,
+				E258C90B1EE036830076097D /* HitsViewController.swift in Sources */,
+				E2C50CC31EE7E85E0030247C /* RefinementViewController.swift in Sources */,
 				E258C9091EE036830076097D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +383,7 @@
 				E258C9191EE036830076097D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
