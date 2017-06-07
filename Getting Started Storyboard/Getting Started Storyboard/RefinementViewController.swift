@@ -8,19 +8,32 @@
 
 import UIKit
 import InstantSearch
-import InstantSearchCore
 
-class RefinementViewController: UIViewController {
+class RefinementViewController: UIViewController, RefinementTableViewDataSource {
     
     @IBOutlet weak var tableView: RefinementTableWidget!
+    var refinementController: RefinementController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refinementController = RefinementController(table: tableView)
+        tableView.dataSource = refinementController
+        tableView.delegate = refinementController
+        refinementController.tableDataSource = self
+        // refinementController.tableDelegate = self
         
-        
+        InstantSearch.reference.add(widget: tableView)
     }
     
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing facet: String, with count: Int, is refined: Bool) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "refinementCell", for: indexPath)
+        
+        cell.textLabel?.text = facet
+        cell.detailTextLabel?.text = String(count)
+        cell.accessoryType = refined ? .checkmark : .none
+        
+        return cell
+    }
 }
 
 
