@@ -8,6 +8,7 @@
 
 import UIKit
 import InstantSearch
+import InstantSearchCore
 
 class ViewController: HitsTableViewController {
     
@@ -32,6 +33,10 @@ class ViewController: HitsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hitCell", for: indexPath)
         
         cell.textLabel?.text = hit["name"] as? String
+        
+        cell.textLabel?.highlightedTextColor = .blue
+        cell.textLabel?.highlightedBackgroundColor = .yellow
+        cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value
         
         return cell
     }
