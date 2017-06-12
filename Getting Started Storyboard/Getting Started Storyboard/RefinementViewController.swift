@@ -22,7 +22,7 @@ class RefinementViewController: UIViewController, RefinementTableViewDataSource 
         refinementController.tableDataSource = self
         // refinementController.tableDelegate = self
         
-        InstantSearch.reference.add(widget: tableView)
+        InstantSearch.shared.register(widget: tableView)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing facet: String, with count: Int, is refined: Bool) -> UITableViewCell {

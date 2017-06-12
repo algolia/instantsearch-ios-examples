@@ -20,13 +20,12 @@ class HitsViewController: HitsTableViewController {
         
         hitsTableView = tableView
         
-        InstantSearch.reference.addAllWidgets(in: self.view)
+        InstantSearch.shared.registerAllWidgets(in: self.view)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hitCell", for: indexPath)
         
-        cell.textLabel?.text = hit["name"] as? String
         cell.textLabel?.highlightedTextColor = .blue
         cell.textLabel?.highlightedBackgroundColor = .yellow
         cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value
