@@ -30,7 +30,7 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
         tableView.delegate = refinementController
         refinementController.tableDataSource = self
 
-        instantSearchPresenter.addAllWidgets(in: self.view)
+        instantSearchPresenter.registerAllWidgets(in: self.view)
 //        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
 //        
 //        instantSearch.addWidget(stats: nbHitsLabel)

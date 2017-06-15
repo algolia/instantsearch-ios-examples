@@ -17,7 +17,6 @@
 		E219FAC21E4382B2006D9CFC /* ecommerceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAC11E4382B2006D9CFC /* ecommerceUITests.swift */; };
 		E219FAD81E44C710006D9CFC /* ItemRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAD71E44C710006D9CFC /* ItemRecord.swift */; };
 		E219FADA1E44DB20006D9CFC /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAD91E44DB20006D9CFC /* ItemCell.swift */; };
-		E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FADB1E4880ED006D9CFC /* Helpers.swift */; };
 		E219FAE01E49F982006D9CFC /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FADF1E49F982006D9CFC /* TopBarView.swift */; };
 		E219FAE21E4A1E16006D9CFC /* FacetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */; };
 		E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */; };
@@ -69,7 +68,6 @@
 		E219FAC31E4382B2006D9CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E219FAD71E44C710006D9CFC /* ItemRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemRecord.swift; sourceTree = "<group>"; };
 		E219FAD91E44DB20006D9CFC /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
-		E219FADB1E4880ED006D9CFC /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		E219FADF1E49F982006D9CFC /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		E219FAE11E4A1E16006D9CFC /* FacetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetTableViewController.swift; sourceTree = "<group>"; };
 		E219FB031E534AF8006D9CFC /* FacetCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetCategoryCell.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 		E219FAA01E4382B2006D9CFC /* ecommerce */ = {
 			isa = PBXGroup;
 			children = (
-				E219FAE31E4B0EAD006D9CFC /* Helpers */,
 				E219FAE61E4B0F1E006D9CFC /* Model */,
 				E219FAE51E4B0ED9006D9CFC /* Views */,
 				E219FAE41E4B0EC1006D9CFC /* Controllers */,
@@ -184,14 +181,6 @@
 				E219FAC31E4382B2006D9CFC /* Info.plist */,
 			);
 			path = ecommerceUITests;
-			sourceTree = "<group>";
-		};
-		E219FAE31E4B0EAD006D9CFC /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				E219FADB1E4880ED006D9CFC /* Helpers.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 		E219FAE41E4B0EC1006D9CFC /* Controllers */ = {
@@ -517,7 +506,6 @@
 				E219FAE01E49F982006D9CFC /* TopBarView.swift in Sources */,
 				E22B900A1E5EF17B00059F95 /* FilterCell.swift in Sources */,
 				E219FAA41E4382B2006D9CFC /* ItemTableViewController.swift in Sources */,
-				E219FADC1E4880ED006D9CFC /* Helpers.swift in Sources */,
 				E219FB411E54B555006D9CFC /* FilterEurekaViewController.swift in Sources */,
 				E219FB041E534AF8006D9CFC /* FacetCategoryCell.swift in Sources */,
 				E219FB441E56F4C9006D9CFC /* Constants.swift in Sources */,

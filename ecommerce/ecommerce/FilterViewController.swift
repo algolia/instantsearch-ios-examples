@@ -72,7 +72,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        instantSearch?.addWidget(numericControl: controls[2], withFilterName: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
 //        instantSearch?.addWidget(numericControl: controls[3], withFilterName: RefinementParameters.salePrice, operation: .lessThan)
         
-        instantSearchPresenter.addAllWidgets(in: self.view)
+        instantSearchPresenter.registerAllWidgets(in: self.view)
         // let stats = Stats(label: resultButton.titleLabel!)
         //slider1 = SliderWidget(attribute: RefinementParameters.salePrice, operation: .greaterThanOrEqual)
         

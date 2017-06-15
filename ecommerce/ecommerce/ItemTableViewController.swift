@@ -56,8 +56,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         //instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
         //instantSearch.hitDataSource = self
         
-        InstantSearch.reference.add(searchController: searchController)
-        InstantSearch.reference.addAllWidgets(in: self.view)
+        InstantSearch.shared.register(searchController: searchController)
+        InstantSearch.shared.registerAllWidgets(in: self.view)
     }
     
     func configureTable() {
@@ -111,7 +111,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         if segue.identifier == "FacetSegue" {
             searchController.isActive = false
             let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.instantSearchPresenter = InstantSearch.reference
+            facetTableViewController.instantSearchPresenter = InstantSearch.shared
             //facetTableViewController.instantSearch = instantSearch
         }
         
@@ -130,7 +130,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         if segue.identifier == "FilterSegue" {
             let navigationController = segue.destination as! UINavigationController
             let filterViewController = navigationController.topViewController as! FilterViewController
-            filterViewController.instantSearchPresenter = InstantSearch.reference
+            filterViewController.instantSearchPresenter = InstantSearch.shared
             filterViewController.didDismiss = {
                 //self.instantSearch.searcher.search()
             }
