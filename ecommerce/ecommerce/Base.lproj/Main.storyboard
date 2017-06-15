@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F71b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bB7-xE-IpO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G12b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bB7-xE-IpO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -204,35 +204,12 @@
                         <outlet property="searchBarView" destination="2C1-MB-EIr" id="gDL-xq-RuS"/>
                         <outlet property="tableView" destination="Ro2-2Z-Loj" id="Xet-PJ-uWn"/>
                         <outlet property="topBarView" destination="YAA-Ez-PoB" id="5e8-4t-ccn"/>
-                        <segue destination="80H-py-BPS" kind="presentation" identifier="FilterEurekaSegue" id="2cK-bZ-z1L"/>
                         <segue destination="LbJ-CV-7dl" kind="presentation" identifier="FilterSegue" id="oOB-c1-ePu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1983.2" y="8.5457271364317844"/>
-        </scene>
-        <!--Filters-->
-        <scene sceneID="Zpc-9m-zXb">
-            <objects>
-                <viewController id="Qi6-95-g1T" customClass="FilterEurekaViewController" customModule="ecommerce" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7qO-n7-gIB"/>
-                        <viewControllerLayoutGuide type="bottom" id="WQ7-Ld-Uoc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dih-Vm-Jtm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Filters" id="cIg-ni-ia0">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="cI3-1Q-pyJ"/>
-                        <barButtonItem key="rightBarButtonItem" title="Search" id="q23-e3-AgV"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8UI-px-4dF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1681" y="773"/>
         </scene>
         <!--Filter View Controller-->
         <scene sceneID="cv9-so-VyE">
@@ -423,24 +400,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6U-6Z-fDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2922" y="9"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="3hz-4h-0v8">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="80H-py-BPS" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eJE-vF-bGP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Qi6-95-g1T" kind="relationship" relationship="rootViewController" id="5Ih-DD-Hfu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qaa-DY-QqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2663" y="774"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rMu-yP-oBy">

@@ -11,7 +11,6 @@ target 'ecommerce' do
   use_frameworks!
   pod 'InstantSearch-Swift', '~> 1.0.0-beta3’
   pod 'AFNetworking', '~> 3.0'
-  pod 'Eureka', '~> 2.0.0-beta.1'
 
   # Pods for ecommerce
 
