@@ -85,6 +85,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         searchController.searchBar.sizeToFit()
         
         searchController.searchBar.barTintColor = ColorConstants.barBackgroundColor
+        searchController.searchBar.prefe
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true

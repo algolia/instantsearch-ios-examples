@@ -24,10 +24,10 @@ class ItemCell: UITableViewCell {
             
             nameLabel.highlightedText = item.name_highlighted
             nameLabel.highlightedTextColor = UIColor.black
-            nameLabel.highlightedBackgroundColor = UIColor.orange
+            nameLabel.highlightedBackgroundColor = ColorConstants.lightYellowColor
             typeLabel.highlightedText = item.type_highlighted
             typeLabel.highlightedTextColor = UIColor.black
-            typeLabel.highlightedBackgroundColor = UIColor.yellow
+            typeLabel.highlightedBackgroundColor = ColorConstants.lightYellowColor
             
             
             if let price = item.price {

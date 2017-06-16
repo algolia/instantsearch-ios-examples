@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 struct ColorConstants {
-    static let barBackgroundColor = UIColor(red: 27/256, green: 35/256, blue: 47/256, alpha: 1)
+    static let barBackgroundColor = UIColor(red: 28/256, green: 35/256, blue: 47/256, alpha: 1)
     static let barTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     static let tableColor = UIColor.white
+    static let lightYellowColor = UIColor(red: 253/265, green: 253/256, blue: 163/256, alpha: 1)
 }
 
 struct FilterTags {
