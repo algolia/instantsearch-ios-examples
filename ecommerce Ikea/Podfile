@@ -12,6 +12,7 @@ target 'ecommerce' do
   pod 'InstantSearch-Swift', '~> 1.0.0-beta3’
   pod 'AFNetworking', '~> 3.0'
   pod 'Cosmos', '~> 10.0'
+  pod 'WARangeSlider'
 
   # Pods for ecommerce
 

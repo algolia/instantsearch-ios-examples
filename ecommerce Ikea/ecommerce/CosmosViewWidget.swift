@@ -13,7 +13,6 @@ import InstantSearchCore
 
 private var xoAssociationKey: UInt8 = 0
 
-
 extension CosmosView: AlgoliaWidget, SearchableViewModel {
     
     var searcher: Searcher! {

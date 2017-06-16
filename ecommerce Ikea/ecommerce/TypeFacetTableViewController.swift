@@ -11,6 +11,7 @@ import UIKit
 
 class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSource {
     
+    @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var nbHitsLabel: UILabel!
@@ -35,10 +36,18 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
         topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()
         configureTable()
-        //        instantSearch.set(facetSearchController: searchController)
-        //        instantSearch.facetDataSource = self
+        LayoutHelpers.setupResultButton(button: resultButton)
+        resultButton.addTarget(self, action: #selector(resultButtonClicked), for: .touchUpInside)
     }
-    
+
+    func resultButtonClicked() {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? ItemTableViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         searchController.isActive = false
     }

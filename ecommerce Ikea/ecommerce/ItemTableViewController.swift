@@ -90,18 +90,4 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         searchController.searchBar.clipsToBounds = true
         searchBarView.addSubview(searchController.searchBar)
     }
-    
-    // MARK: Actions
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "FilterSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let filterViewController = navigationController.topViewController as! FilterViewController
-            filterViewController.instantSearchPresenter = InstantSearch.shared
-            filterViewController.didDismiss = {
-                //self.instantSearch.searcher.search()
-            }
-        }
-    }
 }
