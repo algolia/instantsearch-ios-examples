@@ -9,7 +9,7 @@
 import InstantSearch
 import UIKit
 
-class FacetTableViewController: UIViewController, RefinementTableViewDataSource {
+class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSource {
     
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
@@ -26,17 +26,17 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
         tableView.dataSource = refinementController
         tableView.delegate = refinementController
         refinementController.tableDataSource = self
-
+        
         InstantSearch.shared.registerAllWidgets(in: self.view)
-//        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
-//        
-//        instantSearch.addWidget(stats: nbHitsLabel)
+        //        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
+        //
+        //        instantSearch.addWidget(stats: nbHitsLabel)
         configureNavBar()
         topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()
         configureTable()
-//        instantSearch.set(facetSearchController: searchController)
-//        instantSearch.facetDataSource = self
+        //        instantSearch.set(facetSearchController: searchController)
+        //        instantSearch.facetDataSource = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,7 +74,7 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-        searchController.searchBar.placeholder = "Search categories"
+        searchController.searchBar.placeholder = "Search types"
         searchController.searchBar.sizeToFit()
         
         searchController.searchBar.barTintColor = ColorConstants.barBackgroundColor

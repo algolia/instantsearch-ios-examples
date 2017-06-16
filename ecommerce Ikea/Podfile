@@ -11,6 +11,7 @@ target 'ecommerce' do
   use_frameworks!
   pod 'InstantSearch-Swift', '~> 1.0.0-beta3’
   pod 'AFNetworking', '~> 3.0'
+  pod 'Cosmos', '~> 10.0'
 
   # Pods for ecommerce
 

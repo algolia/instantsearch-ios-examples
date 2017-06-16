@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - AlgoliaSearch-Client-Swift (4.8.1)
+  - Cosmos (10.0.0)
   - InstantSearch-Core-Swift (2.0.0-beta1):
     - AlgoliaSearch-Client-Swift (~> 4.0)
   - InstantSearch-Swift (1.0.0-beta3):
@@ -26,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - Cosmos (~> 10.0)
   - InstantSearch-Swift (~> 1.0.0-beta3)
   - Nimble
   - Quick
@@ -33,11 +35,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AlgoliaSearch-Client-Swift: 5bdfbc8727f203773245e2410edd7a9c8e831637
+  Cosmos: bb9310e73ad1ad472b183b848b959302c569cf09
   InstantSearch-Core-Swift: 39baf4378e48028ce3f7137cfc3067ad80e7b732
   InstantSearch-Swift: e7d9d88cf140affd5686fd7d757c9a52995d6ca8
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
 
-PODFILE CHECKSUM: 711f90e03b380c037097ca05ffbd7cae82821708
+PODFILE CHECKSUM: ccf4698316951a5b02666238c7ac724f5c9406dc
 
 COCOAPODS: 1.2.1

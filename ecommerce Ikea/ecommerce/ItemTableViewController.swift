@@ -85,7 +85,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         searchController.searchBar.sizeToFit()
         
         searchController.searchBar.barTintColor = ColorConstants.barBackgroundColor
-        searchController.searchBar.prefe
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true
@@ -95,13 +94,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     // MARK: Actions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "FacetSegue" {
-            searchController.isActive = false
-            let facetTableViewController = segue.destination as! FacetTableViewController
-            facetTableViewController.instantSearchPresenter = InstantSearch.shared
-            //facetTableViewController.instantSearch = instantSearch
-        }
-        
         
         if segue.identifier == "FilterSegue" {
             let navigationController = segue.destination as! UINavigationController

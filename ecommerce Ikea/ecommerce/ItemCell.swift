@@ -8,13 +8,14 @@
 
 import UIKit
 import AFNetworking
+import Cosmos
 
 class ItemCell: UITableViewCell {
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var ratingView: CosmosView!
     
     static let placeholder = UIImage(named: "placeholder")
     
@@ -34,8 +35,9 @@ class ItemCell: UITableViewCell {
                 priceLabel.text = "$\(String(describing: price))"
             }
             
+            ratingView.settings.updateOnTouch = false
             if let rating = item.rating {
-                ratingLabel.text = "(\(String(describing: rating)))"
+                ratingView.rating = Double(rating)
             }
             
             itemImageView.cancelImageDownloadTask()
