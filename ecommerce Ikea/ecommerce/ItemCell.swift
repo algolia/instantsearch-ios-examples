@@ -12,10 +12,9 @@ import AFNetworking
 class ItemCell: UITableViewCell {
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var manufacturerLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var reviewCountLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
     
     static let placeholder = UIImage(named: "placeholder")
     
@@ -26,20 +25,17 @@ class ItemCell: UITableViewCell {
             nameLabel.highlightedText = item.name_highlighted
             nameLabel.highlightedTextColor = UIColor.black
             nameLabel.highlightedBackgroundColor = UIColor.orange
-            categoryLabel.highlightedText = item.category_highlighted
-            categoryLabel.highlightedTextColor = UIColor.black
-            categoryLabel.highlightedBackgroundColor = UIColor.yellow
+            typeLabel.highlightedText = item.type_highlighted
+            typeLabel.highlightedTextColor = UIColor.black
+            typeLabel.highlightedBackgroundColor = UIColor.yellow
             
-            if let manufacturer = item.manufacturer {
-                manufacturerLabel.text = "by \(manufacturer)"
-            }
             
             if let price = item.price {
                 priceLabel.text = "$\(String(describing: price))"
             }
             
-            if let customerReviewCount = item.customerReviewCount {
-                reviewCountLabel.text = "(\(String(describing: customerReviewCount)))"
+            if let rating = item.rating {
+                ratingLabel.text = "(\(String(describing: rating)))"
             }
             
             itemImageView.cancelImageDownloadTask()

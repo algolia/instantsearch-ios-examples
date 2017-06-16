@@ -15,15 +15,11 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: HitsTableWidget!
     @IBOutlet weak var searchBarNavigationItem: UINavigationItem!
-    @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var nbHitsLabel: UILabel!
     
     var hitsController: HitsController!
-
-    
     var searchController: UISearchController!
-    var isFilterClicked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +58,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     
     func configureTable() {
         tableView.delegate = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100.0
+//        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 50
         tableView.backgroundColor = ColorConstants.tableColor
     }
     
@@ -74,10 +70,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     }
     
     func configureToolBar() {
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(filterClicked))
-        singleTap.numberOfTapsRequired = 1 // you can change this value
-        arrowImageView.isUserInteractionEnabled = true
-        arrowImageView.addGestureRecognizer(singleTap)
+
         topBarView.backgroundColor = ColorConstants.tableColor
     }
     
@@ -99,13 +92,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     }
     
     // MARK: Actions
-    
-    @IBAction func filterClicked(_ sender: Any) {
-        arrowImageView.image = isFilterClicked ? UIImage(named: "arrow_down_flat") : UIImage(named: "arrow_up_flat")
-        isFilterClicked = !isFilterClicked
-        //performSegue(withIdentifier: "FilterEurekaSegue", sender: self)
-        performSegue(withIdentifier: "FilterSegue", sender: self)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FacetSegue" {

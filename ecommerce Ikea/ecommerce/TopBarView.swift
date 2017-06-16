@@ -15,7 +15,7 @@ class TopBarView: UIView {
         
         let context = UIGraphicsGetCurrentContext()
         context?.setStrokeColor(UIColor.gray.cgColor)
-        context?.setLineWidth(1)
+        context?.setLineWidth(2)
         context?.move(to: CGPoint(x: 0, y: bounds.height))
         context?.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
         context?.strokePath()
