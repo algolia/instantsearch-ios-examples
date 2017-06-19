@@ -29,23 +29,12 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
         refinementController.tableDataSource = self
         
         InstantSearch.shared.registerAllWidgets(in: self.view)
-        //        categoryFacets = instantSearch.getSearchFacetRecords(withFacetName: FACET_NAME)!
-        //
-        //        instantSearch.addWidget(stats: nbHitsLabel)
         configureNavBar()
         topBarView.backgroundColor = ColorConstants.tableColor
         configureSearchController()
         configureTable()
         LayoutHelpers.setupResultButton(button: resultButton)
         resultButton.addTarget(self, action: #selector(resultButtonClicked), for: .touchUpInside)
-    }
-
-    func resultButtonClicked() {
-        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? ItemTableViewController {
-            if let navigator = navigationController {
-                navigator.pushViewController(viewController, animated: true)
-            }
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,6 +80,14 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
         searchController.searchBar.layer.cornerRadius = 1.0
         searchController.searchBar.clipsToBounds = true
         searchBarView.addSubview(searchController.searchBar)
+    }
+    
+    func resultButtonClicked() {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? ItemTableViewController {
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
     }
     
     deinit {

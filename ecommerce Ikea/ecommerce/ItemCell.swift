@@ -11,6 +11,7 @@ import AFNetworking
 import Cosmos
 
 class ItemCell: UITableViewCell {
+    
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!

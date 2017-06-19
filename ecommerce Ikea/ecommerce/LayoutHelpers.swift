@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class LayoutHelpers {
+    
     static func setupResultButton(button: UIButton) {
-        
         button.backgroundColor = ColorConstants.barBackgroundColor
         button.setTitle("Fetching number of results...", for: .normal)
         button.titleLabel?.textAlignment = .center

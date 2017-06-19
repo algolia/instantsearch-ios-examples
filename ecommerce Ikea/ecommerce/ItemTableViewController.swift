@@ -38,9 +38,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
-        // TODO: Solve it better with data binding techniques
         cell.item = ItemRecord(json: hit)
-        
         cell.backgroundColor = ColorConstants.tableColor
         
         return cell
@@ -49,17 +47,12 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     // MARK: Helper methods for configuring each component of the table
     
     func configureInstantSearch() {
-        //instantSearch = InstantSearch(algoliaSearchProtocol: AlgoliaSearchManager.instance, searchController: searchController)
-        //instantSearch.hitDataSource = self
-        
         InstantSearch.shared.register(searchController: searchController)
         InstantSearch.shared.registerAllWidgets(in: self.view)
     }
     
     func configureTable() {
         tableView.delegate = self
-//        tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 50
         tableView.backgroundColor = ColorConstants.tableColor
     }
     
@@ -70,7 +63,6 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     }
     
     func configureToolBar() {
-
         topBarView.backgroundColor = ColorConstants.tableColor
     }
     
