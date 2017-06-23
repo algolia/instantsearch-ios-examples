@@ -60,6 +60,10 @@ class ViewController: HitsTableViewController {
         
         // Register tableView identifier
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "hitCell")
+        
+        // Style the stats label
+        stats.textAlignment = .center
+        stats.font = UIFont.boldSystemFont(ofSize:18.0)
     }
     
 }
