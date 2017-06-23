@@ -23,6 +23,8 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
+        self.extendedLayoutIncludesOpaqueBars = true
         configureNavBar()
         configureToolBar()
         configureSearchController()
