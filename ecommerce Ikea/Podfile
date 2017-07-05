@@ -9,7 +9,7 @@ end
 target 'ecommerce' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'InstantSearch-Swift', '~> 1.0.0-beta3’
+  pod 'InstantSearch-iOS', '~> 1.0.0-beta4'
   pod 'AFNetworking', '~> 3.0'
   pod 'Cosmos', '~> 10.0'
   pod 'WARangeSlider'

@@ -18,9 +18,9 @@ PODS:
   - Cosmos (10.0.0)
   - InstantSearch-Core-Swift (2.0.0-beta1):
     - AlgoliaSearch-Client-Swift (~> 4.0)
-  - InstantSearch-Swift (1.0.0-beta3):
-    - InstantSearch-Swift/InstantSearch-Swift (= 1.0.0-beta3)
-  - InstantSearch-Swift/InstantSearch-Swift (1.0.0-beta3):
+  - InstantSearch-iOS (1.0.0-beta4):
+    - InstantSearch-iOS/InstantSearch-iOS (= 1.0.0-beta4)
+  - InstantSearch-iOS/InstantSearch-iOS (1.0.0-beta4):
     - InstantSearch-Core-Swift (~> 2.0.0-beta1)
   - Nimble (7.0.1)
   - Quick (1.1.0)
@@ -29,7 +29,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Cosmos (~> 10.0)
-  - InstantSearch-Swift (~> 1.0.0-beta3)
+  - InstantSearch-iOS (~> 1.0.0-beta4)
   - Nimble
   - Quick
   - WARangeSlider
@@ -39,11 +39,11 @@ SPEC CHECKSUMS:
   AlgoliaSearch-Client-Swift: 5bdfbc8727f203773245e2410edd7a9c8e831637
   Cosmos: bb9310e73ad1ad472b183b848b959302c569cf09
   InstantSearch-Core-Swift: 39baf4378e48028ce3f7137cfc3067ad80e7b732
-  InstantSearch-Swift: e7d9d88cf140affd5686fd7d757c9a52995d6ca8
+  InstantSearch-iOS: d12c0d621762e578dd411d0e9fd4777da6cab807
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   WARangeSlider: 54b3e0853b8d16c444fd539005901aecee86837d
 
-PODFILE CHECKSUM: d78025491b1e6d64ad95e7627506e8f9c39e8d50
+PODFILE CHECKSUM: 17b10f708de3ba2defb2dcd535bab8e7c1f021f9
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
