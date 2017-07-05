@@ -7,7 +7,7 @@
 We have built a demo application to give you an idea of what you can build with InstantSearch iOS:
 
 ## E-commerce application
-<img src="../docs/ikea.gif" align="right" width="300"/>
+<img src="./docs/ikea.gif" align="right" width="300"/>
 
 This example imitates a product search interface like well-known e-commerce applications.
 
