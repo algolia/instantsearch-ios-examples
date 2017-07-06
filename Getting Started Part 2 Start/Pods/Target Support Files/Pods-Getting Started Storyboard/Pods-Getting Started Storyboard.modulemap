@@ -1,0 +1,6 @@
+framework module Pods_Getting_Started_Storyboard {
+  umbrella header "Pods-Getting Started Storyboard-umbrella.h"
+
+  export *
+  module * { export * }
+}
