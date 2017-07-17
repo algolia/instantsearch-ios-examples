@@ -45,10 +45,11 @@ playground.xcworkspace
 #
 ecommerce bestbuy/Pods/
 ecommerce Ikea/Pods/
-ecommerce/Pods/
-ecommerce/ecommerce.xcworkspace/
 Getting Started Programatically/Pods/
 Getting Started Storyboard/Pods/
+
+# Unfinished Projects
+ecommerce bestbuy
 
 # Carthage
 #
@@ -68,4 +69,3 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
-BasicDemo/Pods
