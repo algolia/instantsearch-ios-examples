@@ -1,20 +1,20 @@
 PODS:
   - AlgoliaSearch-Client-Swift (4.8.1)
-  - InstantSearch-Core-Swift (2.0.0-beta1):
+  - InstantSearch-Core-Swift (2.0.0):
     - AlgoliaSearch-Client-Swift (~> 4.0)
-  - InstantSearch-iOS (1.0.0-beta4):
-    - InstantSearch-iOS/InstantSearch-iOS (= 1.0.0-beta4)
-  - InstantSearch-iOS/InstantSearch-iOS (1.0.0-beta4):
-    - InstantSearch-Core-Swift (~> 2.0.0-beta1)
+  - InstantSearch-iOS (1.0.0):
+    - InstantSearch-iOS/InstantSearch-iOS (= 1.0.0)
+  - InstantSearch-iOS/InstantSearch-iOS (1.0.0):
+    - InstantSearch-Core-Swift (~> 2.0.0)
 
 DEPENDENCIES:
-  - InstantSearch-iOS (~> 1.0.0-beta4)
+  - InstantSearch-iOS (~> 1.0.0)
 
 SPEC CHECKSUMS:
   AlgoliaSearch-Client-Swift: 5bdfbc8727f203773245e2410edd7a9c8e831637
-  InstantSearch-Core-Swift: 39baf4378e48028ce3f7137cfc3067ad80e7b732
-  InstantSearch-iOS: d12c0d621762e578dd411d0e9fd4777da6cab807
+  InstantSearch-Core-Swift: 456199cd7887c9d66d11668a12d899235a61b9d4
+  InstantSearch-iOS: c9484cee0fb79ab80538562cd7c365264a3dcac6
 
-PODFILE CHECKSUM: 885b8de2bb218ba4992cf2db61e0b65b325e977c
+PODFILE CHECKSUM: f42815a8e6820a4f5ffcd121a804828ebb4ceead
 
 COCOAPODS: 1.2.1
