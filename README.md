@@ -6,7 +6,7 @@
 ## Examples
 We have built a demo application to give you an idea of what you can build with InstantSearch iOS:
 
-## E-commerce application
+## [E-commerce Ikea App](https://github.com/algolia/instantsearch-ios-examples/tree/master/ecommerce%20Ikea)
 <img src="./docs/ikea.gif" align="right" width="300"/>
 
 This example imitates a product search interface like well-known e-commerce applications.
