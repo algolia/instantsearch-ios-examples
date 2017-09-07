@@ -1,5 +1,5 @@
 ## Tourism application
-<!--<img src="../docs/ikea.gif" align="right" width="300"/>-->
+<img src="../docs/icebnb.gif" align="right" width="300"/>
 
 This example imitates a bed and breakfast search interface like well-known applications.
 
