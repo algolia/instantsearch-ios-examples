@@ -1,0 +1,6 @@
+framework module WARangeSlider {
+  umbrella header "WARangeSlider-umbrella.h"
+
+  export *
+  module * { export * }
+}

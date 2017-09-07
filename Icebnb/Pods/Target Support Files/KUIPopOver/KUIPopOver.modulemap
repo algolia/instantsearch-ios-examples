@@ -1,0 +1,6 @@
+framework module KUIPopOver {
+  umbrella header "KUIPopOver-umbrella.h"
+
+  export *
+  module * { export * }
+}

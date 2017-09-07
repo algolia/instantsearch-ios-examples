@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Icebnb" customModuleProvider="target">
+            <connections>
+                <outlet property="blurView" destination="wZC-3C-7zc" id="NLA-NL-RV7"/>
+                <outlet property="collectionView" destination="mdU-YR-hcO" id="PWH-Iv-VNj"/>
+                <outlet property="mapView" destination="X21-ZA-GwF" id="3Mf-Uf-mRv"/>
+                <outlet property="searchBarView" destination="f6q-Fo-z9F" id="cMk-7C-B0f"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X21-ZA-GwF" customClass="MapViewWidget" customModule="Icebnb" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="109" width="375" height="558"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="558" id="Cfh-vh-wOi"/>
+                    </constraints>
+                </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-3C-7zc">
+                    <rect key="frame" x="0.0" y="457" width="375" height="210"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="210" id="haa-Op-yhc"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mdU-YR-hcO" customClass="HitsCollectionWidget" customModule="InstantSearch">
+                    <rect key="frame" x="0.0" y="457" width="375" height="210"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="210" id="1qv-gH-cZc"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="uAn-S9-mr8">
+                        <size key="itemSize" width="150" height="150"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="15" minY="10" maxX="15" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="infiniteScrolling" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </collectionView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="f6q-Fo-z9F">
+                    <rect key="frame" x="0.0" y="65" width="375" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="f6q-Fo-z9F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1nA-MF-EmI"/>
+                <constraint firstAttribute="bottom" secondItem="X21-ZA-GwF" secondAttribute="bottom" id="4B6-BV-9M5"/>
+                <constraint firstAttribute="trailing" secondItem="f6q-Fo-z9F" secondAttribute="trailing" id="EAb-nl-kO2"/>
+                <constraint firstAttribute="bottom" secondItem="wZC-3C-7zc" secondAttribute="bottom" id="Fmz-Bw-fc9"/>
+                <constraint firstAttribute="bottom" secondItem="X21-ZA-GwF" secondAttribute="bottom" id="GEa-nu-uDv"/>
+                <constraint firstAttribute="trailing" secondItem="X21-ZA-GwF" secondAttribute="trailing" id="J40-jE-R7Y"/>
+                <constraint firstItem="mdU-YR-hcO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QlD-gx-idd"/>
+                <constraint firstItem="X21-ZA-GwF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S82-uW-q4I"/>
+                <constraint firstAttribute="bottom" secondItem="mdU-YR-hcO" secondAttribute="bottom" id="h3p-g8-ww8"/>
+                <constraint firstItem="f6q-Fo-z9F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="mNy-0P-dZ1"/>
+                <constraint firstItem="wZC-3C-7zc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="p03-fJ-wrK"/>
+                <constraint firstAttribute="trailing" secondItem="wZC-3C-7zc" secondAttribute="trailing" id="tuE-b5-ee7"/>
+                <constraint firstAttribute="trailing" secondItem="mdU-YR-hcO" secondAttribute="trailing" id="tzA-uu-4gq"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>
