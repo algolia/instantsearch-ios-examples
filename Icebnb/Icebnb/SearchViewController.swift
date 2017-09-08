@@ -17,14 +17,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
   @IBOutlet weak var blurView: UIView!
   @IBOutlet weak var collectionView: HitsCollectionWidget!
   @IBOutlet weak var mapView: MapViewWidget!
-  @IBOutlet weak var searchBarView: UISearchBar!
+  @IBOutlet weak var searchBarView: SearchBarWidget!
   var filterBtn: UIButton!
   var hitsController: HitsController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.title = "Icebnb"
-    configureSearchController()
+    configureSearchBar()
     configureInstantSearch()
     configureCollection()
     configureNavbar()
@@ -36,7 +36,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
   }
   
   func configureInstantSearch() {
-    InstantSearch.shared.register(searchBar: searchBarView)
     InstantSearch.shared.registerAllWidgets(in: self.view)
   }
   
@@ -48,7 +47,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterBtn)
   }
   
-  func configureSearchController() {
+  func configureSearchBar() {
     searchBarView.placeholder = "Search items"
     searchBarView.sizeToFit()
     
@@ -85,16 +84,20 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
   }
   
   func filterPressed() {
+    let roomFilter: FilterBlock = { ctrl in
+      let roomController = TypeFacetViewController(nibName: "TypeFacetViewController", bundle: nil)
+      ctrl.navigationController?.pushViewController(roomController, animated: true)
+    }
+    
+    let priceFilter: FilterBlock = { ctrl in
+      let rangeController = PriceRangeViewController(nibName: "PriceRangeViewController", bundle: nil)
+      ctrl.navigationController?.pushViewController(rangeController, animated: true)
+    }
+    
     let controller = FilterViewController(nibName: "FilterViewController",
                                           bundle: nil,
-                                          filters: ["Room type" : { ctrl in
-                                            let roomController = TypeFacetViewController(nibName: "TypeFacetViewController", bundle: nil)
-                                            ctrl.navigationController?.pushViewController(roomController, animated: true)
-                                            },
-                                                    "Price": { ctrl in
-                                                      let rangeController = PriceRangeViewController(nibName: "PriceRangeViewController", bundle: nil)
-                                                      ctrl.navigationController?.pushViewController(rangeController, animated: true)
-                                            }])
+                                          filters: ["Room type" : roomFilter,
+                                                    "Price": priceFilter])
     controller.showPopover(withNavigationController: filterBtn, sourceRect: filterBtn.bounds)
   }
 }

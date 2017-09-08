@@ -52,7 +52,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="infiniteScrolling" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </collectionView>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="f6q-Fo-z9F">
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="f6q-Fo-z9F" customClass="SearchBarWidget" customModule="InstantSearch">
                     <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
