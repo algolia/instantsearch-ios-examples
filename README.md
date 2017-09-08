@@ -16,3 +16,27 @@ This example imitates a product search interface like well-known e-commerce appl
 - Filter with Numeric filters by **price** or **rating**
 - Custom views using `AlgoliaWidget` for filtering by **price** and **rating**.
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+## [Tourism application](https://github.com/algolia/instantsearch-ios-examples/tree/master/Icebnb)
+<img src="./docs/icebnb.gif" align="right" width="300"/>
+
+Example of a bed and breakfast search interface.
+
+- Search in a place by **location**
+- Filter with RefinementList by **room_type**
+- Filter with Numeric filters by **price**
+- Custom views using `AlgoliaWidget` for filtering by **price** and **room_type**
+- Custom widgets for linking the search results with the `MKMapView`
+
