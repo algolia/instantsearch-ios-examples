@@ -48,8 +48,9 @@ ecommerce Ikea/Pods/
 Getting Started Programatically/Pods/
 Getting Started Storyboard/Pods/
 Getting Started Storyboard Objective-C/Pods/
-Icebnb/Pods
-
+Icebnb/Pods/
+IS-CustomSource/Pods/
+IS-CustomSource/Podfile.lock
 # Unfinished Projects
 ecommerce bestbuy
 

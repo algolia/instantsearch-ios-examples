@@ -1,0 +1,17 @@
+{
+  "hitsPerPage": "10",
+  "nbHits": 2,
+  "hits": [{
+           "name": "Test1",
+           "description": "Description test1"
+           }, {
+           "name": "Test2",
+           "description": "Description test2"
+           }],
+  "page": 0,
+  "params": "",
+  "processingTimeMS": 0,
+  "query": "whatever",
+  "exhaustiveNbHits": 1,
+  "nbPages": 1
+}

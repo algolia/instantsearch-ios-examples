@@ -1,0 +1,10 @@
+{
+  "nbHits": 2,
+  "hits": [{
+           "name": "Test1",
+           "description": "Description test1"
+           }, {
+           "name": "Test2",
+           "description": "Description test2"
+           }]
+}

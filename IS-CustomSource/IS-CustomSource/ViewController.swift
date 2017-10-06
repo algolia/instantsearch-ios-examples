@@ -1,0 +1,54 @@
+//
+//  ViewController.swift
+//  IS-CustomSource
+//
+//  Created by Robert Mogos on 06/10/2017.
+//  Copyright © 2017 Robert Mogos. All rights reserved.
+//
+
+import UIKit
+import InstantSearch
+import InstantSearchCore
+
+class ViewController: UIViewController, HitsTableViewDataSource {
+
+  var hitsController: HitsController!
+  var instantSearch: InstantSearch!
+  lazy var tableView: HitsTableWidget = {
+    HitsTableWidget(frame: .zero, style: .plain)
+  }()
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    tableView.frame = self.view.bounds
+    self.view.addSubview(tableView)
+    hitsController = HitsController(table: tableView)
+    tableView.dataSource = hitsController
+    tableView.delegate = hitsController
+    hitsController.tableDataSource = self
+    tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cellID")
+    configureInstantSearch()
+  }
+  
+  func configureInstantSearch() {
+    let index = CustomSearchable()
+    let searcher = Searcher(index: index)
+    instantSearch = InstantSearch.init(searcher: searcher)
+    instantSearch.registerAllWidgets(in: self.view)
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+    cell.textLabel?.text = hit["name"] as? String
+    return cell
+  }
+
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+
+
+}
+
