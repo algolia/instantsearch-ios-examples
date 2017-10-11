@@ -61,7 +61,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     func configureNavBar() {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : ColorConstants.barTextColor]
+      navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : ColorConstants.barTextColor]
     }
     
     func configureToolBar() {
