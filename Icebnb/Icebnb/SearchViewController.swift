@@ -83,7 +83,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
     return collectionViewCell
   }
   
-  func filterPressed() {
+  @objc func filterPressed() {
     let roomFilter: FilterBlock = { ctrl in
       let roomController = TypeFacetViewController(nibName: "TypeFacetViewController", bundle: nil)
       ctrl.navigationController?.pushViewController(roomController, animated: true)
