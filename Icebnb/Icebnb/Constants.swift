@@ -17,6 +17,13 @@ struct ColorConstants {
 
 struct PopoverConstants {
   static let popoverWidth:CGFloat = 200
-  static let popoverRangeHeight:CGFloat = 150
+  static let popoverRangeHeight:CGFloat = 200
   static let popoverCellHeight:CGFloat = 50
+}
+
+struct Geo {
+  static let minimalDistance: Double = 250
+  static let startRadius: Double = 100 // 100 m
+  static let endRadius: Double = 10000 // 10 Km
+  static let defaultRadius: Double = 500 // 500 m
 }
