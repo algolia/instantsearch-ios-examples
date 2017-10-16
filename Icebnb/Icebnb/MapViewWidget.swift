@@ -10,14 +10,17 @@ import UIKit
 import MapKit
 import InstantSearch
 import InstantSearchCore
+import AlgoliaSearch
 
 class MapViewWidget: MKMapView, AlgoliaWidget, ResultingDelegate {
   
   func on(results: SearchResults?, error: Error?, userInfo: [String: Any]) {
     
-    let annotations = self.annotations
-    removeAnnotations(annotations)
-    
+    let searchParams = userInfo["params"] as? SearchParameters
+    if searchParams == nil || searchParams?.page == 0 {
+      let annotations = self.annotations
+      removeAnnotations(annotations)
+    }
     guard let results = results else {
       return
     }
