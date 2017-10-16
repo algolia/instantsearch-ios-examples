@@ -34,7 +34,8 @@ This example imitates a product search interface like well-known e-commerce appl
 
 Example of a bed and breakfast search interface.
 
-- Search in a place by **location**
+- Search a place by **your location** around you
+- Filter with Numberic filters by **radius**
 - Filter with RefinementList by **room_type**
 - Filter with Numeric filters by **price**
 - Custom views using `AlgoliaWidget` for filtering by **price** and **room_type**

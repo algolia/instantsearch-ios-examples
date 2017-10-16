@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		1D0E64091F6135DC00AA542E /* TypeFacetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0E64071F6135DC00AA542E /* TypeFacetViewController.swift */; };
 		1D0E640A1F6135DC00AA542E /* TypeFacetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D0E64081F6135DC00AA542E /* TypeFacetViewController.xib */; };
+		1D4EB5F01F8F6BA800067746 /* RadiusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EB5EE1F8F6BA800067746 /* RadiusController.swift */; };
+		1D4EB5F11F8F6BA800067746 /* RadiusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D4EB5EF1F8F6BA800067746 /* RadiusController.xib */; };
+		1D4EB5F61F8F725000067746 /* PRGRoundRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EB5F51F8F6DA800067746 /* PRGRoundRangeSlider.swift */; };
+		1D4EB5F71F8F725500067746 /* PRGRoundSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EB5F31F8F6DA800067746 /* PRGRoundSlider.swift */; };
+		1D4EB5F81F8F725800067746 /* SliderKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EB5F41F8F6DA800067746 /* SliderKit.swift */; };
 		1D9AC75C1F5ED5B900A60680 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9AC75A1F5ED5B900A60680 /* SearchViewController.swift */; };
 		1D9AC75D1F5ED5B900A60680 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9AC75B1F5ED5B900A60680 /* SearchViewController.xib */; };
 		1D9AC7601F5EDAE200A60680 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9AC75F1F5EDAE200A60680 /* Constants.swift */; };
@@ -57,6 +62,11 @@
 		1BB328979C876F3A02FB95D5 /* Pods_IcebnbUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IcebnbUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0E64071F6135DC00AA542E /* TypeFacetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeFacetViewController.swift; sourceTree = "<group>"; };
 		1D0E64081F6135DC00AA542E /* TypeFacetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypeFacetViewController.xib; sourceTree = "<group>"; };
+		1D4EB5EE1F8F6BA800067746 /* RadiusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusController.swift; sourceTree = "<group>"; };
+		1D4EB5EF1F8F6BA800067746 /* RadiusController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadiusController.xib; sourceTree = "<group>"; };
+		1D4EB5F31F8F6DA800067746 /* PRGRoundSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRGRoundSlider.swift; sourceTree = "<group>"; };
+		1D4EB5F41F8F6DA800067746 /* SliderKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderKit.swift; sourceTree = "<group>"; };
+		1D4EB5F51F8F6DA800067746 /* PRGRoundRangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRGRoundRangeSlider.swift; sourceTree = "<group>"; };
 		1D9AC75A1F5ED5B900A60680 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1D9AC75B1F5ED5B900A60680 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		1D9AC75F1F5EDAE200A60680 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -128,6 +138,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D4EB5F21F8F6D8200067746 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				1D4EB5F51F8F6DA800067746 /* PRGRoundRangeSlider.swift */,
+				1D4EB5F31F8F6DA800067746 /* PRGRoundSlider.swift */,
+				1D4EB5F41F8F6DA800067746 /* SliderKit.swift */,
+			);
+			name = Slider;
+			sourceTree = "<group>";
+		};
 		1D9AC7591F5ED52D00A60680 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +159,8 @@
 				1D0E64081F6135DC00AA542E /* TypeFacetViewController.xib */,
 				1DE211EF1F61473600E0C591 /* PriceRangeViewController.swift */,
 				1DE211F01F61473600E0C591 /* PriceRangeViewController.xib */,
+				1D4EB5EE1F8F6BA800067746 /* RadiusController.swift */,
+				1D4EB5EF1F8F6BA800067746 /* RadiusController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -154,6 +176,7 @@
 		1D9AC7611F5EE23A00A60680 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1D4EB5F21F8F6D8200067746 /* Slider */,
 				1D9AC7621F5EE25D00A60680 /* PlaceCell.swift */,
 				1D9AC7631F5EE25D00A60680 /* PlaceCell.xib */,
 			);
@@ -386,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D9AC7711F6023D000A60680 /* FilterViewController.xib in Resources */,
+				1D4EB5F11F8F6BA800067746 /* RadiusController.xib in Resources */,
 				1DCB80851F5ECCA600C18E5E /* LaunchScreen.storyboard in Resources */,
 				1D0E640A1F6135DC00AA542E /* TypeFacetViewController.xib in Resources */,
 				1DCB80821F5ECCA600C18E5E /* Assets.xcassets in Resources */,
@@ -591,12 +615,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE211F11F61473600E0C591 /* PriceRangeViewController.swift in Sources */,
+				1D4EB5F81F8F725800067746 /* SliderKit.swift in Sources */,
 				1D9AC7601F5EDAE200A60680 /* Constants.swift in Sources */,
 				1D9AC76B1F5FE20300A60680 /* MapViewWidget.swift in Sources */,
 				1D9AC7701F6023D000A60680 /* FilterViewController.swift in Sources */,
 				1D9AC76D1F5FFC1900A60680 /* MapAnnotation.swift in Sources */,
+				1D4EB5F01F8F6BA800067746 /* RadiusController.swift in Sources */,
 				1D9AC75C1F5ED5B900A60680 /* SearchViewController.swift in Sources */,
+				1D4EB5F71F8F725500067746 /* PRGRoundSlider.swift in Sources */,
 				1DCB807B1F5ECCA600C18E5E /* AppDelegate.swift in Sources */,
+				1D4EB5F61F8F725000067746 /* PRGRoundRangeSlider.swift in Sources */,
 				1D9AC7641F5EE25D00A60680 /* PlaceCell.swift in Sources */,
 				1D0E64091F6135DC00AA542E /* TypeFacetViewController.swift in Sources */,
 				1DE211F41F6149FE00E0C591 /* RangeSliderWidget.swift in Sources */,
