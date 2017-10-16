@@ -22,7 +22,7 @@ struct PopoverConstants {
 }
 
 struct Geo {
-  static let minimalDistance: Double = 250
+  static let minimalDistance: Double = 250 // 250 m
   static let startRadius: Double = 100 // 100 m
   static let endRadius: Double = 10000 // 10 Km
   static let defaultRadius: Double = 500 // 500 m

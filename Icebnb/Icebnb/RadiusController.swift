@@ -44,8 +44,6 @@ class RadiusController: UIViewController {
       return meters >= 1000 ? formatter.string(fromValue: round(meters / 100) / 10, unit: .kilometer) :
                                formatter.string(fromValue: meters, unit: .meter)
     }
-    
-    // Do any additional setup after loading the view.
   }
   
   override func viewWillDisappear(_ animated: Bool) {

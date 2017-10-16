@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 import InstantSearch
 import InstantSearchCore
-import AlgoliaSearch
 
 class MapViewWidget: MKMapView, AlgoliaWidget, ResultingDelegate {
   

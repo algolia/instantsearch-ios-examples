@@ -142,7 +142,6 @@ extension SearchViewController: CLLocationManagerDelegate {
     case .authorizedWhenInUse:
       mapView.showsUserLocation = true
       locationManager.startUpdatingLocation()
-      return
     default:
       showLocationError()
     }
