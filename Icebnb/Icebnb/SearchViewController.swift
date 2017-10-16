@@ -8,12 +8,9 @@
 
 import UIKit
 import InstantSearch
-import InstantSearchCore
-import AlgoliaSearch
 import MapKit
 import Nuke
 import KUIPopOver
-import CoreLocation
 
 class SearchViewController: UIViewController, UICollectionViewDelegate, HitsCollectionViewDataSource {
   
@@ -23,13 +20,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
   @IBOutlet weak var searchBarView: SearchBarWidget!
   var filterBtn: UIButton!
   var hitsController: HitsController!
-  let locationManager = CLLocationManager()
-  var lastSearchLocation: CLLocation?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.title = "Icebnb"
-    configureLocationManager()
     configureSearchBar()
     configureInstantSearch()
     configureCollection()
@@ -39,7 +33,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
     collectionView.dataSource = hitsController
     collectionView.delegate = hitsController
     hitsController.collectionDataSource = self
-    InstantSearch.shared.searcher.params.aroundRadius = Query.AroundRadius.explicit(UInt(Geo.defaultRadius))
   }
   
   func configureInstantSearch() {
@@ -52,12 +45,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
     filterBtn.setTitleColor(.black, for: .normal)
     filterBtn.addTarget(self, action: #selector(filterPressed), for: .touchUpInside)
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterBtn)
-  }
-  
-  func configureLocationManager() {
-    locationManager.delegate = self
-    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-    locationManager.requestWhenInUseAuthorization()
   }
   
   func configureSearchBar() {
@@ -107,60 +94,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
       ctrl.navigationController?.pushViewController(rangeController, animated: true)
     }
     
-    let radiusFilter: FilterBlock = { ctrl in
-      let rangeController = RadiusController(nibName: "RadiusController",
-                                             bundle: nil,
-                                             searcher: InstantSearch.shared.searcher)
-      ctrl.navigationController?.pushViewController(rangeController, animated: true)
-    }
-    
     let controller = FilterViewController(nibName: "FilterViewController",
                                           bundle: nil,
                                           filters: ["Room type" : roomFilter,
-                                                    "Price": priceFilter,
-                                                    "Radius": radiusFilter])
+                                                    "Price": priceFilter])
     controller.showPopover(withNavigationController: filterBtn, sourceRect: filterBtn.bounds)
-  }
-  
-  func showLocationError() {
-    
-  }
-  
-  func updateResultsWithLocation() {
-    guard let lastSearchLocation = lastSearchLocation else {
-      return
-    }
-    InstantSearch.shared.searcher.params.aroundLatLng = LatLng(lat: lastSearchLocation.coordinate.latitude,
-                                                               lng: lastSearchLocation.coordinate.longitude)
-    InstantSearch.shared.searcher.search()
-  }
-}
-
-extension SearchViewController: CLLocationManagerDelegate {
-  public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    switch status {
-    case .authorizedWhenInUse:
-      locationManager.startUpdatingLocation()
-      return
-    default:
-      showLocationError()
-    }
-  }
-  
-  public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    showLocationError()
-  }
-  
-  public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let newLocation = locations.last else {
-      return
-    }
-    
-    if lastSearchLocation == nil ||
-      newLocation.distance(from: lastSearchLocation!) >= Geo.minimalDistance {
-      lastSearchLocation = locations.last
-      updateResultsWithLocation()
-      return
-    }
   }
 }

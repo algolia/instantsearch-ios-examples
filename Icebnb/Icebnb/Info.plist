@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Give you the best placces around you</string>
 	<key>AlgoliaApiKey</key>
 	<string>${ALGOLIA_API_KEY}</string>
 	<key>CFBundleDevelopmentRegion</key>
