@@ -9,6 +9,7 @@
 import UIKit
 import InstantSearch
 import InstantSearchCore
+import AFNetworking
 
 class QuerySuggestionDemo: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
@@ -72,6 +73,8 @@ class QuerySuggestionDemo: UIViewController, UITableViewDataSource, UITableViewD
             cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value
             cell.textLabel?.highlightedTextColor = UIColor.black
             cell.textLabel?.highlightedBackgroundColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 100 / 255, alpha: 1)
+            cell.imageView?.contentMode = .scaleAspectFit
+            cell.imageView?.setImageWith(URL(string: hit["image"] as! String)!, placeholderImage: UIImage(named: "placeholder"))
         }
         
         return cell
@@ -111,6 +114,10 @@ class QuerySuggestionDemo: UIViewController, UITableViewDataSource, UITableViewD
         } else {
             return 40
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
