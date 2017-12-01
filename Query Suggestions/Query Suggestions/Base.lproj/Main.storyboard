@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ww6-OQ-lZO">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Query Suggestion Demo-->
+        <scene sceneID="maA-er-EMd">
+            <objects>
+                <viewController id="Ww6-OQ-lZO" customClass="QuerySuggestionDemo" customModule="InstantSearchDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4P5-2P-nVh"/>
+                        <viewControllerLayoutGuide type="bottom" id="kUR-rD-0eD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1hX-fv-hOL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g2L-f2-imz" customClass="MultiHitsTableWidget" customModule="InstantSearch">
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="querySuggestionCell" id="dCL-Ow-bb8">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dCL-Ow-bb8" id="bBR-Nd-cio">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" id="fFv-3I-BGO">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fFv-3I-BGO" id="rKU-Ua-c5M">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="hitsPerSection" value="5,20"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showItemsOnEmptyQuery" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="indexNames" value="instantsearch_query_suggestions,instant_search"/>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ns3-em-Fug" customClass="SearchBarWidget" customModule="InstantSearch">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kUR-rD-0eD" firstAttribute="top" secondItem="g2L-f2-imz" secondAttribute="bottom" id="67Q-ak-Ors"/>
+                            <constraint firstItem="ns3-em-Fug" firstAttribute="leading" secondItem="1hX-fv-hOL" secondAttribute="leading" id="7hW-f9-ehc"/>
+                            <constraint firstItem="ns3-em-Fug" firstAttribute="top" secondItem="1hX-fv-hOL" secondAttribute="top" constant="20" id="H63-Ni-LFs"/>
+                            <constraint firstAttribute="trailing" secondItem="g2L-f2-imz" secondAttribute="trailing" id="JQO-rL-QdX"/>
+                            <constraint firstItem="ns3-em-Fug" firstAttribute="leading" secondItem="1hX-fv-hOL" secondAttribute="leading" id="O7f-of-dU7"/>
+                            <constraint firstAttribute="trailing" secondItem="ns3-em-Fug" secondAttribute="trailing" id="V9P-fA-cWU"/>
+                            <constraint firstItem="g2L-f2-imz" firstAttribute="top" secondItem="ns3-em-Fug" secondAttribute="bottom" id="Wkb-IE-Fa6"/>
+                            <constraint firstAttribute="trailing" secondItem="ns3-em-Fug" secondAttribute="trailing" id="jg4-UT-CY3"/>
+                            <constraint firstItem="g2L-f2-imz" firstAttribute="leading" secondItem="1hX-fv-hOL" secondAttribute="leading" id="xMV-Zx-chf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rj1-hh-Qv4"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="ns3-em-Fug" id="FKM-kj-gqq"/>
+                        <outlet property="tableView" destination="g2L-f2-imz" id="m9L-wx-JIC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6zU-rz-KQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3092" y="680"/>
+        </scene>
+    </scenes>
+</document>
