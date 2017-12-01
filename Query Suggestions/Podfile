@@ -5,8 +5,11 @@ target 'Query Suggestions' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+  inhibit_all_warnings!
+  
   # Pods for Query Suggestions
-  pod 'InstantSearch-iOS', :path => '/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios'
-  pod 'InstantSearch-Core-Swift', :path => '/Users/guydaher/Developer/Algolia/iOS/instantsearch-core-swift'
+  pod 'InstantSearch-iOS', :git => 'https://github.com/algolia/instantsearch-ios.git', :branch => 'multi-index'
+  pod 'InstantSearch-Core-Swift', :git => 'https://github.com/algolia/instantsearch-core-swift.git', :branch => 'develop'
+  pod 'AFNetworking', '~> 3.0'
 
 end

@@ -13,11 +13,7 @@
         <!--Query Suggestion Demo-->
         <scene sceneID="maA-er-EMd">
             <objects>
-                <viewController id="Ww6-OQ-lZO" customClass="QuerySuggestionDemo" customModule="InstantSearchDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4P5-2P-nVh"/>
-                        <viewControllerLayoutGuide type="bottom" id="kUR-rD-0eD"/>
-                    </layoutGuides>
+                <viewController id="Ww6-OQ-lZO" customClass="QuerySuggestionDemo" customModule="Query_Suggestions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1hX-fv-hOL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,12 +30,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" id="fFv-3I-BGO">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" textLabel="orK-5x-bHU" rowHeight="104" style="IBUITableViewCellStyleDefault" id="fFv-3I-BGO">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fFv-3I-BGO" id="rKU-Ua-c5M">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="103.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="orK-5x-bHU">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="103.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -56,17 +61,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="kUR-rD-0eD" firstAttribute="top" secondItem="g2L-f2-imz" secondAttribute="bottom" id="67Q-ak-Ors"/>
-                            <constraint firstItem="ns3-em-Fug" firstAttribute="leading" secondItem="1hX-fv-hOL" secondAttribute="leading" id="7hW-f9-ehc"/>
+                            <constraint firstItem="aBj-4v-3jx" firstAttribute="bottom" secondItem="g2L-f2-imz" secondAttribute="bottom" id="67Q-ak-Ors"/>
+                            <constraint firstItem="ns3-em-Fug" firstAttribute="leading" secondItem="aBj-4v-3jx" secondAttribute="leading" id="7hW-f9-ehc"/>
                             <constraint firstItem="ns3-em-Fug" firstAttribute="top" secondItem="1hX-fv-hOL" secondAttribute="top" constant="20" id="H63-Ni-LFs"/>
-                            <constraint firstAttribute="trailing" secondItem="g2L-f2-imz" secondAttribute="trailing" id="JQO-rL-QdX"/>
-                            <constraint firstItem="ns3-em-Fug" firstAttribute="leading" secondItem="1hX-fv-hOL" secondAttribute="leading" id="O7f-of-dU7"/>
-                            <constraint firstAttribute="trailing" secondItem="ns3-em-Fug" secondAttribute="trailing" id="V9P-fA-cWU"/>
+                            <constraint firstItem="aBj-4v-3jx" firstAttribute="trailing" secondItem="g2L-f2-imz" secondAttribute="trailing" id="JQO-rL-QdX"/>
+                            <constraint firstItem="ns3-em-Fug" firstAttribute="leading" secondItem="aBj-4v-3jx" secondAttribute="leading" id="O7f-of-dU7"/>
+                            <constraint firstItem="aBj-4v-3jx" firstAttribute="trailing" secondItem="ns3-em-Fug" secondAttribute="trailing" id="V9P-fA-cWU"/>
                             <constraint firstItem="g2L-f2-imz" firstAttribute="top" secondItem="ns3-em-Fug" secondAttribute="bottom" id="Wkb-IE-Fa6"/>
-                            <constraint firstAttribute="trailing" secondItem="ns3-em-Fug" secondAttribute="trailing" id="jg4-UT-CY3"/>
-                            <constraint firstItem="g2L-f2-imz" firstAttribute="leading" secondItem="1hX-fv-hOL" secondAttribute="leading" id="xMV-Zx-chf"/>
+                            <constraint firstItem="aBj-4v-3jx" firstAttribute="trailing" secondItem="ns3-em-Fug" secondAttribute="trailing" id="jg4-UT-CY3"/>
+                            <constraint firstItem="g2L-f2-imz" firstAttribute="leading" secondItem="aBj-4v-3jx" secondAttribute="leading" id="xMV-Zx-chf"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="rj1-hh-Qv4"/>
+                        <viewLayoutGuide key="safeArea" id="aBj-4v-3jx"/>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="ns3-em-Fug" id="FKM-kj-gqq"/>
@@ -75,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zU-rz-KQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3092" y="680"/>
+            <point key="canvasLocation" x="-3092" y="679.61019490254876"/>
         </scene>
     </scenes>
 </document>
