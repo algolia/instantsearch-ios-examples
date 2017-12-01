@@ -16,15 +16,6 @@ private var xoAssociationKey: UInt8 = 0
 
 extension RangeSlider: AlgoliaWidget, SearchableViewModel {
     
-    public var indexName: String {
-        get {
-            return objc_getAssociatedObject(self, &xoAssociationKey) as! String
-        }
-        set(newValue) {
-            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-        }
-    }
-    
     var searcher: Searcher! {
         get {
             return objc_getAssociatedObject(self, &xoAssociationKey) as? Searcher
