@@ -10,12 +10,15 @@ import UIKit
 import InstantSearch
 import InstantSearchCore
 
-class QuerySuggestionDemo: MultiHitsTableViewController {
+class QuerySuggestionDemo: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: MultiHitsTableWidget!
     @IBOutlet weak var searchBar: SearchBarWidget!
     
-    var hitsController: MultiHitsController!
+    var multiHitsViewModel: MultiHitsViewModel!
+    var searchViewModel: SearchViewModel!
+    
+    var isTextBarClicked = false
     
     private let ALGOLIA_APP_ID = "latency"
     private let ALGOLIA_API_KEY = "afc3dd66dd1293e2e2736a5a51b05c0a"
@@ -24,29 +27,59 @@ class QuerySuggestionDemo: MultiHitsTableViewController {
         super.viewDidLoad()
         let searcherIds: [SearcherId] = [SearcherId.init(indexName: "instant_search"), SearcherId.init(indexName: "instantsearch_query_suggestions")]
         InstantSearch.shared.configure(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY, searcherIds: searcherIds)
-        InstantSearch.shared.registerAllWidgets(in: self.view)
         
-        hitsTableView = tableView
+        InstantSearch.shared.register(widget: searchBar)
+        multiHitsViewModel = MultiHitsViewModel(view: tableView)
+        InstantSearch.shared.register(viewModel: multiHitsViewModel)
+        searchViewModel = SearchViewModel(view: searchBar)
+        InstantSearch.shared.register(viewModel: searchViewModel)
+        InstantSearch.shared.search()
+        
+        searchBar.placeholder = "Search a pro..."
+        
+        searchBar.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return multiHitsViewModel.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 && !isTextBarClicked {
+            return 0
+        }
+        
+        return multiHitsViewModel.numberOfRows(in: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell!
+        
+        let hit = multiHitsViewModel.hitForRow(at: indexPath)
         
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "querySuggestionCell", for: indexPath)
             cell.textLabel?.text = hit["query"] as? String
+            cell.textLabel?.textColor = UIColor.gray
             cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "query")?.value
-            
+            cell.textLabel?.highlightedTextColor = UIColor.black
+            cell.textLabel?.isHighlightingInversed = true
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "hitCell", for: indexPath)
             cell.textLabel?.text = hit["name"] as? String
             cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value
+            cell.textLabel?.highlightedTextColor = UIColor.black
+            cell.textLabel?.highlightedBackgroundColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 100 / 255, alpha: 1)
         }
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, containing hit: [String : Any]) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let hit = multiHitsViewModel.hitForRow(at: indexPath)
+        
         if indexPath.section == 0 {
             let query = hit["query"] as! String
             InstantSearch.shared.search(with: query)
@@ -59,16 +92,16 @@ class QuerySuggestionDemo: MultiHitsTableViewController {
             return nil
         }
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 40))
+        let label = UILabel(frame: CGRect(x: 12, y: 0, width: 300, height: 40))
         if tableView == self.tableView {
             if section == 1 {
-                label.text = "Results"
+                label.text = "Best results"
             }
         }
         
         let view = UIView()
         view.addSubview(label)
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = UIColor.lightGray
         return view
     }
     
@@ -78,6 +111,15 @@ class QuerySuggestionDemo: MultiHitsTableViewController {
         } else {
             return 40
         }
+    }
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchViewModel.search(query: searchText)
+    }
+    
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isTextBarClicked = true
+        searchViewModel.search(query: searchBar.text)
     }
     
     override func didReceiveMemoryWarning() {
