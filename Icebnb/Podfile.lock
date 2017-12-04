@@ -14,13 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AlgoliaSearch-Client-Swift (5.0.4)
+  - AlgoliaSearch-Client-Swift (5.1.0)
   - Cosmos (12.0.1)
-  - InstantSearch-Core-Swift (3.0.0):
+  - InstantSearch-Core-Swift (3.2.0):
     - AlgoliaSearch-Client-Swift (~> 5.0)
-  - InstantSearch-iOS (2.0.0):
-    - InstantSearch-Core-Swift (~> 3.0.0)
-  - KUIPopOver (1.0.0)
+  - InstantSearch-iOS (2.0.1):
+    - InstantSearch-Core-Swift (~> 3.0)
+  - KUIPopOver (1.0.2)
   - Nimble (7.0.2)
   - Nuke (5.2)
   - Quick (1.2.0)
@@ -38,11 +38,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AlgoliaSearch-Client-Swift: bb1028d2bc1fa32a35ba5f709e2443c7c7655e4f
+  AlgoliaSearch-Client-Swift: 9cd63f85d45c6e50f06c267439928c2211c1bfe4
   Cosmos: 4a9f57998a08788a1062c7b8eefbc62d2b590f39
-  InstantSearch-Core-Swift: b804afe0fbfc61429d03e8daec436541b4651eb3
-  InstantSearch-iOS: ee9633dfc442a2aab6bf073f0f336cd7e2777017
-  KUIPopOver: 2c18c6c57fd75667001887c05650d77a42c622e0
+  InstantSearch-Core-Swift: 40cf5cf38d04d08d54f9d633f1551b19d989bf48
+  InstantSearch-iOS: e35549e03232c65f40d3bef672ff2d711fc85d09
+  KUIPopOver: 10d512237d0758273e8b49dc23a263974f380f6e
   Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
   Nuke: 5f420c4637415f979c83afb35e73176dd03232d9
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08

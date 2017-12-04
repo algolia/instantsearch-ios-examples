@@ -41,3 +41,24 @@ Example of a bed and breakfast search interface.
 - Custom views using `AlgoliaWidget` for filtering by **price** and **room_type**
 - Custom widgets for linking the search results with the `MKMapView`
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+## [Query Suggestions](https://github.com/algolia/instantsearch-ios-examples/tree/master/Query%20Suggestions)
+<img src="./docs/suggestion.gif" align="right" width="300"/>
+
+Example of a query suggestion search interface.
+
+- Query suggestions appear when clicking on the search bar
+- When clicking a query suggestion, the search bar is filled with that suggestion and results are refreshed
+- Showing how you can use the ViewModels for better control and customization of your widgets
