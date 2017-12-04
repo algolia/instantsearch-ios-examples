@@ -18,12 +18,34 @@ class ViewController: MultiHitsTableViewController {
     
     var hitsController: MultiHitsController!
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         InstantSearch.shared.registerAllWidgets(in: self.view)
         
         hitsTableViews = [tableView]
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        InstantSearch.shared.register(searchController: searchController)
+        self.navigationItem.searchController = searchController
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = false
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
@@ -106,6 +128,7 @@ class ViewController: MultiHitsTableViewController {
     }
 
     @objc func loadMoreButtonTapped(sender: UIButton) {
+        searchController.isActive = false
         if sender.tag == 0 {
             let detailVC = DetailViewControllerDemo(nibName: "DetailViewController", bundle: Bundle.main)
             self.navigationController?.pushViewController(detailVC, animated: true)

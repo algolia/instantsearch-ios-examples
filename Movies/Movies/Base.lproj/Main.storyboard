@@ -18,17 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for movie or artist" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UTs-60-aBp" customClass="TextFieldWidget" customModule="InstantSearch">
-                                <rect key="frame" x="0.0" y="64" width="375" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="cjt-X9-bXR"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w4g-B8-x4a" customClass="MultiHitsTableWidget" customModule="InstantSearch">
-                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="79" id="ONq-bh-b21" customClass="Cell" customModule="Movies" customModuleProvider="target">
@@ -75,10 +66,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UTs-60-aBp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8iG-xi-NdC"/>
-                            <constraint firstItem="UTs-60-aBp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TVD-nQ-jFB"/>
-                            <constraint firstItem="w4g-B8-x4a" firstAttribute="top" secondItem="UTs-60-aBp" secondAttribute="bottom" id="Tc9-q1-ZhK"/>
-                            <constraint firstItem="UTs-60-aBp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VRf-rg-86O"/>
+                            <constraint firstItem="w4g-B8-x4a" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="g2E-gr-cEQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="w4g-B8-x4a" secondAttribute="trailing" id="qk9-EV-SB2"/>
                             <constraint firstItem="w4g-B8-x4a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rqT-ya-dlh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="w4g-B8-x4a" secondAttribute="bottom" id="tbN-Mc-bTO"/>
@@ -87,7 +75,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies and Actors" id="Tsw-le-J1X"/>
                     <connections>
-                        <outlet property="searchBar" destination="UTs-60-aBp" id="Ct9-gk-SmH"/>
                         <outlet property="tableView" destination="w4g-B8-x4a" id="YDL-U9-sZG"/>
                     </connections>
                 </viewController>
