@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import InstantSearch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    private let ALGOLIA_APP_ID = "latency"
+    private let ALGOLIA_API_KEY = "afc3dd66dd1293e2e2736a5a51b05c0a"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let searcherIds: [SearcherId] = [SearcherId.init(indexName: "instant_search"), SearcherId.init(indexName: "instantsearch_query_suggestions")]
+        InstantSearch.shared.configure(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY, searcherIds: searcherIds)
         return true
     }
 
