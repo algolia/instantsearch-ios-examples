@@ -58,9 +58,10 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="hitsPerSection" value="5,5"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="hitsPerSection" value="3,5"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showItemsOnEmptyQuery" value="YES"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="indexNames" value="actors,movies"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="indexIds" value="main,main"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                         </subviews>

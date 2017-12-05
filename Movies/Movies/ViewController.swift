@@ -14,7 +14,6 @@ import AFNetworking
 class ViewController: MultiHitsTableViewController {
     
     @IBOutlet weak var tableView: MultiHitsTableWidget!
-    @IBOutlet weak var searchBar: TextFieldWidget!
     
     var hitsController: MultiHitsController!
     
@@ -128,13 +127,19 @@ class ViewController: MultiHitsTableViewController {
     }
 
     @objc func loadMoreButtonTapped(sender: UIButton) {
-        searchController.isActive = false
+        let detailVC = DetailViewControllerDemo(nibName: "DetailViewController", bundle: Bundle.main)
+        
+        detailVC.query = searchController.searchBar.text ?? ""
+        
         if sender.tag == 0 {
-            let detailVC = DetailViewControllerDemo(nibName: "DetailViewController", bundle: Bundle.main)
-            self.navigationController?.pushViewController(detailVC, animated: true)
+            detailVC.indexName = .actors
+            
         } else {
-            print("results button clicked")
+            detailVC.indexName = .movies
         }
+        
+        searchController.isActive = false
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
