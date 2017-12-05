@@ -62,3 +62,26 @@ Example of a query suggestion search interface.
 - Query suggestions appear when clicking on the search bar
 - When clicking a query suggestion, the search bar is filled with that suggestion and results are refreshed
 - Showing how you can use the ViewModels for better control and customization of your widgets
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+## [Movies Demo](https://github.com/algolia/instantsearch-ios-examples/tree/master/Movies)
+<img src="./docs/Movies.gif" align="right" width="300"/>
+
+Example of a multi-index search interface.
+
+- Multi-Index table showcasing results from different indices (movies and actors)
+- A load more button taking you to an infinite scrolling list
+- Keep the state of the search when moving to the load more screen
+- Uses the new iOS 11 SearchBar in NavigationBar.
