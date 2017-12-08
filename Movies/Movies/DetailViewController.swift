@@ -26,8 +26,8 @@ class DetailViewControllerDemo: HitsTableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         
         hitsTableView = HitsTableWidget(frame: self.view.bounds)
-        hitsTableView.indexName = indexName.description
-        hitsTableView.indexId = "detail"
+        hitsTableView.index = indexName.description
+        hitsTableView.variant = "detail"
         hitsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "DetailsCell")
 
         self.view.addSubview(hitsTableView)

@@ -38,7 +38,7 @@ CHECKOUT OPTIONS:
     :commit: 7426bca57cf9dac28123fe45b8e994bc38ab2748
     :git: https://github.com/algolia/instantsearch-core-swift.git
   InstantSearch-iOS:
-    :commit: 9d535a737439ff02f6164d7249bc6ac10700cf69
+    :commit: c211c9709bda2db7b5048f5e2440361c111d448c
     :git: https://github.com/algolia/instantsearch-ios.git
 
 SPEC CHECKSUMS:

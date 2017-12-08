@@ -51,7 +51,7 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="hitsPerSection" value="5,20"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showItemsOnEmptyQuery" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="indexNames" value="instantsearch_query_suggestions,instant_search"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="indices" value="instantsearch_query_suggestions,instant_search"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ns3-em-Fug" customClass="SearchBarWidget" customModule="InstantSearch">

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let searcherIds: [SearcherId] = [SearcherId.init(indexName: "instant_search"), SearcherId.init(indexName: "instantsearch_query_suggestions")]
+        let searcherIds: [SearcherId] = [SearcherId.init(index: "instant_search"), SearcherId.init(index: "instantsearch_query_suggestions")]
         InstantSearch.shared.configure(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY, searcherIds: searcherIds)
         return true
     }
