@@ -6,6 +6,7 @@ target 'Getting Started Storyboard' do
   use_frameworks!
 
   # Pods for Getting Started Storyboard
-  pod 'InstantSearch-iOS', '~> 1.0.0'
+  pod 'InstantSearch-iOS', :git => 'https://github.com/algolia/instantsearch-ios.git', :branch => 'multi-index'
+  pod 'InstantSearch-Core-Swift', :git => 'https://github.com/algolia/instantsearch-core-swift.git', :branch => 'develop'
 
 end
