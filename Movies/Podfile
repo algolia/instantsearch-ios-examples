@@ -6,8 +6,7 @@ target 'Movies' do
   use_frameworks!
 
   # Pods for Movies
-  pod 'InstantSearch-iOS', :git => 'https://github.com/algolia/instantsearch-ios.git', :branch => 'multi-index'
-  pod 'InstantSearch-Core-Swift', :git => 'https://github.com/algolia/instantsearch-core-swift.git', :branch => 'develop'
+  pod 'InstantSearch-iOS', '~> 2.0'
   pod 'AFNetworking', '~> 3.0'
   
   inhibit_all_warnings!
