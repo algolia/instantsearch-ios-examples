@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,33 +14,31 @@
                 <outlet property="blurView" destination="wZC-3C-7zc" id="NLA-NL-RV7"/>
                 <outlet property="collectionView" destination="mdU-YR-hcO" id="PWH-Iv-VNj"/>
                 <outlet property="mapView" destination="X21-ZA-GwF" id="3Mf-Uf-mRv"/>
+                <outlet property="recordButton" destination="Mcb-1U-tbG" id="Uaz-Ni-obv"/>
                 <outlet property="searchBarView" destination="f6q-Fo-z9F" id="cMk-7C-B0f"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X21-ZA-GwF" customClass="MapViewWidget" customModule="Icebnb" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="109" width="375" height="558"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="558" id="Cfh-vh-wOi"/>
-                    </constraints>
+                    <rect key="frame" x="0.0" y="142" width="375" height="670"/>
                 </mapView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-3C-7zc">
-                    <rect key="frame" x="0.0" y="457" width="375" height="210"/>
+                    <rect key="frame" x="0.0" y="477" width="375" height="335"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="210" id="haa-Op-yhc"/>
+                        <constraint firstAttribute="height" constant="335" id="cJi-i8-McI"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mdU-YR-hcO" customClass="HitsCollectionWidget" customModule="InstantSearch">
-                    <rect key="frame" x="0.0" y="457" width="375" height="210"/>
+                    <rect key="frame" x="0.0" y="477" width="375" height="335"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="210" id="1qv-gH-cZc"/>
+                        <constraint firstAttribute="height" constant="335" id="Wjm-cp-S0M"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="uAn-S9-mr8">
                         <size key="itemSize" width="150" height="150"/>
@@ -53,28 +51,44 @@
                     </userDefinedRuntimeAttributes>
                 </collectionView>
                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="f6q-Fo-z9F" customClass="SearchBarWidget" customModule="InstantSearch">
-                    <rect key="frame" x="0.0" y="65" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="86" width="375" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcb-1U-tbG">
+                    <rect key="frame" x="292" y="98" width="35" height="30"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                    <state key="normal" image="mic"/>
+                    <connections>
+                        <action selector="record:" destination="-1" eventType="touchUpInside" id="KJk-bz-9Ca"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="f6q-Fo-z9F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1nA-MF-EmI"/>
-                <constraint firstAttribute="bottom" secondItem="X21-ZA-GwF" secondAttribute="bottom" id="4B6-BV-9M5"/>
-                <constraint firstAttribute="trailing" secondItem="f6q-Fo-z9F" secondAttribute="trailing" id="EAb-nl-kO2"/>
-                <constraint firstAttribute="bottom" secondItem="wZC-3C-7zc" secondAttribute="bottom" id="Fmz-Bw-fc9"/>
-                <constraint firstAttribute="bottom" secondItem="X21-ZA-GwF" secondAttribute="bottom" id="GEa-nu-uDv"/>
-                <constraint firstAttribute="trailing" secondItem="X21-ZA-GwF" secondAttribute="trailing" id="J40-jE-R7Y"/>
-                <constraint firstItem="mdU-YR-hcO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QlD-gx-idd"/>
-                <constraint firstItem="X21-ZA-GwF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S82-uW-q4I"/>
-                <constraint firstAttribute="bottom" secondItem="mdU-YR-hcO" secondAttribute="bottom" id="h3p-g8-ww8"/>
-                <constraint firstItem="f6q-Fo-z9F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="mNy-0P-dZ1"/>
-                <constraint firstItem="wZC-3C-7zc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="p03-fJ-wrK"/>
-                <constraint firstAttribute="trailing" secondItem="wZC-3C-7zc" secondAttribute="trailing" id="tuE-b5-ee7"/>
-                <constraint firstAttribute="trailing" secondItem="mdU-YR-hcO" secondAttribute="trailing" id="tzA-uu-4gq"/>
+                <constraint firstAttribute="trailing" secondItem="f6q-Fo-z9F" secondAttribute="trailing" id="4d3-T8-j0F"/>
+                <constraint firstItem="f6q-Fo-z9F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="86" id="5sV-hd-68n"/>
+                <constraint firstAttribute="bottom" secondItem="mdU-YR-hcO" secondAttribute="bottom" id="ENH-oy-vX5"/>
+                <constraint firstAttribute="bottom" secondItem="mdU-YR-hcO" secondAttribute="bottom" id="EZi-Nq-gWO"/>
+                <constraint firstItem="mdU-YR-hcO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FsO-rq-iCu"/>
+                <constraint firstAttribute="trailing" secondItem="mdU-YR-hcO" secondAttribute="trailing" id="KMa-hA-i1U"/>
+                <constraint firstAttribute="trailing" secondItem="wZC-3C-7zc" secondAttribute="trailing" id="QQP-4Z-Ufm"/>
+                <constraint firstAttribute="trailing" secondItem="Mcb-1U-tbG" secondAttribute="trailing" constant="48" id="W59-6P-mwJ"/>
+                <constraint firstItem="f6q-Fo-z9F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YUw-O9-yeY"/>
+                <constraint firstItem="wZC-3C-7zc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eVp-3c-be0"/>
+                <constraint firstAttribute="bottom" secondItem="X21-ZA-GwF" secondAttribute="bottom" id="gUX-m8-fTt"/>
+                <constraint firstItem="X21-ZA-GwF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gg3-ww-Vfd"/>
+                <constraint firstItem="Mcb-1U-tbG" firstAttribute="centerY" secondItem="f6q-Fo-z9F" secondAttribute="centerY" constant="-1" id="hV6-gB-MOG"/>
+                <constraint firstItem="mdU-YR-hcO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kMH-S5-jtl"/>
+                <constraint firstAttribute="trailing" secondItem="X21-ZA-GwF" secondAttribute="trailing" id="vDR-P8-Otf"/>
+                <constraint firstItem="X21-ZA-GwF" firstAttribute="top" secondItem="f6q-Fo-z9F" secondAttribute="bottom" id="xXK-yr-Q0q"/>
+                <constraint firstAttribute="bottom" secondItem="wZC-3C-7zc" secondAttribute="bottom" id="xkG-Fz-TrM"/>
+                <constraint firstAttribute="trailing" secondItem="mdU-YR-hcO" secondAttribute="trailing" id="ySg-Ia-2OM"/>
             </constraints>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+            <point key="canvasLocation" x="33.5" y="53"/>
         </view>
     </objects>
+    <resources>
+        <image name="mic" width="42" height="42"/>
+    </resources>
 </document>

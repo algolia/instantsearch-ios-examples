@@ -38,4 +38,8 @@ class RangeSliderViewController: UIViewController {
         minLabel.text = "\(Int(rangeSlider.lowerValue))$"
         maxLabel.text = "\(Int(rangeSlider.upperValue))$"
     }
+  
+  deinit {
+    print("here")
+  }
 }

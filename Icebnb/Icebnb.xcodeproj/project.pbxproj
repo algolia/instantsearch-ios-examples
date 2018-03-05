@@ -24,6 +24,7 @@
 		1D9AC76D1F5FFC1900A60680 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9AC76C1F5FFC1900A60680 /* MapAnnotation.swift */; };
 		1D9AC7701F6023D000A60680 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9AC76E1F6023D000A60680 /* FilterViewController.swift */; };
 		1D9AC7711F6023D000A60680 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9AC76F1F6023D000A60680 /* FilterViewController.xib */; };
+		1DBB7E2820090DF000C29D99 /* LFTPulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBB7E2720090DF000C29D99 /* LFTPulseAnimation.swift */; };
 		1DCB807B1F5ECCA600C18E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCB807A1F5ECCA600C18E5E /* AppDelegate.swift */; };
 		1DCB80821F5ECCA600C18E5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DCB80811F5ECCA600C18E5E /* Assets.xcassets */; };
 		1DCB80851F5ECCA600C18E5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCB80831F5ECCA600C18E5E /* LaunchScreen.storyboard */; };
@@ -77,6 +78,7 @@
 		1D9AC76C1F5FFC1900A60680 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		1D9AC76E1F6023D000A60680 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		1D9AC76F1F6023D000A60680 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		1DBB7E2720090DF000C29D99 /* LFTPulseAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFTPulseAnimation.swift; sourceTree = "<group>"; };
 		1DCB80771F5ECCA600C18E5E /* Icebnb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Icebnb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCB807A1F5ECCA600C18E5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DCB80811F5ECCA600C18E5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		1D9AC7611F5EE23A00A60680 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1DBB7E292009101700C29D99 /* PulseButton */,
 				1D4EB5F21F8F6D8200067746 /* Slider */,
 				1D9AC7621F5EE25D00A60680 /* PlaceCell.swift */,
 				1D9AC7631F5EE25D00A60680 /* PlaceCell.xib */,
@@ -199,6 +202,14 @@
 				1D9AC76A1F5FE20300A60680 /* MapViewWidget.swift */,
 			);
 			name = CustomWidgets;
+			sourceTree = "<group>";
+		};
+		1DBB7E292009101700C29D99 /* PulseButton */ = {
+			isa = PBXGroup;
+			children = (
+				1DBB7E2720090DF000C29D99 /* LFTPulseAnimation.swift */,
+			);
+			name = PulseButton;
 			sourceTree = "<group>";
 		};
 		1DCB806E1F5ECCA600C18E5E = {
@@ -366,7 +377,7 @@
 				TargetAttributes = {
 					1DCB80761F5ECCA600C18E5E = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 2CNP84DWNA;
+						DevelopmentTeam = 5RDFJYUV23;
 						ProvisioningStyle = Automatic;
 					};
 					1DCB808A1F5ECCA600C18E5E = {
@@ -615,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE211F11F61473600E0C591 /* PriceRangeViewController.swift in Sources */,
+				1DBB7E2820090DF000C29D99 /* LFTPulseAnimation.swift in Sources */,
 				1D4EB5F81F8F725800067746 /* SliderKit.swift in Sources */,
 				1D9AC7601F5EDAE200A60680 /* Constants.swift in Sources */,
 				1D9AC76B1F5FE20300A60680 /* MapViewWidget.swift in Sources */,
@@ -776,7 +788,7 @@
 			buildSettings = {
 				ALGOLIA_API_KEY = 6be0576ff61c053d5f9a3225e2a90f76;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2CNP84DWNA;
+				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = "$(SRCROOT)/Icebnb/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -792,7 +804,7 @@
 			buildSettings = {
 				ALGOLIA_API_KEY = 6be0576ff61c053d5f9a3225e2a90f76;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2CNP84DWNA;
+				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = "$(SRCROOT)/Icebnb/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

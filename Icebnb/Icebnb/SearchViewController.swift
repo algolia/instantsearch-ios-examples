@@ -21,14 +21,19 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
   @IBOutlet weak var collectionView: HitsCollectionWidget!
   @IBOutlet weak var mapView: MapViewWidget!
   @IBOutlet weak var searchBarView: SearchBarWidget!
+  @IBOutlet weak var recordButton: UIButton!
+  
   var filterBtn: UIButton!
   var hitsController: HitsController!
   let locationManager = CLLocationManager()
   var lastSearchLocation: CLLocation?
+  var speechController: SpeechController?
+  var pulseEffect: LFTPulseAnimation!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.title = "Icebnb"
+    speechController = SpeechController()
     configureLocationManager()
     configureSearchBar()
     configureInstantSearch()
@@ -134,6 +139,33 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, HitsColl
                                                                lng: lastSearchLocation.coordinate.longitude)
     InstantSearch.shared.searcher.search()
   }
+  
+  @IBAction func record(_ sender: Any) {
+    if speechController!.isRecording() {
+      speechController?.stopRecording()
+      stopPulseButton()
+      return
+    }
+    setupPulseButton()
+    speechController?.startRecording(textHandler: { (text, final) in
+      self.searchBarView.searchBar(self.searchBarView, textDidChange: text)
+      },
+                                     errorHandler: { _ in
+                                      
+                                      })
+  }
+  
+  func setupPulseButton() {
+    if (pulseEffect == nil) {
+      pulseEffect = LFTPulseAnimation(repeatCount: Float.infinity, radius:20, position:recordButton.center)
+    }
+    view.layer.insertSublayer(pulseEffect, below: recordButton.layer)
+  }
+  
+  func stopPulseButton() {
+    pulseEffect.removeFromSuperlayer()
+  }
+  
 }
 
 extension SearchViewController: CLLocationManagerDelegate {

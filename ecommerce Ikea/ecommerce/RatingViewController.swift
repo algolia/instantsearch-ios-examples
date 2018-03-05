@@ -16,8 +16,8 @@ class RatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         InstantSearch.shared.registerAllWidgets(in: self.view)
-        LayoutHelpers.setupResultButton(button: resultButton)
-        resultButton.addTarget(self, action: #selector(resultButtonClicked), for: .touchUpInside)
+//        LayoutHelpers.setupResultButton(button: resultButton)
+//        resultButton.addTarget(self, action: #selector(resultButtonClicked), for: .touchUpInside)
     }
     
   @objc func resultButtonClicked() {
@@ -27,4 +27,8 @@ class RatingViewController: UIViewController {
             }
         }
     }
+  
+  deinit {
+    print("Deinit RatingViewController")
+  }
 }
