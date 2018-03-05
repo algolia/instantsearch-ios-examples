@@ -14,6 +14,8 @@ class ViewController: UIViewController, HitsTableViewDataSource {
 
   var hitsController: HitsController!
   var instantSearch: InstantSearch!
+  var searchBar: SearchBarWidget!
+  
   lazy var tableView: HitsTableWidget = {
     HitsTableWidget(frame: .zero, style: .plain)
   }()
@@ -21,7 +23,10 @@ class ViewController: UIViewController, HitsTableViewDataSource {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.frame = self.view.bounds
+    searchBar = SearchBarWidget(frame: .zero)
+    
+    self.navigationItem.titleView = searchBar
+    tableView.frame = self.view.frame
     self.view.addSubview(tableView)
     hitsController = HitsController(table: tableView)
     tableView.dataSource = hitsController
@@ -36,6 +41,7 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     let searcher = Searcher(index: index)
     instantSearch = InstantSearch.init(searcher: searcher)
     instantSearch.registerAllWidgets(in: self.view)
+    instantSearch.register(widget: searchBar)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
