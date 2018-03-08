@@ -25,7 +25,7 @@ public class CustomSearchable:NSObject, Searchable {
           if let path = Bundle.main.path(forResource: "mock-light", ofType: "json") {
             do {
               let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-              var jsonObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONObject
+              var jsonObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
               
               guard let query = query.query, !query.isEmpty else {
                 if let op = weakOp, !op.isCancelled {
@@ -36,9 +36,9 @@ public class CustomSearchable:NSObject, Searchable {
               jsonObj!["hits"] = (jsonObj!["hits"] as! [[String: String]]).filter({ item in
                 (item["name"]?.contains(query))! || (item["description"]?.contains(query))!
               })
-              if let op = weakOp, !op.isCancelled {
+              //if let op = weakOp, !op.isCancelled {
                 completionHandler(jsonObj, nil)
-              }
+              //}
             } catch let error {
               print(error.localizedDescription)
             }
