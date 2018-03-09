@@ -38,6 +38,7 @@ class ViewController: UIViewController, HitsTableViewDataSource {
   }
   
   func configureInstantSearch() {
+    //let index = CustomBackend(searchTransformer: CustomTransformer())
     let index = CustomSearchable()
     let searcher = Searcher(index: index)
     instantSearch = InstantSearch.init(searcher: searcher)
