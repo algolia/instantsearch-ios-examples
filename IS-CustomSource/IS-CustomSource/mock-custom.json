@@ -1,0 +1,10 @@
+{
+    "nbHitsCustom": 2,
+    "hitsCustom": [{
+             "nameCustom": "Test1",
+             "descriptionCustom": "Description test1"
+             }, {
+             "nameCustom": "Test2",
+             "descriptionCustom": "Description test2"
+             }]
+}

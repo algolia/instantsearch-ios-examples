@@ -26,6 +26,7 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     searchBar = SearchBarWidget(frame: .zero)
     
     self.navigationItem.titleView = searchBar
+    self.edgesForExtendedLayout = []
     tableView.frame = self.view.frame
     self.view.addSubview(tableView)
     hitsController = HitsController(table: tableView)
@@ -46,7 +47,7 @@ class ViewController: UIViewController, HitsTableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-    cell.textLabel?.text = hit["name"] as? String
+    cell.textLabel?.text = hit["nameCustom"] as? String
     return cell
   }
 

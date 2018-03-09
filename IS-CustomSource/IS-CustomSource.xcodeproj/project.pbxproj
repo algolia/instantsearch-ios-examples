@@ -15,6 +15,7 @@
 		1DCF1F461F87858500F8155D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF1F441F87858500F8155D /* LaunchScreen.storyboard */; };
 		1DCF1F4E1F878BD500F8155D /* CustomSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F4D1F878BD500F8155D /* CustomSearchable.swift */; };
 		91A599BFAA8A83CA116BDE30 /* Pods_IS_CustomSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444CED014D4EA150BF99CCB8 /* Pods_IS_CustomSource.framework */; };
+		E2E2FCF420529A7E0073B0B5 /* mock-custom.json in Resources */ = {isa = PBXBuildFile; fileRef = E2E2FCF320529A7E0073B0B5 /* mock-custom.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		1DCF1F4D1F878BD500F8155D /* CustomSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchable.swift; sourceTree = "<group>"; };
 		444CED014D4EA150BF99CCB8 /* Pods_IS_CustomSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IS_CustomSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A693FF2ED0701A77DF1CD23B /* Pods-IS-CustomSource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IS-CustomSource.release.xcconfig"; path = "Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource.release.xcconfig"; sourceTree = "<group>"; };
+		E2E2FCF320529A7E0073B0B5 /* mock-custom.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mock-custom.json"; sourceTree = "<group>"; };
 		FCED998CB93BDA062451B756 /* Pods-IS-CustomSource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IS-CustomSource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				1DCF1F4D1F878BD500F8155D /* CustomSearchable.swift */,
 				1D8145121F87B9CE00ED100F /* mock.json */,
 				1D8145141F87BC5E00ED100F /* mock-light.json */,
+				E2E2FCF320529A7E0073B0B5 /* mock-custom.json */,
 			);
 			path = "IS-CustomSource";
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			files = (
 				1DCF1F461F87858500F8155D /* LaunchScreen.storyboard in Resources */,
 				1DCF1F431F87858500F8155D /* Assets.xcassets in Resources */,
+				E2E2FCF420529A7E0073B0B5 /* mock-custom.json in Resources */,
 				1D8145151F87BC5E00ED100F /* mock-light.json in Resources */,
 				1D8145131F87B9CE00ED100F /* mock.json in Resources */,
 			);
