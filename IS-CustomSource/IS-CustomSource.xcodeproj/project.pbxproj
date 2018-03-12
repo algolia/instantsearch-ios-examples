@@ -13,8 +13,9 @@
 		1DCF1F3E1F87858500F8155D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F3D1F87858500F8155D /* ViewController.swift */; };
 		1DCF1F431F87858500F8155D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF1F421F87858500F8155D /* Assets.xcassets */; };
 		1DCF1F461F87858500F8155D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF1F441F87858500F8155D /* LaunchScreen.storyboard */; };
-		1DCF1F4E1F878BD500F8155D /* CustomSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F4D1F878BD500F8155D /* CustomSearchable.swift */; };
+		1DCF1F4E1F878BD500F8155D /* CustomSearchableLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F4D1F878BD500F8155D /* CustomSearchableLibrary.swift */; };
 		91A599BFAA8A83CA116BDE30 /* Pods_IS_CustomSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444CED014D4EA150BF99CCB8 /* Pods_IS_CustomSource.framework */; };
+		E2CAC0D02056C9BE002BB9CA /* CustomSearchableImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */; };
 		E2E2FCF420529A7E0073B0B5 /* mock-custom.json in Resources */ = {isa = PBXBuildFile; fileRef = E2E2FCF320529A7E0073B0B5 /* mock-custom.json */; };
 /* End PBXBuildFile section */
 
@@ -27,9 +28,10 @@
 		1DCF1F421F87858500F8155D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DCF1F451F87858500F8155D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DCF1F471F87858500F8155D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1DCF1F4D1F878BD500F8155D /* CustomSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchable.swift; sourceTree = "<group>"; };
+		1DCF1F4D1F878BD500F8155D /* CustomSearchableLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchableLibrary.swift; sourceTree = "<group>"; };
 		444CED014D4EA150BF99CCB8 /* Pods_IS_CustomSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IS_CustomSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A693FF2ED0701A77DF1CD23B /* Pods-IS-CustomSource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IS-CustomSource.release.xcconfig"; path = "Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource.release.xcconfig"; sourceTree = "<group>"; };
+		E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchableImplementation.swift; sourceTree = "<group>"; };
 		E2E2FCF320529A7E0073B0B5 /* mock-custom.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mock-custom.json"; sourceTree = "<group>"; };
 		FCED998CB93BDA062451B756 /* Pods-IS-CustomSource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IS-CustomSource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,7 +74,8 @@
 				1DCF1F421F87858500F8155D /* Assets.xcassets */,
 				1DCF1F441F87858500F8155D /* LaunchScreen.storyboard */,
 				1DCF1F471F87858500F8155D /* Info.plist */,
-				1DCF1F4D1F878BD500F8155D /* CustomSearchable.swift */,
+				1DCF1F4D1F878BD500F8155D /* CustomSearchableLibrary.swift */,
+				E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */,
 				1D8145121F87B9CE00ED100F /* mock.json */,
 				1D8145141F87BC5E00ED100F /* mock-light.json */,
 				E2E2FCF320529A7E0073B0B5 /* mock-custom.json */,
@@ -236,8 +239,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DCF1F4E1F878BD500F8155D /* CustomSearchable.swift in Sources */,
+				1DCF1F4E1F878BD500F8155D /* CustomSearchableLibrary.swift in Sources */,
 				1DCF1F3E1F87858500F8155D /* ViewController.swift in Sources */,
+				E2CAC0D02056C9BE002BB9CA /* CustomSearchableImplementation.swift in Sources */,
 				1DCF1F3C1F87858500F8155D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
