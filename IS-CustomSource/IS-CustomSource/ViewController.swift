@@ -42,10 +42,10 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     // Initialising an Index
     
     // With POC 1
-    //let index = CustomSearchableImplementation()
+    let index = CustomSearchableImplementation()
     
     // With POC 2
-    let index = CustomSearchable(searchTransformer: CustomSearchTransformerImplementation())
+    //let index = CustomSearchable(searchTransformer: CustomSearchTransformerImplementation())
     
     
     let searcher = Searcher(index: index)
