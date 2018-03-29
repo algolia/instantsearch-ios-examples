@@ -33,31 +33,39 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     tableView.dataSource = hitsController
     tableView.delegate = hitsController
     hitsController.tableDataSource = self
-    tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cellID")
     configureInstantSearch()
+    
+    tableView.estimatedRowHeight = 80
   }
   
   func configureInstantSearch() {
     
     // Initialising an Index
     
-    // With POC 1
-    let index = CustomSearchableImplementation()
-    
-    // With POC 2
-    //let index = CustomSearchable(searchTransformer: CustomSearchTransformerImplementation())
-    
+    //let index = CustomSearchableImplementation()
+    let index = ElasticImplementation()
     
     let searcher = Searcher(index: index)
     instantSearch = InstantSearch.init(searcher: searcher)
     instantSearch.registerAllWidgets(in: self.view)
     instantSearch.register(widget: searchBar)
   }
-  
+    
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-    cell.textLabel?.text = hit["nameCustom"] as? String
-    return cell
+    var cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
+    if cell == nil {
+        cell = UITableViewCell(style: .value1, reuseIdentifier: "cellID")
+    }
+    
+    let source = hit["_source"] as! [String: Any]
+    
+    let name = source["name"] as! String
+    let location = source["location"] as! String
+    
+    cell!.textLabel?.text = name
+    cell!.detailTextLabel?.text = location
+    
+    return cell!
   }
 
   override func didReceiveMemoryWarning() {

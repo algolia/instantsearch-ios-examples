@@ -12,6 +12,7 @@ target 'IS-CustomSource' do
   pod 'InstantSearch-Core-Swift', :path => '/Users/guydaher/Developer/Algolia/iOS/instantsearch-core-swift'
   pod 'AFNetworking', '~> 3.0'
   pod 'Nuke'
+  pod 'Alamofire', '~> 4.7'
   # Pods for Icebnb
 
 end
