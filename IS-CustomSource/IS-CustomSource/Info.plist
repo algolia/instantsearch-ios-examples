@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <!--Include to allow all connections (DANGER)-->
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 	<key>AlgoliaApiKey</key>
 	<string>6be0576ff61c053d5f9a3225e2a90f76</string>
 	<key>CFBundleDevelopmentRegion</key>

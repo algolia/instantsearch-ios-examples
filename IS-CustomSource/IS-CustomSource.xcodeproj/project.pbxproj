@@ -10,11 +10,13 @@
 		1D8145131F87B9CE00ED100F /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D8145121F87B9CE00ED100F /* mock.json */; };
 		1D8145151F87BC5E00ED100F /* mock-light.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D8145141F87BC5E00ED100F /* mock-light.json */; };
 		1DCF1F3C1F87858500F8155D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F3B1F87858500F8155D /* AppDelegate.swift */; };
-		1DCF1F3E1F87858500F8155D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F3D1F87858500F8155D /* ViewController.swift */; };
+		1DCF1F3E1F87858500F8155D /* MultiIndexViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF1F3D1F87858500F8155D /* MultiIndexViewControler.swift */; };
 		1DCF1F431F87858500F8155D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF1F421F87858500F8155D /* Assets.xcassets */; };
 		1DCF1F461F87858500F8155D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF1F441F87858500F8155D /* LaunchScreen.storyboard */; };
 		91A599BFAA8A83CA116BDE30 /* Pods_IS_CustomSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444CED014D4EA150BF99CCB8 /* Pods_IS_CustomSource.framework */; };
 		E2472A852073D71500E6A31D /* RefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2472A842073D71500E6A31D /* RefinementViewController.swift */; };
+		E2472A872074CDC600E6A31D /* CustomBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2472A862074CDC600E6A31D /* CustomBackend.swift */; };
+		E2472A892074ED9700E6A31D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2472A882074ED9700E6A31D /* ViewController.swift */; };
 		E29DACED206D28C0008AAFFC /* ElasticSearchCustomBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DACEC206D28C0008AAFFC /* ElasticSearchCustomBackend.swift */; };
 		E2CAC0D02056C9BE002BB9CA /* CustomSearchableImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */; };
 		E2E2FCF420529A7E0073B0B5 /* mock-custom.json in Resources */ = {isa = PBXBuildFile; fileRef = E2E2FCF320529A7E0073B0B5 /* mock-custom.json */; };
@@ -25,13 +27,15 @@
 		1D8145141F87BC5E00ED100F /* mock-light.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mock-light.json"; sourceTree = "<group>"; };
 		1DCF1F381F87858500F8155D /* IS-CustomSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IS-CustomSource.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCF1F3B1F87858500F8155D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1DCF1F3D1F87858500F8155D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1DCF1F3D1F87858500F8155D /* MultiIndexViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexViewControler.swift; sourceTree = "<group>"; };
 		1DCF1F421F87858500F8155D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DCF1F451F87858500F8155D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DCF1F471F87858500F8155D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444CED014D4EA150BF99CCB8 /* Pods_IS_CustomSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IS_CustomSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A693FF2ED0701A77DF1CD23B /* Pods-IS-CustomSource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IS-CustomSource.release.xcconfig"; path = "Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource.release.xcconfig"; sourceTree = "<group>"; };
 		E2472A842073D71500E6A31D /* RefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementViewController.swift; sourceTree = "<group>"; };
+		E2472A862074CDC600E6A31D /* CustomBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackend.swift; sourceTree = "<group>"; };
+		E2472A882074ED9700E6A31D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E29DACEC206D28C0008AAFFC /* ElasticSearchCustomBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticSearchCustomBackend.swift; sourceTree = "<group>"; };
 		E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchableImplementation.swift; sourceTree = "<group>"; };
 		E2E2FCF320529A7E0073B0B5 /* mock-custom.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mock-custom.json"; sourceTree = "<group>"; };
@@ -72,7 +76,9 @@
 			isa = PBXGroup;
 			children = (
 				1DCF1F3B1F87858500F8155D /* AppDelegate.swift */,
-				1DCF1F3D1F87858500F8155D /* ViewController.swift */,
+				1DCF1F3D1F87858500F8155D /* MultiIndexViewControler.swift */,
+				E2472A882074ED9700E6A31D /* ViewController.swift */,
+				E2472A862074CDC600E6A31D /* CustomBackend.swift */,
 				E2472A842073D71500E6A31D /* RefinementViewController.swift */,
 				1DCF1F421F87858500F8155D /* Assets.xcassets */,
 				1DCF1F441F87858500F8155D /* LaunchScreen.storyboard */,
@@ -244,11 +250,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DCF1F3E1F87858500F8155D /* ViewController.swift in Sources */,
+				1DCF1F3E1F87858500F8155D /* MultiIndexViewControler.swift in Sources */,
 				E2472A852073D71500E6A31D /* RefinementViewController.swift in Sources */,
 				E2CAC0D02056C9BE002BB9CA /* CustomSearchableImplementation.swift in Sources */,
+				E2472A872074CDC600E6A31D /* CustomBackend.swift in Sources */,
 				E29DACED206D28C0008AAFFC /* ElasticSearchCustomBackend.swift in Sources */,
 				1DCF1F3C1F87858500F8155D /* AppDelegate.swift in Sources */,
+				E2472A892074ED9700E6A31D /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

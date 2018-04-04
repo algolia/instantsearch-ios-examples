@@ -11,77 +11,76 @@ import InstantSearch
 import InstantSearchCore
 
 class ViewController: UIViewController, HitsTableViewDataSource {
-
-  var hitsController: HitsController!
-  var instantSearch: InstantSearch!
-  var searchBar: SearchBarWidget!
-  
-  lazy var tableView: HitsTableWidget = {
-    HitsTableWidget(frame: .zero, style: .plain)
-  }()
-  
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    searchBar = SearchBarWidget(frame: .zero)
     
-    self.navigationItem.titleView = searchBar
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filters", style: .plain, target: self, action: #selector(onFiltersTapped))
-    self.edgesForExtendedLayout = []
-    tableView.frame = self.view.frame
-    self.view.addSubview(tableView)
-    hitsController = HitsController(table: tableView)
-    tableView.dataSource = hitsController
-    tableView.delegate = hitsController
-    hitsController.tableDataSource = self
-    configureInstantSearch()
+    var hitsController: HitsController!
+    var instantSearch: InstantSearch!
+    var searchBar: SearchBarWidget!
     
-    tableView.estimatedRowHeight = 80
-  }
+    lazy var tableView: HitsTableWidget = {
+        HitsTableWidget(frame: .zero, style: .plain)
+    }()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        searchBar = SearchBarWidget(frame: .zero)
+        
+        self.navigationItem.titleView = searchBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filters", style: .plain, target: self, action: #selector(onFiltersTapped))
+        self.edgesForExtendedLayout = []
+        tableView.frame = self.view.frame
+        self.view.addSubview(tableView)
+        hitsController = HitsController(table: tableView)
+        tableView.dataSource = hitsController
+        tableView.delegate = hitsController
+        hitsController.tableDataSource = self
+        configureInstantSearch()
+        
+        tableView.estimatedRowHeight = 80
+    }
     
     @objc func onFiltersTapped() {
         let refinementViewController = RefinementViewController()
         refinementViewController.instantSearch = instantSearch
         self.navigationController?.pushViewController(refinementViewController, animated: true)
     }
-  
-  func configureInstantSearch() {
     
-    // Initialising an Index
-    
-    //let index = CustomSearchableImplementation()
-    let index = ElasticImplementation()
-    
-    let searcher = Searcher(index: index)
-    instantSearch = InstantSearch.init(searcher: searcher)
-    instantSearch.registerAllWidgets(in: self.view)
-    instantSearch.register(widget: searchBar)
-    instantSearch.searcher.params.addFacetRefinement(name: "category", value: "someCat")
-    instantSearch.searcher.params.addNumericRefinement("price", .greaterThanOrEqual, 20)
-  }
-    
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
-    if cell == nil {
-        cell = UITableViewCell(style: .value1, reuseIdentifier: "cellID")
+    func configureInstantSearch() {
+        
+        // Initialising an Index
+        
+        //let index = CustomSearchableImplementation()
+        let index = ElasticImplementation()
+        //let index = CustomBackendMovies()
+        
+        let searcher = Searcher(index: index)
+        instantSearch = InstantSearch.init(searcher: searcher)
+        instantSearch.registerAllWidgets(in: self.view)
+        instantSearch.register(widget: searchBar)
+        instantSearch.searcher.params.addFacetRefinement(name: "category", value: "someCat")
+        instantSearch.searcher.params.addNumericRefinement("price", .greaterThanOrEqual, 20)
     }
     
-    let source = hit["_source"] as! [String: Any]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
+        if cell == nil {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "cellID")
+        }
+        
+        let name = hit["title"] as! String
+        
+        
+        cell!.textLabel?.text = name
+        //cell!.detailTextLabel?.text = location
+        
+        return cell!
+    }
     
-    let name = source["name"] as! String
-    let location = source["location"] as! String
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
-    cell!.textLabel?.text = name
-    cell!.detailTextLabel?.text = location
     
-    return cell!
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
-
 }
 

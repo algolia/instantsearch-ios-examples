@@ -36,23 +36,9 @@ class RefinementViewController: UIViewController, RefinementTableViewDataSource 
         tableView.dataSource = refinementController
         tableView.delegate = refinementController
         refinementController.tableDataSource = self
-        configureInstantSearch()
+        instantSearch.registerAllWidgets(in: self.view)
         
         tableView.estimatedRowHeight = 80
-    }
-    
-    func configureInstantSearch() {
-        
-        // Initialising an Index
-        
-        //let index = CustomSearchableImplementation()
-        let index = ElasticImplementation()
-        
-        let searcher = Searcher(index: index)
-        instantSearch = InstantSearch.init(searcher: searcher)
-        instantSearch.registerAllWidgets(in: self.view)
-        //instantSearch.searcher.params.addFacetRefinement(name: "category", value: "someCat")
-        //instantSearch.searcher.params.addNumericRefinement("price", .greaterThanOrEqual, 20)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing facet: String, with count: Int, is refined: Bool) -> UITableViewCell {
