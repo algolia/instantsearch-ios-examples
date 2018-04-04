@@ -61,6 +61,9 @@ public class ElasticImplementation: SearchTransformer<ElasticSearchParameters, E
     
     // Transforms the Algolia params to custom backend params.
     public override func map(query: Query) -> ElasticSearchParameters {
+        let searchParameters = query as! SearchParameters
+        let facetRefinements = searchParameters.facetRefinements
+        let numericRefinements = searchParameters.numericRefinements
         let queryText = query.query
         
         return ElasticSearchParameters(q: queryText)
@@ -70,8 +73,13 @@ public class ElasticImplementation: SearchTransformer<ElasticSearchParameters, E
     public override func map(results: ElasticSearchResults) -> SearchResults {
         let nbHits = results.total
         let hits = results.hits
+        let categoryFacet = ["chairs": 10, "tables": 15]
+        let facets = ["category": categoryFacet]
+        let extraContent = ["facets": facets]
         
-        return SearchResults(nbHits: nbHits, hits: hits)
+        // If want to add facets, needs to add it to the content
+        
+        return SearchResults(nbHits: nbHits, hits: hits, extraContent: extraContent)
     }
 }
 

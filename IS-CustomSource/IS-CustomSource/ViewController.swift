@@ -26,6 +26,7 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     searchBar = SearchBarWidget(frame: .zero)
     
     self.navigationItem.titleView = searchBar
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filters", style: .plain, target: self, action: #selector(onFiltersTapped))
     self.edgesForExtendedLayout = []
     tableView.frame = self.view.frame
     self.view.addSubview(tableView)
@@ -37,6 +38,12 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     
     tableView.estimatedRowHeight = 80
   }
+    
+    @objc func onFiltersTapped() {
+        let refinementViewController = RefinementViewController()
+        refinementViewController.instantSearch = instantSearch
+        self.navigationController?.pushViewController(refinementViewController, animated: true)
+    }
   
   func configureInstantSearch() {
     
@@ -49,6 +56,8 @@ class ViewController: UIViewController, HitsTableViewDataSource {
     instantSearch = InstantSearch.init(searcher: searcher)
     instantSearch.registerAllWidgets(in: self.view)
     instantSearch.register(widget: searchBar)
+    instantSearch.searcher.params.addFacetRefinement(name: "category", value: "someCat")
+    instantSearch.searcher.params.addNumericRefinement("price", .greaterThanOrEqual, 20)
   }
     
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String: Any]) -> UITableViewCell {
