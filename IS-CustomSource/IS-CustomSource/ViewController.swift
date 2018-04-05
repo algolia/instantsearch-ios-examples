@@ -37,6 +37,7 @@ class ViewController: UIViewController, HitsTableViewDataSource {
         configureInstantSearch()
         
         tableView.estimatedRowHeight = 80
+        tableView.infiniteScrolling = false
     }
     
     @objc func onFiltersTapped() {
@@ -49,9 +50,10 @@ class ViewController: UIViewController, HitsTableViewDataSource {
         
         // Initialising an Index
         
+        // UNCOMMENT ELASTICIMPLEMENTATION IF WANT TO TRY IT OUT. ALSO NEED TO CHANGE cellForRowAt:
         //let index = CustomSearchableImplementation()
-        let index = ElasticImplementation()
-        //let index = CustomBackendMovies()
+        //let index = ElasticImplementation()
+        let index = CustomBackendMovies()
         
         let searcher = Searcher(index: index)
         instantSearch = InstantSearch.init(searcher: searcher)
