@@ -15,7 +15,7 @@ public class CustomBackendProducts: SearchTransformer<CustomBackendParameters, C
     
     public override func map(query: Query) -> CustomBackendParameters {
         let queryText = query.query ?? ""
-        let hpp = query.hitsPerPage ?? 3
+        let hpp = query.hitsPerPage ?? 20
         
         return CustomBackendParameters(query: queryText, hitsPerPage: hpp)
     }
@@ -49,7 +49,7 @@ public class CustomBackendMovies: SearchTransformer<CustomBackendParameters, Cus
     
     public override func map(query: Query) -> CustomBackendParameters {
         let queryText = query.query ?? ""
-        let hpp = query.hitsPerPage ?? 3
+        let hpp = query.hitsPerPage ?? 20
         
         return CustomBackendParameters(query: queryText, hitsPerPage: hpp)
     }

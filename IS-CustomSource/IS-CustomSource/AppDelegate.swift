@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    let searchController = ViewController()
+//    let searchController = ViewController()
+    let searchController = MultiIndexViewController()
     let navController = UINavigationController(rootViewController: searchController)
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = navController
