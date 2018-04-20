@@ -45,7 +45,7 @@ class MultiIndexViewController: MultiHitsTableViewController {
     // Initialising an Index
     
     //let index = CustomSearchableImplementation()
-    //let index = ElasticImplementation()
+    //let index = SomeImplementation()
     let productSearchable = CustomBackendProducts()
     let movieSearchable = CustomBackendMovies()
     

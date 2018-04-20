@@ -13,18 +13,18 @@ import Alamofire
 
 // Search Data Models of the custom backend
 
-public struct ElasticSearchParameters {
+public struct SomeSearchParameters {
     var q: String?
 }
 
-public struct ElasticSearchResults {
+public struct SomeSearchResults {
     var total: Int
     var hits: [[String: Any]]
 }
 
-public class ElasticImplementation: SearchTransformer<ElasticSearchParameters, ElasticSearchResults> {
+public class SomeImplementation: SearchTransformer<SomeSearchParameters, SomeSearchResults> {
     
-    public override func search(_ query: ElasticSearchParameters, searchResultsHandler: @escaping SearchResultsHandler) {
+    public override func search(_ query: SomeSearchParameters, searchResultsHandler: @escaping SearchResultsHandler) {
         
         let user = "3nmp9kz7fh"
         let password = "gch2ewzerx"
@@ -52,25 +52,25 @@ public class ElasticImplementation: SearchTransformer<ElasticSearchParameters, E
                 print("Total: \(total)")
                 print("hits: \(hits)")
                 
-                let elasticSearchResults = ElasticSearchResults(total: total, hits: hits)
-                searchResultsHandler(elasticSearchResults, nil)
+                let someSearchResults = SomeSearchResults(total: total, hits: hits)
+                searchResultsHandler(someSearchResults, nil)
             }
         }
         
     }
     
     // Transforms the Algolia params to custom backend params.
-    public override func map(query: Query) -> ElasticSearchParameters {
+    public override func map(query: Query) -> SomeSearchParameters {
         let searchParameters = query as! SearchParameters
         let facetRefinements = searchParameters.facetRefinements
         let numericRefinements = searchParameters.numericRefinements
         let queryText = query.query
         
-        return ElasticSearchParameters(q: queryText)
+        return SomeSearchParameters(q: queryText)
     }
     
     // Transforms the custom backend result to an Algolia result.
-    public override func map(results: ElasticSearchResults) -> SearchResults {
+    public override func map(results: SomeSearchResults) -> SearchResults {
         let nbHits = results.total
         let hits = results.hits
         let categoryFacet = ["chairs": 10, "tables": 15]

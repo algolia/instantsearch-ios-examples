@@ -50,9 +50,8 @@ class ViewController: UIViewController, HitsTableViewDataSource {
         
         // Initialising an Index
         
-        // UNCOMMENT ELASTICIMPLEMENTATION IF WANT TO TRY IT OUT. ALSO NEED TO CHANGE cellForRowAt:
         //let index = CustomSearchableImplementation()
-        //let index = ElasticImplementation()
+        //let index = SomeImplementation()
         let index = CustomBackendMovies()
         
         let searcher = Searcher(index: index)
