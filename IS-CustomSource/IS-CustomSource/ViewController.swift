@@ -50,9 +50,9 @@ class ViewController: UIViewController, HitsTableViewDataSource {
         
         // Initialising an Index
         
-        //let index = CustomSearchableImplementation()
+        let index = CustomSearchableImplementation()
         //let index = SomeImplementation()
-        let index = CustomBackendMovies()
+        //let index = CustomBackendMovies()
         
         let searcher = Searcher(index: index)
         instantSearch = InstantSearch.init(searcher: searcher)
@@ -68,8 +68,8 @@ class ViewController: UIViewController, HitsTableViewDataSource {
             cell = UITableViewCell(style: .value1, reuseIdentifier: "cellID")
         }
         
-        let name = hit["title"] as! String
-        
+        //let name = hit["title"] as! String
+        let name = hit["nameCustom"] as! String
         
         cell!.textLabel?.text = name
         //cell!.detailTextLabel?.text = location

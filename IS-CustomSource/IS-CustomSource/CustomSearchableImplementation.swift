@@ -23,7 +23,7 @@ public struct CustomSearchParameters {
     var facets: [String]?
 }
 
-public class CustomSearchableImplementation: SearchTransformer<CustomSearchParameters, CustomSearchResults> {
+public class CustomSearchableImplementation: SearchClient<CustomSearchParameters, CustomSearchResults> {
     
     public override func search(_ query: CustomSearchParameters, searchResultsHandler: @escaping SearchResultsHandler) {
 

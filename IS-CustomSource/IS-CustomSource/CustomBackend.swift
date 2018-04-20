@@ -11,7 +11,7 @@ import InstantSearchCore
 import AlgoliaSearch
 import Alamofire
 
-public class CustomBackendProducts: SearchTransformer<CustomBackendParameters, CustomBackendResults> {
+public class CustomBackendProducts: SearchClient<CustomBackendParameters, CustomBackendResults> {
     
     public override func map(query: Query) -> CustomBackendParameters {
         let queryText = query.query ?? ""
@@ -45,7 +45,7 @@ public class CustomBackendProducts: SearchTransformer<CustomBackendParameters, C
     
 }
 
-public class CustomBackendMovies: SearchTransformer<CustomBackendParameters, CustomBackendResults> {
+public class CustomBackendMovies: SearchClient<CustomBackendParameters, CustomBackendResults> {
     
     public override func map(query: Query) -> CustomBackendParameters {
         let queryText = query.query ?? ""

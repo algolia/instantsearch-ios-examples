@@ -22,7 +22,7 @@ public struct SomeSearchResults {
     var hits: [[String: Any]]
 }
 
-public class SomeImplementation: SearchTransformer<SomeSearchParameters, SomeSearchResults> {
+public class SomeImplementation: SearchClient<SomeSearchParameters, SomeSearchResults> {
     
     public override func search(_ query: SomeSearchParameters, searchResultsHandler: @escaping SearchResultsHandler) {
         
@@ -61,9 +61,9 @@ public class SomeImplementation: SearchTransformer<SomeSearchParameters, SomeSea
     
     // Transforms the Algolia params to custom backend params.
     public override func map(query: Query) -> SomeSearchParameters {
-        let searchParameters = query as! SearchParameters
-        let facetRefinements = searchParameters.facetRefinements
-        let numericRefinements = searchParameters.numericRefinements
+        //let searchParameters = query as! SearchParameters
+        //let facetRefinements = searchParameters.facetRefinements
+        //let numericRefinements = searchParameters.numericRefinements
         let queryText = query.query
         
         return SomeSearchParameters(q: queryText)

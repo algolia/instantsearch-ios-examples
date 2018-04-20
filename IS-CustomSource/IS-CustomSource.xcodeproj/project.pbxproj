@@ -17,7 +17,7 @@
 		E2472A852073D71500E6A31D /* RefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2472A842073D71500E6A31D /* RefinementViewController.swift */; };
 		E2472A872074CDC600E6A31D /* CustomBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2472A862074CDC600E6A31D /* CustomBackend.swift */; };
 		E2472A892074ED9700E6A31D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2472A882074ED9700E6A31D /* ViewController.swift */; };
-		E29DACED206D28C0008AAFFC /* ElasticSearchCustomBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DACEC206D28C0008AAFFC /* ElasticSearchCustomBackend.swift */; };
+		E29DACED206D28C0008AAFFC /* SomeSearchCustomBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DACEC206D28C0008AAFFC /* SomeSearchCustomBackend.swift */; };
 		E2CAC0D02056C9BE002BB9CA /* CustomSearchableImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */; };
 		E2E2FCF420529A7E0073B0B5 /* mock-custom.json in Resources */ = {isa = PBXBuildFile; fileRef = E2E2FCF320529A7E0073B0B5 /* mock-custom.json */; };
 /* End PBXBuildFile section */
@@ -36,7 +36,7 @@
 		E2472A842073D71500E6A31D /* RefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementViewController.swift; sourceTree = "<group>"; };
 		E2472A862074CDC600E6A31D /* CustomBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackend.swift; sourceTree = "<group>"; };
 		E2472A882074ED9700E6A31D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E29DACEC206D28C0008AAFFC /* ElasticSearchCustomBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticSearchCustomBackend.swift; sourceTree = "<group>"; };
+		E29DACEC206D28C0008AAFFC /* SomeSearchCustomBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeSearchCustomBackend.swift; sourceTree = "<group>"; };
 		E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchableImplementation.swift; sourceTree = "<group>"; };
 		E2E2FCF320529A7E0073B0B5 /* mock-custom.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mock-custom.json"; sourceTree = "<group>"; };
 		FCED998CB93BDA062451B756 /* Pods-IS-CustomSource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IS-CustomSource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 				1DCF1F471F87858500F8155D /* Info.plist */,
 				E2472A862074CDC600E6A31D /* CustomBackend.swift */,
 				E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */,
-				E29DACEC206D28C0008AAFFC /* ElasticSearchCustomBackend.swift */,
+				E29DACEC206D28C0008AAFFC /* SomeSearchCustomBackend.swift */,
 				1D8145121F87B9CE00ED100F /* mock.json */,
 				1D8145141F87BC5E00ED100F /* mock-light.json */,
 				E2E2FCF320529A7E0073B0B5 /* mock-custom.json */,
@@ -254,7 +254,7 @@
 				E2472A852073D71500E6A31D /* RefinementViewController.swift in Sources */,
 				E2CAC0D02056C9BE002BB9CA /* CustomSearchableImplementation.swift in Sources */,
 				E2472A872074CDC600E6A31D /* CustomBackend.swift in Sources */,
-				E29DACED206D28C0008AAFFC /* ElasticSearchCustomBackend.swift in Sources */,
+				E29DACED206D28C0008AAFFC /* SomeSearchCustomBackend.swift in Sources */,
 				1DCF1F3C1F87858500F8155D /* AppDelegate.swift in Sources */,
 				E2472A892074ED9700E6A31D /* ViewController.swift in Sources */,
 			);
