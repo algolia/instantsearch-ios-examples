@@ -14,24 +14,22 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AlgoliaSearch-Client-Swift (4.8.1)
-  - Cosmos (10.0.0)
-  - InstantSearch-Core-Swift (2.0.0):
-    - AlgoliaSearch-Client-Swift (~> 4.0)
-  - InstantSearch-iOS (1.0.0):
-    - InstantSearch-iOS/InstantSearch-iOS (= 1.0.0)
-  - InstantSearch-iOS/InstantSearch-iOS (1.0.0):
-    - InstantSearch-Core-Swift (~> 2.0.0)
-  - KUIPopOver (0.0.2)
-  - Nimble (7.0.1)
+  - AlgoliaSearch-Client-Swift (5.1.0)
+  - Cosmos (12.0.1)
+  - InstantSearch-Core-Swift (3.2.0):
+    - AlgoliaSearch-Client-Swift (~> 5.0)
+  - InstantSearch-iOS (2.0.1):
+    - InstantSearch-Core-Swift (~> 3.0)
+  - KUIPopOver (1.0.2)
+  - Nimble (7.0.2)
   - Nuke (5.2)
-  - Quick (1.1.0)
+  - Quick (1.2.0)
   - WARangeSlider (1.1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
-  - Cosmos (~> 10.0)
-  - InstantSearch-iOS (~> 1.0.0)
+  - Cosmos (~> 12.0)
+  - InstantSearch-iOS (~> 2.0.0)
   - KUIPopOver
   - Nimble
   - Nuke
@@ -40,16 +38,16 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AlgoliaSearch-Client-Swift: 5bdfbc8727f203773245e2410edd7a9c8e831637
-  Cosmos: bb9310e73ad1ad472b183b848b959302c569cf09
-  InstantSearch-Core-Swift: 456199cd7887c9d66d11668a12d899235a61b9d4
-  InstantSearch-iOS: c9484cee0fb79ab80538562cd7c365264a3dcac6
-  KUIPopOver: 9d68b71e82b6bd360acf35173e821fd3ba586558
-  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
+  AlgoliaSearch-Client-Swift: 9cd63f85d45c6e50f06c267439928c2211c1bfe4
+  Cosmos: 4a9f57998a08788a1062c7b8eefbc62d2b590f39
+  InstantSearch-Core-Swift: 40cf5cf38d04d08d54f9d633f1551b19d989bf48
+  InstantSearch-iOS: e35549e03232c65f40d3bef672ff2d711fc85d09
+  KUIPopOver: 10d512237d0758273e8b49dc23a263974f380f6e
+  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
   Nuke: 5f420c4637415f979c83afb35e73176dd03232d9
-  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   WARangeSlider: 54b3e0853b8d16c444fd539005901aecee86837d
 
-PODFILE CHECKSUM: ccd7500c14a15badb9d14266f0bd0af7b9ee8f73
+PODFILE CHECKSUM: f7096e87a375e36d1aec99f9d1d9af83a4af4888
 
 COCOAPODS: 1.3.1

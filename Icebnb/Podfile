@@ -8,9 +8,10 @@ end
 target 'Icebnb' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'InstantSearch-iOS', '~> 1.0.0'
+  #pod 'InstantSearch-iOS', :path => "../../instantsearch-ios/"
+  pod 'InstantSearch-iOS', '~> 2.0.0'
   pod 'AFNetworking', '~> 3.0'
-  pod 'Cosmos', '~> 10.0'
+  pod 'Cosmos', '~> 12.0'
   pod 'WARangeSlider'
   pod 'Nuke'
   pod 'KUIPopOver'

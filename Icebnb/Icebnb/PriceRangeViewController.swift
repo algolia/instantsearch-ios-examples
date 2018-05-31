@@ -27,7 +27,7 @@ class PriceRangeViewController: UIViewController {
     rangeSliderValueChanged()
   }
   
-  public func rangeSliderValueChanged() {
+  @objc public func rangeSliderValueChanged() {
     minLabel.text = "\(Int(slider.lowerValue))$"
     maxLabel.text = "\(Int(slider.upperValue))$"
   }
