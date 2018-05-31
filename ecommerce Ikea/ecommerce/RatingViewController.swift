@@ -20,7 +20,7 @@ class RatingViewController: UIViewController {
         resultButton.addTarget(self, action: #selector(resultButtonClicked), for: .touchUpInside)
     }
     
-    func resultButtonClicked() {
+    @objc func resultButtonClicked() {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? ItemTableViewController {
             if let navigator = navigationController {
                 navigator.pushViewController(viewController, animated: true)

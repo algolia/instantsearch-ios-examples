@@ -6,8 +6,7 @@
 //  Copyright © 2017 Guy Daher. All rights reserved.
 //
 
-import AlgoliaSearch
-import InstantSearchCore
+import InstantSearch
 import Foundation
 
 struct ItemRecord {

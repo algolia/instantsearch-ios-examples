@@ -10,7 +10,6 @@ import Quick
 import Nimble
 @testable import ecommerce
 import InstantSearchCore
-import AlgoliaSearch
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {

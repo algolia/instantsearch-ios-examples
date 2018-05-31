@@ -8,7 +8,6 @@
 
 import UIKit
 import InstantSearch
-import AlgoliaSearch
 
 class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableViewDataSource {
     
@@ -61,7 +60,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     func configureNavBar() {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : ColorConstants.barTextColor]
+        navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedStringKey : Any]
     }
     
     func configureToolBar() {

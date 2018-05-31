@@ -62,7 +62,7 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
     func configureNavBar() {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : ColorConstants.barTextColor]
+        navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedStringKey : Any]
     }
     
     func configureSearchController() {
@@ -82,7 +82,7 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
         searchBarView.addSubview(searchController.searchBar)
     }
     
-    func resultButtonClicked() {
+    @objc func resultButtonClicked() {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? ItemTableViewController {
             if let navigator = navigationController {
                 navigator.pushViewController(viewController, animated: true)
