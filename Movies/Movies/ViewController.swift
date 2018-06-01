@@ -8,7 +8,6 @@
 
 import UIKit
 import InstantSearch
-import InstantSearchCore
 import AFNetworking
 
 class ViewController: MultiHitsTableViewController {

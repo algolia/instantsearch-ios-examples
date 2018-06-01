@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import AlgoliaSearch
-import InstantSearchCore
+import InstantSearch
 
 struct Place {
   private var json: JSONObject

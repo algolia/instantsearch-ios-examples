@@ -4,14 +4,14 @@
 target 'Getting Started Storyboard Objc' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
-  pod 'InstantSearch-iOS', '~> 1.0.0'
+  pod 'InstantSearch', '~> 2.0'
   # Pods for Getting Started Storyboard Objc
 end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
+      config.build_settings['SWIFT_VERSION'] = '4.1'
     end
   end
 end

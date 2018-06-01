@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import AlgoliaSearch
-import InstantSearchCore
+import InstantSearch
 
 // Search Data Models of the custom backend
 
@@ -33,12 +32,12 @@ public class CustomSearchableImplementation: SearchClient<CustomSearchParameters
                 return
             }
             do {
-                guard let text = query.query else { return }
+                let text = query.query ?? ""
                 
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 var jsonObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
                 jsonObj!["hitsCustom"] = (jsonObj!["hitsCustom"] as! [[String: String]]).filter({ item in
-                    (item["nameCustom"]?.contains(text))! || (item["descriptionCustom"]?.contains(text))!
+                    text.isEmpty || (item["nameCustom"]?.contains(text))! || (item["descriptionCustom"]?.contains(text))!
                 })
                 let nbHitsCustom = jsonObj!["nbHitsCustom"] as! Int
                 let hitsCustom = jsonObj!["hitsCustom"] as! [[String: Any]]

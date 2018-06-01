@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import AlgoliaSearch
-import InstantSearchCore
+import InstantSearch
 import Alamofire
 
 // Search Data Models of the custom backend

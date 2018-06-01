@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import InstantSearchCore
-import AlgoliaSearch
+import InstantSearch
 import Alamofire
 
 public class CustomBackendProducts: SearchClient<CustomBackendParameters, CustomBackendResults> {

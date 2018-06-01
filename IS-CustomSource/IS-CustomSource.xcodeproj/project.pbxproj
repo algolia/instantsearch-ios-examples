@@ -82,8 +82,8 @@
 				1DCF1F421F87858500F8155D /* Assets.xcassets */,
 				1DCF1F441F87858500F8155D /* LaunchScreen.storyboard */,
 				1DCF1F471F87858500F8155D /* Info.plist */,
-				E2472A862074CDC600E6A31D /* CustomBackend.swift */,
 				E2CAC0CF2056C9BE002BB9CA /* CustomSearchableImplementation.swift */,
+				E2472A862074CDC600E6A31D /* CustomBackend.swift */,
 				E29DACEC206D28C0008AAFFC /* SomeSearchCustomBackend.swift */,
 				1D8145121F87B9CE00ED100F /* mock.json */,
 				1D8145141F87BC5E00ED100F /* mock-light.json */,
@@ -121,7 +121,6 @@
 				1DCF1F351F87858500F8155D /* Frameworks */,
 				1DCF1F361F87858500F8155D /* Resources */,
 				3450447051443D43106F4464 /* [CP] Embed Pods Frameworks */,
-				9A66BDF8B29D0B806D141564 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -191,18 +190,18 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlgoliaSearch-Client-Swift/AlgoliaSearch.framework",
-				"${BUILT_PRODUCTS_DIR}/InstantSearch-Core-Swift/InstantSearchCore.framework",
-				"${BUILT_PRODUCTS_DIR}/InstantSearch-iOS/InstantSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/InstantSearch/InstantSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/InstantSearchClient/InstantSearchClient.framework",
+				"${BUILT_PRODUCTS_DIR}/InstantSearchCore/InstantSearchCore.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlgoliaSearch.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearchCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearchClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearchCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,21 +225,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9A66BDF8B29D0B806D141564 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IS-CustomSource/Pods-IS-CustomSource-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -8,7 +8,6 @@
 
 import UIKit
 import InstantSearch
-import InstantSearchCore
 
 class DetailViewControllerDemo: HitsTableViewController {
     

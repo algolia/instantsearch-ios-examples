@@ -6,6 +6,6 @@ target 'Getting Started Programatically' do
   use_frameworks!
 
   # Pods for Getting Started Programatically
-  pod 'InstantSearch-iOS', '~> 1.0.0'
+  pod 'InstantSearch', '~> 2.0'
   
 end

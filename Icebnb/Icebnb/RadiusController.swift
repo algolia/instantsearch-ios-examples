@@ -8,8 +8,7 @@
 
 import UIKit
 import KUIPopOver
-import InstantSearchCore
-import AlgoliaSearch
+import InstantSearch
 
 class RadiusController: UIViewController {
   @IBOutlet weak var slider: PRGRoundSlider!

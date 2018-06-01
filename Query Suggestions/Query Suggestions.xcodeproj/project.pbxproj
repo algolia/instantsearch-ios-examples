@@ -99,8 +99,7 @@
 				E25F5CE91FD18761002C8A8D /* Sources */,
 				E25F5CEA1FD18761002C8A8D /* Frameworks */,
 				E25F5CEB1FD18761002C8A8D /* Resources */,
-				54E6AA723013ECEC39DE48D5 /* [CP] Embed Pods Frameworks */,
-				A20E53C4E2493D8A5F27D82A /* [CP] Copy Pods Resources */,
+				9EF66132DC33BA91330496C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -159,7 +158,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		54E6AA723013ECEC39DE48D5 /* [CP] Embed Pods Frameworks */ = {
+		9EF66132DC33BA91330496C3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -167,35 +166,20 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Query Suggestions/Pods-Query Suggestions-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/AlgoliaSearch-Client-Swift/AlgoliaSearch.framework",
-				"${BUILT_PRODUCTS_DIR}/InstantSearch-Core-Swift/InstantSearchCore.framework",
-				"${BUILT_PRODUCTS_DIR}/InstantSearch-iOS/InstantSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/InstantSearch/InstantSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/InstantSearchClient/InstantSearchClient.framework",
+				"${BUILT_PRODUCTS_DIR}/InstantSearchCore/InstantSearchCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlgoliaSearch.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearchCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearchClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstantSearchCore.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Query Suggestions/Pods-Query Suggestions-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A20E53C4E2493D8A5F27D82A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Query Suggestions/Pods-Query Suggestions-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA473EABEF52DCE0C5F2C755 /* [CP] Check Pods Manifest.lock */ = {

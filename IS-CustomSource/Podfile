@@ -8,8 +8,7 @@ end
 target 'IS-CustomSource' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'InstantSearch-iOS', :path => '/Users/guydaher/Developer/Algolia/iOS/instantsearch-ios'
-  pod 'InstantSearch-Core-Swift', :path => '/Users/guydaher/Developer/Algolia/iOS/instantsearch-core-swift'
+  pod 'InstantSearch', '~> 2.0'
   pod 'AFNetworking', '~> 3.0'
   pod 'Nuke'
   pod 'Alamofire', '~> 4.7'

@@ -8,8 +8,6 @@
 
 import UIKit
 import InstantSearch
-import InstantSearchCore
-import AlgoliaSearch
 import MapKit
 import Nuke
 import KUIPopOver

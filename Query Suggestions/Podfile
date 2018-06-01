@@ -8,7 +8,7 @@ target 'Query Suggestions' do
   inhibit_all_warnings!
   
   # Pods for Query Suggestions
-  pod 'InstantSearch-iOS', '~> 2.0'
+  pod 'InstantSearch', '~> 2.0'
   pod 'AFNetworking', '~> 3.0'
 
 end

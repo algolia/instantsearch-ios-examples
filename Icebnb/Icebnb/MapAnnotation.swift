@@ -8,8 +8,7 @@
 
 import UIKit
 import MapKit
-import InstantSearchCore
-import AlgoliaSearch
+import InstantSearch
 
 class MapAnnotation: NSObject, MKAnnotation {
   var coordinate: CLLocationCoordinate2D
