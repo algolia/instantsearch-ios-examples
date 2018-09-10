@@ -30,7 +30,7 @@ class HitsViewController: MultiHitsTableViewController {
             cell.textLabel?.highlightedTextColor = .blue
             cell.textLabel?.highlightedBackgroundColor = .yellow
             cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value
-        } else { // ikea
+        } else { // bestbuy promo
             cell.textLabel?.highlightedTextColor = .white
             cell.textLabel?.highlightedBackgroundColor = .black
             cell.textLabel?.highlightedText = SearchResults.highlightResult(hit: hit, path: "name")?.value

@@ -27,7 +27,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="index" value="ikea"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="index" value="bestbuy"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SpX-hR-0cX" customClass="MultiHitsTableWidget" customModule="InstantSearch">
@@ -44,7 +44,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="indices" value="bestbuy_promo,ikea"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="indices" value="bestbuy_promo,bestbuy"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="hitsPerSection" value="5,10"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>

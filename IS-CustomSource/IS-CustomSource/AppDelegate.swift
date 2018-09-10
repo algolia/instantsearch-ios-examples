@@ -12,7 +12,7 @@ import InstantSearch
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   private let ALGOLIA_APP_ID = "latency"
-  private let ALGOLIA_INDEX_NAME = "ikea"
+  private let ALGOLIA_INDEX_NAME = "bestbuy"
   private let ALGOLIA_API_KEY = Bundle.main.infoDictionary!["AlgoliaApiKey"] as! String
   var window: UIWindow?
 

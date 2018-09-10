@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let searcherIds = [SearcherId(index: "bestbuy_promo"), SearcherId(index: "ikea")]
+        let searcherIds = [SearcherId(index: "bestbuy_promo"), SearcherId(index: "bestbuy")]
         InstantSearch.shared.configure(appID: ALGOLIA_APP_ID, apiKey: ALGOLIA_API_KEY, searcherIds: searcherIds)
         
         return true

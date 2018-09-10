@@ -44,7 +44,6 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 ecommerce bestbuy/Pods/
-ecommerce Ikea/Pods/
 Getting Started Programatically/Pods/
 Getting Started Storyboard/Pods/
 Getting Started Storyboard Objective-C/Pods/
