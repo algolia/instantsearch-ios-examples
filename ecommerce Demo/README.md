@@ -1,5 +1,5 @@
 ## E-commerce application
-<img src="../docs/ikea.gif" align="right" width="300"/>
+<img src="../docs/ecommerce.gif" align="right" width="300"/>
 
 This example imitates a product search interface like well-known e-commerce applications.
 

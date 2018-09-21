@@ -6,6 +6,29 @@
 ## Examples
 We have built a demo application to give you an idea of what you can build with InstantSearch iOS:
 
+## [E-commerce Demo App](https://github.com/algolia/instantsearch-ios-examples/tree/master/ecommerce%20Demo)
+<img src="./docs/ecommerce.gif" align="right" width="300"/>
+
+This example imitates a product search interface like well-known e-commerce applications.
+
+- Search in the **product's name**, **type**, and **category**
+- Filter with RefinementList by **type** or **category**
+- Filter with Numeric filters by **price** or **rating**
+- Custom views using `AlgoliaWidget` for filtering by **price** and **rating**.
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ## [Tourism application](https://github.com/algolia/instantsearch-ios-examples/tree/master/Icebnb)
 <img src="./docs/icebnb.gif" align="right" width="300"/>
 
