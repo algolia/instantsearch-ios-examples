@@ -34,8 +34,8 @@ extension RangeSlider: AlgoliaWidget, SearchableViewModel {
     }
     
     @objc func sliderValuesChanged() {
-        searcher.params.updateNumericRefinement("price", .greaterThanOrEqual, NSNumber(value: lowerValue))
-        searcher.params.updateNumericRefinement("price", .lessThanOrEqual, NSNumber(value: upperValue))
+        searcher.params.updateNumericRefinement("salePrice", .greaterThanOrEqual, NSNumber(value: lowerValue))
+        searcher.params.updateNumericRefinement("salePrice", .lessThanOrEqual, NSNumber(value: upperValue))
         searcher.search()
     }
 }

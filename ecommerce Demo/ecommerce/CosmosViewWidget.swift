@@ -27,7 +27,7 @@ extension CosmosView: AlgoliaWidget, SearchableViewModel {
     public func configure(with searcher: Searcher) {
         self.searcher = searcher
         didFinishTouchingCosmos = { rating in
-            searcher.params.updateNumericRefinement("rating", .greaterThanOrEqual, NSNumber(value: rating))
+            searcher.params.updateNumericRefinement("bestSellingRank", .greaterThanOrEqual, NSNumber(value: rating))
             searcher.search()
         }
     }

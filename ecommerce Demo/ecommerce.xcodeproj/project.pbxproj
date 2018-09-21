@@ -422,7 +422,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ecommerceTests/Pods-ecommerceTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ecommerceTests/Pods-ecommerceTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -433,7 +433,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ecommerceTests/Pods-ecommerceTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ecommerceTests/Pods-ecommerceTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7F689A07DF499F45F71A6AC /* [CP] Embed Pods Frameworks */ = {
@@ -442,7 +442,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ecommerce/Pods-ecommerce-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/InstantSearch/InstantSearch.framework",
@@ -461,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ecommerce/Pods-ecommerce-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ecommerce/Pods-ecommerce-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BB4607FFCD5ADF8479CCC381 /* [CP] Check Pods Manifest.lock */ = {
@@ -488,7 +488,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -499,7 +499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ecommerceUITests/Pods-ecommerceUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -676,7 +676,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBE7CDF0FDF54F69B06F8961 /* Pods-ecommerce.debug.xcconfig */;
 			buildSettings = {
-				ALGOLIA_API_KEY = 6be0576ff61c053d5f9a3225e2a90f76;
+				ALGOLIA_API_KEY = 1f6fd3a6fb973cb08419fe7d288fa4db;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = ecommerce/Info.plist;
@@ -691,7 +691,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF8DE04E87BDFD0B3B86E68B /* Pods-ecommerce.release.xcconfig */;
 			buildSettings = {
-				ALGOLIA_API_KEY = 6be0576ff61c053d5f9a3225e2a90f76;
+				ALGOLIA_API_KEY = 1f6fd3a6fb973cb08419fe7d288fa4db;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = ecommerce/Info.plist;

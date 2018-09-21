@@ -22,7 +22,7 @@ struct ItemRecord {
     }
     
     var type: String? {
-        return json["type"] as? String
+        return json["manufacturer"] as? String
     }
     
     var category: String? {
@@ -30,12 +30,12 @@ struct ItemRecord {
     }
     
     var price: Double? {
-        return json["price"] as? Double
+        return json["salePrice"] as? Double
     }
     
     
     var rating: Int? {
-        return json["rating"] as? Int
+        return json["bestSellingRank"] as? Int
     }
     
     var imageUrl: URL? {
@@ -52,7 +52,7 @@ struct ItemRecord {
     }
     
     var type_highlighted: String? {
-        return SearchResults.highlightResult(hit: json, path: "type")?.value
+        return SearchResults.highlightResult(hit: json, path: "manufacturer")?.value
     }
 }
 
