@@ -7,7 +7,7 @@
 We have built a demo application to give you an idea of what you can build with InstantSearch iOS:
 
 ## [E-commerce Demo App](https://github.com/algolia/instantsearch-ios-examples/tree/master/ecommerce%20Demo)
-<img src="./docs/ecommerce.png" align="right" width="300"/>
+<img src="./docs/ecommerce.png" align="right" width="250"/>
 
 This example imitates a product search interface like well-known e-commerce applications.
 
