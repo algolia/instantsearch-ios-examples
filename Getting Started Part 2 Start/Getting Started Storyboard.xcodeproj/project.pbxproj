@@ -165,7 +165,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Getting Started Storyboard/Pods-Getting Started Storyboard-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Getting Started Storyboard/Pods-Getting Started Storyboard-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/InstantSearch/InstantSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/InstantSearchClient/InstantSearchClient.framework",
 				"${BUILT_PRODUCTS_DIR}/InstantSearchCore/InstantSearchCore.framework",
@@ -178,7 +178,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Getting Started Storyboard/Pods-Getting Started Storyboard-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Getting Started Storyboard/Pods-Getting Started Storyboard-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		40C9536F391778B124473587 /* [CP] Check Pods Manifest.lock */ = {
@@ -336,7 +336,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.daher.Getting-Started-Storyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -350,7 +350,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.daher.Getting-Started-Storyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

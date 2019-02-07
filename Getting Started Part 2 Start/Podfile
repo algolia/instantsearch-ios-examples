@@ -6,6 +6,6 @@ target 'Getting Started Storyboard' do
   use_frameworks!
 
   # Pods for Getting Started Storyboard
-  pod 'InstantSearch', '~> 2.0'
+  pod 'InstantSearch', '~> 3.0'
 
 end

@@ -31,6 +31,12 @@ class ViewController: HitsTableViewController {
         return cell
     }
 
+  func viewForNoResults(in tableView: UITableView) -> UIView {
+    let v = UIView()
+    v.backgroundColor = .red
+    return v
+  }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

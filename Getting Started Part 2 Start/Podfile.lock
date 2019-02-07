@@ -1,14 +1,14 @@
 PODS:
-  - InstantSearch (2.1.3):
-    - InstantSearch/UI (= 2.1.3)
-  - InstantSearch/UI (2.1.3):
-    - InstantSearchCore (~> 3.2)
-  - InstantSearchClient (5.1.10)
-  - InstantSearchCore (3.2.4):
-    - InstantSearchClient (~> 5.0)
+  - InstantSearch (3.1.3):
+    - InstantSearch/UI (= 3.1.3)
+  - InstantSearch/UI (3.1.3):
+    - InstantSearchCore (~> 4.0)
+  - InstantSearchClient (6.1.1)
+  - InstantSearchCore (4.0.0):
+    - InstantSearchClient (~> 6.0)
 
 DEPENDENCIES:
-  - InstantSearch (~> 2.0)
+  - InstantSearch (~> 3.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -17,10 +17,10 @@ SPEC REPOS:
     - InstantSearchCore
 
 SPEC CHECKSUMS:
-  InstantSearch: 4e30463b32cb9782a8210fd6fc8559ce05cdb077
-  InstantSearchClient: 1792580c276f362741aea75e60aa9c1aa22a1277
-  InstantSearchCore: 0d22b438c4ed031d1c888c87605d318868bf21f1
+  InstantSearch: c5ec1dd67f2d68b68026dd8086ad858659b5a2cd
+  InstantSearchClient: 8e3754ff154e2d65b0a391671a2a36f045a9bf5a
+  InstantSearchCore: d7213fee88c766297624c54f8257cff987cd1037
 
-PODFILE CHECKSUM: 3b5550e6e5bc0942e4133f4f02c0dc3dba37beaa
+PODFILE CHECKSUM: b4bccf0dd2fc0b50e3c16f3ed3a4dd253599f535
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2
