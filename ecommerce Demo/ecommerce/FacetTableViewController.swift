@@ -53,7 +53,7 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
     }
     
     func configureTable() {
-        tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor
     }
@@ -61,7 +61,7 @@ class FacetTableViewController: UIViewController, RefinementTableViewDataSource 
     func configureNavBar() {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedStringKey : Any]
+      navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedString.Key : Any]
     }
     
     func configureSearchController() {

@@ -54,7 +54,7 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
     }
     
     func configureTable() {
-        tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.backgroundColor = ColorConstants.tableColor
     }
@@ -62,7 +62,7 @@ class TypeFacetTableViewController: UIViewController, RefinementTableViewDataSou
     func configureNavBar() {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedStringKey : Any]
+      navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedString.Key : Any]
     }
     
     func configureSearchController() {

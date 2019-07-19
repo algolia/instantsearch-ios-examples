@@ -9,7 +9,7 @@
 import UIKit
 import InstantSearch
 
-class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableViewDataSource {
+class ItemTableViewController: HitsTableViewController {
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var tableView: HitsTableWidget!
@@ -17,7 +17,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var nbHitsLabel: UILabel!
     
-    var hitsController: HitsController!
+//    var hitsController: HitsController!
     var searchController: UISearchController!
     
     override func viewDidLoad() {
@@ -29,14 +29,14 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
         configureSearchController()
         configureTable()
         configureInstantSearch()
-        
-        hitsController = HitsController(table: tableView)
-        tableView.dataSource = hitsController
-        tableView.delegate = hitsController
-        hitsController.tableDataSource = self
+        hitsTableView = tableView
+//        hitsController = HitsController(table: tableView)
+//        tableView.dataSource = hitsController
+//        tableView.delegate = hitsController
+//        hitsController.tableDataSource = self
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! ItemCell
         
         cell.item = ItemRecord(json: hit)
@@ -60,7 +60,7 @@ class ItemTableViewController: UIViewController, UITableViewDelegate, HitsTableV
     func configureNavBar() {
         navigationController?.navigationBar.barTintColor = ColorConstants.barBackgroundColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedStringKey : Any]
+      navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : ColorConstants.barTextColor] as [NSAttributedString.Key : Any]
     }
     
     func configureToolBar() {

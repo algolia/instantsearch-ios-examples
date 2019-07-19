@@ -15,13 +15,13 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - Cosmos (16.0.0)
-  - InstantSearch (2.1.3):
-    - InstantSearch/UI (= 2.1.3)
-  - InstantSearch/UI (2.1.3):
-    - InstantSearchCore (~> 3.2)
-  - InstantSearchClient (5.1.10)
-  - InstantSearchCore (3.2.3):
-    - InstantSearchClient (~> 5.0)
+  - InstantSearch (4.0.0):
+    - InstantSearch/UI (= 4.0.0)
+  - InstantSearch/UI (4.0.0):
+    - InstantSearchCore (~> 5.0)
+  - InstantSearchClient (7.0.0)
+  - InstantSearchCore (5.0.0):
+    - InstantSearchClient (~> 7.0)
   - Nimble (7.1.1)
   - Quick (1.3.0)
   - WARangeSlider (1.1.1)
@@ -29,7 +29,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Cosmos (~> 16.0)
-  - InstantSearch (~> 2.0)
+  - InstantSearch (~> 4.0)
   - Nimble
   - Quick
   - WARangeSlider
@@ -48,13 +48,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Cosmos: 7bcee0fa858a9355a214f2a181be5dffcee42c81
-  InstantSearch: 4e30463b32cb9782a8210fd6fc8559ce05cdb077
-  InstantSearchClient: 1792580c276f362741aea75e60aa9c1aa22a1277
-  InstantSearchCore: 5cd71e96911430bbb49512739b8c998444a016f6
+  InstantSearch: 1f2ece050db0e23f74e69a06734a57501c67dedb
+  InstantSearchClient: c9c1522c59f109514c6a37a7ec2a622e069ba56b
+  InstantSearchCore: 2367211e88b682ad605603945620c984fd1fd8f1
   Nimble: 391f07782af4b37914f9bd7b2ffbb952731b8202
   Quick: 03278013f71aa05fe9ecabc94fbcc6835f1ee76f
   WARangeSlider: 54b3e0853b8d16c444fd539005901aecee86837d
 
-PODFILE CHECKSUM: c653bdc6972425de6f59b7a5835eb1289e1acae2
+PODFILE CHECKSUM: fc035b0aed7d78b76ba89bd3271985db2e1c80da
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.6.1
