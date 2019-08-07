@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'DemoDirectory' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  pod 'InstantSearchCore', :git => 'https://github.com/algolia/instantsearch-core-swift.git', :branch => 'isv2'
+  pod 'InstantSearch', :git => 'https://github.com/algolia/instantsearch-ios.git', :branch => 'isv2'
+  pod 'SDWebImage'
+  pod 'TagListView', '~> 1.0'
+  pod 'WARangeSlider'
+
+  # Pods for DemoDirectory
+
+  target 'DemoDirectoryTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
