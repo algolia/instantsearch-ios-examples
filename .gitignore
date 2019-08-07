@@ -53,6 +53,8 @@ IS-CustomSource/Podfile.lock
 Icebnb/Pods
 Query Suggestions/Pods/
 Movies/Pods/
+DemoDirectory/Pods/
+DemoDirectory/Podfile.lock
 
 # Unfinished Projects
 
