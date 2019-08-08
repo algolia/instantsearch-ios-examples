@@ -27,6 +27,9 @@ We have built a demo application to give you an idea of what you can build with 
 <br />
 <br />
 <br />
+<br />
+<br />
+<br />
 
 ## Multi index search
 
@@ -50,6 +53,9 @@ Example of a multi-index search interface.
 <br />
 <br />
 <br />
+<br />
+<br />
+<br />
 
 ## Search for facets
 
@@ -60,6 +66,9 @@ Example of a facet search interface.
 - Search as you type experience
 - Presentation of selected facets
 
+<br />
+<br />
+<br />
 <br />
 <br />
 <br />
