@@ -60,6 +60,7 @@ Example of a multi-index search interface.
 <br />
 <br />
 <br />
+
 ## Search for facets
 
 <img src="./docs/facets.png" align="right" width="300"/>
