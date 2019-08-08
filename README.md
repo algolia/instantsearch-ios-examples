@@ -9,9 +9,9 @@ We have built a demo application to give you an idea of what you can build with 
 
 ## Single index search
 
-<img src="./docs/single-index.png" align="right" width="250"/>
+<img src="./docs/single-index.png" align="right" width="300"/>
 
-- Search-as-you type experience
+- Search as you type experience
 - Search a movie by title, actor or year
 - Infinite scrolling of search results
 
@@ -30,7 +30,7 @@ We have built a demo application to give you an idea of what you can build with 
 
 ## Multi index search
 
-<img src="./docs/multi-index.png" align="right" width="250"/>
+<img src="./docs/multi-index.png" align="right" width="300"/>
 
 Example of a multi-index search interface.
 
@@ -53,9 +53,12 @@ Example of a multi-index search interface.
 
 ## Search for facets
 
-<img src="./docs/facets.png" align="right" width="250"/>
+<img src="./docs/facets.png" align="right" width="300"/>
 
-Example of a facet search interface. 
+Example of a facet search interface.
+
+- Search as you type experience
+- Presentation of selected facets
 
 <br />
 <br />
