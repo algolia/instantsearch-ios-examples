@@ -6,6 +6,10 @@
 ## Examples
 We have built a demo application to give you an idea of what you can build with InstantSearch iOS:
 
+## Search as you type experience
+<img src="./docs/instant_results.gif" align="right" width="300"/>
+
+- Search results updated on each keystroke
 
 ## Single index search
 
