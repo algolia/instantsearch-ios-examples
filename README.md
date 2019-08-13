@@ -11,6 +11,26 @@ We have built a demo application to give you an idea of what you can build with 
 
 - Search results updated on each keystroke
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ## Single index search
 
 <img src="./docs/single-index.png" align="right" width="300"/>
