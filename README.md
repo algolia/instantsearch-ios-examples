@@ -61,7 +61,7 @@ We have built a demo application to give you an idea of what you can build with 
 
 ## Multi index search
 
-<img src="./docs/multi-index.png" align="right" width="300"/>
+<img src="./docs/multi-index.gif" align="right" width="300"/>
 
 Example of a multi-index search interface.
 
