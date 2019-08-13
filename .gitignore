@@ -20,6 +20,7 @@ xcuserdata/
 ## Other
 *.moved-aside
 *.xcuserstate
+*.DS_Store
 
 ## Obj-C/Swift specific
 *.hmap
@@ -53,6 +54,8 @@ IS-CustomSource/Podfile.lock
 Icebnb/Pods
 Query Suggestions/Pods/
 Movies/Pods/
+DemoDirectory/Pods/
+DemoDirectory/Podfile.lock
 
 # Unfinished Projects
 
