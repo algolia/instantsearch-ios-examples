@@ -51,6 +51,7 @@ class SingleIndexDemoViewController: UIViewController {
   
   private func setup() {
     
+    hitsTableViewController.tableView.keyboardDismissMode = .onDrag
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
     
     queryInputInteractor.connectSearcher(searcher, searchTriggeringMode: .searchAsYouType)
@@ -70,6 +71,7 @@ class SingleIndexDemoViewController: UIViewController {
 private extension SingleIndexDemoViewController {
   
   func configureUI() {
+    title = "Movies"
     view.backgroundColor = .white
     configureSearchBar()
     configureStatsLabel()

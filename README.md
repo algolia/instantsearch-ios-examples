@@ -33,7 +33,7 @@ We have built a demo application to give you an idea of what you can build with 
 
 ## Single index search
 
-<img src="./docs/single-index.png" align="right" width="300"/>
+<img src="./docs/infinite-scrolling.gif" align="right" width="300"/>
 
 - Search as you type experience
 - Search a movie by title, actor or year
