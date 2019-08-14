@@ -84,10 +84,6 @@ Example of a multi-index search interface.
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
 
 ## Search for facets
 
@@ -98,6 +94,12 @@ Example of a facet search interface.
 - Search as you type experience
 - Presentation of selected facets
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <br />
 <br />
 <br />
