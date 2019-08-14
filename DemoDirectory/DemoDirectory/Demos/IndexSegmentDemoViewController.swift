@@ -72,27 +72,40 @@ class IndexSegmentDemoViewController: UIViewController {
 
     indexSegmentInteractor.connectSearcher(searcher: searcher)
 
-    indexSegmentInteractor.connectController(selectIndexAlertController) { (index) -> String in
-      switch index {
-      case self.indexTitle: return "Default"
-      case self.indexYearAsc: return "Year Asc"
-      case self.indexYearDesc: return "Year Desc"
-      default: return index.name
-      }
+    indexSegmentInteractor.connectController(selectIndexAlertController, presenter: title(for:))
+    indexSegmentInteractor.onSelectedComputed.subscribe(with: self) { (controller, index) in
+      index.flatMap { controller.indexes[$0] }.flatMap(controller.setChangeIndexButton)
     }
-
   }
 
 }
 
 extension IndexSegmentDemoViewController {
+  
+  func title(for index: Index) -> String {
+    switch index {
+    case indexTitle:
+      return "Default"
+    case indexYearAsc:
+      return "Year Asc"
+    case indexYearDesc:
+      return "Year Desc"
+    default:
+      return index.name
+    }
+  }
+  
+  func setChangeIndexButton(with index: Index) {
+    let title = "Sort by: \(self.title(for: index))"
+    navigationItem.rightBarButtonItem = .init(title: title, style: .done, target: self, action: #selector(self.editButtonTapped(sender:)))
+  }
 
   fileprivate func setupUI() {
 
+    title = "Movies"
     view.backgroundColor = .white
 
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(self.editButtonTapped(sender:)))
-
+    setChangeIndexButton(with: indexTitle)
 
     let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false

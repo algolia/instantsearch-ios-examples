@@ -106,3 +106,22 @@ Example of a facet search interface.
 <br />
 <br />
 <br />
+
+## Sorting results
+
+<img src="./docs/sort-by.gif" align="right" width="300"/>
+
+Example of sorting movies by year attribute.
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
