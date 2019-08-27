@@ -53,6 +53,7 @@ class DemoListViewController: UIViewController {
   let filterState: FilterState
   let hitsInteractor: HitsInteractor<Demo>
   let searchBarController: SearchBarController
+  let queryInputInteractor: QueryInputInteractor
   
   let tableView: UITableView
   let searchController: UISearchController
@@ -63,7 +64,6 @@ class DemoListViewController: UIViewController {
     searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_home"))
     filterState = .init()
     hitsInteractor = HitsInteractor(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
-    searchBarController = SearchBarController(searchBar: .init())
     groupedDemos = []
     
     searcher.indexQueryState.query.hitsPerPage = 40
@@ -71,11 +71,14 @@ class DemoListViewController: UIViewController {
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectFilterState(filterState)
     searchController = UISearchController(searchResultsController: .none)
+    searchBarController = SearchBarController(searchBar: searchController.searchBar)
+    queryInputInteractor = .init()
+    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectSearcher(searcher)
     searchController.dimsBackgroundDuringPresentation = false
     self.tableView = UITableView()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     definesPresentationContext = true
-    searchController.searchResultsUpdater = self
     navigationItem.searchController = searchController
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     tableView.delegate = self
@@ -173,14 +176,6 @@ class DemoListViewController: UIViewController {
     return viewController
   }
   
-}
-
-extension DemoListViewController: UISearchResultsUpdating {
-  
-  func updateSearchResults(for searchController: UISearchController) {
-    searcher.query = searchController.searchBar.text
-    searcher.search()
-  }
 }
 
 extension DemoListViewController: UITableViewDataSource {
