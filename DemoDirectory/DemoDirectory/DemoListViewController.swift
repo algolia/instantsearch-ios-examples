@@ -185,7 +185,9 @@ extension DemoListViewController: UITableViewDataSource {
     self.groupedDemos = demosPerType
       .sorted { $0.key < $1.key }
       .map { ($0.key, $0.value.sorted { $0.name < $1.name } ) }
-    tableView.reloadData()
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
