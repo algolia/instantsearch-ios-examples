@@ -65,7 +65,6 @@ class FilterNumericComparisonDemoViewController: UIViewController {
 
 }
 
-
 private extension FilterNumericComparisonDemoViewController {
 
   func setup() {
@@ -73,17 +72,17 @@ private extension FilterNumericComparisonDemoViewController {
     searcher.connectFilterState(filterState)
     
     numberInteractor.connectFilterState(filterState, attribute: yearAttribute, numericOperator: .greaterThanOrEqual)
-    numberInteractor.connectController(numericTextFieldController1)
+    numberInteractor.connectController(numericTextFieldController1, presenter: { return $0 ?? 0 })
     numberInteractor.connectSearcher(searcher, attribute: yearAttribute)
 
     numberInteractor2.connectFilterState(filterState, attribute: yearAttribute, numericOperator: .greaterThanOrEqual)
-    numberInteractor2.connectController(numericTextFieldController2)
+    numberInteractor2.connectController(numericTextFieldController2, presenter: { return $0 ?? 0 })
     numberInteractor2.connectSearcher(searcher, attribute: yearAttribute)
 
     numberInteractor3.connectFilterState(filterState, attribute: priceAttribute, numericOperator: .greaterThanOrEqual)
-    numberInteractor3.connectController(numericStepperController)
+    numberInteractor3.connectController(numericStepperController, presenter: { return $0 ?? 0 })
     numberInteractor3.connectSearcher(searcher, attribute: priceAttribute)
-
+ 
     searchStateViewController.connectSearcher(searcher)
     searchStateViewController.connectFilterState(filterState)
 
