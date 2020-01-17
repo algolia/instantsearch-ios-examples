@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		30DC48C8C22BD09E20BF8CBA /* Pods_DemoDirectory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DE08C8AB500B61D5E405F1 /* Pods_DemoDirectory.framework */; };
 		8C06187DB7CEB678D6CF2F53 /* Pods_DemoDirectoryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF16B98A8A6191A809FBAD9D /* Pods_DemoDirectoryTests.framework */; };
+		AF2C1D6523CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C1D6423CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift */; };
 		AF6778CA22FB319200850ACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778C822FB319200850ACC /* Main.storyboard */; };
 		AF6778CC22FB319300850ACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CB22FB319300850ACC /* Assets.xcassets */; };
 		AF6778CF22FB319300850ACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CD22FB319300850ACC /* LaunchScreen.storyboard */; };
@@ -53,6 +54,7 @@
 		AF67793422FB34C000850ACC /* SearchStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790D22FB34C000850ACC /* SearchStateViewController.swift */; };
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
+		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,7 @@
 		54D81F516917FAE2244213C3 /* Pods-DemoDirectory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoDirectory.debug.xcconfig"; path = "Target Support Files/Pods-DemoDirectory/Pods-DemoDirectory.debug.xcconfig"; sourceTree = "<group>"; };
 		550B4C5E2EAC9B68511658B1 /* Pods-DemoDirectoryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoDirectoryTests.debug.xcconfig"; path = "Target Support Files/Pods-DemoDirectoryTests/Pods-DemoDirectoryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E8F9026ADF5C90288884004 /* Pods-DemoDirectoryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoDirectoryTests.release.xcconfig"; path = "Target Support Files/Pods-DemoDirectoryTests/Pods-DemoDirectoryTests.release.xcconfig"; sourceTree = "<group>"; };
+		AF2C1D6423CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778C122FB319200850ACC /* DemoDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6778C422FB319200850ACC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF6778C922FB319200850ACC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 		AF67790C22FB34C000850ACC /* DemoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoHelper.swift; sourceTree = "<group>"; };
 		AF67790D22FB34C000850ACC /* SearchStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStateViewController.swift; sourceTree = "<group>"; };
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
+		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
 		EED0BE889DCF147206A47C40 /* Pods-DemoDirectory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoDirectory.release.xcconfig"; path = "Target Support Files/Pods-DemoDirectory/Pods-DemoDirectory.release.xcconfig"; sourceTree = "<group>"; };
 		F9DE08C8AB500B61D5E405F1 /* Pods_DemoDirectory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemoDirectory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF16B98A8A6191A809FBAD9D /* Pods_DemoDirectoryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemoDirectoryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +225,7 @@
 				AF6778F222FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift */,
 				AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */,
 				AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */,
+				AF2C1D6423CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift */,
 				AF6778F522FB34C000850ACC /* IndexSegmentDemoViewController.swift */,
 				AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */,
 				AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */,
@@ -230,6 +235,7 @@
 				AF6778FB22FB34C000850ACC /* ClearFiltersDemoViewController.swift */,
 				AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */,
 				AF6778FD22FB34C000850ACC /* LoadingDemoViewController.swift */,
+				AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				AF67791B22FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift in Sources */,
 				AF67792A22FB34C000850ACC /* ActorCollectionViewCell.swift in Sources */,
 				AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */,
+				AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */,
 				AF67793022FB34C000850ACC /* Helpers.swift in Sources */,
 				AF67791A22FB34C000850ACC /* RefinementPersistentListDemoViewController.swift in Sources */,
 				AF67791622FB34C000850ACC /* MultiIndexSnippetViewController.swift in Sources */,
@@ -464,6 +471,7 @@
 				AF67792E22FB34C000850ACC /* HitsTableViewController.swift in Sources */,
 				AF67792D22FB34C000850ACC /* UITableView+Convenience.swift in Sources */,
 				AF67791E22FB34C000850ACC /* IndexSegmentDemoViewController.swift in Sources */,
+				AF2C1D6523CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift in Sources */,
 				AF67791822FB34C000850ACC /* SegmentedDemoViewController.swift in Sources */,
 				AF67792322FB34C000850ACC /* HierarchicalDemoViewController.swift in Sources */,
 				AF67791422FB34C000850ACC /* StatsDemoViewController.swift in Sources */,

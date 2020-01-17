@@ -42,6 +42,7 @@ struct Demo: Codable {
     case highlighting
     case loading
     case hierarchical = "filter_hierarchical"
+    case searchSuggestions = "search_suggestions"
   }
   
 }
@@ -54,6 +55,7 @@ class DemoListViewController: UIViewController {
   let hitsInteractor: HitsInteractor<Demo>
   let searchBarController: SearchBarController
   let queryInputInteractor: QueryInputInteractor
+  
   
   let tableView: UITableView
   let searchController: UISearchController
@@ -75,7 +77,7 @@ class DemoListViewController: UIViewController {
     queryInputInteractor = .init()
     queryInputInteractor.connectController(searchBarController)
     queryInputInteractor.connectSearcher(searcher)
-    searchController.dimsBackgroundDuringPresentation = false
+    searchController.obscuresBackgroundDuringPresentation = false
     self.tableView = UITableView()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     definesPresentationContext = true
@@ -171,6 +173,9 @@ class DemoListViewController: UIViewController {
 
     case .hierarchical:
       viewController = HierarchicalDemoViewController()
+      
+    case .searchSuggestions:
+      viewController = SearchSuggestionsDemoViewController()
     }
     
     return viewController
