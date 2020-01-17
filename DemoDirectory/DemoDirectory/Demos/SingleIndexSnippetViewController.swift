@@ -27,6 +27,8 @@ class SingleIndexSnippetViewController: UIViewController {
   let categoryAttribute: Attribute = "category"
   let filterState: FilterState = .init()
   
+  var tagsConnection: Connection?
+  
   let categoryInteractor: FacetListInteractor = .init(selectionMode: .single)
   let categoryTableViewController: UITableViewController = .init()
   lazy var categoryListController: FacetListTableController = {
@@ -37,7 +39,7 @@ class SingleIndexSnippetViewController: UIViewController {
     super.viewDidLoad()
     setup()
     configureUI()
-    navigationController?.setNavigationBarHidden(true, animated: false)
+    navigationController?.setNavigationBarHidden(false, animated: false)
   }
   
   func setup() {
@@ -64,6 +66,12 @@ class SingleIndexSnippetViewController: UIViewController {
     categoryInteractor.connectSearcher(searcher, with: categoryAttribute)
     categoryInteractor.connectFilterState(filterState, with: categoryAttribute, operator: .and)
     categoryInteractor.connectController(categoryListController, with: FacetListPresenter(sortBy: [.isRefined]))
+    
+    if #available(iOS 13.0, *) {
+      tagsConnection = FacetSearchTextFieldConnection(filterState: filterState, searchTextField: searchBarController.searchBar.searchTextField)
+      tagsConnection?.connect()
+      searchBarController.searchBar.searchTextField.delegate = self
+    }
     
     searcher.search()
   }
@@ -131,5 +139,11 @@ class SingleIndexSnippetViewController: UIViewController {
   @objc func dismissFilters() {
     dismiss(animated: true, completion: .none)
   }
+  
+}
+
+extension SingleIndexSnippetViewController: UISearchTextFieldDelegate {
+  
+  
   
 }
