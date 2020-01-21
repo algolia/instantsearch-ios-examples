@@ -83,53 +83,7 @@ class ShopItemTableViewCell: UITableViewCell {
   
 }
 
-struct Suggestion: Codable {
-  let query: String
-}
-
-class SearchSuggestsionsViewController: UITableViewController, HitsController {
-    
-  var hitsSource: HitsInteractor<Suggestion>?
-  
-  let cellID = "cellID"
-
-  var didSelect: ((Suggestion) -> Void)?
-    
-  override init(style: UITableView.Style) {
-    super.init(style: style)
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func reload() {
-    tableView.reloadData()
-  }
-  
-  func scrollToTop() {
-    tableView.scrollToFirstNonEmptySection()
-  }
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return hitsSource?.numberOfHits() ?? 0
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellID)
-    cell?.textLabel?.text = hitsSource?.hit(atIndex: indexPath.row)?.query
-    return cell ?? .init()
-  }
-  
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let suggestion = hitsSource?.hit(atIndex: indexPath.row) else { return }
-    didSelect?(suggestion)
-  }
-  
-}
-
-class SearchResultsViewController: UITableViewController, HitsController {
+class ResultsViewController: UITableViewController, HitsController {
     
   var hitsSource: HitsInteractor<ShopItem>?
   
@@ -178,16 +132,13 @@ class SearchSuggestionsDemoViewController: UIViewController {
   
   let searchController: UISearchController
   
-  let connector: MultiIndexHitsConnector
+  let multiIndexHitsConnector: MultiIndexHitsConnector
   
-  let queryInputInteractor: QueryInputInteractor = .init()
+  let queryInputInteractor: QueryInputInteractor
   let searchBarController: SearchBarController
-  
-  let suggestionsHitsInteractor: HitsInteractor<Suggestion>
-  let itemsHitsInteractor: HitsInteractor<ShopItem>
-  
-  let suggestionsViewController = SearchSuggestsionsViewController(style: .plain)
-  let resultsViewController = SearchResultsViewController(style: .plain)
+    
+  let suggestionsViewController: SearchSuggestionsViewController
+  let resultsViewController: ResultsViewController
   
   let appID = "latency"
   let apiKey = "afc3dd66dd1293e2e2736a5a51b05c0a"
@@ -196,30 +147,36 @@ class SearchSuggestionsDemoViewController: UIViewController {
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
-    suggestionsHitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
-    itemsHitsInteractor = .init(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
-    searchController = .init(searchResultsController: suggestionsViewController)
-    searchBarController = .init(searchBar: searchController.searchBar)
-
-    connector = .init(appID: appID, apiKey: apiKey, indexModules: [
-        .init(name: suggestionsIndex, hitsInteractor: suggestionsHitsInteractor),
-        .init(name: resultsIndex, hitsInteractor: itemsHitsInteractor)
-    ])
+    suggestionsViewController = .init(style: .plain)
+    suggestionsViewController.isHighlightingInverted = true
+    resultsViewController = .init(style: .plain)
     
+    searchController = .init(searchResultsController: suggestionsViewController)
+    
+    queryInputInteractor = .init()
+    searchBarController = .init(searchBar: searchController.searchBar)
+    let suggestionsHitsInteractor = HitsInteractor<Hit<SearchSuggestion>>(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
+    let itemsHitsInteractor = HitsInteractor<ShopItem>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
+    
+    multiIndexHitsConnector = .init(appID: appID, apiKey: apiKey, indexModules: [
+        .init(indexName: suggestionsIndex, hitsInteractor: suggestionsHitsInteractor),
+        .init(indexName: resultsIndex, hitsInteractor: itemsHitsInteractor)
+    ])
+        
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     queryInputInteractor.connectController(searchBarController)
-    queryInputInteractor.connectSearcher(connector.searcher)
+    queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
     navigationItem.searchController = searchController
     definesPresentationContext = true
     suggestionsViewController.didSelect = { suggestion in
-      self.searchController.searchBar.searchTextField.text = suggestion.query
-      self.searchBarController.onQueryChanged?(suggestion.query)
+      self.searchController.searchBar.searchTextField.text = suggestion.object.query
+      self.searchBarController.onQueryChanged?(suggestion.object.query)
       self.searchController.dismiss(animated: true, completion: .none)
     }
     searchController.searchBar.searchTextField.delegate = self
     suggestionsHitsInteractor.connectController(suggestionsViewController)
     itemsHitsInteractor.connectController(resultsViewController)
-    connector.searcher.search()
+    multiIndexHitsConnector.searcher.search()
   }
   
   required init?(coder: NSCoder) {
