@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import InstantSearch
-import WARangeSlider
 
 class FilterNumericRangeDemoViewController: UIViewController {
 

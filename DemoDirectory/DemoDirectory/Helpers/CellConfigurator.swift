@@ -73,19 +73,9 @@ struct ActorHitCollectionViewCellViewState {
   
   func configure(_ cell: ActorCollectionViewCell) -> (Hit<Actor>) -> () {
     return { actorHit in
-      switch actorHit.highlightResult {
-      case .dictionary(let dict):
-        if let title = dict["name"] {
-          switch title {
-          case .value(let theTitle):
-            cell.nameLabel.attributedText = NSAttributedString(highlightedResults: [theTitle], separator: NSAttributedString(string: ", "), attributes: [.foregroundColor: UIColor.red])
-          default: break
-          }
-
-        }
-      default: break
+      if let highlightedName = actorHit.hightlightedString(forKey: "name") {
+        cell.nameLabel.attributedText = NSAttributedString(highlightedString: highlightedName, attributes: [.foregroundColor: UIColor.red])
       }
-
     }
   }
   
@@ -139,18 +129,8 @@ struct MovieHitCellConfigurator: CellConfigurable {
   static func configure(_ cell: UITableViewCell) -> (Hit<Movie>) -> Void {
     return { movieHit in
       let movie = movieHit.object
-
-      switch movieHit.highlightResult {
-      case .dictionary(let dict):
-        if let title = dict["title"] {
-          switch title {
-          case .value(let theTitle):
-            cell.textLabel?.attributedText = NSAttributedString(highlightedResults: [theTitle], separator: NSAttributedString(string: ", "), attributes: [.foregroundColor: UIColor.red])
-          default: break
-          }
-
-        }
-      default: break
+      if let highlightedTitle = movieHit.hightlightedString(forKey: "title") {
+        cell.textLabel?.attributedText = NSAttributedString(highlightedString: highlightedTitle, attributes: [.foregroundColor: UIColor.red])
       }
       
       cell.detailTextLabel?.text = movie.genre.joined(separator: ", ")

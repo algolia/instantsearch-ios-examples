@@ -130,53 +130,48 @@ class ResultsViewController: UITableViewController, HitsController {
 
 class SearchSuggestionsDemoViewController: UIViewController {
   
-  let searchController: UISearchController
-  
-  let multiIndexHitsConnector: MultiIndexHitsConnector
-  
-  let queryInputInteractor: QueryInputInteractor
-  let searchBarController: SearchBarController
-    
-  let suggestionsViewController: QuerySuggestionsViewController
-  let resultsViewController: ResultsViewController
-  
   let appID = "latency"
   let apiKey = "afc3dd66dd1293e2e2736a5a51b05c0a"
   let suggestionsIndex = "instantsearch_query_suggestions"
   let resultsIndex = "instant_search"
   
+  let searchController: UISearchController
+  
+  let queryInputInteractor: QueryInputInteractor
+  let textFieldController: TextFieldController
+    
+  let suggestionsViewController: QuerySuggestionsViewController
+  let suggestionsHitsInteractor: HitsInteractor<Hit<QuerySuggestion>>
+  
+  let resultsHitsInteractor: HitsInteractor<ShopItem>
+  let resultsViewController: ResultsViewController
+  
+  let multiIndexHitsConnector: MultiIndexHitsConnector
+  
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
+    suggestionsHitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
     suggestionsViewController = .init(style: .plain)
-    suggestionsViewController.isHighlightingInverted = true
+    
+    resultsHitsInteractor = .init(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
     resultsViewController = .init(style: .plain)
     
     searchController = .init(searchResultsController: suggestionsViewController)
-    
+        
     queryInputInteractor = .init()
-    searchBarController = .init(searchBar: searchController.searchBar)
+
     let suggestionsHitsInteractor = HitsInteractor<Hit<QuerySuggestion>>(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
     let itemsHitsInteractor = HitsInteractor<ShopItem>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
+    textFieldController = .init(searchBar: searchController.searchBar)
     
     multiIndexHitsConnector = .init(appID: appID, apiKey: apiKey, indexModules: [
         .init(indexName: suggestionsIndex, hitsInteractor: suggestionsHitsInteractor),
-        .init(indexName: resultsIndex, hitsInteractor: itemsHitsInteractor)
+        .init(indexName: resultsIndex, hitsInteractor: resultsHitsInteractor)
     ])
         
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    queryInputInteractor.connectController(searchBarController)
-    queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
-    navigationItem.searchController = searchController
-    definesPresentationContext = true
-    suggestionsViewController.didSelect = { suggestion in
-      self.searchController.searchBar.searchTextField.text = suggestion.object.query
-      self.searchBarController.onQueryChanged?(suggestion.object.query)
-      self.searchController.dismiss(animated: true, completion: .none)
-    }
-    searchController.searchBar.searchTextField.delegate = self
-    suggestionsHitsInteractor.connectController(suggestionsViewController)
-    itemsHitsInteractor.connectController(resultsViewController)
-    multiIndexHitsConnector.searcher.search()
+    
+    setup()
   }
   
   required init?(coder: NSCoder) {
@@ -190,28 +185,48 @@ class SearchSuggestionsDemoViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationItem.hidesSearchBarWhenScrolling = false
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    navigationItem.hidesSearchBarWhenScrolling = true
   }
-  
-  func configureUI() {
+    
+  private func configureUI() {
+    definesPresentationContext = true
     view.backgroundColor = .white
     addChild(resultsViewController)
     resultsViewController.didMove(toParent: self)
     resultsViewController.view.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(resultsViewController.view)
-    resultsViewController.view.pin(to: view.safeAreaLayoutGuide)
+    NSLayoutConstraint.activate([
+      resultsViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      resultsViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      resultsViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      resultsViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+    ])
   }
   
-}
-
-extension SearchSuggestionsDemoViewController: UITextFieldDelegate {
+  private func setup() {
+    queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
+    
+    queryInputInteractor.connectController(textFieldController)
+    
+    suggestionsHitsInteractor.connectController(suggestionsViewController)
+    resultsHitsInteractor.connectController(resultsViewController)
+    
+    suggestionsViewController.isHighlightingInverted = true
+    navigationItem.searchController = searchController
+    navigationItem.hidesSearchBarWhenScrolling = false
+    suggestionsViewController.didSelect = { [weak searchController] suggestion in
+      searchController?.searchBar.searchTextField.text = suggestion.object.query
+      searchController?.searchBar.searchTextField.sendActions(for: .editingChanged)
+      searchController?.dismiss(animated: true, completion: .none)
+    }
+    searchController.searchBar.searchTextField.addTarget(self, action: #selector(didSubmitTextfield), for: .editingDidEnd)
+    multiIndexHitsConnector.searcher.search()
+  }
   
-  func textFieldDidEndEditing(_ textField: UITextField) {
+  @objc func didSubmitTextfield(_ textField: UITextField) {
     searchController.dismiss(animated: true, completion: .none)
   }
   

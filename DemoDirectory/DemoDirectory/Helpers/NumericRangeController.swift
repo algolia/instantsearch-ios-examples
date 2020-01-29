@@ -9,7 +9,6 @@
 import Foundation
 import InstantSearchCore
 import UIKit
-import WARangeSlider
 
 public class NumericRangeController: NumberRangeController {
   public var onRangeChanged: ((ClosedRange<Double>) -> Void)?

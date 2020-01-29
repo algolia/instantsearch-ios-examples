@@ -15,11 +15,12 @@ import InstantSearch
 class StatsDemoViewController: UIViewController {
   
   let stackView = UIStackView()
+  let searchBar = UISearchBar()
   
   let searcher: SingleIndexSearcher
   
   let queryInputInteractor: QueryInputInteractor
-  let searchBarController: SearchBarController
+  let textFieldController: TextFieldController
   
   let statsInteractor: StatsInteractor
   let labelStatsController: LabelStatsController
@@ -27,7 +28,7 @@ class StatsDemoViewController: UIViewController {
   
   init() {
     self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
-    self.searchBarController = .init(searchBar: .init())
+    self.textFieldController = .init(searchBar: searchBar)
     self.queryInputInteractor = .init()
     self.statsInteractor = .init()
     self.attributedLabelStatsController = AttributedLabelStatsController(label: .init())
@@ -47,7 +48,7 @@ class StatsDemoViewController: UIViewController {
   
   private func setup() {
     
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectSearcher(searcher)
     
     statsInteractor.connectSearcher(searcher)
@@ -84,7 +85,6 @@ private extension StatsDemoViewController {
   }
   
   func configureSearchBar() {
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
   }
@@ -97,9 +97,9 @@ private extension StatsDemoViewController {
   
   func configureLayout() {
     
-    searchBarController.searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
-    stackView.addArrangedSubview(searchBarController.searchBar)
+    stackView.addArrangedSubview(searchBar)
     let statsMSContainer = UIView()
     statsMSContainer.heightAnchor.constraint(equalToConstant: 44).isActive = true
     statsMSContainer.translatesAutoresizingMaskIntoConstraints = false

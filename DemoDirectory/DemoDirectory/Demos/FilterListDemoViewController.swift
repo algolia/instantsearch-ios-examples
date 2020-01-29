@@ -8,6 +8,7 @@
 
 import Foundation
 import InstantSearch
+import UIKit
 
 struct FilterListDemo {
   
