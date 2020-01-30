@@ -11,8 +11,8 @@
 		AF0BB12823DEF4C800EF07A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BB12723DEF4C800EF07A9 /* SceneDelegate.swift */; };
 		AF0BB12F23DEF4CC00EF07A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF0BB12E23DEF4CC00EF07A9 /* Assets.xcassets */; };
 		AF0BB13223DEF4CC00EF07A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BB13023DEF4CC00EF07A9 /* LaunchScreen.storyboard */; };
-		AF0BB14823DEF85800EF07A9 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF0BB14723DEF85800EF07A9 /* InstantSearch */; };
 		AF0BB14E23DEF96D00EF07A9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF0BB14D23DEF96D00EF07A9 /* SDWebImage */; };
+		AF7D3E7723E308AA002B9BC0 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7D3E7623E308AA002B9BC0 /* InstantSearch */; };
 		AF8D1BAB23DF2C8E00CB415F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BA723DF2C8E00CB415F /* ResultsViewController.swift */; };
 		AF8D1BAC23DF2C8E00CB415F /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BA823DF2C8E00CB415F /* ShopItem.swift */; };
 		AF8D1BAD23DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BA923DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift */; };
@@ -37,8 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7D3E7723E308AA002B9BC0 /* InstantSearch in Frameworks */,
 				AF0BB14E23DEF96D00EF07A9 /* SDWebImage in Frameworks */,
-				AF0BB14823DEF85800EF07A9 /* InstantSearch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,8 +94,8 @@
 			);
 			name = SearchSuggestions;
 			packageProductDependencies = (
-				AF0BB14723DEF85800EF07A9 /* InstantSearch */,
 				AF0BB14D23DEF96D00EF07A9 /* SDWebImage */,
+				AF7D3E7623E308AA002B9BC0 /* InstantSearch */,
 			);
 			productName = SearchSuggestions;
 			productReference = AF0BB12223DEF4C800EF07A9 /* SearchSuggestions.app */;
@@ -126,8 +126,8 @@
 			);
 			mainGroup = AF0BB11923DEF4C800EF07A9;
 			packageReferences = (
-				AF0BB14623DEF85800EF07A9 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 				AF0BB14C23DEF96D00EF07A9 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				AF7D3E7523E308AA002B9BC0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 			);
 			productRefGroup = AF0BB12323DEF4C800EF07A9 /* Products */;
 			projectDirPath = "";
@@ -352,14 +352,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF0BB14623DEF85800EF07A9 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/algolia/instantsearch-ios";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
 		AF0BB14C23DEF96D00EF07A9 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
@@ -368,18 +360,26 @@
 				minimumVersion = 5.5.2;
 			};
 		};
+		AF7D3E7523E308AA002B9BC0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/instantsearch-ios";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF0BB14723DEF85800EF07A9 /* InstantSearch */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF0BB14623DEF85800EF07A9 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearch;
-		};
 		AF0BB14D23DEF96D00EF07A9 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF0BB14C23DEF96D00EF07A9 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		AF7D3E7623E308AA002B9BC0 /* InstantSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7D3E7523E308AA002B9BC0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearch;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

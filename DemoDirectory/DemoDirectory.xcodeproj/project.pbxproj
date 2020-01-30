@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF3C1FE423E30E4A00B8471D /* SearchSuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1FE323E30E4A00B8471D /* SearchSuggestions */; };
 		AF6778CA22FB319200850ACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778C822FB319200850ACC /* Main.storyboard */; };
 		AF6778CC22FB319300850ACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CB22FB319300850ACC /* Assets.xcassets */; };
 		AF6778CF22FB319300850ACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CD22FB319300850ACC /* LaunchScreen.storyboard */; };
@@ -51,7 +52,6 @@
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
-		AFA2D6D523E1F90F00178EAC /* SearchSuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AFA2D6D423E1F90F00178EAC /* SearchSuggestions */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFA2D6D523E1F90F00178EAC /* SearchSuggestions in Frameworks */,
+				AF3C1FE423E30E4A00B8471D /* SearchSuggestions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +278,7 @@
 			);
 			name = DemoDirectory;
 			packageProductDependencies = (
-				AFA2D6D423E1F90F00178EAC /* SearchSuggestions */,
+				AF3C1FE323E30E4A00B8471D /* SearchSuggestions */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -678,7 +678,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AFA2D6D423E1F90F00178EAC /* SearchSuggestions */ = {
+		AF3C1FE323E30E4A00B8471D /* SearchSuggestions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SearchSuggestions;
 		};

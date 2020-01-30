@@ -14,9 +14,9 @@
         "package": "InstantSearchCore",
         "repositoryURL": "https://github.com/algolia/instantsearch-core-swift",
         "state": {
-          "branch": "develop",
-          "revision": "1839b9e7502c355e8441def18207197c50bb0949",
-          "version": null
+          "branch": null,
+          "revision": "0a5e4bb885b8f688309d8f575fb31faaec8189dd",
+          "version": "6.5.0"
         }
       },
       {
@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
           "branch": "develop",
-          "revision": "92748c791c4ee677882e7e2bf2e665f8440d5a54",
+          "revision": "6417cd822f48e46980ce0506ec670b5896ce6500",
           "version": null
         }
       },
