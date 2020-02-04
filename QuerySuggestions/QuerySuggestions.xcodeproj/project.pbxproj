@@ -11,25 +11,25 @@
 		AF0BB12823DEF4C800EF07A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BB12723DEF4C800EF07A9 /* SceneDelegate.swift */; };
 		AF0BB12F23DEF4CC00EF07A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF0BB12E23DEF4CC00EF07A9 /* Assets.xcassets */; };
 		AF0BB13223DEF4CC00EF07A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BB13023DEF4CC00EF07A9 /* LaunchScreen.storyboard */; };
-		AF0BB14E23DEF96D00EF07A9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF0BB14D23DEF96D00EF07A9 /* SDWebImage */; };
-		AF7D3E7723E308AA002B9BC0 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7D3E7623E308AA002B9BC0 /* InstantSearch */; };
-		AF8D1BAB23DF2C8E00CB415F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BA723DF2C8E00CB415F /* ResultsViewController.swift */; };
-		AF8D1BAC23DF2C8E00CB415F /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BA823DF2C8E00CB415F /* ShopItem.swift */; };
-		AF8D1BAD23DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BA923DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift */; };
-		AF8D1BAE23DF2C8E00CB415F /* ShopItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1BAA23DF2C8E00CB415F /* ShopItemTableViewCell.swift */; };
+		AF641B8223E993F500397DE0 /* ShopItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF641B7E23E993F500397DE0 /* ShopItemTableViewCell.swift */; };
+		AF641B8323E993F500397DE0 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF641B7F23E993F500397DE0 /* ResultsViewController.swift */; };
+		AF641B8423E993F500397DE0 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF641B8023E993F500397DE0 /* ShopItem.swift */; };
+		AF641B8523E993F500397DE0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF641B8123E993F500397DE0 /* SearchViewController.swift */; };
+		AF641B9423E99FF400397DE0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF641B9323E99FF400397DE0 /* SDWebImage */; };
+		AF641B9D23E9B1DE00397DE0 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF641B9C23E9B1DE00397DE0 /* InstantSearch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AF0BB12223DEF4C800EF07A9 /* SearchSuggestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchSuggestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF0BB12223DEF4C800EF07A9 /* QuerySuggestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuerySuggestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF0BB12523DEF4C800EF07A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF0BB12723DEF4C800EF07A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AF0BB12E23DEF4CC00EF07A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF0BB13123DEF4CC00EF07A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF0BB13323DEF4CC00EF07A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF8D1BA723DF2C8E00CB415F /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsViewController.swift; path = Sources/SearchSuggestions/ResultsViewController.swift; sourceTree = "<group>"; };
-		AF8D1BA823DF2C8E00CB415F /* ShopItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopItem.swift; path = Sources/SearchSuggestions/ShopItem.swift; sourceTree = "<group>"; };
-		AF8D1BA923DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSuggestionsDemoViewController.swift; path = Sources/SearchSuggestions/SearchSuggestionsDemoViewController.swift; sourceTree = "<group>"; };
-		AF8D1BAA23DF2C8E00CB415F /* ShopItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopItemTableViewCell.swift; path = Sources/SearchSuggestions/ShopItemTableViewCell.swift; sourceTree = "<group>"; };
+		AF641B7E23E993F500397DE0 /* ShopItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopItemTableViewCell.swift; path = Sources/QuerySuggestions/ShopItemTableViewCell.swift; sourceTree = "<group>"; };
+		AF641B7F23E993F500397DE0 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsViewController.swift; path = Sources/QuerySuggestions/ResultsViewController.swift; sourceTree = "<group>"; };
+		AF641B8023E993F500397DE0 /* ShopItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopItem.swift; path = Sources/QuerySuggestions/ShopItem.swift; sourceTree = "<group>"; };
+		AF641B8123E993F500397DE0 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Sources/QuerySuggestions/SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,8 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF7D3E7723E308AA002B9BC0 /* InstantSearch in Frameworks */,
-				AF0BB14E23DEF96D00EF07A9 /* SDWebImage in Frameworks */,
+				AF641B9D23E9B1DE00397DE0 /* InstantSearch in Frameworks */,
+				AF641B9423E99FF400397DE0 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,7 +48,7 @@
 		AF0BB11923DEF4C800EF07A9 = {
 			isa = PBXGroup;
 			children = (
-				AF0BB12423DEF4C800EF07A9 /* SearchSuggestions */,
+				AF0BB12423DEF4C800EF07A9 /* QuerySuggestions */,
 				AF0BB12323DEF4C800EF07A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,33 +56,33 @@
 		AF0BB12323DEF4C800EF07A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF0BB12223DEF4C800EF07A9 /* SearchSuggestions.app */,
+				AF0BB12223DEF4C800EF07A9 /* QuerySuggestions.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF0BB12423DEF4C800EF07A9 /* SearchSuggestions */ = {
+		AF0BB12423DEF4C800EF07A9 /* QuerySuggestions */ = {
 			isa = PBXGroup;
 			children = (
 				AF0BB12523DEF4C800EF07A9 /* AppDelegate.swift */,
 				AF0BB12723DEF4C800EF07A9 /* SceneDelegate.swift */,
-				AF8D1BA723DF2C8E00CB415F /* ResultsViewController.swift */,
-				AF8D1BA923DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift */,
-				AF8D1BA823DF2C8E00CB415F /* ShopItem.swift */,
-				AF8D1BAA23DF2C8E00CB415F /* ShopItemTableViewCell.swift */,
+				AF641B7F23E993F500397DE0 /* ResultsViewController.swift */,
+				AF641B8123E993F500397DE0 /* SearchViewController.swift */,
+				AF641B8023E993F500397DE0 /* ShopItem.swift */,
+				AF641B7E23E993F500397DE0 /* ShopItemTableViewCell.swift */,
 				AF0BB12E23DEF4CC00EF07A9 /* Assets.xcassets */,
 				AF0BB13023DEF4CC00EF07A9 /* LaunchScreen.storyboard */,
 				AF0BB13323DEF4CC00EF07A9 /* Info.plist */,
 			);
-			path = SearchSuggestions;
+			path = QuerySuggestions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF0BB12123DEF4C800EF07A9 /* SearchSuggestions */ = {
+		AF0BB12123DEF4C800EF07A9 /* QuerySuggestions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF0BB13623DEF4CC00EF07A9 /* Build configuration list for PBXNativeTarget "SearchSuggestions" */;
+			buildConfigurationList = AF0BB13623DEF4CC00EF07A9 /* Build configuration list for PBXNativeTarget "QuerySuggestions" */;
 			buildPhases = (
 				AF0BB11E23DEF4C800EF07A9 /* Sources */,
 				AF0BB11F23DEF4C800EF07A9 /* Frameworks */,
@@ -92,13 +92,13 @@
 			);
 			dependencies = (
 			);
-			name = SearchSuggestions;
+			name = QuerySuggestions;
 			packageProductDependencies = (
-				AF0BB14D23DEF96D00EF07A9 /* SDWebImage */,
-				AF7D3E7623E308AA002B9BC0 /* InstantSearch */,
+				AF641B9323E99FF400397DE0 /* SDWebImage */,
+				AF641B9C23E9B1DE00397DE0 /* InstantSearch */,
 			);
 			productName = SearchSuggestions;
-			productReference = AF0BB12223DEF4C800EF07A9 /* SearchSuggestions.app */;
+			productReference = AF0BB12223DEF4C800EF07A9 /* QuerySuggestions.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -116,7 +116,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AF0BB11D23DEF4C800EF07A9 /* Build configuration list for PBXProject "SearchSuggestions" */;
+			buildConfigurationList = AF0BB11D23DEF4C800EF07A9 /* Build configuration list for PBXProject "QuerySuggestions" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -126,14 +126,14 @@
 			);
 			mainGroup = AF0BB11923DEF4C800EF07A9;
 			packageReferences = (
-				AF0BB14C23DEF96D00EF07A9 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				AF7D3E7523E308AA002B9BC0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
+				AF641B9223E99FF400397DE0 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				AF641B9B23E9B1DE00397DE0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 			);
 			productRefGroup = AF0BB12323DEF4C800EF07A9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF0BB12123DEF4C800EF07A9 /* SearchSuggestions */,
+				AF0BB12123DEF4C800EF07A9 /* QuerySuggestions */,
 			);
 		};
 /* End PBXProject section */
@@ -155,12 +155,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF641B8523E993F500397DE0 /* SearchViewController.swift in Sources */,
 				AF0BB12623DEF4C800EF07A9 /* AppDelegate.swift in Sources */,
+				AF641B8223E993F500397DE0 /* ShopItemTableViewCell.swift in Sources */,
+				AF641B8423E993F500397DE0 /* ShopItem.swift in Sources */,
 				AF0BB12823DEF4C800EF07A9 /* SceneDelegate.swift in Sources */,
-				AF8D1BAD23DF2C8E00CB415F /* SearchSuggestionsDemoViewController.swift in Sources */,
-				AF8D1BAC23DF2C8E00CB415F /* ShopItem.swift in Sources */,
-				AF8D1BAE23DF2C8E00CB415F /* ShopItemTableViewCell.swift in Sources */,
-				AF8D1BAB23DF2C8E00CB415F /* ResultsViewController.swift in Sources */,
+				AF641B8323E993F500397DE0 /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,12 +298,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
-				INFOPLIST_FILE = SearchSuggestions/Info.plist;
+				INFOPLIST_FILE = QuerySuggestions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.algolia.demo.SearchSuggestions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algolia.demo.QuerySuggestions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -316,12 +316,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
-				INFOPLIST_FILE = SearchSuggestions/Info.plist;
+				INFOPLIST_FILE = QuerySuggestions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.algolia.demo.SearchSuggestions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algolia.demo.QuerySuggestions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -331,7 +331,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF0BB11D23DEF4C800EF07A9 /* Build configuration list for PBXProject "SearchSuggestions" */ = {
+		AF0BB11D23DEF4C800EF07A9 /* Build configuration list for PBXProject "QuerySuggestions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF0BB13423DEF4CC00EF07A9 /* Debug */,
@@ -340,7 +340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF0BB13623DEF4CC00EF07A9 /* Build configuration list for PBXNativeTarget "SearchSuggestions" */ = {
+		AF0BB13623DEF4CC00EF07A9 /* Build configuration list for PBXNativeTarget "QuerySuggestions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF0BB13723DEF4CC00EF07A9 /* Debug */,
@@ -352,33 +352,33 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF0BB14C23DEF96D00EF07A9 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		AF641B9223E99FF400397DE0 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.5.2;
 			};
 		};
-		AF7D3E7523E308AA002B9BC0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
+		AF641B9B23E9B1DE00397DE0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF0BB14D23DEF96D00EF07A9 /* SDWebImage */ = {
+		AF641B9323E99FF400397DE0 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF0BB14C23DEF96D00EF07A9 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = AF641B9223E99FF400397DE0 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		AF7D3E7623E308AA002B9BC0 /* InstantSearch */ = {
+		AF641B9C23E9B1DE00397DE0 /* InstantSearch */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF7D3E7523E308AA002B9BC0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			package = AF641B9B23E9B1DE00397DE0 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearch;
 		};
 /* End XCSwiftPackageProductDependency section */

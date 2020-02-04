@@ -1,6 +1,6 @@
 //
 //  ShopItemTableViewCell.swift
-//  SearchSuggestions
+//  QuerySuggestions
 //
 //  Created by Vladislav Fitc on 27/01/2020.
 //  Copyright © 2020 Algolia. All rights reserved.

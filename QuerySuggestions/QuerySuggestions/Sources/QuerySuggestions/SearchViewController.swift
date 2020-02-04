@@ -1,6 +1,6 @@
 //
-//  SearchSuggestionsDemoViewController.swift
-//  SearchSuggestions
+//  SearchViewController.swift
+//  QuerySuggestions
 //
 //  Created by Vladislav Fitc on 27/01/2020.
 //  Copyright © 2020 Algolia. All rights reserved.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import InstantSearch
 
-public class SearchSuggestionsDemoViewController: UIViewController {
+public class SearchViewController: UIViewController {
   
   let appID = "latency"
   let apiKey = "afc3dd66dd1293e2e2736a5a51b05c0a"
@@ -22,8 +22,8 @@ public class SearchSuggestionsDemoViewController: UIViewController {
   let queryInputInteractor: QueryInputInteractor
   let textFieldController: TextFieldController
     
-  let suggestionsHitsInteractor: HitsInteractor<Hit<SearchSuggestion>>
-  let suggestionsViewController: SearchSuggestionsViewController
+  let suggestionsHitsInteractor: HitsInteractor<Hit<QuerySuggestion>>
+  let suggestionsViewController: QuerySuggestionsViewController
   
   let resultsHitsInteractor: HitsInteractor<ShopItem>
   let resultsViewController: ResultsViewController
@@ -64,6 +64,7 @@ public class SearchSuggestionsDemoViewController: UIViewController {
       
   private func configureUI() {
     definesPresentationContext = true
+    searchController.showsSearchResultsController = true
     view.backgroundColor = .white
     addChild(resultsViewController)
     resultsViewController.didMove(toParent: self)
@@ -79,7 +80,6 @@ public class SearchSuggestionsDemoViewController: UIViewController {
   
   private func setup() {
     queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
-    
     queryInputInteractor.connectController(textFieldController)
     
     suggestionsHitsInteractor.connectController(suggestionsViewController)

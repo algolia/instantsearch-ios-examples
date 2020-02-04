@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import InstantSearchCore
 import InstantSearch
-import SearchSuggestions
+import QuerySuggestions
+
+typealias QuerySuggestionsDemoViewController = QuerySuggestions.SearchViewController
 
 struct Demo: Codable {
   
@@ -175,7 +177,7 @@ class DemoListViewController: UIViewController {
       viewController = HierarchicalDemoViewController()
       
     case .querySuggestions:
-      viewController = SearchSuggestionsDemoViewController()
+      viewController = QuerySuggestionsDemoViewController()
     }
     
     return viewController

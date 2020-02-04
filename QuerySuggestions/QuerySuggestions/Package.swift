@@ -4,25 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "SearchSuggestions",
+    name: "QuerySuggestions",
     platforms: [
       .iOS(.v13)
     ],
     products: [
         .library(
-            name: "SearchSuggestions",
-            targets: ["SearchSuggestions"]),
+            name: "QuerySuggestions",
+            targets: ["QuerySuggestions"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/algolia/instantsearch-ios", .branch("develop")),
+      .package(url: "https://github.com/algolia/instantsearch-ios", from: "5.2.1"),
       .package(url: "https://github.com/SDWebImage/SDWebImage", from: "5.5.2")
     ],
     targets: [
         .target(
-            name: "SearchSuggestions",
+            name: "QuerySuggestions",
             dependencies: ["InstantSearch", "SDWebImage"]),
         .testTarget(
-            name: "SearchSuggestionsTests",
-            dependencies: ["SearchSuggestions", "InstantSearch", "SDWebImage"]),
+            name: "QuerySuggestionsTests",
+            dependencies: ["QuerySuggestions", "InstantSearch", "SDWebImage"]),
     ]
 )

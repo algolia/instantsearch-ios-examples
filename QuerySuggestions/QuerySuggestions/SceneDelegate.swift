@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  SearchSuggestions
+//  QuerySuggestions
 //
 //  Created by Vladislav Fitc on 27/01/2020.
 //  Copyright © 2020 Algolia. All rights reserved.
@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     guard let scene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: scene)
-    let navigationController = UINavigationController(rootViewController: SearchSuggestionsDemoViewController())
+    let navigationController = UINavigationController(rootViewController: SearchViewController())
     window.rootViewController = navigationController
     self.window = window
     window.makeKeyAndVisible()
