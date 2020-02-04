@@ -8,6 +8,7 @@
 
 import Foundation
 import InstantSearch
+import UIKit
 
 class FacetSearchDemoViewController: UIViewController {
 

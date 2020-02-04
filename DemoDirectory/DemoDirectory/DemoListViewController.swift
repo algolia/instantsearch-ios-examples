@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import InstantSearchCore
 import InstantSearch
+import QuerySuggestions
+
+typealias QuerySuggestionsDemoViewController = QuerySuggestions.SearchViewController
 
 struct Demo: Codable {
   
@@ -53,9 +56,8 @@ class DemoListViewController: UIViewController {
   let searcher: SingleIndexSearcher
   let filterState: FilterState
   let hitsInteractor: HitsInteractor<Demo>
-  let searchBarController: SearchBarController
+  let textFieldController: TextFieldController
   let queryInputInteractor: QueryInputInteractor
-  
   
   let tableView: UITableView
   let searchController: UISearchController
@@ -73,9 +75,9 @@ class DemoListViewController: UIViewController {
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectFilterState(filterState)
     searchController = UISearchController(searchResultsController: .none)
-    searchBarController = SearchBarController(searchBar: searchController.searchBar)
+    textFieldController = TextFieldController(searchBar: searchController.searchBar)
     queryInputInteractor = .init()
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectSearcher(searcher)
     searchController.obscuresBackgroundDuringPresentation = false
     self.tableView = UITableView()
@@ -175,7 +177,7 @@ class DemoListViewController: UIViewController {
       viewController = HierarchicalDemoViewController()
       
     case .querySuggestions:
-      viewController = SearchSuggestionsDemoViewController()
+      viewController = QuerySuggestionsDemoViewController()
     }
     
     return viewController

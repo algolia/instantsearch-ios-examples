@@ -15,8 +15,11 @@ class SingleIndexSnippetViewController: UIViewController {
                                             apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                             indexName: "bestbuy")
   
+  let searchBar: UISearchBar = .init()
   let queryInputInteractor: QueryInputInteractor = .init()
-  let searchBarController: SearchBarController = .init(searchBar: UISearchBar())
+  lazy var textFieldController: TextFieldController = {
+    return .init(searchBar: searchBar)
+  }()
   
   let statsInteractor: StatsInteractor = .init()
   let statsController: LabelStatsController = .init(label: UILabel())
@@ -47,7 +50,7 @@ class SingleIndexSnippetViewController: UIViewController {
     searcher.connectFilterState(filterState)
     
     queryInputInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
     
     statsInteractor.connectSearcher(searcher)
     statsInteractor.connectController(statsController)
@@ -68,9 +71,9 @@ class SingleIndexSnippetViewController: UIViewController {
     categoryInteractor.connectController(categoryListController, with: FacetListPresenter(sortBy: [.isRefined]))
     
     if #available(iOS 13.0, *) {
-      tagsConnection = FacetSearchTextFieldConnection(filterState: filterState, searchTextField: searchBarController.searchBar.searchTextField)
+      tagsConnection = FacetSearchTextFieldConnection(filterState: filterState, searchTextField: searchBar.searchTextField)
       tagsConnection?.connect()
-      searchBarController.searchBar.searchTextField.delegate = self
+      searchBar.searchTextField.delegate = self
     }
     
     searcher.search()
@@ -87,7 +90,6 @@ class SingleIndexSnippetViewController: UIViewController {
     stackView.layoutMargins = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
     stackView.isLayoutMarginsRelativeArrangement = true
     
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     searchBar.searchBarStyle = .minimal

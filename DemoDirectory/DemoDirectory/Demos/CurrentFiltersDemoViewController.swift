@@ -9,7 +9,6 @@
 import Foundation
 import InstantSearch
 import UIKit
-import TagListView
 
 class CurrentFiltersDemoViewController: UIViewController {
 
@@ -18,25 +17,25 @@ class CurrentFiltersDemoViewController: UIViewController {
   let currentFiltersListInteractor2: CurrentFiltersInteractor
 
   let currentFiltersController: CurrentFilterListTableController
-  let currentFiltersController2: TagListController
+  let currentFiltersController2: SearchTextFieldCurrentFiltersController
 
   let searchStateViewController: SearchStateViewController
 
   let tableView: UITableView
-  let tagListView: TagListView
+  let searchTextField: UISearchTextField
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     searchStateViewController = .init()
     filterState = .init()
 
     tableView = .init()
-    tagListView = .init()
+    searchTextField = .init()
 
     currentFiltersListInteractor = .init()
     currentFiltersListInteractor2 = .init()
 
     currentFiltersController = .init(tableView: tableView)
-    currentFiltersController2 = .init(tagListView: tagListView)
+    currentFiltersController2 = .init(searchTextField: searchTextField)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
@@ -50,7 +49,7 @@ class CurrentFiltersDemoViewController: UIViewController {
     setup()
     setupUI()
   }
-
+  
 }
 
 private extension CurrentFiltersDemoViewController {
@@ -60,16 +59,13 @@ private extension CurrentFiltersDemoViewController {
     let groupFacets = FilterGroup.ID.or(name: "filterFacets", filterType: .facet)
     let groupNumerics = FilterGroup.ID.and(name: "filterNumerics")
 
-
-    currentFiltersListInteractor.connectFilterState(filterState)
+    currentFiltersListInteractor.connectFilterState(filterState).connect()
     currentFiltersListInteractor.connectController(currentFiltersController)
 
-    currentFiltersListInteractor2.connectFilterState(filterState, filterGroupID: groupFacets)
+    currentFiltersListInteractor2.connectFilterState(filterState, filterGroupID: groupFacets).connect()
     currentFiltersListInteractor2.connectController(currentFiltersController2)
 
-
     searchStateViewController.connectFilterState(filterState)
-
 
     let filterFacet1 = Filter.Facet(attribute: "category", value: "table")
     let filterFacet2 = Filter.Facet(attribute: "category", value: "chair")
@@ -107,13 +103,13 @@ private extension CurrentFiltersDemoViewController {
     searchStateViewController.didMove(toParent: self)
     searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
 
-    //tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-    tagListView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+    searchTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
     mainStackView.addArrangedSubview(searchStateViewController.view)
+    mainStackView.addArrangedSubview(searchTextField)
     mainStackView.addArrangedSubview(tableView)
-    mainStackView.addArrangedSubview(tagListView)
-
+    
   }
 
 }
