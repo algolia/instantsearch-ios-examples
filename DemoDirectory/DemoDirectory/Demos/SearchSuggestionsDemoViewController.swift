@@ -137,7 +137,7 @@ class SearchSuggestionsDemoViewController: UIViewController {
   let queryInputInteractor: QueryInputInteractor
   let searchBarController: SearchBarController
     
-  let suggestionsViewController: SearchSuggestionsViewController
+  let suggestionsViewController: QuerySuggestionsViewController
   let resultsViewController: ResultsViewController
   
   let appID = "latency"
@@ -155,7 +155,7 @@ class SearchSuggestionsDemoViewController: UIViewController {
     
     queryInputInteractor = .init()
     searchBarController = .init(searchBar: searchController.searchBar)
-    let suggestionsHitsInteractor = HitsInteractor<Hit<SearchSuggestion>>(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
+    let suggestionsHitsInteractor = HitsInteractor<Hit<QuerySuggestion>>(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
     let itemsHitsInteractor = HitsInteractor<ShopItem>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
     
     multiIndexHitsConnector = .init(appID: appID, apiKey: apiKey, indexModules: [
