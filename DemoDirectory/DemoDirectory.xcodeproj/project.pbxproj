@@ -51,8 +51,8 @@
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
-		AFC4D51723E9B44500EA13C6 /* QuerySuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AFC4D51623E9B44500EA13C6 /* QuerySuggestions */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
+		AFFDBAAA23E9C44600B2B1FE /* QuerySuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AFFDBAA923E9C44600B2B1FE /* QuerySuggestions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,8 +116,8 @@
 		AF67790D22FB34C000850ACC /* SearchStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStateViewController.swift; sourceTree = "<group>"; };
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
 		AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
-		AFC4D51523E9B42200EA13C6 /* QuerySuggestions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QuerySuggestions; path = ../QuerySuggestions/QuerySuggestions; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
+		AFFDBAA823E9C40900B2B1FE /* QuerySuggestions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QuerySuggestions; path = ../QuerySuggestions/QuerySuggestions; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFC4D51723E9B44500EA13C6 /* QuerySuggestions in Frameworks */,
+				AFFDBAAA23E9C44600B2B1FE /* QuerySuggestions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +142,7 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AFC4D51523E9B42200EA13C6 /* QuerySuggestions */,
+				AFFDBAA823E9C40900B2B1FE /* QuerySuggestions */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 			);
 			name = DemoDirectory;
 			packageProductDependencies = (
-				AFC4D51623E9B44500EA13C6 /* QuerySuggestions */,
+				AFFDBAA923E9C44600B2B1FE /* QuerySuggestions */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -678,7 +678,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AFC4D51623E9B44500EA13C6 /* QuerySuggestions */ = {
+		AFFDBAA923E9C44600B2B1FE /* QuerySuggestions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = QuerySuggestions;
 		};
