@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     guard let scene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: scene)
-    let navigationController = UINavigationController(rootViewController: SearchViewController())
+    let searchViewController = SearchViewController()
+    searchViewController.title = "Query Suggestions"
+    let navigationController = UINavigationController(rootViewController: searchViewController)
     window.rootViewController = navigationController
     self.window = window
     window.makeKeyAndVisible()
