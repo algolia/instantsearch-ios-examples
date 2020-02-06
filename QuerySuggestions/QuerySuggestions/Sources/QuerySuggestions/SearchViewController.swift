@@ -79,27 +79,23 @@ public class SearchViewController: UIViewController {
   }
   
   private func setup() {
+    
+    navigationItem.searchController = searchController
+    navigationItem.hidesSearchBarWhenScrolling = false
+    
     queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
     queryInputInteractor.connectController(textFieldController)
+    queryInputInteractor.connectController(suggestionsViewController)
     
+    queryInputInteractor.onQuerySubmitted.subscribe(with: searchController) { (searchController, _) in
+      searchController.dismiss(animated: true, completion: .none)
+    }
+        
     suggestionsHitsInteractor.connectController(suggestionsViewController)
     resultsHitsInteractor.connectController(resultsViewController)
     
     suggestionsViewController.isHighlightingInverted = true
-    navigationItem.searchController = searchController
-    navigationItem.hidesSearchBarWhenScrolling = false
-    
-    suggestionsViewController.didSelect = { [weak searchController] suggestion in
-      searchController?.searchBar.searchTextField.text = suggestion.object.query
-      searchController?.searchBar.searchTextField.sendActions(for: .editingChanged)
-      searchController?.dismiss(animated: true, completion: .none)
-    }
-    searchController.searchBar.searchTextField.addTarget(self, action: #selector(didSubmitTextfield), for: .editingDidEnd)
     multiIndexHitsConnector.searcher.search()
-  }
-  
-  @objc func didSubmitTextfield(_ textField: UITextField) {
-    searchController.dismiss(animated: true, completion: .none)
   }
   
 }
