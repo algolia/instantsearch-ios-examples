@@ -25,6 +25,19 @@ struct MovieCellViewState {
     }
   }
   
+  func configure(_ cell: UIView & MovieCell) -> (Product) -> () {
+    return { ecommerceHit in
+      cell.artworkImageView.sd_setImage(with: ecommerceHit.image) { (_, _, _, _) in
+        DispatchQueue.main.async {
+          cell.setNeedsLayout()
+        }
+      }
+      cell.titleLabel.text = ecommerceHit.name
+      cell.genreLabel.text = ecommerceHit.brand
+      cell.yearLabel.text = ecommerceHit.type
+    }
+  }
+  
 }
 
 struct MovieHitCellViewState {

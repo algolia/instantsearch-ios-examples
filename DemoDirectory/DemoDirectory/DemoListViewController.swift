@@ -46,6 +46,7 @@ struct Demo: Codable {
     case loading
     case hierarchical = "filter_hierarchical"
     case querySuggestions = "query_suggestions"
+    case relatedItems = "personalisation_related_items"
   }
   
 }
@@ -178,6 +179,8 @@ class DemoListViewController: UIViewController {
       
     case .querySuggestions:
       viewController = QuerySuggestionsDemoViewController()
+    case .relatedItems:
+      viewController = RelatedItemsDemoViewController()
     }
     
     return viewController
