@@ -11,29 +11,6 @@ import InstantSearchCore
 import InstantSearch
 import SDWebImage
 
-public struct MatchingPattern<Model> {
-  let attribute: Attribute
-  let score: Int
-  let oneOrManyKeyPath: OneOrManyKeyPaths<Model, String>
-  
-  public init(attribute: Attribute, score: Int, filterPath: KeyPath<Model, String>) {
-    self.attribute = attribute
-    self.score = score
-    self.oneOrManyKeyPath = .one(filterPath)
-  }
-  
-  public init(attribute: Attribute, score: Int, filterPath: KeyPath<Model, [String]>) {
-    self.attribute = attribute
-    self.score = score
-    self.oneOrManyKeyPath = .many(filterPath)
-  }
-  
-  enum OneOrManyKeyPaths<T, V> {
-    case one(KeyPath<T, V>)
-    case many(KeyPath<T, [V]>)
-  }
-}
-
 class RelatedItemsDemoViewController: UIViewController {
   
   let stackView = UIStackView()
@@ -78,8 +55,6 @@ class RelatedItemsDemoViewController: UIViewController {
     
     hitsTableViewController.didSelect = { hit in
       
-      self.relatedItemSearcher.indexQueryState.query.sumOrFiltersScores = true
-      self.relatedItemSearcher.indexQueryState.query.facetFilters = ["objectID:-\(hit.objectID)"]
       
       let matchingPatterns: [MatchingPattern<Product>] =
         [
@@ -87,49 +62,9 @@ class RelatedItemsDemoViewController: UIViewController {
           MatchingPattern(attribute: "type", score: 10, filterPath: \.type),
           MatchingPattern(attribute: "categories", score: 2, filterPath: \.categories),
         ]
-
-      let filterState = FilterState()
       
-      for matchingPattern in matchingPatterns {
-        switch matchingPattern.oneOrManyKeyPath {
-        case .one(let keyPath):
-          let facetValue = hit.object[keyPath: keyPath]
-          let facetFilter = Filter.Facet.init(attribute: matchingPattern.attribute, value: .string(facetValue), score: matchingPattern.score)
-          filterState[and: matchingPattern.attribute.name].add(facetFilter)
-        case .many(let keyPath):
-          let facetFilters = hit.object[keyPath: keyPath].map { Filter.Facet.init(attribute: matchingPattern.attribute, value: .string($0), score: matchingPattern.score) }
-          filterState[or: matchingPattern.attribute.name].addAll(facetFilters)
-        }
-      }
-      
-      let legacyFilters = FilterGroupConverter().legacy(filterState.toFilterGroups())
-      
-      // workaround as the client only accepts [Stirng] and not [[String]] for now...
-      var reducedOptionalFilters: [String] = []
-      if let legacyFilters = legacyFilters {
-        
-        for legacyFilter in legacyFilters {
-          if legacyFilter.count == 1 {
-            let string = legacyFilter.first!
-            reducedOptionalFilters.append(string)
-          } else if legacyFilter.count > 1 {
-            let string = "[\(legacyFilter.joined(separator: ","))]"
-            if let escapedString = string.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-              reducedOptionalFilters.append(escapedString)
-            }
-          }
-        }
-      }
-      
-      //print(optionalFilters)
-      //print(FilterGroupConverter().sql(filterState.toFilterGroups()))
-      print(reducedOptionalFilters)
-      
-//          self.relatedItemSearcher.indexQueryState.query.optionalFilters = ["brand:Amazon<score=3>","type:Streaming media plyr<score=10>","%5B%22categories%3ATV%20%26%20Home%20Theater%3Cscore%3D2%3E%22%2C%22categories%3AStreaming%20Media%20Players%3Cscore%3D2%3E%22%5D"]
-      
-//      self.relatedItemSearcher.indexQueryState.query.optionalFilters = ["brand:Amazon<score=3>","type:Streaming media plyr<score=10>","%5B%22categories%22%3A%22TV%20%26%20Home%20Theater%3Cscore%3D2%3E%22%2C%22categories%22%3A%22Streaming%20Media%20Players%3Cscore%3D2%3E%22%5D"]
-      
-      self.relatedItemSearcher.indexQueryState.query.optionalFilters = reducedOptionalFilters
+      self.relatedHitsInteractor.connectSearcher(self.relatedItemSearcher, withRelatedItemsTo: hit, with: matchingPatterns)
+      self.relatedHitsInteractor.connectController(self.relatedHitsTableViewController)
       
       self.relatedItemSearcher.search()
     }
@@ -140,10 +75,6 @@ class RelatedItemsDemoViewController: UIViewController {
     
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectController(hitsTableViewController)
-    
-    // connectSearcher<T>(searcher: withRelatedItemsToHit andMatchingPatterns: )
-    relatedHitsInteractor.connectSearcher(relatedItemSearcher)
-    relatedHitsInteractor.connectController(relatedHitsTableViewController)
     
     searcher.search()
   }
