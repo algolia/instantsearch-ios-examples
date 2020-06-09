@@ -141,6 +141,7 @@ extension IndexSegmentDemoViewController {
   }
 
   @objc func editButtonTapped(sender: UIBarButtonItem) {
+    selectIndexAlertController.alertController.popoverPresentationController?.barButtonItem = sender
     present(selectIndexAlertController.alertController, animated: true, completion: nil)
   }
 
