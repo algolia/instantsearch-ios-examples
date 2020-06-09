@@ -14,44 +14,6 @@ import QuerySuggestions
 
 typealias QuerySuggestionsDemoViewController = QuerySuggestions.SearchViewController
 
-struct Demo: Codable {
-  
-  let objectID: String
-  let name: String
-  let type: String
-  let index: String
-  
-  enum ID: String {
-    case singleIndex = "paging_single_index"
-    case multiIndex = "paging_multiple_index"
-    case sffv = "facet_list_search"
-    case toggle = "filter_toggle"
-    case toggleDefault = "filter_toggle_default"
-    case facetList = "facet_list"
-    case facetListPersistentSelection = "facet_list_persistent"
-    case segmented = "filter_segment"
-//    case allFilterList = "filter_list_all"
-    case facetFilterList = "filter_list_facet"
-    case numericFilterList = "filter_list_numeric"
-    case tagFilterList = "filter_list_tag"
-    case filterNumericComparison = "filter_numeric_comparison"
-    case sortBy = "sort_by"
-    case currentFilters = "filter_current"
-    case searchAsYouType = "search_as_you_type"
-    case searchOnSubmit = "search_on_submit"
-    case clearFilters = "filter_clear"
-    case filterNumericRange = "filter_numeric_range"
-    case stats
-    case highlighting
-    case loading
-    case hierarchical = "filter_hierarchical"
-    case querySuggestions = "query_suggestions"
-    case relatedItems = "personalisation_related_items"
-  }
-  
-}
-
-
 class DemoListViewController: UIViewController {
   
   let searcher: SingleIndexSearcher
@@ -64,6 +26,7 @@ class DemoListViewController: UIViewController {
   let searchController: UISearchController
   private let cellIdentifier = "cellID"
   var groupedDemos: [(groupName: String, demos: [Demo])]
+  weak var delegate: DemoListViewControllerDelegate?
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_home")
@@ -107,85 +70,6 @@ class DemoListViewController: UIViewController {
     searcher.search()
   }
   
-  func viewController(for index: Demo.ID) -> UIViewController {
-    let viewController: UIViewController
-    
-    switch index {
-    case .singleIndex:
-      viewController = SingleIndexDemoViewController()
-      
-    case .sffv:
-      viewController = FacetSearchDemoViewController()
-      
-    case .toggle:
-      viewController = ToggleDemoViewController()
-      
-    case .toggleDefault:
-      viewController = ToggleDefaultDemoViewController()
-      
-    case .facetList:
-      viewController = RefinementListDemoViewController()
-      
-    case .facetListPersistentSelection:
-      viewController = RefinementPersistentListDemoViewController()
-      
-    case .segmented:
-      viewController = SegmentedDemoViewController()
-
-    case .filterNumericComparison:
-      viewController = FilterNumericComparisonDemoViewController()
-
-    case .filterNumericRange:
-      viewController = FilterNumericRangeDemoViewController()
-
-    case .sortBy:
-      viewController = IndexSegmentDemoViewController()
-
-    case .currentFilters:
-      viewController = CurrentFiltersDemoViewController()
-      
-    case .clearFilters:
-      viewController = ClearFiltersDemoViewController()
-      
-    case .multiIndex:
-      viewController = MultiIndexDemoViewController()
-      
-    case .facetFilterList:
-      viewController = FilterListDemo.facet()
-            
-    case .numericFilterList:
-      viewController = FilterListDemo.numeric()
-      
-    case .tagFilterList:
-      viewController = FilterListDemo.tag()
-      
-    case .searchOnSubmit:
-      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
-      
-    case .searchAsYouType:
-      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
-      
-    case .stats:
-      viewController = StatsDemoViewController()
-      
-    case .highlighting:
-      viewController = HighlightingDemoViewController()
-      
-    case .loading:
-      viewController = LoadingDemoViewController()
-
-    case .hierarchical:
-      viewController = HierarchicalDemoViewController()
-      
-    case .querySuggestions:
-      viewController = QuerySuggestionsDemoViewController()
-    case .relatedItems:
-      viewController = RelatedItemsDemoViewController()
-    }
-    
-    return viewController
-  }
-  
 }
 
 extension DemoListViewController: UITableViewDataSource {
@@ -224,21 +108,15 @@ extension DemoListViewController: UITableViewDataSource {
 extension DemoListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     let demo = groupedDemos[indexPath.section].demos[indexPath.row]
-    
-    guard let demoID = Demo.ID(rawValue: demo.objectID) else {
-      let notImplementedAlertController = UIAlertController(title: nil, message: "This demo is not implemented yet", preferredStyle: .alert)
-      let okAction = UIAlertAction(title: "OK", style: .cancel, handler: .none)
-      notImplementedAlertController.addAction(okAction)
-      navigationController?.present(notImplementedAlertController, animated: true, completion: .none)
-      return
-    }
-    
-    let viewController = self.viewController(for: demoID)
-    viewController.title = demo.name
-    
-    navigationController?.pushViewController(viewController, animated: true)
+    delegate?.demoListViewController(self, didSelect: demo)
   }
   
 }
+
+protocol DemoListViewControllerDelegate: class {
+  
+  func demoListViewController(_ demoListViewController: DemoListViewController, didSelect demo: Demo)
+  
+}
+

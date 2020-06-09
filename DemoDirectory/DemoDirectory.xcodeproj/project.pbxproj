@@ -54,6 +54,9 @@
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
 		AFAA5C8A248FC3EE00EC7B95 /* QuerySuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AFAA5C89248FC3EE00EC7B95 /* QuerySuggestions */; };
+		AFAA5C8C248FD64700EC7B95 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */; };
+		AFAA5C8E248FDC6700EC7B95 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8D248FDC6700EC7B95 /* Demo.swift */; };
+		AFAA5C90248FDC8800EC7B95 /* DemoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +123,9 @@
 		AF67790D22FB34C000850ACC /* SearchStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStateViewController.swift; sourceTree = "<group>"; };
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
 		AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		AFAA5C8D248FDC6700EC7B95 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
+		AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFactory.swift; sourceTree = "<group>"; };
 		AFAE47BA248FA6F30081CF68 /* QuerySuggestions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QuerySuggestions; path = ../QuerySuggestions/QuerySuggestions; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +181,7 @@
 			children = (
 				AF6778C422FB319200850ACC /* AppDelegate.swift */,
 				AF6778E722FB34C000850ACC /* DemoListViewController.swift */,
+				AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */,
 				AF6778E822FB34C000850ACC /* Demos */,
 				AF67790522FB34C000850ACC /* Helpers */,
 				AF6778E422FB34C000850ACC /* Models */,
@@ -201,6 +208,8 @@
 			children = (
 				AF6778E522FB34C000850ACC /* Movie.swift */,
 				AF6778E622FB34C000850ACC /* Actor.swift */,
+				AFAA5C8D248FDC6700EC7B95 /* Demo.swift */,
+				AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,6 +393,8 @@
 				AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */,
 				AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */,
 				52C68BFF244DF0DC008502D4 /* EcommerceHitsTableViewController.swift in Sources */,
+				AFAA5C90248FDC8800EC7B95 /* DemoFactory.swift in Sources */,
+				AFAA5C8E248FDC6700EC7B95 /* Demo.swift in Sources */,
 				AF67793022FB34C000850ACC /* Helpers.swift in Sources */,
 				AF67791A22FB34C000850ACC /* RefinementPersistentListDemoViewController.swift in Sources */,
 				AF67791622FB34C000850ACC /* MultiIndexSnippetViewController.swift in Sources */,
@@ -393,6 +404,7 @@
 				AF67791D22FB34C000850ACC /* SearchInputDemoViewController.swift in Sources */,
 				AF67792922FB34C000850ACC /* UIView+Layout.swift in Sources */,
 				AF67793222FB34C000850ACC /* FilterStateViewController.swift in Sources */,
+				AFAA5C8C248FD64700EC7B95 /* MainSplitViewController.swift in Sources */,
 				AF67791122FB34C000850ACC /* DemoListViewController.swift in Sources */,
 				AF67792E22FB34C000850ACC /* HitsTableViewController.swift in Sources */,
 				AF67792D22FB34C000850ACC /* UITableView+Convenience.swift in Sources */,
