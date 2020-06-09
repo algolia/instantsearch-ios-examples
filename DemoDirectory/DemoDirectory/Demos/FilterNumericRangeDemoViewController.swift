@@ -12,7 +12,7 @@ import InstantSearch
 
 class FilterNumericRangeDemoViewController: UIViewController {
 
-  let priceAttribute = Attribute("price")
+  let priceAttribute: Attribute = "price"
 
   let searcher: SingleIndexSearcher
   let filterState: FilterState
@@ -50,7 +50,6 @@ class FilterNumericRangeDemoViewController: UIViewController {
 
     self.searchStateViewController = SearchStateViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -60,6 +59,7 @@ class FilterNumericRangeDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    setup()
   }
 
 }
@@ -68,21 +68,22 @@ class FilterNumericRangeDemoViewController: UIViewController {
 private extension FilterNumericRangeDemoViewController {
 
   func setup() {
-
-    searcher.connectFilterState(filterState)
-
+    
     sliderInteractor1.connectFilterState(filterState, attribute: priceAttribute)
     sliderInteractor1.connectController(numericRangeController1)
     sliderInteractor1.connectSearcher(searcher, attribute: priceAttribute)
-
+    
     sliderInteractor2.connectFilterState(filterState, attribute: priceAttribute)
     sliderInteractor2.connectController(numericRangeController2)
     sliderInteractor2.connectSearcher(searcher, attribute: priceAttribute)
+    
+    searcher.connectFilterState(filterState)
 
     searchStateViewController.connectSearcher(searcher)
     searchStateViewController.connectFilterState(filterState)
-
+    
     searcher.search()
+
   }
 
   func setupUI() {
@@ -109,11 +110,18 @@ private extension FilterNumericRangeDemoViewController {
     sliderStackView1.addArrangedSubview(sliderLower1)
     sliderStackView1.addArrangedSubview(numericRangeController1.rangerSlider)
     sliderStackView1.addArrangedSubview(sliderUpper1)
+    
+    sliderInteractor1.onBoundsComputed.subscribePast(with: self) { (viewController, bounds) in
+      guard let bounds = bounds else { return }
+      viewController.sliderLower1.text = "\(bounds.lowerBound.rounded(toPlaces: 2))"
+      viewController.sliderUpper1.text = "\(bounds.upperBound.rounded(toPlaces: 2))"
+    }.onQueue(.main)
+    
     sliderInteractor1.onItemChanged.subscribePast(with: self) { viewController, range in
       guard let range = range else { return }
       viewController.sliderLower1.text = "\(range.lowerBound.rounded(toPlaces: 2))"
       viewController.sliderUpper1.text = "\(range.upperBound.rounded(toPlaces: 2))"
-    }
+    }.onQueue(.main)
 
     sliderStackView1.heightAnchor.constraint(equalToConstant: 50).isActive = true
     mainStackView.addArrangedSubview(sliderStackView1)
@@ -123,11 +131,19 @@ private extension FilterNumericRangeDemoViewController {
     sliderStackView2.addArrangedSubview(sliderLower2)
     sliderStackView2.addArrangedSubview(numericRangeController2.rangerSlider)
     sliderStackView2.addArrangedSubview(sliderUpper2)
+    
+    sliderInteractor2.onBoundsComputed.subscribePast(with: self) { (viewController, bounds) in
+      guard let bounds = bounds else { return }
+      viewController.sliderLower2.text = "\(bounds.lowerBound.rounded(toPlaces: 2))"
+      viewController.sliderUpper2.text = "\(bounds.upperBound.rounded(toPlaces: 2))"
+    }.onQueue(.main)
+    
     sliderInteractor2.onItemChanged.subscribePast(with: self) { viewController, range in
       guard let range = range else { return }
       viewController.sliderLower2.text = "\(range.lowerBound.rounded(toPlaces: 2))"
       viewController.sliderUpper2.text = "\(range.upperBound.rounded(toPlaces: 2))"
-    }
+    }.onQueue(.main)
+    
     mainStackView.addArrangedSubview(sliderStackView2)
 
     let spacerView = UIView()

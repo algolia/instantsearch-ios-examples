@@ -36,7 +36,7 @@ class FilterStateViewController: UIViewController {
       let filtersText = filterState.toFilterGroups().sqlFormWithSyntaxHighlighting(colorMap: viewController.colorMap)
       viewController.stateLabel.attributedText = filtersText
       viewController.view.layoutIfNeeded()
-    }
+    }.onQueue(.main)
   }
   
 }
