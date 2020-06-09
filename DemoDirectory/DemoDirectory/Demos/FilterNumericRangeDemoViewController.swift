@@ -34,7 +34,7 @@ class FilterNumericRangeDemoViewController: UIViewController {
   let sliderUpper2 = UILabel()
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName:"mobile_demo_filter_numeric_comparison"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
     self.filterState = .init()
 
     sliderInteractor1 = .init()

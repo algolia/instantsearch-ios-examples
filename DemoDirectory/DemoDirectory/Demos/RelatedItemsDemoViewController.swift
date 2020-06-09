@@ -24,11 +24,10 @@ class RelatedItemsDemoViewController: UIViewController {
   let relatedHitsTableViewController: EcommerceHitsTableViewController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "instant_search"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
     self.hitsInteractor = .init(settings: .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true))
     self.hitsTableViewController = EcommerceHitsTableViewController()
-    
-    self.relatedItemSearcher = SingleIndexSearcher(index: .demo(withName: "instant_search"))
+    self.relatedItemSearcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
     self.relatedHitsInteractor = .init()
     self.relatedHitsTableViewController = EcommerceHitsTableViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -62,8 +61,8 @@ class RelatedItemsDemoViewController: UIViewController {
           MatchingPattern(attribute: "type", score: 10, filterPath: \.type),
           MatchingPattern(attribute: "categories", score: 2, filterPath: \.categories),
         ]
-      
-      self.relatedHitsInteractor.connectSearcher(self.relatedItemSearcher, withRelatedItemsTo: hit, with: matchingPatterns)
+      let objectWrapper = ObjectWrapper(objectID: ObjectID(rawValue: hit.objectID), object: hit.object)
+      self.relatedHitsInteractor.connectSearcher(self.relatedItemSearcher, withRelatedItemsTo: objectWrapper, with: matchingPatterns)
       self.relatedHitsInteractor.connectController(self.relatedHitsTableViewController)
       
       self.relatedItemSearcher.search()

@@ -15,7 +15,8 @@ class FacetSearchDemoViewController: UIViewController {
   let searcher: SingleIndexSearcher
   let filterState: FilterState
   let facetSearcher: FacetSearcher
-  let searchBarController: SearchBarController
+  let searchBar: UISearchBar
+  let textFieldController: TextFieldController
   let categoryController: FacetListTableController
   let categoryListInteractor: FacetListInteractor
   let searchStateViewController: SearchStateViewController
@@ -23,17 +24,17 @@ class FacetSearchDemoViewController: UIViewController {
   let queryInputInteractor: QueryInputInteractor
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    
-    let index: Index = .demo(withName: "mobile_demo_facet_list_search")
-    
-    searcher = SingleIndexSearcher(index: index)
+        
+    let indexName: IndexName = "mobile_demo_facet_list_search"
+    searcher = SingleIndexSearcher(client: .demo, indexName: indexName)
     filterState = .init()
-    facetSearcher = FacetSearcher(index: index, facetName: Attribute("brand").name)
+    facetSearcher = FacetSearcher(client: .demo, indexName: indexName, facetName: "brand")
     
     queryInputInteractor = QueryInputInteractor()
     categoryListInteractor = FacetListInteractor(selectionMode: .multiple)
 
-    searchBarController = SearchBarController(searchBar: .init())
+    searchBar = .init()
+    textFieldController = TextFieldController(searchBar: searchBar)
     searchStateViewController = SearchStateViewController()
     categoryController = FacetListTableController(tableView: .init())
 
@@ -69,7 +70,7 @@ private extension FacetSearchDemoViewController {
     searchStateViewController.connectFilterState(filterState)
     searchStateViewController.connectFacetSearcher(facetSearcher)
 
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectSearcher(facetSearcher)
     
     categoryListInteractor.connectFacetSearcher(facetSearcher)
@@ -91,7 +92,6 @@ private extension FacetSearchDemoViewController {
     
     mainStackView.pin(to: view.safeAreaLayoutGuide)
     
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
     mainStackView.addArrangedSubview(searchBar)

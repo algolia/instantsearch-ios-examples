@@ -66,7 +66,7 @@ class DemoListViewController: UIViewController {
   var groupedDemos: [(groupName: String, demos: [Demo])]
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_home"))
+    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_home")
     filterState = .init()
     hitsInteractor = HitsInteractor(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
     groupedDemos = []
@@ -89,7 +89,7 @@ class DemoListViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     hitsInteractor.onResultsUpdated.subscribe(with: self) { viewController, results in
-      let demos = (try? results.deserializeHits() as [Demo]) ?? []
+      let demos = (try? results.extractHits() as [Demo]) ?? []
       viewController.updateDemos(demos)
     }
   }

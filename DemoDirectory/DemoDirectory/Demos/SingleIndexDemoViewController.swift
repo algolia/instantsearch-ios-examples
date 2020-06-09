@@ -16,11 +16,12 @@ class SingleIndexDemoViewController: UIViewController {
   typealias HitType = Movie
   
   let stackView = UIStackView()
+  let searchBar = UISearchBar()
   
   let searcher: SingleIndexSearcher
   
   let queryInputInteractor: QueryInputInteractor
-  let searchBarController: SearchBarController
+  let textFieldController: TextFieldController
   
   let statsInteractor: StatsInteractor
   let statsController: LabelStatsController
@@ -29,9 +30,9 @@ class SingleIndexDemoViewController: UIViewController {
   let hitsTableViewController: HitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputInteractor = .init()
-    self.searchBarController = .init(searchBar: .init())
+    self.textFieldController = .init(searchBar: searchBar)
     self.statsInteractor = .init()
     self.statsController = .init(label: .init())
     self.hitsInteractor = .init()
@@ -55,7 +56,7 @@ class SingleIndexDemoViewController: UIViewController {
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
     
     queryInputInteractor.connectSearcher(searcher, searchTriggeringMode: .searchAsYouType)
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
     
     statsInteractor.connectSearcher(searcher)
     statsInteractor.connectController(statsController)
@@ -80,7 +81,6 @@ private extension SingleIndexDemoViewController {
   }
   
   func configureSearchBar() {
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
   }
@@ -100,7 +100,7 @@ private extension SingleIndexDemoViewController {
     addChild(hitsTableViewController)
     hitsTableViewController.didMove(toParent: self)
     
-    stackView.addArrangedSubview(searchBarController.searchBar)
+    stackView.addArrangedSubview(searchBar)
     let statsContainer = UIView()
     statsContainer.translatesAutoresizingMaskIntoConstraints = false
     statsContainer.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
@@ -113,7 +113,7 @@ private extension SingleIndexDemoViewController {
 
     stackView.pin(to: view.safeAreaLayoutGuide)
     
-    searchBarController.searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
     statsController.label.heightAnchor.constraint(equalToConstant: 16).isActive = true
 

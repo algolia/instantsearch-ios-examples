@@ -27,7 +27,7 @@ class StatsDemoViewController: UIViewController {
   let attributedLabelStatsController: AttributedLabelStatsController
   
   init() {
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
     self.queryInputInteractor = .init()
     self.statsInteractor = .init()

@@ -25,14 +25,16 @@ class MultiIndexDemoViewController: UIViewController, InstantSearchCore.MultiInd
   weak var hitsSource: MultiIndexHitsSource?
   
   let multiIndexSearcher: MultiIndexSearcher
-  let searchBarController: SearchBarController
+  let textFieldController: TextFieldController
   let queryInputInteractor: QueryInputInteractor
   let multiIndexHitsInteractor: MultiIndexHitsInteractor
+  let searchBar: UISearchBar
   let moviesCollectionView: UICollectionView
   let actorsCollectionView: UICollectionView
   let cellIdentifier = "CellID"
 
   init() {
+    searchBar = UISearchBar()
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .horizontal
     moviesCollectionView = .init(frame: .zero, collectionViewLayout: flowLayout)
@@ -54,7 +56,7 @@ class MultiIndexDemoViewController: UIViewController, InstantSearchCore.MultiInd
     
     multiIndexHitsInteractor = .init(hitsInteractors: hitsInteractors)
 
-    searchBarController = .init(searchBar: .init())
+    textFieldController = .init(searchBar: searchBar)
     queryInputInteractor = .init()
     
     super.init(nibName: nil, bundle: nil)
@@ -90,7 +92,7 @@ private extension MultiIndexDemoViewController {
   
   func setup() {
     queryInputInteractor.connectSearcher(multiIndexSearcher)
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
 
     multiIndexHitsInteractor.connectSearcher(multiIndexSearcher)
     multiIndexHitsInteractor.connectController(self)
@@ -127,8 +129,8 @@ private extension MultiIndexDemoViewController {
     
     stackView.pin(to: view.safeAreaLayoutGuide)
     
-    searchBarController.searchBar.searchBarStyle = .minimal
-    searchBarController.searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    searchBar.searchBarStyle = .minimal
+    searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
     moviesCollectionView.translatesAutoresizingMaskIntoConstraints = false
     moviesCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
@@ -146,7 +148,7 @@ private extension MultiIndexDemoViewController {
     actorsTitleLabel.font = .systemFont(ofSize: 15, weight: .black)
     actorsTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
-    stackView.addArrangedSubview(searchBarController.searchBar)
+    stackView.addArrangedSubview(searchBar)
     stackView.addArrangedSubview(moviesTitleLabel)
     stackView.addArrangedSubview(moviesCollectionView)
     let spacer = UIView()

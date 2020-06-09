@@ -94,7 +94,7 @@ class SearchStateViewController: UIViewController {
   }
   
   func configureActivityIndicator() {
-    activityIndicator.style = .gray
+    activityIndicator.style = .medium
     activityIndicator.hidesWhenStopped = true
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
   }

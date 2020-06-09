@@ -53,8 +53,8 @@
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
+		AFAA5C8A248FC3EE00EC7B95 /* QuerySuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AFAA5C89248FC3EE00EC7B95 /* QuerySuggestions */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
-		AFFDBAAA23E9C44600B2B1FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AFFDBAA923E9C44600B2B1FE /* SwiftPackageProductDependency */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,8 +120,8 @@
 		AF67790D22FB34C000850ACC /* SearchStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStateViewController.swift; sourceTree = "<group>"; };
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
 		AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		AFAE47BA248FA6F30081CF68 /* QuerySuggestions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QuerySuggestions; path = ../QuerySuggestions/QuerySuggestions; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
-		AFFDBAA823E9C40900B2B1FE /* QuerySuggestions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QuerySuggestions; path = ../QuerySuggestions/QuerySuggestions; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFFDBAAA23E9C44600B2B1FE /* BuildFile in Frameworks */,
+				AFAA5C8A248FC3EE00EC7B95 /* QuerySuggestions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +146,7 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AFFDBAA823E9C40900B2B1FE /* QuerySuggestions */,
+				AFAE47BA248FA6F30081CF68 /* QuerySuggestions */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -284,7 +284,7 @@
 			);
 			name = DemoDirectory;
 			packageProductDependencies = (
-				AFFDBAA923E9C44600B2B1FE /* SwiftPackageProductDependency */,
+				AFAA5C89248FC3EE00EC7B95 /* QuerySuggestions */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -336,6 +336,8 @@
 				Base,
 			);
 			mainGroup = AF6778B822FB319200850ACC;
+			packageReferences = (
+			);
 			productRefGroup = AF6778C222FB319200850ACC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -684,7 +686,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AFFDBAA923E9C44600B2B1FE /* SwiftPackageProductDependency */ = {
+		AFAA5C89248FC3EE00EC7B95 /* QuerySuggestions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = QuerySuggestions;
 		};

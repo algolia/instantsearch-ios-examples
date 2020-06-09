@@ -15,19 +15,20 @@ class HighlightingDemoViewController: UIViewController {
   typealias HitType = Hit<Movie>
   
   let stackView = UIStackView()
+  let searchBar = UISearchBar()
 
   let searcher: SingleIndexSearcher
 
   let queryInputInteractor: QueryInputInteractor
-  let searchBarController: SearchBarController
+  let textFieldController: TextFieldController
   
   let hitsInteractor: HitsInteractor<HitType>
   let hitsTableViewController: HitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputInteractor = .init()
-    self.searchBarController = .init(searchBar: .init())
+    self.textFieldController = .init(searchBar: searchBar)
     self.hitsInteractor = .init()
     self.hitsTableViewController = HitsTableViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -48,7 +49,7 @@ class HighlightingDemoViewController: UIViewController {
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
     
     queryInputInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
         
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectController(hitsTableViewController)
@@ -69,7 +70,6 @@ private extension HighlightingDemoViewController {
   }
   
   func configureSearchBar() {
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
   }
@@ -85,14 +85,14 @@ private extension HighlightingDemoViewController {
     addChild(hitsTableViewController)
     hitsTableViewController.didMove(toParent: self)
     
-    stackView.addArrangedSubview(searchBarController.searchBar)
+    stackView.addArrangedSubview(searchBar)
     stackView.addArrangedSubview(hitsTableViewController.view)
     
     view.addSubview(stackView)
     
     stackView.pin(to: view.safeAreaLayoutGuide)
     
-    searchBarController.searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
   }
   

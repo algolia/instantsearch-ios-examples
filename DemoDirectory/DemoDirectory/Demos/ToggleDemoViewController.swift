@@ -33,7 +33,7 @@ class ToggleDemoViewController: UIViewController {
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
-    searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_filter_toggle"))
+    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_toggle")
     filterState = .init()
     searchStateViewController = SearchStateViewController()
     
