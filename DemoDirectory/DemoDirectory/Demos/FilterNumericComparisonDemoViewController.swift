@@ -71,6 +71,17 @@ private extension FilterNumericComparisonDemoViewController {
     
     searcher.connectFilterState(filterState)
     
+    numberInteractor.onBoundsComputed.subscribePast(with: self) { (controller, bounds) in
+      guard let bounds = bounds else { return }
+      controller.numericTextFieldController1.textField.placeholder = "\(bounds.lowerBound) - \(bounds.upperBound)"
+    }.onQueue(.main)
+
+    
+    numberInteractor2.onBoundsComputed.subscribePast(with: self) { (controller, bounds) in
+      guard let bounds = bounds else { return }
+      controller.numericTextFieldController2.textField.placeholder = "\(bounds.lowerBound) - \(bounds.upperBound)"
+    }.onQueue(.main)
+    
     numberInteractor.connectFilterState(filterState, attribute: yearAttribute, numericOperator: .greaterThanOrEqual)
     numberInteractor.connectController(numericTextFieldController1, presenter: { return $0 ?? 0 })
     numberInteractor.connectSearcher(searcher, attribute: yearAttribute)
