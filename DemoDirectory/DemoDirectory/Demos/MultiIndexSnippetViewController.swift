@@ -11,79 +11,135 @@ import InstantSearch
 import UIKit
 
 class MultiIndexSnippetViewController: UIViewController {
-  
-  let tableView: UITableView
-  
-  let searcher: MultiIndexSearcher
-  let hitsInteractor: MultiIndexHitsInteractor
-  let tableController: MultiIndexHitsTableController
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
-    tableView = .init()
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
-
-    searcher = .init(appID: "latency",
-                     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                     indexNames: ["mobile_demo_actors", "mobile_demo_movies"])
-    
+  let searcher: MultiIndexSearcher = .init(appID: "latency",
+                                           apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
+                                           indexNames: ["mobile_demo_actors", "mobile_demo_movies"])
+  
+  
+  let searchBar: UISearchBar = .init()
+  let queryInputInteractor: QueryInputInteractor = .init()
+  lazy var textFieldController: TextFieldController = {
+    return .init(searchBar: searchBar)
+  }()
+  
+  lazy var hitsInteractor: MultiIndexHitsInteractor = {
     let actorHitsInteractor: HitsInteractor<Actor> = .init(infiniteScrolling: .off)
     let movieHitsInteractor: HitsInteractor<Movie> = .init(infiniteScrolling: .off)
-    
-    hitsInteractor = .init(hitsInteractors: [actorHitsInteractor, movieHitsInteractor])
-    tableController = .init(tableView: tableView)
-    
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(tableController)
-    
-    searcher.search()
-    
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    
-    configureTableController()
-  }
+    return .init(hitsInteractors: [actorHitsInteractor, movieHitsInteractor])
+  }()
   
-  func configureTableController() {
+  let hitsTableViewController: HitsViewController = .init(style: .plain)
     
-    let dataSource = MultiIndexHitsTableViewDataSource()
-    
-    dataSource.setCellConfigurator(forSection: 0) { (tableView, actor: Actor, indexPath) in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-      cell.textLabel?.text = actor.name
-      return cell
-    }
-    
-    dataSource.setCellConfigurator(forSection: 1) { (tableView, movie: Movie, indexPath) in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-      cell.textLabel?.text = movie.title
-      return cell
-    }
-    
-    tableController.dataSource = dataSource
-    
-    let delegate = MultiIndexHitsTableViewDelegate()
-    
-    delegate.setClickHandler(forSection: 0) { (tableView, actor: Actor, indexPath) in
-      // Actor selection action
-    }
-    
-    delegate.setClickHandler(forSection: 1) { (tableView, movie: Movie, indexPath) in
-      // Movie selection action
-    }
-    
-    tableController.delegate = delegate
-
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(tableView)
-    tableView.pin(to: view.safeAreaLayoutGuide)
+    setup()
+    configureUI()
+  }
+  
+  func setup() {
+    queryInputInteractor.connectSearcher(searcher)
+    queryInputInteractor.connectController(textFieldController)
+    
+    hitsInteractor.connectSearcher(searcher)
+    hitsInteractor.connectController(hitsTableViewController)
+    
+    searcher.search()
+  }
+  
+  func configureUI() {
+    view.backgroundColor = .white
+    
+    let stackView = UIStackView()
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.spacing = 16
+    stackView.axis = .vertical
+    stackView.layoutMargins = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+    stackView.isLayoutMarginsRelativeArrangement = true
+    
+    searchBar.translatesAutoresizingMaskIntoConstraints = false
+    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    searchBar.searchBarStyle = .minimal
+    
+    stackView.addArrangedSubview(searchBar)
+    
+    hitsTableViewController.tableView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.addArrangedSubview(hitsTableViewController.tableView)
+    
+    view.addSubview(stackView)
+    
+    NSLayoutConstraint.activate([
+      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+    ])
+
   }
   
 }
+
+extension MultiIndexSnippetViewController {
+  
+  class HitsViewController: UITableViewController, MultiIndexHitsController {
+    
+    var hitsSource: MultiIndexHitsSource?
+    
+    let actorsSection = 0
+    let moviesSection = 1
+    
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+      guard let hitsSource = hitsSource else { return 0 }
+      return hitsSource.numberOfSections()
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      guard let hitsSource = hitsSource else { return .init() }
+      return hitsSource.numberOfHits(inSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+      guard let hitsSource = hitsSource else { return .init() }
+      
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+      
+      switch indexPath.section {
+      case actorsSection:
+        if let actor: Actor = try? hitsSource.hit(atIndex: indexPath.row, inSection: indexPath.section) {
+          cell.textLabel?.text = actor.name
+        }
+        
+      case moviesSection:
+        if let movie: Movie = try? hitsSource.hit(atIndex: indexPath.row, inSection: indexPath.section)  {
+          cell.textLabel?.text = movie.title
+        }
+        
+      default:
+        break
+      }
+      
+      return cell
+      
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+      switch section {
+      case actorsSection:
+        return "Actors"
+      case moviesSection:
+        return "Movies"
+      default:
+        return nil
+      }
+    }
+    
+  }
+
+}
+

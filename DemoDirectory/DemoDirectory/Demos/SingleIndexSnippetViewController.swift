@@ -15,6 +15,8 @@ class SingleIndexSnippetViewController: UIViewController {
                                             apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                             indexName: "bestbuy")
   
+  let filterState: FilterState = .init()
+  
   let searchBar: UISearchBar = .init()
   let queryInputInteractor: QueryInputInteractor = .init()
   lazy var textFieldController: TextFieldController = {
@@ -25,18 +27,15 @@ class SingleIndexSnippetViewController: UIViewController {
   let statsController: LabelStatsController = .init(label: UILabel())
   
   let hitsInteractor: HitsInteractor<JSON> = .init()
-  let hitsTableController: HitsTableController<HitsInteractor<JSON>> = .init(tableView: UITableView())
-  
-  let categoryAttribute: Attribute = "category"
-  let filterState: FilterState = .init()
-  
-  var tagsConnection: Connection?
+  let hitsTableViewController: HitsViewController = .init(style: .plain)
   
   let categoryInteractor: FacetListInteractor = .init(selectionMode: .single)
   let categoryTableViewController: UITableViewController = .init()
   lazy var categoryListController: FacetListTableController = {
     return .init(tableView: categoryTableViewController.tableView, titleDescriptor: .none)
   }()
+  
+  var tagsConnection: Connection?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -56,18 +55,11 @@ class SingleIndexSnippetViewController: UIViewController {
     statsInteractor.connectController(statsController)
     
     hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableController)
+    hitsInteractor.connectController(hitsTableViewController)
     hitsInteractor.connectFilterState(filterState)
-
-    hitsTableController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
-    hitsTableController.dataSource = .init(cellConfigurator: { tableView, hit, indexPath in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-      cell.textLabel?.text = [String: Any](hit)?["name"] as? String
-      return cell
-    })
     
-    categoryInteractor.connectSearcher(searcher, with: categoryAttribute)
-    categoryInteractor.connectFilterState(filterState, with: categoryAttribute, operator: .and)
+    categoryInteractor.connectSearcher(searcher, with: "category")
+    categoryInteractor.connectFilterState(filterState, with: "category", operator: .and)
     categoryInteractor.connectController(categoryListController, with: FacetListPresenter(sortBy: [.isRefined]))
     
     if #available(iOS 13.0, *) {
@@ -116,13 +108,13 @@ class SingleIndexSnippetViewController: UIViewController {
     statsLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
     stackView.addArrangedSubview(statsLabel)
 
-    stackView.addArrangedSubview(hitsTableController.tableView)
+    stackView.addArrangedSubview(hitsTableViewController.tableView)
     
     view.addSubview(stackView)
     
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
       stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
       ])
@@ -147,5 +139,32 @@ class SingleIndexSnippetViewController: UIViewController {
 extension SingleIndexSnippetViewController: UISearchTextFieldDelegate {
   
   
+  
+}
+
+extension SingleIndexSnippetViewController {
+  
+  class HitsViewController: UITableViewController, HitsController {
+    
+    var hitsSource: HitsInteractor<JSON>?
+      
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return hitsSource?.numberOfHits() ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      guard let hit = hitsSource?.hit(atIndex: indexPath.row) else { return .init() }
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+      cell.textLabel?.text = [String: Any](hit)?["name"] as? String
+      return cell
+    }
+    
+  }
+
   
 }

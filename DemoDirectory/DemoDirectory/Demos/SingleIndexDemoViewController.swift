@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import InstantSearchCore
 import InstantSearch
 import SDWebImage
 
