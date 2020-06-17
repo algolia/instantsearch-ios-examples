@@ -49,7 +49,6 @@ class ToggleDefaultDemoViewController: UIViewController {
   
   func setup() {
     
-    //let popularDeselected = Filter.Facet(attribute: "popular", boolValue: false)
 
     searcher.connectFilterState(filterState)
     popularInteractor.connectFilterState(filterState)

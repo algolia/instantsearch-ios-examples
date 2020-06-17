@@ -219,6 +219,7 @@
 		AF6778E822FB34C000850ACC /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				AF6778F922FB34C000850ACC /* ToggleDemoViewController.swift */,
 				AF6778E922FB34C000850ACC /* ToggleDefaultDemoViewController.swift */,
 				AF6778EA22FB34C000850ACC /* CurrentFiltersDemoViewController.swift */,
 				AF6778EB22FB34C000850ACC /* StatsDemoViewController.swift */,
@@ -237,7 +238,6 @@
 				AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */,
 				52C68BFC244DE97B008502D4 /* RelatedItemsDemoViewController.swift */,
 				AF6778F822FB34C000850ACC /* HighlightingDemoViewController.swift */,
-				AF6778F922FB34C000850ACC /* ToggleDemoViewController.swift */,
 				AF6778FA22FB34C000850ACC /* HierarchicalDemoViewController.swift */,
 				AF6778FB22FB34C000850ACC /* ClearFiltersDemoViewController.swift */,
 				AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */,
