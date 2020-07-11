@@ -1,51 +1,32 @@
 //
-//  MultiIndexDemoViewController.swift
-//  development-pods-instantsearch
+//  MultiIndexCommerceDemoViewController.swift
+//  DemoDirectory
 //
-//  Created by Vladislav Fitc on 09/06/2019.
-//  Copyright © 2019 Algolia. All rights reserved.
+//  Created by Vladislav Fitc on 19/06/2020.
+//  Copyright © 2020 Algolia. All rights reserved.
 //
 
 import Foundation
-import InstantSearch
 import UIKit
+import InstantSearch
+import QuerySuggestions
 
-extension HitViewModel {
-  
-  static func movie(_ movie: Movie) -> Self {
-    return HitViewModel()
-      .set(\.imageViewConfigurator) { imageView in
-        imageView.sd_setImage(with: movie.image, completed: .none)
-        imageView.contentMode = .scaleAspectFit
-      }
-      .set(\.mainTitleConfigurator) { label in
-        label.text = movie.title
-        label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.numberOfLines = 0
-      }
-      .set(\.secondaryTitleConfigurator) { label in
-        label.text = "\(movie.year)"
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-      }
-      .set(\.detailsTitleConfigurator) { label in
-        label.text = movie.genre.joined(separator: ", ")
-        label.font = .systemFont(ofSize: 12, weight: .light)
-        label.numberOfLines = 0
-      }
-  }
-  
+typealias ShopItem = QuerySuggestions.ShopItem
+
+struct Brand: Codable {
+  let name: String
 }
 
-class MultiIndexDemoViewController: UIViewController, InstantSearchCore.MultiIndexHitsController {
+class MultiIndexCommerceDemoViewController: UIViewController, InstantSearchCore.MultiIndexHitsController {
   
   func reload() {
-    moviesCollectionView.reloadData()
-    actorsCollectionView.reloadData()
+    itemsCollectionView.reloadData()
+    brandsCollectionView.reloadData()
   }
   
   func scrollToTop() {
-    moviesCollectionView.scrollToFirstNonEmptySection()
-    actorsCollectionView.scrollToFirstNonEmptySection()
+    itemsCollectionView.scrollToFirstNonEmptySection()
+    brandsCollectionView.scrollToFirstNonEmptySection()
   }
 
   weak var hitsSource: MultiIndexHitsSource?
@@ -55,29 +36,30 @@ class MultiIndexDemoViewController: UIViewController, InstantSearchCore.MultiInd
   let queryInputInteractor: QueryInputInteractor
   let multiIndexHitsInteractor: MultiIndexHitsInteractor
   let searchBar: UISearchBar
-  let moviesCollectionView: UICollectionView
-  let actorsCollectionView: UICollectionView
+  let itemsCollectionView: UICollectionView
+  let brandsCollectionView: UICollectionView
   let cellIdentifier = "CellID"
 
   init() {
     searchBar = UISearchBar()
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .horizontal
-    moviesCollectionView = .init(frame: .zero, collectionViewLayout: flowLayout)
+    itemsCollectionView = .init(frame: .zero, collectionViewLayout: flowLayout)
     
     let actorsFlowLayout = UICollectionViewFlowLayout()
     actorsFlowLayout.scrollDirection = .horizontal
-    actorsCollectionView = .init(frame: .zero, collectionViewLayout: actorsFlowLayout)
+    brandsCollectionView = .init(frame: .zero, collectionViewLayout: actorsFlowLayout)
     
     let indices = [
-      Section.shopItems.index,
-      Section.actors.index,
+      Section.items.index,
+      Section.brands.index,
     ]
-    multiIndexSearcher = .init(client: .demo, indices: indices)
+
+    multiIndexSearcher = .init(appID: "latency", apiKey: "afc3dd66dd1293e2e2736a5a51b05c0a", indexNames: ["instant_search", "instantsearch_query_suggestions"])
     
     let hitsInteractors: [AnyHitsInteractor] = [
-      HitsInteractor<Movie>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true),
-      HitsInteractor<Hit<Actor>>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true),
+      HitsInteractor<Hit<ShopItem>>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true),
+      HitsInteractor<Hit<QuerySuggestion>>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true),
     ]
     
     multiIndexHitsInteractor = .init(hitsInteractors: hitsInteractors)
@@ -101,15 +83,15 @@ class MultiIndexDemoViewController: UIViewController, InstantSearchCore.MultiInd
   
 }
 
-private extension MultiIndexDemoViewController {
+private extension MultiIndexCommerceDemoViewController {
   
   func section(for collectionView: UICollectionView) -> Section? {
     switch collectionView {
-    case moviesCollectionView:
-      return .shopItems
+    case itemsCollectionView:
+      return .items
       
-    case actorsCollectionView:
-      return .actors
+    case brandsCollectionView:
+      return .brands
 
     default:
       return .none
@@ -134,10 +116,10 @@ private extension MultiIndexDemoViewController {
   }
   
   func configureCollectionView() {
-    moviesCollectionView.register(HitCollectionViewCell.self, forCellWithReuseIdentifier: Section.shopItems.cellIdentifier)
-    actorsCollectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: Section.actors.cellIdentifier)
-    configure(moviesCollectionView)
-    configure(actorsCollectionView)
+    itemsCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Section.items.cellIdentifier)
+    brandsCollectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: Section.brands.cellIdentifier)
+    configure(itemsCollectionView)
+    configure(brandsCollectionView)
   }
   
   func setupUI() {
@@ -158,43 +140,43 @@ private extension MultiIndexDemoViewController {
     searchBar.searchBarStyle = .minimal
     searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
-    moviesCollectionView.translatesAutoresizingMaskIntoConstraints = false
-    moviesCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    itemsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    itemsCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     
-    actorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-    actorsCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    brandsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    brandsCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
     let moviesTitleLabel = UILabel(frame: .zero)
-    moviesTitleLabel.text = "   Movies"
+    moviesTitleLabel.text = "   Items"
     moviesTitleLabel.font = .systemFont(ofSize: 15, weight: .black)
     moviesTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
     let actorsTitleLabel = UILabel(frame: .zero)
-    actorsTitleLabel.text = "   Actors"
+    actorsTitleLabel.text = "   Suggestions"
     actorsTitleLabel.font = .systemFont(ofSize: 15, weight: .black)
     actorsTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
     stackView.addArrangedSubview(searchBar)
     stackView.addArrangedSubview(moviesTitleLabel)
-    stackView.addArrangedSubview(moviesCollectionView)
+    stackView.addArrangedSubview(itemsCollectionView)
     let spacer = UIView()
     spacer.translatesAutoresizingMaskIntoConstraints = false
     spacer.heightAnchor.constraint(equalToConstant: 20).isActive = true
     stackView.addSubview(spacer)
     stackView.addArrangedSubview(actorsTitleLabel)
-    stackView.addArrangedSubview(actorsCollectionView)
+    stackView.addArrangedSubview(brandsCollectionView)
     stackView.addArrangedSubview(UIView())
     
   }
 
 }
 
-extension MultiIndexDemoViewController {
+extension MultiIndexCommerceDemoViewController {
   
   enum Section: Int {
     
-    case shopItems
-    case actors
+    case items
+    case brands
     
     init?(section: Int) {
       self.init(rawValue: section)
@@ -206,29 +188,29 @@ extension MultiIndexDemoViewController {
     
     var title: String {
       switch self {
-      case .actors:
-        return "Actors"
-      case .shopItems:
-        return "Movies"
+      case .items:
+        return "Items"
+      case .brands:
+        return "Brands"
       }
     }
     
     var index: Index {
       switch self {
-      case .actors:
-        return .demo(withName: "mobile_demo_actors")
+      case .items:
+        return .demo(withName: "instant_search")
         
-      case .shopItems:
-        return .demo(withName: "mobile_demo_movies")
+      case .brands:
+        return .demo(withName: "instantsearch_query_suggestions")
       }
     }
     
     var cellIdentifier: String {
       switch self {
-      case .actors:
-        return "actorCell"
-      case .shopItems:
-        return "movieCell"
+      case .items:
+        return "itemsCell"
+      case .brands:
+        return "brandCell"
       }
     }
     
@@ -236,7 +218,7 @@ extension MultiIndexDemoViewController {
   
 }
 
-extension MultiIndexDemoViewController: UICollectionViewDataSource {
+extension MultiIndexCommerceDemoViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     guard let section = self.section(for: collectionView) else { return 0 }
@@ -250,15 +232,14 @@ extension MultiIndexDemoViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: section.cellIdentifier, for: indexPath)
     
     switch section {
-    case .shopItems:
-      if let item: Movie = try? hitsSource?.hit(atIndex: indexPath.row, inSection: section.rawValue),
-        let cell = cell as? HitCollectionViewCell {
-        HitViewModel.movie(item).configure(cell.hitView)
+    case .items:
+      if let shopItem: Hit<ShopItem> = try? hitsSource?.hit(atIndex: indexPath.row, inSection: section.rawValue) {
+        (cell as? MovieCollectionViewCell).flatMap(MovieHitCellViewState().configure)?(shopItem)
       }
       
-    case .actors:
-      if let actor: Hit<Actor> = try? hitsSource?.hit(atIndex: indexPath.row, inSection: section.rawValue) {
-        (cell as? ActorCollectionViewCell).flatMap(ActorHitCollectionViewCellViewState().configure)?(actor)
+    case .brands:
+      if let brand: Hit<QuerySuggestion> = try? hitsSource?.hit(atIndex: indexPath.row, inSection: section.rawValue) {
+        (cell as? ActorCollectionViewCell).flatMap(ActorHitCollectionViewCellViewState().configure)?(brand)
       }
     }
 
@@ -267,7 +248,7 @@ extension MultiIndexDemoViewController: UICollectionViewDataSource {
   
 }
 
-extension MultiIndexDemoViewController: UICollectionViewDelegateFlowLayout {
+extension MultiIndexCommerceDemoViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
@@ -284,10 +265,10 @@ extension MultiIndexDemoViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     guard let section = section(for: collectionView) else { return .zero }
     switch section {
-    case .shopItems:
+    case .items:
       return CGSize(width: collectionView.bounds.width / 2 - 10, height: collectionView.bounds.height - 10)
 
-    case .actors:
+    case .brands:
       return CGSize(width: collectionView.bounds.width / 3, height: 40)
     }
   }

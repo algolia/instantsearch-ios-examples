@@ -60,7 +60,7 @@ class RelatedItemsDemoViewController: UIViewController {
           MatchingPattern(attribute: "type", score: 10, filterPath: \.type),
           MatchingPattern(attribute: "categories", score: 2, filterPath: \.categories),
         ]
-      let objectWrapper = ObjectWrapper(objectID: ObjectID(rawValue: hit.objectID), object: hit.object)
+      let objectWrapper = ObjectWrapper(objectID: hit.objectID, object: hit.object)
       self.relatedHitsInteractor.connectSearcher(self.relatedItemSearcher, withRelatedItemsTo: objectWrapper, with: matchingPatterns)
       self.relatedHitsInteractor.connectController(self.relatedHitsTableViewController)
       

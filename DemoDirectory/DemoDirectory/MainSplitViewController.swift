@@ -29,7 +29,8 @@ class MainSplitViewController: UISplitViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    demoListViewController.title = "InstantSearch demos"
+//    preferredDisplayMode = 
+    demoListViewController.title = "InstantSearch"
     demoListViewController.delegate = self
     viewControllers = [demoListNavigationController]
   }

@@ -56,7 +56,7 @@ struct MovieHitCellViewState {
         if let title = dict["title"] {
           switch title {
           case .value(let theTitle):
-            cell.titleLabel.attributedText = NSAttributedString(highlightedResults: [theTitle], separator: NSAttributedString(string: ", "), attributes: [.foregroundColor: UIColor.red])
+            cell.titleLabel.attributedText = NSAttributedString(highlightedResults: [theTitle], separator: NSAttributedString(string: ", "), attributes: [.font: UIFont.systemFont(ofSize: cell.titleLabel.font.pointSize, weight: .black)])
           default: break
           }
 
@@ -71,6 +71,51 @@ struct MovieHitCellViewState {
 
   
 }
+
+extension MovieHitCellViewState {
+  
+  func configure(_ cell: UIView & MovieCell) -> (Hit<ShopItem>) -> () {
+    return { itemHit in
+      let item = itemHit.object
+      cell.artworkImageView.sd_setImage(with: item.image) { (_, _, _, _) in
+        DispatchQueue.main.async {
+          cell.setNeedsLayout()
+        }
+      }
+
+      switch itemHit.highlightResult {
+      case .dictionary(let dict):
+        if let title = dict["name"] {
+          switch title {
+          case .value(let theTitle):
+            cell.titleLabel.attributedText = NSAttributedString(highlightedResults: [theTitle], separator: NSAttributedString(string: ", "), attributes: [.foregroundColor: UIColor.red])
+          default: break
+          }
+
+        }
+      default: break
+      }
+
+      cell.genreLabel.text = item.brand
+      cell.yearLabel.text = item.description
+    }
+  }
+  
+}
+
+extension ActorHitCollectionViewCellViewState {
+  
+  func configure(_ cell: ActorCollectionViewCell) -> (Hit<QuerySuggestion>) -> () {
+    return { brandHit in
+      if let highlightedName = brandHit.hightlightedString(forKey: "query") {
+        cell.nameLabel.attributedText = NSAttributedString(highlightedString: highlightedName, attributes: [.font:
+          UIFont.systemFont(ofSize: cell.nameLabel.font.pointSize, weight: .black)])
+      }
+    }
+  }
+  
+}
+
 
 struct ActorCollectionViewCellViewState {
   
@@ -87,7 +132,8 @@ struct ActorHitCollectionViewCellViewState {
   func configure(_ cell: ActorCollectionViewCell) -> (Hit<Actor>) -> () {
     return { actorHit in
       if let highlightedName = actorHit.hightlightedString(forKey: "name") {
-        cell.nameLabel.attributedText = NSAttributedString(highlightedString: highlightedName, attributes: [.foregroundColor: UIColor.red])
+        cell.nameLabel.attributedText = NSAttributedString(highlightedString: highlightedName, attributes: [.font:
+          UIFont.systemFont(ofSize: cell.nameLabel.font.pointSize, weight: .black)])
       }
     }
   }
@@ -143,7 +189,11 @@ struct MovieHitCellConfigurator: CellConfigurable {
     return { movieHit in
       let movie = movieHit.object
       if let highlightedTitle = movieHit.hightlightedString(forKey: "title") {
-        cell.textLabel?.attributedText = NSAttributedString(highlightedString: highlightedTitle, attributes: [.foregroundColor: UIColor.red])
+        if let textLabel = cell.textLabel {
+          textLabel.attributedText = NSAttributedString(highlightedString: highlightedTitle, attributes: [.font:
+            UIFont.systemFont(ofSize: textLabel.font.pointSize, weight: .black)])
+
+        }
       }
       
       cell.detailTextLabel?.text = movie.genre.joined(separator: ", ")

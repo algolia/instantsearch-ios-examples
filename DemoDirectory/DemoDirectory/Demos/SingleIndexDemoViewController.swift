@@ -9,10 +9,11 @@
 import UIKit
 import InstantSearch
 import SDWebImage
+import QuerySuggestions
 
 class SingleIndexDemoViewController: UIViewController {
   
-  typealias HitType = Movie
+  typealias HitType = ShopItem
   
   let stackView = UIStackView()
   let searchBar = UISearchBar()
@@ -26,16 +27,16 @@ class SingleIndexDemoViewController: UIViewController {
   let statsController: LabelStatsController
   
   let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: HitsTableViewController<HitType>
+  let hitsTableViewController: ResultsTableViewController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
     self.queryInputInteractor = .init()
     self.textFieldController = .init(searchBar: searchBar)
     self.statsInteractor = .init()
     self.statsController = .init(label: .init())
-    self.hitsInteractor = .init()
-    self.hitsTableViewController = HitsTableViewController()
+    self.hitsInteractor = .init(infiniteScrolling: .on(withOffset: 5), showItemsOnEmptyQuery: true)
+    self.hitsTableViewController = ResultsTableViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -52,8 +53,7 @@ class SingleIndexDemoViewController: UIViewController {
   private func setup() {
     
     hitsTableViewController.tableView.keyboardDismissMode = .onDrag
-    hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    
+
     queryInputInteractor.connectSearcher(searcher, searchTriggeringMode: .searchAsYouType)
     queryInputInteractor.connectController(textFieldController)
     
@@ -71,7 +71,7 @@ class SingleIndexDemoViewController: UIViewController {
 private extension SingleIndexDemoViewController {
   
   func configureUI() {
-    title = "Movies"
+    title = "Amazing"
     view.backgroundColor = .white
     configureSearchBar()
     configureStatsLabel()
