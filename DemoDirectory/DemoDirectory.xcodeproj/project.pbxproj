@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		52C68BFD244DE97B008502D4 /* RelatedItemsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C68BFC244DE97B008502D4 /* RelatedItemsDemoViewController.swift */; };
 		52C68BFF244DF0DC008502D4 /* EcommerceHitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C68BFE244DF0DC008502D4 /* EcommerceHitsTableViewController.swift */; };
-		AF0B716B24C6FF30005CFB27 /* QuerySuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AF0B716A24C6FF30005CFB27 /* QuerySuggestions */; };
+		AF0B716D24C705F5005CFB27 /* QuerySuggestions in Frameworks */ = {isa = PBXBuildFile; productRef = AF0B716C24C705F5005CFB27 /* QuerySuggestions */; };
 		AF6778CA22FB319200850ACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778C822FB319200850ACC /* Main.storyboard */; };
 		AF6778CC22FB319300850ACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CB22FB319300850ACC /* Assets.xcassets */; };
 		AF6778CF22FB319300850ACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CD22FB319300850ACC /* LaunchScreen.storyboard */; };
@@ -142,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF0B716B24C6FF30005CFB27 /* QuerySuggestions in Frameworks */,
+				AF0B716D24C705F5005CFB27 /* QuerySuggestions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 			);
 			name = DemoDirectory;
 			packageProductDependencies = (
-				AF0B716A24C6FF30005CFB27 /* QuerySuggestions */,
+				AF0B716C24C705F5005CFB27 /* QuerySuggestions */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -716,7 +716,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF0B716A24C6FF30005CFB27 /* QuerySuggestions */ = {
+		AF0B716C24C705F5005CFB27 /* QuerySuggestions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = QuerySuggestions;
 		};
