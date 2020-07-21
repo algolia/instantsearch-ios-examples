@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 class MovieCollectionViewCell: UICollectionViewCell, MovieCell {
   
   let artworkImageView: UIImageView

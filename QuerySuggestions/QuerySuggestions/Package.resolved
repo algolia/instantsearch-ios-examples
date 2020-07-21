@@ -2,30 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "InstantSearchClient",
+        "package": "AlgoliaSearchClientSwift",
         "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
         "state": {
           "branch": null,
-          "revision": "ef949269c6119a69ed574edb8ccecd67b2e1cf38",
-          "version": "7.0.3"
-        }
-      },
-      {
-        "package": "InstantSearchCore",
-        "repositoryURL": "https://github.com/algolia/instantsearch-core-swift",
-        "state": {
-          "branch": "develop",
-          "revision": "1839b9e7502c355e8441def18207197c50bb0949",
-          "version": null
+          "revision": "3635acae296e7cbff571f548c3ff67edacc98981",
+          "version": "8.0.0-beta.7"
         }
       },
       {
         "package": "InstantSearch",
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
-          "branch": "develop",
-          "revision": "92748c791c4ee677882e7e2bf2e665f8440d5a54",
-          "version": null
+          "branch": null,
+          "revision": "88a3cb34c72e56e9044769f563f88cd1df3a3f9c",
+          "version": "7.0.0-beta.1"
         }
       },
       {
@@ -42,8 +33,17 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {
           "branch": null,
-          "revision": "aa7ff6f060d8f34d2c66a716aefff1a3bc9ef816",
-          "version": "5.5.2"
+          "revision": "fe92b7aa3d49900defea430828a6774f0a2ab6dd",
+          "version": "5.8.1"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "74d7b91ceebc85daf387ebb206003f78813f71aa",
+          "version": "1.2.0"
         }
       }
     ]

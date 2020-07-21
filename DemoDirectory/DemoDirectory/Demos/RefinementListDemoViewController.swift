@@ -37,7 +37,7 @@ class RefinementListDemoViewController: UIViewController {
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
-    searcher = .init(index: .demo(withName:"mobile_demo_facet_list"))
+    searcher = .init(client: .demo, indexName: "mobile_demo_facet_list")
     searchStateViewController = .init()
     filterState = .init()
     colorInteractor = .init(selectionMode: .single)
@@ -96,7 +96,7 @@ private extension RefinementListDemoViewController {
     
     // Predefined filter
     let greenColor = Filter.Facet(attribute: colorAttribute, stringValue: "green")
-    let groupID = FilterGroup.ID.and(name: colorAttribute.name)
+    let groupID = FilterGroup.ID.and(name: colorAttribute.rawValue)
     filterState.notify(.add(filter: greenColor, toGroupWithID: groupID))
     
     searcher.connectFilterState(filterState)

@@ -12,10 +12,10 @@ import InstantSearch
 
 public class SearchViewController: UIViewController {
   
-  let appID = "latency"
-  let apiKey = "afc3dd66dd1293e2e2736a5a51b05c0a"
-  let suggestionsIndex = "instantsearch_query_suggestions"
-  let resultsIndex = "instant_search"
+  let appID: ApplicationID = "latency"
+  let apiKey: APIKey = "afc3dd66dd1293e2e2736a5a51b05c0a"
+  let suggestionsIndex: IndexName = "instantsearch_query_suggestions"
+  let resultsIndex: IndexName = "instant_search"
   
   let searchController: UISearchController
   

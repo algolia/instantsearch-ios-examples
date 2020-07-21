@@ -33,7 +33,7 @@ class FilterNumericComparisonDemoViewController: UIViewController {
   let stepperLabel = UILabel()
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName:"mobile_demo_filter_numeric_comparison"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
     self.filterState = .init()
     numberInteractor = .init()
     numberInteractor2 = .init()
@@ -70,6 +70,17 @@ private extension FilterNumericComparisonDemoViewController {
   func setup() {
     
     searcher.connectFilterState(filterState)
+    
+    numberInteractor.onBoundsComputed.subscribePast(with: self) { (controller, bounds) in
+      guard let bounds = bounds else { return }
+      controller.numericTextFieldController1.textField.placeholder = "\(bounds.lowerBound) - \(bounds.upperBound)"
+    }.onQueue(.main)
+
+    
+    numberInteractor2.onBoundsComputed.subscribePast(with: self) { (controller, bounds) in
+      guard let bounds = bounds else { return }
+      controller.numericTextFieldController2.textField.placeholder = "\(bounds.lowerBound) - \(bounds.upperBound)"
+    }.onQueue(.main)
     
     numberInteractor.connectFilterState(filterState, attribute: yearAttribute, numericOperator: .greaterThanOrEqual)
     numberInteractor.connectController(numericTextFieldController1, presenter: { return $0 ?? 0 })

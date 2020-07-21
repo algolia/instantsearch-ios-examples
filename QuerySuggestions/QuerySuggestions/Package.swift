@@ -14,8 +14,8 @@ let package = Package(
             targets: ["QuerySuggestions"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/algolia/instantsearch-ios", from: "5.2.2"),
-      .package(url: "https://github.com/SDWebImage/SDWebImage", from: "5.5.2")
+      .package(url: "https://github.com/algolia/instantsearch-ios", from: "7.0.0"),
+      .package(url: "https://github.com/SDWebImage/SDWebImage", from: "5.8.0")
     ],
     targets: [
         .target(

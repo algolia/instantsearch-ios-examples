@@ -8,16 +8,16 @@
 
 import Foundation
 import UIKit
-import InstantSearchCore
+import InstantSearch
 import SDWebImage
 
-class ResultsViewController: UITableViewController, HitsController {
+public class ResultsViewController: UITableViewController, HitsController {
     
-  var hitsSource: HitsInteractor<ShopItem>?
+  public var hitsSource: HitsInteractor<ShopItem>?
   
   let cellID = "cellID"
   
-  override init(style: UITableView.Style) {
+  public override init(style: UITableView.Style) {
     super.init(style: style)
     tableView.register(ShopItemTableViewCell.self, forCellReuseIdentifier: cellID)
   }
@@ -26,19 +26,19 @@ class ResultsViewController: UITableViewController, HitsController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func reload() {
+  public func reload() {
     tableView.reloadData()
   }
   
-  func scrollToTop() {
+  public func scrollToTop() {
     tableView.scrollToFirstNonEmptySection()
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return hitsSource?.numberOfHits() ?? 0
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard
       let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? ShopItemTableViewCell,
       let item = hitsSource?.hit(atIndex: indexPath.row) else {
@@ -50,7 +50,7 @@ class ResultsViewController: UITableViewController, HitsController {
     return cell
   }
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  public override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 80
   }
   

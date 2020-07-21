@@ -56,7 +56,7 @@ class FilterListDemoViewController<F: FilterType & Hashable>: UIViewController {
   let searchStateViewController: SearchStateViewController
   
   init(items: [F], selectionMode: SelectionMode) {
-    searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_filter_list"))
+    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_list")
     filterState = .init()
     filterListInteractor = FilterListInteractor(items: items, selectionMode: selectionMode)
     filterListController = FilterListTableController(tableView: .init())

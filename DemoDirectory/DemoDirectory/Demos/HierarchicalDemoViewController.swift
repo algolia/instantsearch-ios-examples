@@ -33,7 +33,7 @@ class HierarchicalDemoViewController: UIViewController {
   let tableViewController: UITableViewController
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_hierarchical"))
+    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_hierarchical")
     filterState = .init()
     hierarchicalInteractor = HierarchicalInteractor(hierarchicalAttributes: order, separator: " > ")
     tableViewController = .init(style: .plain)

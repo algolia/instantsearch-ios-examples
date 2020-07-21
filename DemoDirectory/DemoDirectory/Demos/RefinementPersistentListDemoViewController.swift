@@ -23,7 +23,7 @@ class RefinementPersistentListDemoViewController: UIViewController {
   let categoryListController: FacetListTableController
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = .init(index: .demo(withName:"mobile_demo_facet_list"))
+    searcher = .init(client: .demo, indexName: "mobile_demo_facet_list")
     colorInteractor = .init(selectionMode: .multiple)
     categoryInteractor = .init(selectionMode: .single)
     colorListController = .init(tableView: .init(), titleDescriptor: .init(text: "Multiple choice", color: .red))

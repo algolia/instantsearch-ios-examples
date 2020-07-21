@@ -24,7 +24,7 @@ class ToggleDefaultDemoViewController: UIViewController {
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
-    searcher = .init(index: .demo(withName: "mobile_demo_filter_toggle"))
+    searcher = .init(client: .demo, indexName: "mobile_demo_filter_toggle")
     filterState = .init()
     searchStateViewController = .init()
     
@@ -49,7 +49,6 @@ class ToggleDefaultDemoViewController: UIViewController {
   
   func setup() {
     
-    //let popularDeselected = Filter.Facet(attribute: "popular", boolValue: false)
 
     searcher.connectFilterState(filterState)
     popularInteractor.connectFilterState(filterState)

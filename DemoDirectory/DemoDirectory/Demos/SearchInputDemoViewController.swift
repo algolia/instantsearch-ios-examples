@@ -31,7 +31,7 @@ class SearchInputDemoViewController: UIViewController {
   init(searchTriggeringMode: SearchTriggeringMode) {
     self.searchBar = .init()
     self.searchTriggeringMode = searchTriggeringMode
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
     self.queryInputInteractor = .init()
     self.hitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)

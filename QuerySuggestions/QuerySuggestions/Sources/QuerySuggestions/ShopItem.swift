@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ShopItem: Codable {
-  let name: String
-  let description: String
-  let brand: String
-  let image: URL
+public struct ShopItem: Codable {
+  public let name: String
+  public let description: String
+  public let brand: String
+  public let image: URL
 }

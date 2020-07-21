@@ -21,8 +21,7 @@ class ToggleDemoViewController: UIViewController {
   let couponInteractor: SelectableInteractor<Filter.Facet>
   
   let mainStackView = UIStackView()
-  let firstRowStackView = UIStackView()
-  let secondRowStackView = UIStackView()
+  let controlsStackView = UIStackView()
   let couponStackView = UIStackView()
   
   let vintageButtonController: SelectableFilterButtonController<Filter.Tag>
@@ -33,24 +32,21 @@ class ToggleDemoViewController: UIViewController {
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
-    searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_filter_toggle"))
+    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_toggle")
     filterState = .init()
     searchStateViewController = SearchStateViewController()
     
     // Size constraint button
-    
     let sizeConstraintFilter = Filter.Numeric(attribute: "size", operator: .greaterThan, value: 40)
     sizeConstraintInteractor = SelectableInteractor(item: sizeConstraintFilter)
     sizeConstraintButtonController = SelectableFilterButtonController(button: .init())
     
     // Vintage tag button
-    
     let vintageFilter = Filter.Tag(value: "vintage")
     vintageInteractor = SelectableInteractor(item: vintageFilter)
     vintageButtonController = SelectableFilterButtonController(button: .init())
     
     // Coupon switch
-    
     let couponFacet = Filter.Facet(attribute: "promotions", stringValue: "coupon")
     couponInteractor = SelectableInteractor<Filter.Facet>(item: couponFacet)
     couponSwitchController = FilterSwitchController(switch: .init())
@@ -97,8 +93,7 @@ private extension ToggleDemoViewController {
     configureCouponSwitch()
     configureCouponStackView()
     configureMainStackView()
-    configureFirstRowStackView()
-    configureSecondRowStackView()
+    configureControlsStackView()
     configureLayout()
   }
   
@@ -125,21 +120,16 @@ private extension ToggleDemoViewController {
     couponStackView.addArrangedSubview(couponSwitchController.switch)
     couponStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
-    firstRowStackView.addArrangedSubview(sizeConstraintButtonController.button)
-
-    firstRowStackView.addArrangedSubview(self.spacer())
-    firstRowStackView.addArrangedSubview(couponStackView)
-
-    secondRowStackView.addArrangedSubview(vintageButtonController.button)
-    secondRowStackView.addArrangedSubview(self.spacer())
-
-    mainStackView.addArrangedSubview(firstRowStackView)
-    mainStackView.addArrangedSubview(secondRowStackView)
-    mainStackView.addArrangedSubview(self.spacer())
-    
-    firstRowStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.9).isActive = true
-    secondRowStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.9).isActive = true
-    
+    controlsStackView.addArrangedSubview(spacer())
+    controlsStackView.addArrangedSubview(sizeConstraintButtonController.button)
+    controlsStackView.addArrangedSubview(spacer())
+    controlsStackView.addArrangedSubview(vintageButtonController.button)
+    controlsStackView.addArrangedSubview(spacer())
+    controlsStackView.addArrangedSubview(couponStackView)
+    controlsStackView.addArrangedSubview(spacer())
+    mainStackView.addArrangedSubview(controlsStackView)
+    mainStackView.addArrangedSubview(spacer())
+    controlsStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 1).isActive = true
   }
   
   private func spacer() -> UIView {
@@ -156,35 +146,45 @@ private extension ToggleDemoViewController {
     mainStackView.translatesAutoresizingMaskIntoConstraints = false
   }
   
-  func configureFirstRowStackView() {
-    firstRowStackView.axis = .horizontal
-    firstRowStackView.distribution = .fill
-    firstRowStackView.spacing = .px16
-    firstRowStackView.translatesAutoresizingMaskIntoConstraints = false
+  func configureControlsStackView() {
+    controlsStackView.axis = .horizontal
+    controlsStackView.distribution = .equalSpacing
+    controlsStackView.translatesAutoresizingMaskIntoConstraints = false
   }
-
-  func configureSecondRowStackView() {
-    secondRowStackView.axis = .horizontal
-    secondRowStackView.distribution = .fill
-    secondRowStackView.spacing = .px16
-    secondRowStackView.translatesAutoresizingMaskIntoConstraints = false
+  
+  func configureCouponStackView() {
+    couponStackView.translatesAutoresizingMaskIntoConstraints = false
+    couponStackView.axis = .horizontal
+    couponStackView.spacing = .px16
+    couponStackView.alignment = .center
+    couponStackView.distribution = .fill
   }
-
-  func configureCheckBoxButton(_ button: UIButton, withTitle title: String) {
+    
+  func configureSizeButton() {
+    let button = sizeConstraintButtonController.button
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle(title, for: .normal)
+    button.setTitle("size > 40", for: .normal)
+    button.setTitleColor(.black, for: .normal)
+    button.setTitleColor(.systemGreen, for: .selected)
+    button.layer.borderWidth = 1
+    button.layer.cornerRadius = 10
+    button.contentEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
+    button.addTarget(self, action: #selector(didTapSizeButton), for: .touchUpInside)
+  }
+  
+  @objc func didTapSizeButton(_ button: UIButton) {
+    let borderColor: UIColor =  button.isSelected ? .black : .systemGreen
+    button.layer.borderColor = borderColor.cgColor
+  }
+  
+  func configureVintageButton() {
+    let button = vintageButtonController.button
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle("vintage", for: .normal)
     button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
     button.setTitleColor(.black, for: .normal)
     button.setImage(UIImage(named: "square"), for: .normal)
     button.setImage(UIImage(named: "check-square"), for: .selected)
-  }
-  
-  func configureSizeButton() {
-    configureCheckBoxButton(sizeConstraintButtonController.button, withTitle: "size > 40")
-  }
-  
-  func configureVintageButton() {
-    configureCheckBoxButton(vintageButtonController.button, withTitle: "vintage")
   }
   
   func configureCouponSwitch() {
@@ -196,13 +196,4 @@ private extension ToggleDemoViewController {
     couponLabel.translatesAutoresizingMaskIntoConstraints = false
   }
   
-  func configureCouponStackView() {
-    couponStackView.translatesAutoresizingMaskIntoConstraints = false
-    couponStackView.axis = .horizontal
-    couponStackView.spacing = .px16
-    couponStackView.alignment = .center
-    couponStackView.distribution = .fill
-  }
-  
 }
-

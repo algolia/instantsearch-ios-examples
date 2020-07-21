@@ -27,7 +27,7 @@ class SegmentedDemoViewController: UIViewController {
   let female = Filter.Facet(attribute: "gender", stringValue: "female")
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName:"mobile_demo_filter_segment"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_segment")
     let items: [Int: Filter.Facet] = [
       0: male,
       1: female
@@ -66,7 +66,7 @@ private extension SegmentedDemoViewController {
     searchStateViewController.connectSearcher(searcher)
     searchStateViewController.connectFilterState(filterState)
     
-    filterState.notify(.add(filter: male, toGroupWithID: .or(name: genderAttribute.name, filterType: .facet)))
+    filterState.notify(.add(filter: male, toGroupWithID: .or(name: genderAttribute.rawValue, filterType: .facet)))
     
   }
   

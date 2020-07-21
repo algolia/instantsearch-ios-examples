@@ -16,12 +16,14 @@ class LoadingDemoViewController: UIViewController {
   typealias HitType = Movie
   
   let stackView = UIStackView()
-  let activityIndicator = UIActivityIndicatorView(style: .gray)
+  let activityIndicator = UIActivityIndicatorView(style: .medium)
   
   let searcher: SingleIndexSearcher
   
+    
+  let searchBar: UISearchBar
   let queryInputInteractor: QueryInputInteractor
-  let searchBarController: SearchBarController
+  let searchBarController: TextFieldController
   
   let statsInteractor: StatsInteractor
   let statsController: LabelStatsController
@@ -30,9 +32,10 @@ class LoadingDemoViewController: UIViewController {
   let hitsTableViewController: HitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputInteractor = .init()
-    self.searchBarController = .init(searchBar: .init())
+    self.searchBar = .init()
+    self.searchBarController = .init(searchBar: searchBar)
     self.statsInteractor = .init()
     self.statsController = .init(label: .init())
     self.hitsInteractor = .init()
@@ -89,7 +92,6 @@ private extension LoadingDemoViewController {
   }
   
   func configureSearchBar() {
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
   }
@@ -111,7 +113,7 @@ private extension LoadingDemoViewController {
     
     let barStackView = UIStackView()
     barStackView.axis = .horizontal
-    barStackView.addArrangedSubview(searchBarController.searchBar)
+    barStackView.addArrangedSubview(searchBar)
     barStackView.addArrangedSubview(activityIndicator)
     let spacerView = UIView()
     spacerView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +132,7 @@ private extension LoadingDemoViewController {
     
     stackView.pin(to: view.safeAreaLayoutGuide)
     
-    searchBarController.searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
     statsController.label.heightAnchor.constraint(equalToConstant: 16).isActive = true
     

@@ -11,21 +11,21 @@ import UIKit
 
 extension UIView {
   
-  func pin(to view: UIView) {
+  func pin(to view: UIView, insets: UIEdgeInsets = .init()) {
     NSLayoutConstraint.activate([
-      topAnchor.constraint(equalTo: view.topAnchor),
-      bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
+      bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insets.bottom),
+      leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
+      trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insets.right),
       ])
   }
   
-  func pin(to layoutGuide: UILayoutGuide) {
+  func pin(to layoutGuide: UILayoutGuide, insets: UIEdgeInsets = .init()) {
     NSLayoutConstraint.activate([
-      topAnchor.constraint(equalTo: layoutGuide.topAnchor),
-      bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor),
-      leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
-      trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
+      topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: insets.top),
+      bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: insets.bottom),
+      leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor, constant: insets.left),
+      trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: insets.right),
       ])
   }
   

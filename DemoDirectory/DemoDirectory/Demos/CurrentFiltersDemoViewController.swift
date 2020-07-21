@@ -104,10 +104,15 @@ private extension CurrentFiltersDemoViewController {
     searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
 
     tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-    searchTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    searchTextField.translatesAutoresizingMaskIntoConstraints = false
+    let searchTextFieldContainer = UIView()
+    searchTextFieldContainer.heightAnchor.constraint(equalToConstant: 54).isActive = true
+    searchTextFieldContainer.translatesAutoresizingMaskIntoConstraints = false
+    searchTextFieldContainer.addSubview(searchTextField)
+    searchTextField.pin(to: searchTextFieldContainer, insets: UIEdgeInsets(top: 5, left: 5, bottom: -5, right: -5))
 
     mainStackView.addArrangedSubview(searchStateViewController.view)
-    mainStackView.addArrangedSubview(searchTextField)
+    mainStackView.addArrangedSubview(searchTextFieldContainer)
     mainStackView.addArrangedSubview(tableView)
     
   }

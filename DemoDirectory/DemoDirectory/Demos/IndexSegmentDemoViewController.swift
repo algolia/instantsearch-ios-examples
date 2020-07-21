@@ -13,18 +13,20 @@ class IndexSegmentDemoViewController: UIViewController {
   
   typealias HitType = Movie
 
+  let searchBar: UISearchBar
+  
   let searcher: SingleIndexSearcher
   let queryInputInteractor: QueryInputInteractor
-  let searchBarController: SearchBarController
+  let textFieldController: TextFieldController
   let hitsInteractor: HitsInteractor<HitType>
   let hitsTableViewController: HitsTableViewController<HitType>
   let indexSegmentInteractor: IndexSegmentInteractor
 
-  let indexTitle: Index = .demo(withName: "mobile_demo_movies")
-  let indexYearAsc: Index = .demo(withName: "mobile_demo_movies_year_asc")
-  let indexYearDesc: Index = .demo(withName: "mobile_demo_movies_year_desc")
+  let indexTitle: IndexName = "mobile_demo_movies"
+  let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
+  let indexYearDesc: IndexName = "mobile_demo_movies_year_desc"
 
-  let indexes: [Int: Index]
+  let indexes: [Int: IndexName]
 
   let selectIndexAlertController: SelectIndexController = {
     let alert = UIAlertController(title: "Change Index",
@@ -36,8 +38,9 @@ class IndexSegmentDemoViewController: UIViewController {
   private let cellIdentifier = "CellID"
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(index: .demo(withName: "mobile_demo_movies"))
-    self.searchBarController = SearchBarController(searchBar: .init())
+    self.searchBar = UISearchBar()
+    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.textFieldController = TextFieldController(searchBar: searchBar)
     self.hitsInteractor = .init()
     self.hitsTableViewController = .init()
     self.queryInputInteractor = .init()
@@ -46,7 +49,7 @@ class IndexSegmentDemoViewController: UIViewController {
       1 : indexYearAsc,
       2 : indexYearDesc
     ]
-    indexSegmentInteractor = IndexSegmentInteractor(items: indexes)
+    indexSegmentInteractor = IndexSegmentInteractor(items: indexes.mapValues(SearchClient.demo.index(withName:)))
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -67,12 +70,12 @@ class IndexSegmentDemoViewController: UIViewController {
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectController(hitsTableViewController)
 
-    queryInputInteractor.connectController(searchBarController)
+    queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectSearcher(searcher)
 
     indexSegmentInteractor.connectSearcher(searcher: searcher)
 
-    indexSegmentInteractor.connectController(selectIndexAlertController, presenter: title(for:))
+    indexSegmentInteractor.connectController(selectIndexAlertController, presenter: { self.title(for: $0.name) } )
     indexSegmentInteractor.onSelectedComputed.subscribe(with: self) { (controller, index) in
       index.flatMap { controller.indexes[$0] }.flatMap(controller.setChangeIndexButton)
     }
@@ -82,8 +85,12 @@ class IndexSegmentDemoViewController: UIViewController {
 
 extension IndexSegmentDemoViewController {
   
-  func title(for index: Index) -> String {
-    switch index {
+  func index(for name: IndexName) -> Index {
+    SearchClient.demo.index(withName: name)
+  }
+  
+  func title(for indexName: IndexName) -> String {
+    switch indexName {
     case indexTitle:
       return "Default"
     case indexYearAsc:
@@ -91,11 +98,11 @@ extension IndexSegmentDemoViewController {
     case indexYearDesc:
       return "Year Desc"
     default:
-      return index.name
+      return indexName.rawValue
     }
   }
   
-  func setChangeIndexButton(with index: Index) {
+  func setChangeIndexButton(with index: IndexName) {
     let title = "Sort by: \(self.title(for: index))"
     navigationItem.rightBarButtonItem = .init(title: title, style: .done, target: self, action: #selector(self.editButtonTapped(sender:)))
   }
@@ -107,7 +114,6 @@ extension IndexSegmentDemoViewController {
 
     setChangeIndexButton(with: indexTitle)
 
-    let searchBar = searchBarController.searchBar
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
     searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -135,6 +141,7 @@ extension IndexSegmentDemoViewController {
   }
 
   @objc func editButtonTapped(sender: UIBarButtonItem) {
+    selectIndexAlertController.alertController.popoverPresentationController?.barButtonItem = sender
     present(selectIndexAlertController.alertController, animated: true, completion: nil)
   }
 
