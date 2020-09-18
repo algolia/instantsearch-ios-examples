@@ -86,7 +86,6 @@ class MultiIndexDemoViewController: UIViewController, InstantSearchCore.MultiInd
     queryInputInteractor = .init()
     
     super.init(nibName: nil, bundle: nil)
-    
     setup()
   }
   

@@ -13,8 +13,8 @@ import UIKit
 class CurrentFiltersDemoViewController: UIViewController {
 
   let filterState: FilterState
-  let currentFiltersListInteractor: CurrentFiltersInteractor
-  let currentFiltersListInteractor2: CurrentFiltersInteractor
+  let currentFiltersListConnector: CurrentFiltersConnector
+  let currentFiltersListConnector2: CurrentFiltersConnector
 
   let currentFiltersController: CurrentFilterListTableController
   let currentFiltersController2: SearchTextFieldCurrentFiltersController
@@ -31,12 +31,15 @@ class CurrentFiltersDemoViewController: UIViewController {
     tableView = .init()
     searchTextField = .init()
 
-    currentFiltersListInteractor = .init()
-    currentFiltersListInteractor2 = .init()
-
     currentFiltersController = .init(tableView: tableView)
     currentFiltersController2 = .init(searchTextField: searchTextField)
+    
+    currentFiltersListConnector = .init(filterState: filterState,
+                                        controller: currentFiltersController)
 
+    currentFiltersListConnector2 = .init(filterState: filterState,
+                                         groupIDs: [.or(name: "filterFacets", filterType: .facet)],
+                                         controller: currentFiltersController2)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
 
@@ -55,15 +58,6 @@ class CurrentFiltersDemoViewController: UIViewController {
 private extension CurrentFiltersDemoViewController {
 
   func setup() {
-
-    let groupFacets = FilterGroup.ID.or(name: "filterFacets", filterType: .facet)
-    let groupNumerics = FilterGroup.ID.and(name: "filterNumerics")
-
-    currentFiltersListInteractor.connectFilterState(filterState).connect()
-    currentFiltersListInteractor.connectController(currentFiltersController)
-
-    currentFiltersListInteractor2.connectFilterState(filterState, filterGroupID: groupFacets).connect()
-    currentFiltersListInteractor2.connectController(currentFiltersController2)
 
     searchStateViewController.connectFilterState(filterState)
 

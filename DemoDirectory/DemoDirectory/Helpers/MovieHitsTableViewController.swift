@@ -8,31 +8,13 @@
 
 import Foundation
 import UIKit
-import InstantSearchCore
+import InstantSearch
 
-class HitsTableViewController<HitType: Codable>: UITableViewController, InstantSearchCore.HitsController {
-  
-  typealias DataSource = HitsInteractor<HitType>
-  
+class MovieHitsTableViewController<HitType: Codable>: UITableViewController, HitsController {
+    
   let cellIdentifier = "CellID"
   
   var hitsSource: HitsInteractor<HitType>?
-  
-  init() {
-    super.init(nibName: .none, bundle: .none)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func reload() {
-    tableView.reloadData()
-  }
-  
-  func scrollToTop() {
-    tableView.scrollToFirstNonEmptySection()
-  }
   
   //MARK: - UITableViewDataSource
   

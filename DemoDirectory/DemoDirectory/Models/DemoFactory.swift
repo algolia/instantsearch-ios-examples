@@ -21,7 +21,8 @@ class DemoFactory {
      
      switch demoID {
      case .singleIndex:
-       viewController = SingleIndexDemoViewController()
+      viewController = GettingStartedGuide.StepThree.ViewController()
+        //SingleIndexDemoViewController()
        
      case .sffv:
        viewController = FacetSearchDemoViewController()
@@ -57,7 +58,8 @@ class DemoFactory {
        viewController = ClearFiltersDemoViewController()
        
      case .multiIndex:
-       viewController = MultiIndexDemoViewController()
+       viewController = MultiIndexHitsConnectorSearchViewController()
+        //MultiIndexDemoViewController()
        
      case .facetFilterList:
        viewController = FilterListDemo.facet()

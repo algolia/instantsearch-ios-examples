@@ -15,8 +15,8 @@ class ClearFiltersDemoViewController: UIViewController {
   let filterState: FilterState
   let searchStateViewController: SearchStateViewController
 
-  let clearColorsInteractor: FilterClearInteractor
-  let clearExceptColorsInteractor: FilterClearInteractor
+  let clearColorsConnector: FilterClearConnector
+  let clearExceptColorsConnector: FilterClearConnector
 
   let clearColorsController: FilterClearButtonController
   let clearExceptColorsController: FilterClearButtonController
@@ -27,12 +27,19 @@ class ClearFiltersDemoViewController: UIViewController {
 
     filterState = .init()
     searchStateViewController = .init()
-
-    clearColorsInteractor = .init()
-    clearExceptColorsInteractor = .init()
+    let groupColor = FilterGroup.ID.or(name: "color", filterType: .facet)
 
     clearColorsController = .init(button: .init())
     clearExceptColorsController = .init(button: .init())
+    
+    clearColorsConnector = .init(filterState: filterState,
+                                 clearMode: .specified,
+                                 filterGroupIDs: [groupColor],
+                                 controller: clearColorsController)
+    clearExceptColorsConnector = .init(filterState: filterState,
+                                       clearMode: .except,
+                                       filterGroupIDs: [groupColor],
+                                       controller: clearExceptColorsController)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
@@ -58,14 +65,6 @@ class ClearFiltersDemoViewController: UIViewController {
     filterState[and: "category"].add(categoryFacet)
     filterState[or: "color"].add(redFacet, greenFacet)
     filterState.notifyChange()
-    
-    let groupColor = FilterGroup.ID.or(name: "color", filterType: .facet)
-
-    clearColorsInteractor.connectFilterState(filterState, filterGroupIDs: [groupColor], clearMode: .specified)
-    clearExceptColorsInteractor.connectFilterState(filterState, filterGroupIDs: [groupColor], clearMode: .except)
-
-    clearColorsInteractor.connectController(clearColorsController)
-    clearExceptColorsInteractor.connectController(clearExceptColorsController)
 
     searchStateViewController.connectFilterState(filterState)
 

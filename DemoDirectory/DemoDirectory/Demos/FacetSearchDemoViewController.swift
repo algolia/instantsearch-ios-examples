@@ -12,32 +12,35 @@ import UIKit
 
 class FacetSearchDemoViewController: UIViewController {
 
-  let searcher: SingleIndexSearcher
   let filterState: FilterState
   let facetSearcher: FacetSearcher
   let searchBar: UISearchBar
   let textFieldController: TextFieldController
   let categoryController: FacetListTableController
-  let categoryListInteractor: FacetListInteractor
-  let searchStateViewController: SearchStateViewController
+  let categoryListConnector: FacetListConnector
+  let queryInputConnector: QueryInputConnector<FacetSearcher>
   
-  let queryInputInteractor: QueryInputInteractor
+  let searchStateViewController: SearchStateViewController
+
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
-    let indexName: IndexName = "mobile_demo_facet_list_search"
-    searcher = SingleIndexSearcher(client: .demo, indexName: indexName)
     filterState = .init()
-    facetSearcher = FacetSearcher(client: .demo, indexName: indexName, facetName: "brand")
+    facetSearcher = FacetSearcher(client: .demo, indexName: "mobile_demo_facet_list_search", facetName: "brand")
     
-    queryInputInteractor = QueryInputInteractor()
-    categoryListInteractor = FacetListInteractor(selectionMode: .multiple)
+    categoryController = FacetListTableController(tableView: .init())
+    categoryListConnector = .init(searcher: facetSearcher,
+                                  filterState: filterState,
+                                  attribute: "brand",
+                                  operator: .or,
+                                  controller: categoryController)
 
     searchBar = .init()
     textFieldController = TextFieldController(searchBar: searchBar)
+    queryInputConnector = QueryInputConnector(searcher: facetSearcher, controller: textFieldController)
+    
     searchStateViewController = SearchStateViewController()
-    categoryController = FacetListTableController(tableView: .init())
-
+    
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     
     setup()
@@ -60,23 +63,14 @@ private extension FacetSearchDemoViewController {
   
   func setup() {
     
-    searcher.search()
-    searcher.connectFilterState(filterState)
+//    searcher.search()
+//    searcher.connectFilterState(filterState)
 
     facetSearcher.search()
     facetSearcher.connectFilterState(filterState)
 
-    searchStateViewController.connectSearcher(searcher)
     searchStateViewController.connectFilterState(filterState)
     searchStateViewController.connectFacetSearcher(facetSearcher)
-
-    queryInputInteractor.connectController(textFieldController)
-    queryInputInteractor.connectSearcher(facetSearcher)
-    
-    categoryListInteractor.connectFacetSearcher(facetSearcher)
-    categoryListInteractor.connectFilterState(filterState, with: Attribute("brand"), operator: .or)
-    categoryListInteractor.connectController(categoryController)
-    
   }
 
   func setupUI() {

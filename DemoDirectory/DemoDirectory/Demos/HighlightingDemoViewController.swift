@@ -23,14 +23,14 @@ class HighlightingDemoViewController: UIViewController {
   let textFieldController: TextFieldController
   
   let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: HitsTableViewController<HitType>
+  let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputInteractor = .init()
     self.textFieldController = .init(searchBar: searchBar)
     self.hitsInteractor = .init()
-    self.hitsTableViewController = HitsTableViewController()
+    self.hitsTableViewController = MovieHitsTableViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }

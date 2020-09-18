@@ -16,9 +16,9 @@ class ToggleDemoViewController: UIViewController {
   let filterState: FilterState
   let searchStateViewController: SearchStateViewController
   
-  let sizeConstraintInteractor: SelectableInteractor<Filter.Numeric>
-  let vintageInteractor: SelectableInteractor<Filter.Tag>
-  let couponInteractor: SelectableInteractor<Filter.Facet>
+  let sizeConstraintConnector: FilterToggleConnector<Filter.Numeric>
+  let vintageConnector: FilterToggleConnector<Filter.Tag>
+  let couponConnector: FilterToggleConnector<Filter.Facet>
   
   let mainStackView = UIStackView()
   let controlsStackView = UIStackView()
@@ -38,18 +38,18 @@ class ToggleDemoViewController: UIViewController {
     
     // Size constraint button
     let sizeConstraintFilter = Filter.Numeric(attribute: "size", operator: .greaterThan, value: 40)
-    sizeConstraintInteractor = SelectableInteractor(item: sizeConstraintFilter)
     sizeConstraintButtonController = SelectableFilterButtonController(button: .init())
+    sizeConstraintConnector = .init(filterState: filterState, filter: sizeConstraintFilter, controller: sizeConstraintButtonController)
     
     // Vintage tag button
     let vintageFilter = Filter.Tag(value: "vintage")
-    vintageInteractor = SelectableInteractor(item: vintageFilter)
     vintageButtonController = SelectableFilterButtonController(button: .init())
+    vintageConnector = .init(filterState: filterState, filter: vintageFilter, controller: vintageButtonController)
     
     // Coupon switch
     let couponFacet = Filter.Facet(attribute: "promotions", stringValue: "coupon")
-    couponInteractor = SelectableInteractor<Filter.Facet>(item: couponFacet)
     couponSwitchController = FilterSwitchController(switch: .init())
+    couponConnector = .init(filterState: filterState, filter: couponFacet, controller: couponSwitchController)
     
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     
@@ -73,16 +73,9 @@ private extension ToggleDemoViewController {
   
   func setup() {
     searcher.connectFilterState(filterState)
-    couponInteractor.connectFilterState(filterState, operator: .or)
-    sizeConstraintInteractor.connectFilterState(filterState, operator: .or)
-    vintageInteractor.connectFilterState(filterState, operator: .or)
     searchStateViewController.connectSearcher(searcher)
     searchStateViewController.connectFilterState(filterState)
-    searcher.search()
-    
-    sizeConstraintInteractor.connectController(sizeConstraintButtonController)
-    vintageInteractor.connectController(vintageButtonController)
-    couponInteractor.connectController(couponSwitchController)
+    searcher.search()    
   }
   
   func setupUI() {

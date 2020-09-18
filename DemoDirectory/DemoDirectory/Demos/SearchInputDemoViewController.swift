@@ -25,7 +25,7 @@ class SearchInputDemoViewController: UIViewController {
   let textFieldController: TextFieldController
   
   let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: HitsTableViewController<HitType>
+  let hitsTableViewController: MovieHitsTableViewController<HitType>
 
   
   init(searchTriggeringMode: SearchTriggeringMode) {
@@ -35,7 +35,7 @@ class SearchInputDemoViewController: UIViewController {
     self.textFieldController = .init(searchBar: searchBar)
     self.queryInputInteractor = .init()
     self.hitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
-    self.hitsTableViewController = HitsTableViewController()
+    self.hitsTableViewController = MovieHitsTableViewController()
     super.init(nibName: .none, bundle: .none)
     setup()
   }

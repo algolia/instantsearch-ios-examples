@@ -20,26 +20,25 @@ class LoadingDemoViewController: UIViewController {
   
   let searcher: SingleIndexSearcher
   
-    
   let searchBar: UISearchBar
-  let queryInputInteractor: QueryInputInteractor
+  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
   let searchBarController: TextFieldController
   
-  let statsInteractor: StatsInteractor
+  let statsConnector: StatsConnector
   let statsController: LabelStatsController
   
-  let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: HitsTableViewController<HitType>
+  let hitsConnector: HitsConnector<HitType>
+  let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
-    self.queryInputInteractor = .init()
     self.searchBar = .init()
     self.searchBarController = .init(searchBar: searchBar)
-    self.statsInteractor = .init()
+    self.queryInputConnector = QueryInputConnector(searcher: searcher, controller: searchBarController)
     self.statsController = .init(label: .init())
-    self.hitsInteractor = .init()
-    self.hitsTableViewController = HitsTableViewController()
+    statsConnector = .init(searcher: searcher, controller: statsController, presenter: DefaultPresenter.Stats.present)
+    self.hitsTableViewController = MovieHitsTableViewController()
+    self.hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -54,20 +53,10 @@ class LoadingDemoViewController: UIViewController {
   }
   
   private func setup() {
-    
     activityIndicator.hidesWhenStopped = true
     
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    
-    queryInputInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectController(searchBarController)
-    
-    statsInteractor.connectSearcher(searcher)
-    statsInteractor.connectController(statsController)
-    
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
-    
+        
     searcher.isLoading.subscribe(with: self) { viewController, isLoading in
       if isLoading {
         viewController.activityIndicator.startAnimating()

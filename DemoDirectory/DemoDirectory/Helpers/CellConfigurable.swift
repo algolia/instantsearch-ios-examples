@@ -8,7 +8,21 @@
 
 import Foundation
 import SDWebImage
-import InstantSearchCore
+import InstantSearch
+
+struct MovieTableViewCellConfigurator: InstantSearch.CellConfigurable {
+  
+  static var cellIdentifier: String = "movieCell"
+  
+  typealias Model = Movie
+  
+  let movie: Movie
+  
+  init(model: Movie, indexPath: IndexPath) {
+    self.movie = model
+  }
+
+}
 
 struct MovieCellViewState {
   

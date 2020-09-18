@@ -51,15 +51,20 @@ class FilterListDemoViewController<F: FilterType & Hashable>: UIViewController {
   
   let searcher: SingleIndexSearcher
   let filterState: FilterState
-  let filterListInteractor: FilterListInteractor<F>
+  let filterListConnector: FilterListConnector<F>
   let filterListController: FilterListTableController<F>
   let searchStateViewController: SearchStateViewController
   
   init(items: [F], selectionMode: SelectionMode) {
     searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_list")
     filterState = .init()
-    filterListInteractor = FilterListInteractor(items: items, selectionMode: selectionMode)
     filterListController = FilterListTableController(tableView: .init())
+    filterListConnector = .init(filterState: filterState,
+                                filters: items,
+                                selectionMode: selectionMode,
+                                operator: .or,
+                                groupName: "filters",
+                                controller: filterListController)
     searchStateViewController = SearchStateViewController()
     super.init(nibName: nil, bundle: nil)
     searcher.isDisjunctiveFacetingEnabled = false
@@ -82,8 +87,6 @@ private extension FilterListDemoViewController {
   func setup() {
     searcher.search()
     searcher.connectFilterState(filterState)
-    filterListInteractor.connectController(filterListController)
-    filterListInteractor.connectFilterState(filterState, operator: .or)
     searchStateViewController.connectFilterState(filterState)
     searchStateViewController.connectSearcher(searcher)
   }

@@ -12,39 +12,25 @@ import UIKit
 
 class MultiIndexSnippetViewController: UIViewController {
     
-  let searcher: MultiIndexSearcher = .init(appID: "latency",
-                                           apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                                           indexNames: ["mobile_demo_actors", "mobile_demo_movies"])
-  
-  
   let searchBar: UISearchBar = .init()
-  let queryInputInteractor: QueryInputInteractor = .init()
-  lazy var textFieldController: TextFieldController = {
-    return .init(searchBar: searchBar)
-  }()
+  lazy var textFieldController: TextFieldController = .init(searchBar: searchBar)
   
-  lazy var hitsInteractor: MultiIndexHitsInteractor = {
+  lazy var queryInputConnector: QueryInputConnector = .init(searcher: hitsInteractor.searcher, controller: textFieldController)
+
+  
+  lazy var hitsInteractor: MultiIndexHitsConnector = {
     let actorHitsInteractor: HitsInteractor<Actor> = .init(infiniteScrolling: .off)
     let movieHitsInteractor: HitsInteractor<Movie> = .init(infiniteScrolling: .off)
-    return .init(hitsInteractors: [actorHitsInteractor, movieHitsInteractor])
+    let interactor = MultiIndexHitsInteractor(hitsInteractors: [actorHitsInteractor, movieHitsInteractor])
+    return .init(appID: "latency", apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db", indexModules: [.init(indexName: "mobile_demo_actors", hitsInteractor: actorHitsInteractor), .init(indexName: "mobile_demo_movies", hitsInteractor: movieHitsInteractor)], controller: hitsTableViewController)
   }()
   
   let hitsTableViewController: HitsViewController = .init(style: .plain)
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    setup()
     configureUI()
-  }
-  
-  func setup() {
-    queryInputInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectController(textFieldController)
-    
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
-    
-    searcher.search()
+    hitsInteractor.searcher.search()
   }
   
   func configureUI() {
