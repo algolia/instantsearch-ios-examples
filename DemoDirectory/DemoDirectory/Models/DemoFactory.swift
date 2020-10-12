@@ -21,8 +21,7 @@ class DemoFactory {
      
      switch demoID {
      case .singleIndex:
-      viewController = GettingStartedGuide.StepThree.ViewController()
-        //SingleIndexDemoViewController()
+      viewController = SingleIndexDemoViewController()
        
      case .sffv:
        viewController = FacetSearchDemoViewController()
@@ -93,6 +92,9 @@ class DemoFactory {
       
      case .relatedItems:
        viewController = RelatedItemsDemoViewController()
+      
+     case .queryRuleCustomData:
+       viewController = QueryRuleCustomDataDemoViewController()
      }
     
     viewController.title = demo.name

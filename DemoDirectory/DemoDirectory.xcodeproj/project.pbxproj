@@ -16,6 +16,10 @@
 		AF0B717D24C99399005CFB27 /* SearchConnectorSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0B717C24C99399005CFB27 /* SearchConnectorSearchViewController.swift */; };
 		AF0B718324C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */; };
 		AF0B718724C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0B718624C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift */; };
+		AF48C4D625347C6800262367 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D525347C6800262367 /* BannerViewController.swift */; };
+		AF48C4DA25347C7100262367 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D925347C7100262367 /* Banner.swift */; };
+		AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */; };
+		AF48C4E225347CD300262367 /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4E125347CD300262367 /* TemplateViewController.swift */; };
 		AF6778CA22FB319200850ACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778C822FB319200850ACC /* Main.storyboard */; };
 		AF6778CC22FB319300850ACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CB22FB319300850ACC /* Assets.xcassets */; };
 		AF6778CF22FB319300850ACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CD22FB319300850ACC /* LaunchScreen.storyboard */; };
@@ -93,6 +97,11 @@
 		AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexWidgetHitsViewController.swift; sourceTree = "<group>"; };
 		AF0B718624C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyTableViewCellConfigurator.swift; sourceTree = "<group>"; };
 		AF2C1D6423CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsDemoViewController.swift; sourceTree = "<group>"; };
+		AF377EA8252BD13B00A1EC78 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../../algoliasearch-client-swift"; sourceTree = "<group>"; };
+		AF48C4D525347C6800262367 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
+		AF48C4E125347CD300262367 /* TemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewController.swift; sourceTree = "<group>"; };
 		AF6778C122FB319200850ACC /* DemoDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6778C422FB319200850ACC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF6778C922FB319200850ACC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -176,6 +185,7 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF377EA8252BD13B00A1EC78 /* algoliasearch-client-swift */,
 				AF0B717424C862D4005CFB27 /* instantsearch-ios */,
 				AF0B717124C715F7005CFB27 /* QuerySuggestions */,
 			);
@@ -269,6 +279,7 @@
 				AF6778E622FB34C000850ACC /* Actor.swift */,
 				AFAA5C8D248FDC6700EC7B95 /* Demo.swift */,
 				AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */,
+				AF48C4D925347C7100262367 /* Banner.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,6 +313,7 @@
 				AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */,
 				AF6778FD22FB34C000850ACC /* LoadingDemoViewController.swift */,
 				AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */,
+				AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -316,6 +328,8 @@
 				AF67790322FB34C000850ACC /* TagListViewController.swift */,
 				AF67790422FB34C000850ACC /* MovieTableViewCell.swift */,
 				AF9D2D31249CED8200C0EAEB /* HitView.swift */,
+				AF48C4D525347C6800262367 /* BannerViewController.swift */,
+				AF48C4E125347CD300262367 /* TemplateViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF48C4E225347CD300262367 /* TemplateViewController.swift in Sources */,
 				AF67792722FB34C000850ACC /* MovieCell.swift in Sources */,
 				AF67791722FB34C000850ACC /* RefinementListDemoViewController.swift in Sources */,
 				AF67791C22FB34C000850ACC /* FilterNumericRangeDemoViewController.swift in Sources */,
@@ -468,8 +483,10 @@
 				AF67793022FB34C000850ACC /* Helpers.swift in Sources */,
 				AF0B718724C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift in Sources */,
 				AF67791A22FB34C000850ACC /* RefinementPersistentListDemoViewController.swift in Sources */,
+				AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */,
 				AF67791622FB34C000850ACC /* MultiIndexSnippetViewController.swift in Sources */,
 				AF67791322FB34C000850ACC /* CurrentFiltersDemoViewController.swift in Sources */,
+				AF48C4DA25347C7100262367 /* Banner.swift in Sources */,
 				AF67791F22FB34C000850ACC /* FacetSearchDemoViewController.swift in Sources */,
 				AF67790F22FB34C000850ACC /* Movie.swift in Sources */,
 				AF67791D22FB34C000850ACC /* SearchInputDemoViewController.swift in Sources */,
@@ -493,6 +510,7 @@
 				AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */,
 				AF67792122FB34C000850ACC /* HighlightingDemoViewController.swift in Sources */,
 				AF67791222FB34C000850ACC /* ToggleDefaultDemoViewController.swift in Sources */,
+				AF48C4D625347C6800262367 /* BannerViewController.swift in Sources */,
 				AF67792522FB34C000850ACC /* MultiIndexDemoViewController.swift in Sources */,
 				AF67792422FB34C000850ACC /* ClearFiltersDemoViewController.swift in Sources */,
 				AF67792822FB34C000850ACC /* MovieCollectionViewCell.swift in Sources */,
