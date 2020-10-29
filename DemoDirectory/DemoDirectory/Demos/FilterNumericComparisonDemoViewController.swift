@@ -12,42 +12,56 @@ import InstantSearch
 
 class FilterNumericComparisonDemoViewController: UIViewController {
 
-  let yearAttribute = Attribute("year")
-  let priceAttribute = Attribute("price")
-
   let searcher: SingleIndexSearcher
   let filterState: FilterState
 
-  let numberInteractor: NumberInteractor<Int>
-  let numberInteractor2: NumberInteractor<Int>
-  let numberInteractor3: NumberInteractor<Double>
+  let yearConnector: FilterComparisonConnector<Int>
+  let yearDuplicateConnector: FilterComparisonConnector<Int>
+  let priceConnector: FilterComparisonConnector<Double>
 
   let searchStateViewController: SearchStateViewController
 
-  let numericTextFieldController1: NumericTextFieldController
-  let numericTextFieldController2: NumericTextFieldController
+  let yearTextFieldController: NumericTextFieldController
+  let duplicateYearTextFieldController: NumericTextFieldController
   let numericStepperController: NumericStepperController
 
-  let mainStackView = UIStackView(frame: .zero)
-  let stepperStackView = UIStackView(frame: .zero)
   let stepperLabel = UILabel()
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
     self.filterState = .init()
-    numberInteractor = .init()
-    numberInteractor2 = .init()
-    numberInteractor3 = .init()
-  
-    let stepper = UIStepper()
-    let textField = UITextField()
-    let textField2 = UITextField()
-    textField.keyboardType = .numberPad
-    textField2.keyboardType = .numberPad
 
-    numericTextFieldController1 = NumericTextFieldController(textField: textField)
-    numericTextFieldController2 = NumericTextFieldController(textField: textField2)
-    numericStepperController = NumericStepperController(stepper: stepper)
+    yearTextFieldController = NumericTextFieldController()
+    duplicateYearTextFieldController = NumericTextFieldController()
+    numericStepperController = NumericStepperController()
+    
+    self.yearConnector = .init(searcher: searcher,
+                                      filterState: filterState,
+                                      attribute: "year",
+                                      numericOperator: .greaterThanOrEqual,
+                                      number: 0,
+                                      bounds: nil,
+                                      operator: .and,
+                                      controller: yearTextFieldController)
+    
+    self.yearDuplicateConnector = .init(searcher: searcher,
+                                      filterState: filterState,
+                                      attribute: "year",
+                                      numericOperator: .greaterThanOrEqual,
+                                      number: 0,
+                                      bounds: nil,
+                                      operator: .and,
+                                      controller: duplicateYearTextFieldController)
+    
+    self.priceConnector = .init(searcher: searcher,
+                                      filterState: filterState,
+                                      attribute: "price",
+                                      numericOperator: .greaterThanOrEqual,
+                                      number: 0,
+                                      bounds: nil,
+                                      operator: .and,
+                                      controller: numericStepperController)
+
 
     self.searchStateViewController = SearchStateViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -68,97 +82,84 @@ class FilterNumericComparisonDemoViewController: UIViewController {
 private extension FilterNumericComparisonDemoViewController {
 
   func setup() {
-    
     searcher.connectFilterState(filterState)
-    
-    numberInteractor.onBoundsComputed.subscribePast(with: self) { (controller, bounds) in
-      guard let bounds = bounds else { return }
-      controller.numericTextFieldController1.textField.placeholder = "\(bounds.lowerBound) - \(bounds.upperBound)"
-    }.onQueue(.main)
-
-    
-    numberInteractor2.onBoundsComputed.subscribePast(with: self) { (controller, bounds) in
-      guard let bounds = bounds else { return }
-      controller.numericTextFieldController2.textField.placeholder = "\(bounds.lowerBound) - \(bounds.upperBound)"
-    }.onQueue(.main)
-    
-    numberInteractor.connectFilterState(filterState, attribute: yearAttribute, numericOperator: .greaterThanOrEqual)
-    numberInteractor.connectController(numericTextFieldController1, presenter: { return $0 ?? 0 })
-    numberInteractor.connectSearcher(searcher, attribute: yearAttribute)
-
-    numberInteractor2.connectFilterState(filterState, attribute: yearAttribute, numericOperator: .greaterThanOrEqual)
-    numberInteractor2.connectController(numericTextFieldController2, presenter: { return $0 ?? 0 })
-    numberInteractor2.connectSearcher(searcher, attribute: yearAttribute)
-
-    numberInteractor3.connectFilterState(filterState, attribute: priceAttribute, numericOperator: .greaterThanOrEqual)
-    numberInteractor3.connectController(numericStepperController, presenter: { return $0 ?? 0 })
-    numberInteractor3.connectSearcher(searcher, attribute: priceAttribute)
- 
     searchStateViewController.connectSearcher(searcher)
     searchStateViewController.connectFilterState(filterState)
-
     searcher.search()
+    stepperLabel.text = priceConnector.interactor.item.flatMap { "\($0)" }
   }
 
   func setupUI() {
     view.backgroundColor = .white
-    configureMainStackView()
-
+    
     addChild(searchStateViewController)
     searchStateViewController.didMove(toParent: self)
     searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
 
-    mainStackView.addArrangedSubview(searchStateViewController.view)
-    searchStateViewController.view.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 1).isActive = true
+    let yearInputContainer = UIView()
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.layer.borderWidth, to: 1)
+      .set(\.layer.cornerRadius, to: 10)
+      .set(\.layer.borderColor, to: UIColor.gray.cgColor)
+    
+    yearTextFieldController.textField.translatesAutoresizingMaskIntoConstraints = false
+    yearTextFieldController.textField.keyboardType = .numberPad
+    
+    yearInputContainer.addSubview(yearTextFieldController.textField)
+    yearTextFieldController.textField.pin(to: yearInputContainer, insets: .init(top: 0, left: 8, bottom: 0, right: 8))
+    
+    yearTextFieldController.textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-    numericTextFieldController1.textField.layer.borderWidth = 1
-    numericTextFieldController1.textField.layer.borderColor = UIColor.gray.cgColor
-    numericTextFieldController1.textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    let duplicateYearInputContainer = UIView()
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.layer.borderWidth, to: 1)
+      .set(\.layer.cornerRadius, to: 10)
+      .set(\.layer.borderColor, to: UIColor.gray.cgColor)
 
-    mainStackView.addArrangedSubview(numericTextFieldController1.textField)
+    duplicateYearTextFieldController.textField.translatesAutoresizingMaskIntoConstraints = false
+    duplicateYearTextFieldController.textField.keyboardType = .numberPad
+    duplicateYearInputContainer.addSubview(duplicateYearTextFieldController.textField)
+    duplicateYearTextFieldController.textField.pin(to: duplicateYearInputContainer, insets: .init(top: 0, left: 8, bottom: 0, right: 8))
+    duplicateYearTextFieldController.textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-    numericTextFieldController1.textField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
-
-    numericTextFieldController2.textField.layer.borderWidth = 1
-    numericTextFieldController2.textField.layer.borderColor = UIColor.gray.cgColor
-    numericTextFieldController2.textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-    mainStackView.addArrangedSubview(numericTextFieldController2.textField)
-
-    numericTextFieldController2.textField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
-
+    let stepperStackView = UIStackView()
+      .set(\.axis, to: .horizontal)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .fill)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.alignment, to: .center)
     stepperStackView.addArrangedSubview(numericStepperController.stepper)
     stepperStackView.addArrangedSubview(stepperLabel)
     numericStepperController.stepper.addTarget(self, action: #selector(onStepperValueChanged), for: .valueChanged)
+    
+    let mainStackView = UIStackView()
+      .set(\.axis, to: .vertical)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .fill)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.alignment, to: .center)
+    
+    mainStackView.addArrangedSubview(searchStateViewController.view)
+    searchStateViewController.view.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 1).isActive = true
+    
+    mainStackView.addArrangedSubview(yearInputContainer)
+    yearTextFieldController.textField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
+    
+    mainStackView.addArrangedSubview(duplicateYearInputContainer)
+    duplicateYearTextFieldController.textField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
+
     mainStackView.addArrangedSubview(stepperStackView)
-
-    let spacerView = UIView()
-    spacerView.setContentHuggingPriority(.defaultLow, for: .vertical)
-    mainStackView.addArrangedSubview(spacerView)
-
+    mainStackView.addArrangedSubview(UIView().set(\.translatesAutoresizingMaskIntoConstraints, to: false))
+    
     view.addSubview(mainStackView)
-
+    
     mainStackView.pin(to: view.safeAreaLayoutGuide)
   }
 
   @objc func onStepperValueChanged(sender: UIStepper) {
-    stepperLabel.text = "\(sender.value)"
-  }
-
-  func configureMainStackView() {
-    mainStackView.axis = .vertical
-    mainStackView.spacing = .px16
-    mainStackView.distribution = .fill
-    mainStackView.translatesAutoresizingMaskIntoConstraints = false
-    mainStackView.alignment = .center
-  }
-
-  func configureStepperStackView() {
-    stepperStackView.axis = .horizontal
-    stepperStackView.spacing = .px16
-    stepperStackView.distribution = .fill
-    stepperStackView.translatesAutoresizingMaskIntoConstraints = false
-    stepperStackView.alignment = .center
+    stepperLabel.text = priceConnector.interactor.item.flatMap { "\($0)" }
   }
 
 }
+
+extension UIView: Builder {}
