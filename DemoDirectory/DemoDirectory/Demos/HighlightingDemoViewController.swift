@@ -14,23 +14,22 @@ class HighlightingDemoViewController: UIViewController {
   
   typealias HitType = Hit<Movie>
   
-  let stackView = UIStackView()
   let searchBar = UISearchBar()
 
   let searcher: SingleIndexSearcher
 
-  let queryInputInteractor: QueryInputInteractor
+  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
   let textFieldController: TextFieldController
   
-  let hitsInteractor: HitsInteractor<HitType>
+  let hitsConnector: HitsConnector<HitType>
   let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
-    self.queryInputInteractor = .init()
     self.textFieldController = .init(searchBar: searchBar)
-    self.hitsInteractor = .init()
     self.hitsTableViewController = MovieHitsTableViewController()
+    queryInputConnector = .init(searcher: searcher, controller: textFieldController)
+    hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -45,18 +44,11 @@ class HighlightingDemoViewController: UIViewController {
   }
   
   private func setup() {
-    
+    addChild(hitsTableViewController)
+    hitsTableViewController.didMove(toParent: self)
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    
-    queryInputInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectController(textFieldController)
-        
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
-    
     searcher.search()
   }
-
   
 }
 
@@ -64,36 +56,16 @@ private extension HighlightingDemoViewController {
   
   func configureUI() {
     view.backgroundColor = .white
-    configureSearchBar()
-    configureStackView()
-    configureLayout()
-  }
-  
-  func configureSearchBar() {
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
-  }
-  
-  func configureStackView() {
-    stackView.spacing = .px16
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureLayout() {
-    
-    addChild(hitsTableViewController)
-    hitsTableViewController.didMove(toParent: self)
-    
+    let stackView = UIStackView()
+      .set(\.spacing, to: .px16)
+      .set(\.axis, to: .vertical)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
     stackView.addArrangedSubview(searchBar)
     stackView.addArrangedSubview(hitsTableViewController.view)
-    
     view.addSubview(stackView)
-    
     stackView.pin(to: view.safeAreaLayoutGuide)
-    
-    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    
   }
-  
+
 }

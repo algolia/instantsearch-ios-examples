@@ -44,6 +44,8 @@ class HierarchicalDemoViewController: UIViewController {
                                   controller: hierarchicalTableViewController,
                                   presenter: DefaultPresenter.Hierarchical.present)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    addChild(tableViewController)
+    tableViewController.didMove(toParent: self)
     searcher.connectFilterState(filterState)
     searcher.search()
   }
@@ -59,11 +61,10 @@ class HierarchicalDemoViewController: UIViewController {
   
   func setupUI() {
     view.backgroundColor = . white
-    addChild(tableViewController)
-    tableViewController.didMove(toParent: self)
-    tableViewController.view.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(tableViewController.view)
-    tableViewController.view.pin(to: view.safeAreaLayoutGuide)
+    let tableView = tableViewController.view!
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(tableView)
+    tableView.pin(to: view.safeAreaLayoutGuide)
   }
 
 }

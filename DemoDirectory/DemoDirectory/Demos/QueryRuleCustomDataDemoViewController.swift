@@ -15,18 +15,17 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   
   typealias HitType = ShopItem
   
-  let stackView = UIStackView()
   let searchBar = UISearchBar()
   
   let searcher: SingleIndexSearcher
   
-  let queryInputInteractor: QueryInputInteractor
+  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
   let textFieldController: TextFieldController
   
-  let statsInteractor: StatsInteractor
+  let statsConnector: StatsConnector
   let statsController: LabelStatsController
   
-  let hitsInteractor: HitsInteractor<HitType>
+  let hitsConnector: HitsConnector<HitType>
   let hitsTableViewController: ResultsTableViewController
   
   let queryRuleCustomDataConnector: QueryRuleCustomDataConnector<Banner>
@@ -34,13 +33,13 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
-    self.queryInputInteractor = .init()
     self.textFieldController = .init(searchBar: searchBar)
-    self.statsInteractor = .init()
     self.statsController = .init(label: .init())
-    self.hitsInteractor = .init(infiniteScrolling: .on(withOffset: 5), showItemsOnEmptyQuery: true)
     self.hitsTableViewController = ResultsTableViewController()
     self.bannerViewController = BannerViewController()
+    self.queryInputConnector = .init(searcher: searcher, controller: textFieldController)
+    self.statsConnector = .init(searcher: searcher, controller: statsController)
+    self.hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
     self.queryRuleCustomDataConnector = .init(searcher: searcher, controller: bannerViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
@@ -57,16 +56,12 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   
   private func setup() {
     
+    addChild(bannerViewController)
+    bannerViewController.didMove(toParent: self)
+    
+    addChild(hitsTableViewController)
+    hitsTableViewController.didMove(toParent: self)
     hitsTableViewController.tableView.keyboardDismissMode = .onDrag
-
-    queryInputInteractor.connectSearcher(searcher, searchTriggeringMode: .searchAsYouType)
-    queryInputInteractor.connectController(textFieldController)
-    
-    statsInteractor.connectSearcher(searcher)
-    statsInteractor.connectController(statsController)
-    
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
     
     bannerViewController.didTapBanner = { [weak self] in
       if let link = self?.bannerViewController.banner?.link {
@@ -82,7 +77,7 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
       }
     }
     
-    queryInputInteractor.onQuerySubmitted.subscribe(with: self) { (viewController, _) in
+    queryInputConnector.interactor.onQuerySubmitted.subscribe(with: self) { (viewController, _) in
       guard let link = viewController.queryRuleCustomDataConnector.interactor.item?.link else { return }
       if link.absoluteString == "algoliademo://help" {
         UIApplication.shared.open(link)
@@ -119,57 +114,35 @@ private extension QueryRuleCustomDataDemoViewController {
   func configureUI() {
     title = "Amazing"
     view.backgroundColor = .white
-    configureSearchBar()
-    configureStatsLabel()
-    configureStackView()
     configureLayout()
   }
-  
-  func configureSearchBar() {
+    
+  func configureLayout() {
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
-  }
-  
-  func configureStatsLabel() {
+
     statsController.label.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureStackView() {
-    stackView.spacing = .px16
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureLayout() {
-    
-    addChild(hitsTableViewController)
-    hitsTableViewController.didMove(toParent: self)
-    
-    stackView.addArrangedSubview(searchBar)
-    let statsContainer = UIView()
-    statsContainer.translatesAutoresizingMaskIntoConstraints = false
-    statsContainer.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-    statsContainer.addSubview(statsController.label)
-    statsController.label.pin(to: statsContainer.layoutMarginsGuide)
-    stackView.addArrangedSubview(statsContainer)
-    
-    addChild(bannerViewController)
-    bannerViewController.didMove(toParent: self)
+
     bannerViewController.view.isHidden = true
     bannerViewController.view.heightAnchor.constraint(lessThanOrEqualToConstant: 66.7).isActive = true
+
+    let statsContainer = UIView()
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.layoutMargins, to: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
+    statsContainer.addSubview(statsController.label)
+    statsController.label.pin(to: statsContainer.layoutMarginsGuide)
+    
+    let stackView = UIStackView()
+      .set(\.spacing, to: .px16)
+      .set(\.axis, to: .vertical)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+    
+    stackView.addArrangedSubview(searchBar)
+    stackView.addArrangedSubview(statsContainer)
     stackView.addArrangedSubview(bannerViewController.view)
-    
     stackView.addArrangedSubview(hitsTableViewController.view)
-    
     view.addSubview(stackView)
-
     stackView.pin(to: view.safeAreaLayoutGuide)
-    
-    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-    statsController.label.heightAnchor.constraint(equalToConstant: 16).isActive = true
-
   }
   
 }
-

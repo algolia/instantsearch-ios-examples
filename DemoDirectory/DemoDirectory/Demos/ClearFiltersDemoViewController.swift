@@ -21,8 +21,6 @@ class ClearFiltersDemoViewController: UIViewController {
   let clearColorsController: FilterClearButtonController
   let clearExceptColorsController: FilterClearButtonController
 
-  let mainStackView = UIStackView()
-
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 
     filterState = .init()
@@ -65,7 +63,9 @@ class ClearFiltersDemoViewController: UIViewController {
     filterState[and: "category"].add(categoryFacet)
     filterState[or: "color"].add(redFacet, greenFacet)
     filterState.notifyChange()
-
+    
+    addChild(searchStateViewController)
+    searchStateViewController.didMove(toParent: self)
     searchStateViewController.connectFilterState(filterState)
 
   }
@@ -74,7 +74,6 @@ class ClearFiltersDemoViewController: UIViewController {
     view.backgroundColor = .white
     configureButton(clearColorsController.button, text: "Clear Colors")
     configureButton(clearExceptColorsController.button, text: "Clear Except Colors")
-    configureMainStackView()
     configureLayout()
   }
 
@@ -88,41 +87,36 @@ class ClearFiltersDemoViewController: UIViewController {
     button.layer.cornerRadius = 10
   }
 
-  func configureMainStackView() {
-    mainStackView.axis = .vertical
-    mainStackView.alignment = .center
-    mainStackView.spacing = .px16
-    mainStackView.distribution = .fill
-    mainStackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-
   func configureLayout() {
 
-    view.addSubview(mainStackView)
-
-    mainStackView.pin(to: view.safeAreaLayoutGuide)
-
-    addChild(searchStateViewController)
-
-    searchStateViewController.didMove(toParent: self)
+    let mainStackView = UIStackView()
+      .set(\.axis, to: .vertical)
+      .set(\.alignment, to: .center)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .fill)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+    
     mainStackView.addArrangedSubview(searchStateViewController.view)
 
     NSLayoutConstraint.activate([
       searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150),
       searchStateViewController.view.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.98)
-      ])
+    ])
 
     let buttonsStackView = UIStackView()
-    buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-    buttonsStackView.axis = .horizontal
-    buttonsStackView.spacing = .px16
-    buttonsStackView.distribution = .equalCentering
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.axis, to: .horizontal)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .equalCentering)
 
     buttonsStackView.addArrangedSubview(clearColorsController.button)
     buttonsStackView.addArrangedSubview(clearExceptColorsController.button)
     
     mainStackView.addArrangedSubview(buttonsStackView)
     mainStackView.addArrangedSubview(.init())
+    
+    view.addSubview(mainStackView)
+    mainStackView.pin(to: view.safeAreaLayoutGuide)
 
   }
 

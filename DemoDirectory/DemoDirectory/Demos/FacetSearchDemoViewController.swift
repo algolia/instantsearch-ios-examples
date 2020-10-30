@@ -42,10 +42,9 @@ class FacetSearchDemoViewController: UIViewController {
     searchStateViewController = SearchStateViewController()
     
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    
+    addChild(searchStateViewController)
+    searchStateViewController.didMove(toParent: self)
     setup()
-
-
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -62,13 +61,8 @@ class FacetSearchDemoViewController: UIViewController {
 private extension FacetSearchDemoViewController {
   
   func setup() {
-    
-//    searcher.search()
-//    searcher.connectFilterState(filterState)
-
     facetSearcher.search()
     facetSearcher.connectFilterState(filterState)
-
     searchStateViewController.connectFilterState(filterState)
     searchStateViewController.connectFacetSearcher(facetSearcher)
   }
@@ -77,30 +71,25 @@ private extension FacetSearchDemoViewController {
     
     view.backgroundColor = .white
     
-    let mainStackView = UIStackView()
-    mainStackView.translatesAutoresizingMaskIntoConstraints = false
-    mainStackView.axis = .vertical
-    mainStackView.spacing = .px16
-    
-    view.addSubview(mainStackView)
-    
-    mainStackView.pin(to: view.safeAreaLayoutGuide)
-    
-    searchBar.translatesAutoresizingMaskIntoConstraints = false
-    searchBar.searchBarStyle = .minimal
-    mainStackView.addArrangedSubview(searchBar)
-    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-    searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
-    addChild(searchStateViewController)
-    searchStateViewController.didMove(toParent: self)
-    mainStackView.addArrangedSubview(searchStateViewController.view)
-
     let tableView = categoryController.tableView
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellId")
     tableView.translatesAutoresizingMaskIntoConstraints = false
 
-    mainStackView.addArrangedSubview(tableView)
+    searchBar
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.searchBarStyle, to: .minimal)
+
+    let stackView = UIStackView()
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.axis, to: .vertical)
+      .set(\.spacing, to: .px16)
+    
+    view.addSubview(stackView)
+    stackView.pin(to: view.safeAreaLayoutGuide)
+    
+    stackView.addArrangedSubview(searchBar)
+    stackView.addArrangedSubview(searchStateViewController.view)
+    stackView.addArrangedSubview(tableView)
     
   }
 

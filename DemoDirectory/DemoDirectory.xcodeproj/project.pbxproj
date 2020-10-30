@@ -96,7 +96,6 @@
 		AF0B717C24C99399005CFB27 /* SearchConnectorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConnectorSearchViewController.swift; sourceTree = "<group>"; };
 		AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexWidgetHitsViewController.swift; sourceTree = "<group>"; };
 		AF0B718624C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyTableViewCellConfigurator.swift; sourceTree = "<group>"; };
-		AF2C1D6423CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsDemoViewController.swift; sourceTree = "<group>"; };
 		AF377EA8252BD13B00A1EC78 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../../algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF48C4D525347C6800262367 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
 		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
@@ -301,7 +300,6 @@
 				AF6778F222FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift */,
 				AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */,
 				AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */,
-				AF2C1D6423CCD5DB00B5E185 /* SearchSuggestionsDemoViewController.swift */,
 				AF6778F522FB34C000850ACC /* IndexSegmentDemoViewController.swift */,
 				AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */,
 				AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */,

@@ -16,27 +16,29 @@ class SearchInputDemoViewController: UIViewController {
   
   let searchTriggeringMode: SearchTriggeringMode
   
-  let stackView = UIStackView()
-  let searchBar: UISearchBar
   let searcher: SingleIndexSearcher
   
-  let queryInputInteractor: QueryInputInteractor
-  
-  let textFieldController: TextFieldController
+  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
   
   let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: MovieHitsTableViewController<HitType>
 
+  let searchBar: UISearchBar
+  let textFieldController: TextFieldController
+  let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   init(searchTriggeringMode: SearchTriggeringMode) {
     self.searchBar = .init()
     self.searchTriggeringMode = searchTriggeringMode
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
-    self.queryInputInteractor = .init()
+    self.queryInputConnector = QueryInputConnector(searcher: searcher,
+                                                   searchTriggeringMode: searchTriggeringMode,
+                                                   controller: textFieldController)
     self.hitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
     self.hitsTableViewController = MovieHitsTableViewController()
     super.init(nibName: .none, bundle: .none)
+    addChild(hitsTableViewController)
+    hitsTableViewController.didMove(toParent: self)
     setup()
   }
   
@@ -50,17 +52,10 @@ class SearchInputDemoViewController: UIViewController {
   }
   
   private func setup() {
-    
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectController(hitsTableViewController)
-    
-    queryInputInteractor.connectController(textFieldController)
-    queryInputInteractor.connectSearcher(searcher, searchTriggeringMode: searchTriggeringMode)
-    
     searcher.search()
-    
   }
   
 }
@@ -69,40 +64,17 @@ private extension SearchInputDemoViewController {
   
   func configureUI() {
     view.backgroundColor = .white
-    configureSearchBar()
-    configureStackView()
-    configureLayout()
-  }
-  
-  func configureSearchBar() {
-    searchBar.translatesAutoresizingMaskIntoConstraints = false
-    searchBar.searchBarStyle = .minimal
-  }
-  
-  func configureStackView() {
-    stackView.spacing = .px16
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureLayout() {
-    
-    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    
-    addChild(hitsTableViewController)
-    hitsTableViewController.didMove(toParent: self)
-    
+    searchBar
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.searchBarStyle, to: .minimal)
+    let stackView = UIStackView()
+      .set(\.spacing, to: .px16)
+      .set(\.axis, to: .vertical)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
     stackView.addArrangedSubview(searchBar)
     stackView.addArrangedSubview(hitsTableViewController.view)
-    
     view.addSubview(stackView)
-    
     stackView.pin(to: view.safeAreaLayoutGuide)
-    
   }
-  
+    
 }
-
-
-
-

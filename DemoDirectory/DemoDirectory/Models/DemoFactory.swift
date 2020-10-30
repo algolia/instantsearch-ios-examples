@@ -57,8 +57,9 @@ class DemoFactory {
        viewController = ClearFiltersDemoViewController()
        
      case .multiIndex:
-       viewController = MultiIndexHitsConnectorSearchViewController()
-        //MultiIndexDemoViewController()
+       viewController = MultiIndexDemoViewController()
+        //MultiIndexHitsConnectorSearchViewController()
+        //
        
      case .facetFilterList:
        viewController = FilterListDemo.facet()
