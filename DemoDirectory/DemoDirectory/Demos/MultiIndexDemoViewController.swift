@@ -78,7 +78,7 @@ enum MultiIndexDemoSection: CaseIterable {
 class MultiIndexDemoViewController: UIViewController {
     
   let textFieldController: TextFieldController
-  let queryInputConnector: QueryInputConnector<MultiIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   let multiIndexHitsConnector: MultiIndexHitsConnector
   let searchBar: UISearchBar
   let hitsViewController: MultiIndexHitsViewController

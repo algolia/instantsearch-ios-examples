@@ -18,7 +18,7 @@ class HighlightingDemoViewController: UIViewController {
 
   let searcher: SingleIndexSearcher
 
-  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
   
   let hitsConnector: HitsConnector<HitType>

@@ -9,9 +9,8 @@
 import Foundation
 import UIKit
 import InstantSearch
-import QuerySuggestions
 
-typealias QuerySuggestionsDemoViewController = QuerySuggestions.SearchViewController
+typealias QuerySuggestionsDemoViewController = SearchViewController
 
 class DemoListViewController: UIViewController {
   

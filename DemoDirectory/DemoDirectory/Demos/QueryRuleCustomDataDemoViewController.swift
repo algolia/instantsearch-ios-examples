@@ -9,7 +9,6 @@
 import Foundation
 import InstantSearch
 import SDWebImage
-import QuerySuggestions
 
 class QueryRuleCustomDataDemoViewController: UIViewController {
   
@@ -19,7 +18,7 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   
   let searcher: SingleIndexSearcher
   
-  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
   
   let statsConnector: StatsConnector

@@ -18,7 +18,7 @@ class SearchInputDemoViewController: UIViewController {
   
   let searcher: SingleIndexSearcher
   
-  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   
   let hitsInteractor: HitsInteractor<HitType>
 

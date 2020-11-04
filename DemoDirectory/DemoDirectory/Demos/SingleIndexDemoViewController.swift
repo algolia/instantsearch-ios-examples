@@ -9,7 +9,6 @@
 import UIKit
 import InstantSearch
 import SDWebImage
-import QuerySuggestions
 
 class SingleIndexDemoViewController: UIViewController {
   
@@ -19,7 +18,7 @@ class SingleIndexDemoViewController: UIViewController {
   
   let searcher: SingleIndexSearcher
   
-  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
   
   let statsConnector: StatsConnector

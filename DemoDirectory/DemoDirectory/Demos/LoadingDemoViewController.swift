@@ -20,10 +20,10 @@ class LoadingDemoViewController: UIViewController {
   let searcher: SingleIndexSearcher
   
   let searchBar: UISearchBar
-  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   let searchBarController: TextFieldController
   
-  let loadingConnector: LoadingConnector<SingleIndexSearcher>
+  let loadingConnector: LoadingConnector
   let loadingController: ActivityIndicatorController
   
   let statsConnector: StatsConnector

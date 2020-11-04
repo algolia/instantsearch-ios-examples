@@ -18,7 +18,7 @@ class StatsDemoViewController: UIViewController {
   let searcher: SingleIndexSearcher
   
   let textFieldController: TextFieldController
-  let queryInputConnector: QueryInputConnector<SingleIndexSearcher>
+  let queryInputConnector: QueryInputConnector
   
   let statsConnector: StatsConnector
   let labelStatsController: LabelStatsController

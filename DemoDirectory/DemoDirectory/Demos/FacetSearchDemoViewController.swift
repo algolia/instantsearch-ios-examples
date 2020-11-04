@@ -18,7 +18,7 @@ class FacetSearchDemoViewController: UIViewController {
   let textFieldController: TextFieldController
   let categoryController: FacetListTableController
   let categoryListConnector: FacetListConnector
-  let queryInputConnector: QueryInputConnector<FacetSearcher>
+  let queryInputConnector: QueryInputConnector
   
   let searchStateViewController: SearchStateViewController
 
