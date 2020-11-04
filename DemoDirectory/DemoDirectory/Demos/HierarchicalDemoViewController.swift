@@ -27,7 +27,7 @@ class HierarchicalDemoViewController: UIViewController {
 
   let searcher: SingleIndexSearcher
   let filterState: FilterState
-  let hierarchicalInteractor: HierarchicalInteractor
+  let hierarchicalConnector: HierarchicalConnector
   let hierarchicalTableViewController: HierarchicalTableViewController
 
   let tableViewController: UITableViewController
@@ -35,11 +35,19 @@ class HierarchicalDemoViewController: UIViewController {
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_hierarchical")
     filterState = .init()
-    hierarchicalInteractor = HierarchicalInteractor(hierarchicalAttributes: order, separator: " > ")
     tableViewController = .init(style: .plain)
     hierarchicalTableViewController = .init(tableView: tableViewController.tableView)
+    hierarchicalConnector = .init(searcher: searcher,
+                                  filterState: filterState,
+                                  hierarchicalAttributes: order,
+                                  separator: " > ",
+                                  controller: hierarchicalTableViewController,
+                                  presenter: DefaultPresenter.Hierarchical.present)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
+    addChild(tableViewController)
+    tableViewController.didMove(toParent: self)
+    searcher.connectFilterState(filterState)
+    searcher.search()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -50,23 +58,13 @@ class HierarchicalDemoViewController: UIViewController {
     super.viewDidLoad()
     setupUI()
   }
-
-  func setup() {
-    searcher.connectFilterState(filterState)
-    hierarchicalInteractor.connectSearcher(searcher: searcher)
-    hierarchicalInteractor.connectFilterState(filterState)
-    hierarchicalInteractor.connectController(hierarchicalTableViewController)
-    searcher.search()
-  }
-
+  
   func setupUI() {
     view.backgroundColor = . white
-    addChild(tableViewController)
-    tableViewController.didMove(toParent: self)
-    tableViewController.view.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(tableViewController.view)
-    tableViewController.view.pin(to: view.safeAreaLayoutGuide)
+    let tableView = tableViewController.view!
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(tableView)
+    tableView.pin(to: view.safeAreaLayoutGuide)
   }
-
 
 }

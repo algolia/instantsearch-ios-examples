@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 import InstantSearch
-import QuerySuggestions
-
-typealias ShopItem = QuerySuggestions.ShopItem
 
 struct Brand: Codable {
   let name: String

@@ -17,20 +17,25 @@ class StatsDemoViewController: UIViewController {
   
   let searcher: SingleIndexSearcher
   
-  let queryInputInteractor: QueryInputInteractor
   let textFieldController: TextFieldController
+  let queryInputConnector: QueryInputConnector
   
-  let statsInteractor: StatsInteractor
+  let statsConnector: StatsConnector
   let labelStatsController: LabelStatsController
   let attributedLabelStatsController: AttributedLabelStatsController
   
   init() {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
-    self.queryInputInteractor = .init()
-    self.statsInteractor = .init()
+    self.queryInputConnector = .init(searcher: searcher, controller: textFieldController)
     self.attributedLabelStatsController = AttributedLabelStatsController(label: .init())
     self.labelStatsController = LabelStatsController(label: .init())
+    self.statsConnector = .init(searcher: searcher, controller: labelStatsController) { stats -> String? in
+      guard let stats = stats else {
+        return nil
+      }
+      return "\(stats.totalHitsCount) hits in \(stats.processingTimeMS) ms"
+    }
     super.init(nibName: .none, bundle: .none)
     setup()
   }
@@ -46,18 +51,7 @@ class StatsDemoViewController: UIViewController {
   
   private func setup() {
     
-    queryInputInteractor.connectController(textFieldController)
-    queryInputInteractor.connectSearcher(searcher)
-    
-    statsInteractor.connectSearcher(searcher)
-    statsInteractor.connectController(labelStatsController) { stats -> String? in
-      guard let stats = stats else {
-        return nil
-      }
-      return "\(stats.totalHitsCount) hits in \(stats.processingTimeMS) ms"
-    }
-    
-    statsInteractor.connectController(attributedLabelStatsController) { stats -> NSAttributedString? in
+    statsConnector.interactor.connectController(attributedLabelStatsController) { stats -> NSAttributedString? in
       guard let stats = stats else {
         return nil
       }
@@ -68,7 +62,6 @@ class StatsDemoViewController: UIViewController {
     }
     
     searcher.search()
-    
   }
   
 }

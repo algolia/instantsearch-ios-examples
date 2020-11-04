@@ -21,7 +21,7 @@ class DemoFactory {
      
      switch demoID {
      case .singleIndex:
-       viewController = SingleIndexDemoViewController()
+      viewController = SingleIndexDemoViewController()
        
      case .sffv:
        viewController = FacetSearchDemoViewController()
@@ -58,6 +58,8 @@ class DemoFactory {
        
      case .multiIndex:
        viewController = MultiIndexDemoViewController()
+        //MultiIndexHitsConnectorSearchViewController()
+        //
        
      case .facetFilterList:
        viewController = FilterListDemo.facet()
@@ -91,6 +93,9 @@ class DemoFactory {
       
      case .relatedItems:
        viewController = RelatedItemsDemoViewController()
+      
+     case .queryRuleCustomData:
+       viewController = QueryRuleCustomDataDemoViewController()
      }
     
     viewController.title = demo.name

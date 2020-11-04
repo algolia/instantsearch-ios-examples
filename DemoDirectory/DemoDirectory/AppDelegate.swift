@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    self.window?.rootViewController = MainSplitViewController()
+    self.window?.rootViewController = MainSplitViewController(nibName: nil, bundle: nil)
     self.window?.makeKeyAndVisible()    
     return true
   }

@@ -372,7 +372,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
-				branch = develop;
+				branch = "feat/advanced-connectors";
 				kind = branch;
 			};
 		};

@@ -19,7 +19,7 @@ class IndexSegmentDemoViewController: UIViewController {
   let queryInputInteractor: QueryInputInteractor
   let textFieldController: TextFieldController
   let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: HitsTableViewController<HitType>
+  let hitsTableViewController: MovieHitsTableViewController<HitType>
   let indexSegmentInteractor: IndexSegmentInteractor
 
   let indexTitle: IndexName = "mobile_demo_movies"

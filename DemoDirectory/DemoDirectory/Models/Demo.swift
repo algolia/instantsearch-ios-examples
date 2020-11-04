@@ -41,6 +41,7 @@ struct Demo: Codable {
     case hierarchical = "filter_hierarchical"
     case querySuggestions = "query_suggestions"
     case relatedItems = "personalisation_related_items"
+    case queryRuleCustomData = "query_rule_custom_data"
   }
   
 }

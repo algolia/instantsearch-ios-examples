@@ -15,31 +15,34 @@ class LoadingDemoViewController: UIViewController {
   
   typealias HitType = Movie
   
-  let stackView = UIStackView()
   let activityIndicator = UIActivityIndicatorView(style: .medium)
   
   let searcher: SingleIndexSearcher
   
-    
   let searchBar: UISearchBar
-  let queryInputInteractor: QueryInputInteractor
+  let queryInputConnector: QueryInputConnector
   let searchBarController: TextFieldController
   
-  let statsInteractor: StatsInteractor
+  let loadingConnector: LoadingConnector
+  let loadingController: ActivityIndicatorController
+  
+  let statsConnector: StatsConnector
   let statsController: LabelStatsController
   
-  let hitsInteractor: HitsInteractor<HitType>
-  let hitsTableViewController: HitsTableViewController<HitType>
+  let hitsConnector: HitsConnector<HitType>
+  let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
-    self.queryInputInteractor = .init()
-    self.searchBar = .init()
-    self.searchBarController = .init(searchBar: searchBar)
-    self.statsInteractor = .init()
-    self.statsController = .init(label: .init())
-    self.hitsInteractor = .init()
-    self.hitsTableViewController = HitsTableViewController()
+    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    searchBar = .init()
+    searchBarController = .init(searchBar: searchBar)
+    queryInputConnector = QueryInputConnector(searcher: searcher, controller: searchBarController)
+    statsController = .init(label: .init())
+    loadingController = .init(activityIndicator: activityIndicator)
+    loadingConnector = .init(searcher: searcher, controller: loadingController)
+    statsConnector = .init(searcher: searcher, controller: statsController, presenter: DefaultPresenter.Stats.present)
+    hitsTableViewController = MovieHitsTableViewController()
+    hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -54,28 +57,10 @@ class LoadingDemoViewController: UIViewController {
   }
   
   private func setup() {
-    
+    addChild(hitsTableViewController)
+    hitsTableViewController.didMove(toParent: self)
     activityIndicator.hidesWhenStopped = true
-    
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    
-    queryInputInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectController(searchBarController)
-    
-    statsInteractor.connectSearcher(searcher)
-    statsInteractor.connectController(statsController)
-    
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
-    
-    searcher.isLoading.subscribe(with: self) { viewController, isLoading in
-      if isLoading {
-        viewController.activityIndicator.startAnimating()
-      } else {
-        viewController.activityIndicator.stopAnimating()
-      }
-    }.onQueue(.main)
-    
     searcher.search()
   }
   
@@ -85,57 +70,31 @@ private extension LoadingDemoViewController {
   
   func configureUI() {
     view.backgroundColor = .white
-    configureSearchBar()
-    configureStatsLabel()
-    configureStackView()
-    configureLayout()
-  }
-  
-  func configureSearchBar() {
     searchBar.translatesAutoresizingMaskIntoConstraints = false
-    searchBar.searchBarStyle = .minimal
-  }
-  
-  func configureStatsLabel() {
     statsController.label.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureStackView() {
-    stackView.spacing = .px16
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureLayout() {
-    
-    addChild(hitsTableViewController)
-    hitsTableViewController.didMove(toParent: self)
     
     let barStackView = UIStackView()
-    barStackView.axis = .horizontal
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.axis, to: .horizontal)
     barStackView.addArrangedSubview(searchBar)
     barStackView.addArrangedSubview(activityIndicator)
-    let spacerView = UIView()
-    spacerView.translatesAutoresizingMaskIntoConstraints = false
-    spacerView.widthAnchor.constraint(equalToConstant: 4).isActive = true
-    barStackView.addArrangedSubview(spacerView)
-    stackView.addArrangedSubview(barStackView)
+    
     let statsContainer = UIView()
-    statsContainer.translatesAutoresizingMaskIntoConstraints = false
-    statsContainer.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.layoutMargins, to: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
     statsContainer.addSubview(statsController.label)
     statsController.label.pin(to: statsContainer.layoutMarginsGuide)
+    
+    let stackView = UIStackView()
+      .set(\.spacing, to: .px16)
+      .set(\.axis, to: .vertical)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+    stackView.addArrangedSubview(barStackView)
     stackView.addArrangedSubview(statsContainer)
     stackView.addArrangedSubview(hitsTableViewController.view)
     
     view.addSubview(stackView)
-    
     stackView.pin(to: view.safeAreaLayoutGuide)
-    
-    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    
-    statsController.label.heightAnchor.constraint(equalToConstant: 16).isActive = true
-    
   }
-  
+
 }

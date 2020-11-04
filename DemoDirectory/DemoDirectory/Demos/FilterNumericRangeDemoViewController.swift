@@ -12,44 +12,39 @@ import InstantSearch
 
 class FilterNumericRangeDemoViewController: UIViewController {
 
-  let priceAttribute: Attribute = "price"
-
   let searcher: SingleIndexSearcher
   let filterState: FilterState
-
-  let sliderInteractor1: NumberRangeInteractor<Double>
-  let sliderInteractor2: NumberRangeInteractor<Double>
+  
+  let sliderConnector: NumberRangeConnector<Double>
+  let duplicateSliderConnector: NumberRangeConnector<Double>
 
   let searchStateViewController: SearchStateViewController
 
-  let numericRangeController1: NumericRangeController
-  let numericRangeController2: NumericRangeController
-
-  let mainStackView = UIStackView(frame: .zero)
-  let sliderStackView1 = UIStackView(frame: .zero)
-  let sliderStackView2 = UIStackView(frame: .zero)
-  let sliderLower1 = UILabel()
-  let sliderUpper1 = UILabel()
-  let sliderLower2 = UILabel()
-  let sliderUpper2 = UILabel()
+  let numericRangeController: NumericRangeController
+  let duplicateNumericRangeController: NumericRangeController
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
     self.filterState = .init()
 
-    sliderInteractor1 = .init()
-    sliderInteractor2 = .init()
+    numericRangeController = NumericRangeController(rangeSlider: .init())
+    
+    sliderConnector = .init(searcher: searcher,
+                             filterState: filterState,
+                             attribute: "price",
+                             controller: numericRangeController)
 
-    let textField = UITextField()
-    let textField2 = UITextField()
-    textField.keyboardType = .numberPad
-    textField2.keyboardType = .numberPad
-
-    numericRangeController1 = NumericRangeController(rangeSlider: .init())
-    numericRangeController2 = NumericRangeController(rangeSlider: .init())
+    duplicateNumericRangeController = NumericRangeController(rangeSlider: .init())
+    
+    duplicateSliderConnector = .init(searcher: searcher,
+                             filterState: filterState,
+                             attribute: "price",
+                             controller: duplicateNumericRangeController)
 
     self.searchStateViewController = SearchStateViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    addChild(searchStateViewController)
+    searchStateViewController.didMove(toParent: self)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -59,7 +54,10 @@ class FilterNumericRangeDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    setup()
+    searcher.connectFilterState(filterState)
+    searchStateViewController.connectSearcher(searcher)
+    searchStateViewController.connectFilterState(filterState)
+    searcher.search()
   }
 
 }
@@ -67,119 +65,23 @@ class FilterNumericRangeDemoViewController: UIViewController {
 
 private extension FilterNumericRangeDemoViewController {
 
-  func setup() {
-    
-    sliderInteractor1.connectFilterState(filterState, attribute: priceAttribute)
-    sliderInteractor1.connectController(numericRangeController1)
-    sliderInteractor1.connectSearcher(searcher, attribute: priceAttribute)
-    
-    sliderInteractor2.connectFilterState(filterState, attribute: priceAttribute)
-    sliderInteractor2.connectController(numericRangeController2)
-    sliderInteractor2.connectSearcher(searcher, attribute: priceAttribute)
-    
-    searcher.connectFilterState(filterState)
-
-    searchStateViewController.connectSearcher(searcher)
-    searchStateViewController.connectFilterState(filterState)
-    
-    searcher.search()
-
-  }
-
   func setupUI() {
     view.backgroundColor = .white
-    configureMainStackView()
-
-    addChild(searchStateViewController)
-    searchStateViewController.didMove(toParent: self)
-    searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
-
-    mainStackView.addArrangedSubview(searchStateViewController.view)
-    searchStateViewController.view.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 1).isActive = true
-
-    configureHorizontalStackView(sliderStackView1)
-    configureHorizontalStackView(sliderStackView2)
-
-    sliderLower1.widthAnchor.constraint(equalToConstant: 50).isActive = true
-    sliderLower2.widthAnchor.constraint(equalToConstant: 50).isActive = true
-    sliderUpper1.widthAnchor.constraint(equalToConstant: 50).isActive = true
-    sliderUpper2.widthAnchor.constraint(equalToConstant: 50).isActive = true
-
-    numericRangeController1.rangerSlider.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    numericRangeController1.rangerSlider.widthAnchor.constraint(equalToConstant: 500).isActive = true
-    sliderStackView1.addArrangedSubview(sliderLower1)
-    sliderStackView1.addArrangedSubview(numericRangeController1.rangerSlider)
-    sliderStackView1.addArrangedSubview(sliderUpper1)
-    
-    sliderInteractor1.onBoundsComputed.subscribePast(with: self) { (viewController, bounds) in
-      guard let bounds = bounds else { return }
-      viewController.sliderLower1.text = "\(bounds.lowerBound.rounded(toPlaces: 2))"
-      viewController.sliderUpper1.text = "\(bounds.upperBound.rounded(toPlaces: 2))"
-    }.onQueue(.main)
-    
-    sliderInteractor1.onItemChanged.subscribePast(with: self) { viewController, range in
-      guard let range = range else { return }
-      viewController.sliderLower1.text = "\(range.lowerBound.rounded(toPlaces: 2))"
-      viewController.sliderUpper1.text = "\(range.upperBound.rounded(toPlaces: 2))"
-    }.onQueue(.main)
-
-    sliderStackView1.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    mainStackView.addArrangedSubview(sliderStackView1)
-
-    numericRangeController2.rangerSlider.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    numericRangeController2.rangerSlider.widthAnchor.constraint(equalToConstant: 500).isActive = true
-    sliderStackView2.addArrangedSubview(sliderLower2)
-    sliderStackView2.addArrangedSubview(numericRangeController2.rangerSlider)
-    sliderStackView2.addArrangedSubview(sliderUpper2)
-    
-    sliderInteractor2.onBoundsComputed.subscribePast(with: self) { (viewController, bounds) in
-      guard let bounds = bounds else { return }
-      viewController.sliderLower2.text = "\(bounds.lowerBound.rounded(toPlaces: 2))"
-      viewController.sliderUpper2.text = "\(bounds.upperBound.rounded(toPlaces: 2))"
-    }.onQueue(.main)
-    
-    sliderInteractor2.onItemChanged.subscribePast(with: self) { viewController, range in
-      guard let range = range else { return }
-      viewController.sliderLower2.text = "\(range.lowerBound.rounded(toPlaces: 2))"
-      viewController.sliderUpper2.text = "\(range.upperBound.rounded(toPlaces: 2))"
-    }.onQueue(.main)
-    
-    mainStackView.addArrangedSubview(sliderStackView2)
-
-    let spacerView = UIView()
-    spacerView.setContentHuggingPriority(.defaultLow, for: .vertical)
-    mainStackView.addArrangedSubview(spacerView)
-
+    let searchStateView = searchStateViewController.view!
+    let mainStackView = UIStackView()
+      .set(\.axis, to: .vertical)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .fill)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.alignment, to: .center)
+    mainStackView.addArrangedSubview(searchStateView)
+    mainStackView.addArrangedSubview(numericRangeController.view)
+    mainStackView.addArrangedSubview(duplicateNumericRangeController.view)
+    mainStackView.addArrangedSubview(UIView().set(\.translatesAutoresizingMaskIntoConstraints, to: false))
     view.addSubview(mainStackView)
-
     mainStackView.pin(to: view.safeAreaLayoutGuide)
-    
-  }
-
-  @objc func onSlider1ValueChanged(sender: RangeSlider) {
-
-  }
-
-  @objc func onSlider2ValueChanged(sender: RangeSlider) {
-    sliderLower2.text = "\(sender.lowerValue.rounded(toPlaces: 2))"
-    sliderUpper2.text = "\(sender.upperValue.rounded(toPlaces: 2))"
-  }
-
-  func configureMainStackView() {
-    mainStackView.axis = .vertical
-    mainStackView.spacing = .px16
-    mainStackView.distribution = .fill
-    mainStackView.translatesAutoresizingMaskIntoConstraints = false
-    mainStackView.alignment = .center
-  }
-
-  func configureHorizontalStackView(_ stackView: UIStackView) {
-    stackView.axis = .horizontal
-    stackView.spacing = .px16
-    stackView.distribution = .fill
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.alignment = .center
-    
+    searchStateView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+    searchStateView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
   }
 
 }

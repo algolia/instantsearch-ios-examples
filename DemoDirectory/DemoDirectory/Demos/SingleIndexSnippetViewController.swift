@@ -166,5 +166,4 @@ extension SingleIndexSnippetViewController {
     
   }
 
-  
 }

@@ -15,24 +15,29 @@ class ClearFiltersDemoViewController: UIViewController {
   let filterState: FilterState
   let searchStateViewController: SearchStateViewController
 
-  let clearColorsInteractor: FilterClearInteractor
-  let clearExceptColorsInteractor: FilterClearInteractor
+  let clearColorsConnector: FilterClearConnector
+  let clearExceptColorsConnector: FilterClearConnector
 
   let clearColorsController: FilterClearButtonController
   let clearExceptColorsController: FilterClearButtonController
-
-  let mainStackView = UIStackView()
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 
     filterState = .init()
     searchStateViewController = .init()
-
-    clearColorsInteractor = .init()
-    clearExceptColorsInteractor = .init()
+    let groupColor = FilterGroup.ID.or(name: "color", filterType: .facet)
 
     clearColorsController = .init(button: .init())
     clearExceptColorsController = .init(button: .init())
+    
+    clearColorsConnector = .init(filterState: filterState,
+                                 clearMode: .specified,
+                                 filterGroupIDs: [groupColor],
+                                 controller: clearColorsController)
+    clearExceptColorsConnector = .init(filterState: filterState,
+                                       clearMode: .except,
+                                       filterGroupIDs: [groupColor],
+                                       controller: clearExceptColorsController)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
@@ -59,14 +64,8 @@ class ClearFiltersDemoViewController: UIViewController {
     filterState[or: "color"].add(redFacet, greenFacet)
     filterState.notifyChange()
     
-    let groupColor = FilterGroup.ID.or(name: "color", filterType: .facet)
-
-    clearColorsInteractor.connectFilterState(filterState, filterGroupIDs: [groupColor], clearMode: .specified)
-    clearExceptColorsInteractor.connectFilterState(filterState, filterGroupIDs: [groupColor], clearMode: .except)
-
-    clearColorsInteractor.connectController(clearColorsController)
-    clearExceptColorsInteractor.connectController(clearExceptColorsController)
-
+    addChild(searchStateViewController)
+    searchStateViewController.didMove(toParent: self)
     searchStateViewController.connectFilterState(filterState)
 
   }
@@ -75,7 +74,6 @@ class ClearFiltersDemoViewController: UIViewController {
     view.backgroundColor = .white
     configureButton(clearColorsController.button, text: "Clear Colors")
     configureButton(clearExceptColorsController.button, text: "Clear Except Colors")
-    configureMainStackView()
     configureLayout()
   }
 
@@ -89,41 +87,36 @@ class ClearFiltersDemoViewController: UIViewController {
     button.layer.cornerRadius = 10
   }
 
-  func configureMainStackView() {
-    mainStackView.axis = .vertical
-    mainStackView.alignment = .center
-    mainStackView.spacing = .px16
-    mainStackView.distribution = .fill
-    mainStackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-
   func configureLayout() {
 
-    view.addSubview(mainStackView)
-
-    mainStackView.pin(to: view.safeAreaLayoutGuide)
-
-    addChild(searchStateViewController)
-
-    searchStateViewController.didMove(toParent: self)
+    let mainStackView = UIStackView()
+      .set(\.axis, to: .vertical)
+      .set(\.alignment, to: .center)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .fill)
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+    
     mainStackView.addArrangedSubview(searchStateViewController.view)
 
     NSLayoutConstraint.activate([
       searchStateViewController.view.heightAnchor.constraint(equalToConstant: 150),
       searchStateViewController.view.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.98)
-      ])
+    ])
 
     let buttonsStackView = UIStackView()
-    buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-    buttonsStackView.axis = .horizontal
-    buttonsStackView.spacing = .px16
-    buttonsStackView.distribution = .equalCentering
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.axis, to: .horizontal)
+      .set(\.spacing, to: .px16)
+      .set(\.distribution, to: .equalCentering)
 
     buttonsStackView.addArrangedSubview(clearColorsController.button)
     buttonsStackView.addArrangedSubview(clearExceptColorsController.button)
     
     mainStackView.addArrangedSubview(buttonsStackView)
     mainStackView.addArrangedSubview(.init())
+    
+    view.addSubview(mainStackView)
+    mainStackView.pin(to: view.safeAreaLayoutGuide)
 
   }
 

@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import InstantSearch
 
-
 @available(iOS 13.0, *)
 class FacetSearchTextFieldConnection: Connection {
   
