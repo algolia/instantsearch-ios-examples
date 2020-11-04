@@ -187,6 +187,7 @@ struct A {
     index.findObject(matching: predicate) { result in
       if case .success(let response) = result {
         print("Response: \(response)")
+        _ = response
       }
     }
 
@@ -195,6 +196,7 @@ struct A {
                      for: Query("query string")) { result in
       if case .success(let response) = result {
         print("Response: \(response)")
+        _ = response
       }
     }
     

@@ -291,6 +291,7 @@
 				AFAA5C8D248FDC6700EC7B95 /* Demo.swift */,
 				AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */,
 				AF48C4D925347C7100262367 /* Banner.swift */,
+				AF40596F2552D125003C8CDB /* ShopItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,8 +327,6 @@
 				AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */,
 				AF40596E2552D125003C8CDB /* ResultsViewController.swift */,
 				AF4059702552D125003C8CDB /* SearchViewController.swift */,
-				AF40596F2552D125003C8CDB /* ShopItem.swift */,
-				AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -344,6 +343,7 @@
 				AF9D2D31249CED8200C0EAEB /* HitView.swift */,
 				AF48C4D525347C6800262367 /* BannerViewController.swift */,
 				AF48C4E125347CD300262367 /* TemplateViewController.swift */,
+				AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
