@@ -23,6 +23,7 @@
 		AF40597F2552D1CD003C8CDB /* InstantSearchInsights in Frameworks */ = {isa = PBXBuildFile; productRef = AF40597E2552D1CD003C8CDB /* InstantSearchInsights */; };
 		AF4059812552D1CD003C8CDB /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF4059802552D1CD003C8CDB /* InstantSearch */; };
 		AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF4059852552D1EB003C8CDB /* SDWebImage */; };
+		AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059932552D924003C8CDB /* RatingViewController.swift */; };
 		AF48C4D625347C6800262367 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D525347C6800262367 /* BannerViewController.swift */; };
 		AF48C4DA25347C7100262367 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D925347C7100262367 /* Banner.swift */; };
 		AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */; };
@@ -95,18 +96,17 @@
 /* Begin PBXFileReference section */
 		52C68BFC244DE97B008502D4 /* RelatedItemsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedItemsDemoViewController.swift; sourceTree = "<group>"; };
 		52C68BFE244DF0DC008502D4 /* EcommerceHitsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcommerceHitsTableViewController.swift; sourceTree = "<group>"; };
-		AF0B717424C862D4005CFB27 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../../instantsearch-ios"; sourceTree = "<group>"; };
 		AF0B717624C9937D005CFB27 /* MultiIndexHitsConnectorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexHitsConnectorSearchViewController.swift; sourceTree = "<group>"; };
 		AF0B717824C99386005CFB27 /* MultiIndexSearchConnectorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexSearchConnectorSearchViewController.swift; sourceTree = "<group>"; };
 		AF0B717A24C9938E005CFB27 /* HitsConnectorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsConnectorSearchViewController.swift; sourceTree = "<group>"; };
 		AF0B717C24C99399005CFB27 /* SearchConnectorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConnectorSearchViewController.swift; sourceTree = "<group>"; };
 		AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexWidgetHitsViewController.swift; sourceTree = "<group>"; };
 		AF0B718624C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyTableViewCellConfigurator.swift; sourceTree = "<group>"; };
-		AF377EA8252BD13B00A1EC78 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../../algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemTableViewCell.swift; sourceTree = "<group>"; };
 		AF40596E2552D125003C8CDB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		AF40596F2552D125003C8CDB /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		AF4059702552D125003C8CDB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		AF4059932552D924003C8CDB /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		AF48C4D525347C6800262367 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
 		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
@@ -197,8 +197,6 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF377EA8252BD13B00A1EC78 /* algoliasearch-client-swift */,
-				AF0B717424C862D4005CFB27 /* instantsearch-ios */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -328,6 +326,7 @@
 				AF4059702552D125003C8CDB /* SearchViewController.swift */,
 				AF40596F2552D125003C8CDB /* ShopItem.swift */,
 				AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */,
+				AF4059932552D924003C8CDB /* RatingViewController.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -529,6 +528,7 @@
 				AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */,
 				AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */,
 				AF67792122FB34C000850ACC /* HighlightingDemoViewController.swift in Sources */,
+				AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */,
 				AF67791222FB34C000850ACC /* ToggleDefaultDemoViewController.swift in Sources */,
 				AF48C4D625347C6800262367 /* BannerViewController.swift in Sources */,
 				AF67792522FB34C000850ACC /* MultiIndexDemoViewController.swift in Sources */,
@@ -827,8 +827,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.5.0;
+				branch = "feat/rating-control";
+				kind = branch;
 			};
 		};
 		AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {

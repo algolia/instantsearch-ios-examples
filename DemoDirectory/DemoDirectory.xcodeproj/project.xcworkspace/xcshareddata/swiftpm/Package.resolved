@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "AlgoliaSearchClient",
+        "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
+        "state": {
+          "branch": null,
+          "revision": "c9dcc6a114591e81e4a0934e8cc4a1ac8049beec",
+          "version": "8.2.0"
+        }
+      },
+      {
+        "package": "InstantSearch",
+        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
+        "state": {
+          "branch": "feat/rating-control",
+          "revision": "22a53d962b35c9da5ebf9e53f2f0f3f1905a9fe7",
+          "version": null
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {
