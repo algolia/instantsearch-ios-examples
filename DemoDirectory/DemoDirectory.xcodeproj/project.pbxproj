@@ -827,8 +827,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
-				branch = "feat/rating-control";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.6.0;
 			};
 		};
 		AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {

@@ -14,9 +14,9 @@
         "package": "InstantSearch",
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
-          "branch": "feat/rating-control",
-          "revision": "22a53d962b35c9da5ebf9e53f2f0f3f1905a9fe7",
-          "version": null
+          "branch": null,
+          "revision": "6661ce1859adfe17f7615301609094aa97e2d6cb",
+          "version": "7.6.0"
         }
       },
       {
