@@ -35,6 +35,7 @@ struct Demo: Codable {
     case searchOnSubmit = "search_on_submit"
     case clearFilters = "filter_clear"
     case filterNumericRange = "filter_numeric_range"
+    case filterRating = "filter_rating"
     case stats
     case highlighting
     case loading

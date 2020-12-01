@@ -46,6 +46,9 @@ class DemoFactory {
 
      case .filterNumericRange:
        viewController = FilterNumericRangeDemoViewController()
+      
+     case .filterRating:
+       viewController = RatingViewController()
 
      case .sortBy:
        viewController = IndexSegmentDemoViewController()
