@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class DemoFactory {
   
@@ -21,7 +22,8 @@ class DemoFactory {
      
      switch demoID {
      case .singleIndex:
-      viewController = SingleIndexDemoViewController()
+      viewController = UIHostingController(rootView: ContentView())
+        //SingleIndexDemoViewController()
        
      case .sffv:
        viewController = FacetSearchDemoViewController()

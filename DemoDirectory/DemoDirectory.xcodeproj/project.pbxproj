@@ -28,6 +28,7 @@
 		AF48C4DA25347C7100262367 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D925347C7100262367 /* Banner.swift */; };
 		AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */; };
 		AF48C4E225347CD300262367 /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4E125347CD300262367 /* TemplateViewController.swift */; };
+		AF521BDC25CDA8DA000F994C /* SingleIndexSwiftUIDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF521BDB25CDA8DA000F994C /* SingleIndexSwiftUIDemoViewController.swift */; };
 		AF6778CA22FB319200850ACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778C822FB319200850ACC /* Main.storyboard */; };
 		AF6778CC22FB319300850ACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CB22FB319300850ACC /* Assets.xcassets */; };
 		AF6778CF22FB319300850ACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CD22FB319300850ACC /* LaunchScreen.storyboard */; };
@@ -111,6 +112,7 @@
 		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
 		AF48C4E125347CD300262367 /* TemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewController.swift; sourceTree = "<group>"; };
+		AF521BDB25CDA8DA000F994C /* SingleIndexSwiftUIDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleIndexSwiftUIDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778C122FB319200850ACC /* DemoDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6778C422FB319200850ACC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF6778C922FB319200850ACC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				AF40596F2552D125003C8CDB /* ShopItem.swift */,
 				AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */,
 				AF4059932552D924003C8CDB /* RatingViewController.swift */,
+				AF521BDB25CDA8DA000F994C /* SingleIndexSwiftUIDemoViewController.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				52C68BFD244DE97B008502D4 /* RelatedItemsDemoViewController.swift in Sources */,
 				AF9D2D30249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift in Sources */,
 				AF67793122FB34C000850ACC /* FacetListTableController.swift in Sources */,
+				AF521BDC25CDA8DA000F994C /* SingleIndexSwiftUIDemoViewController.swift in Sources */,
 				AF67793322FB34C000850ACC /* DemoHelper.swift in Sources */,
 				AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */,
 				AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */,
