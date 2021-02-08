@@ -2,30 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "AlgoliaSearchClient",
-        "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
-        "state": {
-          "branch": null,
-          "revision": "c7cc8bae87e46fc6ae8a70022c3ccb8701fe90de",
-          "version": "8.6.0"
-        }
-      },
-      {
-        "package": "InstantSearch",
-        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
-        "state": {
-          "branch": null,
-          "revision": "994ab84f90eddf8ad44155b685e0fce36808bf40",
-          "version": "7.8.0"
-        }
-      },
-      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {
           "branch": null,
           "revision": "88b3ba211c0d604e60eab204c1baf8229c513399",
           "version": "5.9.4"
+        }
+      },
+      {
+        "package": "SDWebImageSwiftUI",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI",
+        "state": {
+          "branch": null,
+          "revision": "4c7f169e39bc35d6b80d42b8eb8301bee9cd0907",
+          "version": "1.5.0"
         }
       },
       {

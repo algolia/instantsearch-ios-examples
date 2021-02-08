@@ -10,17 +10,20 @@ import Foundation
 import UIKit
 import SwiftUI
 import InstantSearch
+import SDWebImageSwiftUI
 
 struct ContentView: View {
   
   @ObservedObject var viewModel: AlgoliaViewModel = .init()
     
     var body: some View {
-      return VStack {
+      return VStack(spacing: 10) {
         SearchBar(text: viewModel.queryBinding)
-        Text("Hello world!")
+        Text(viewModel.hitsCountDescription)
           .fontWeight(.medium)
-        HitsView(hits: $viewModel.hits, lastAppearedRowIndex: viewModel.lastRowIndexBinding)
+        HitsView<ShopItemRow>(hitsCount: $viewModel.hitsCount,
+                 lastAppear: viewModel.lastRowIndexBinding,
+                 fetcher: viewModel.hitsInteractor.hit(atIndex:))
       }.onAppear {
         self.viewModel.searcher.search()
       }
@@ -34,26 +37,29 @@ struct ContentView_Previews : PreviewProvider {
 }
 
 class AlgoliaViewModel: ObservableObject {
-  
-  @Published var hits: [HitItem] = []
+
   @Published var hitsCountDescription: String = ""
+  @Published var hitsCount: Int = 0
+  var hitFetcher: ((Int) -> SUIShopItem?)
 
   let queryBinding: Binding<String>
   let lastRowIndexBinding: Binding<Int>
   
   let searcher: SingleIndexSearcher
-  let hitsInteractor: HitsInteractor<HitItem>
+  let hitsInteractor: HitsInteractor<SUIShopItem>
   let statsInteractor: StatsInteractor
     
   init() {
     let searcher = SingleIndexSearcher(appID: "latency",
     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
     indexName: "bestbuy")
-    let hitsInteractor = HitsInteractor<HitItem>(infiniteScrolling: .on(withOffset: 20), showItemsOnEmptyQuery: false)
+    let hitsInteractor = HitsInteractor<SUIShopItem>(infiniteScrolling: .on(withOffset: 20), showItemsOnEmptyQuery: true)
     hitsInteractor.connectSearcher(searcher)
     self.searcher = searcher
     self.statsInteractor = .init()
     self.hitsInteractor = hitsInteractor
+    searcher.indexQueryState.query = Query()
+    hitFetcher = hitsInteractor.hit(atIndex:)
     queryBinding = .init(
       get: {
         searcher.query ?? ""
@@ -66,52 +72,93 @@ class AlgoliaViewModel: ObservableObject {
     lastRowIndexBinding = .init(
       get: { 0 },
       set: {
-        _ = hitsInteractor.hit(atIndex: $0)
+        hitsInteractor.notifyForInfiniteScrolling(rowNumber: $0)
       }
     )
+    searcher.onResults.subscribe(with: self) { (viewModel, response) in
+      print("Received result for query \(response.query), page \(response.page), hits: \(response.hits.count)")
+    }
     hitsInteractor.onResultsUpdated.subscribe(with: self) { (viewModel, results) in
-      viewModel.hits = viewModel.hitsInteractor.getCurrentHits()
+      viewModel.hitsCount = viewModel.hitsInteractor.numberOfHits()
     }.onQueue(.main)
     statsInteractor.connectSearcher(searcher)
     statsInteractor.onItemChanged.subscribe(with: self) { (viewModel, stats) in
       if let stats = stats {
-        viewModel.hitsCountDescription = "\(stats.totalHitsCount) hits"
+        viewModel.hitsCountDescription = "\(stats.totalHitsCount) hits in \(stats.processingTimeMS)ms"
       }
     }.onQueue(.main)
   }
   
 }
 
-struct HitItem: Codable, Hashable {
+struct SUIShopItem: Codable, Hashable {
   let objectID: String
   let name: String
+  let manufacturer: String?
+  let shortDescription: String?
+  let image: URL?
 }
 
-struct HitRow: View {
-    let text: String
-
-    var body: some View {
-      Text(text)
-    }
-
-    init(bestBuyItem: HitItem) {
-      self.text = bestBuyItem.name
-    }
-}
-
-struct HitsView: View {
+struct ShopItemRow: HitRow {
   
-  @Binding var hits: [HitItem]
-  @Binding var lastAppearedRowIndex: Int
+  let title: String
+  let subtitle: String
+  let details: String
+  let imageURL: URL
+
+  var body: some View {
+    HStack(alignment: .center, spacing: 20) {
+      WebImage(url: imageURL)
+        .resizable()
+        .indicator(.activity)
+        .scaledToFit()
+        .clipped()
+        .frame(width: 100, height: 100, alignment: .leading)
+      VStack(alignment: .leading, spacing: 5) {
+        Text(title)
+          .fontWeight(.heavy)
+        Spacer()
+          .frame(height: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        Text(subtitle)
+          .font(.system(size: 14, weight: .medium, design: .default))
+        Text(details)
+      }.multilineTextAlignment(.leading)
+    }.frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 100, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 140, maxHeight: 140, alignment: .leading)
+  }
+
+  init(title: String) {
+    self.title = title
+    self.subtitle = ""
+    self.details = ""
+    self.imageURL = URL(string: "google.com")!
+  }
+  
+  init(item: SUIShopItem?) {
+    self.title = item?.name ?? ""
+    self.subtitle = item?.manufacturer ?? ""
+    self.details = ""
+    self.imageURL = item?.image ?? URL(string: "google.com")!
+  }
+}
+
+protocol HitRow: View {
+  
+  associatedtype Item
+
+  init(item: Item?)
+}
+
+struct HitsView<Row: HitRow>: View {
+  
+  @Binding var hitsCount: Int
+  @Binding var lastAppear: Int
+  var fetcher: (Int) -> Row.Item?
   
   var body: some View {
-    List(hits, id: \.objectID) { hit in
-        HitRow(bestBuyItem: hit).onAppear {
-          if let index = self.hits.firstIndex(of: hit) {
-            print(index)
-            self.lastAppearedRowIndex = index
-          }
-        }
+    List(0..<hitsCount, id: \.self) { index in
+      Row(item: fetcher(index)).onAppear {
+       lastAppear = index
+      }
     }
   }
   

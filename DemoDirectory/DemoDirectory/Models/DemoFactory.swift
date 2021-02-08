@@ -22,8 +22,11 @@ class DemoFactory {
      
      switch demoID {
      case .singleIndex:
-      viewController = UIHostingController(rootView: ContentView())
-        //SingleIndexDemoViewController()
+      if #available(iOS 14.0, *) {
+        viewController = UIHostingController(rootView: ContentView())
+      } else {
+        viewController = SingleIndexDemoViewController()
+      }
        
      case .sffv:
        viewController = FacetSearchDemoViewController()
