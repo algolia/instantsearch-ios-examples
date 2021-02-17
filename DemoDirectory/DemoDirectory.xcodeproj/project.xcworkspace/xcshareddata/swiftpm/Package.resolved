@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
         "state": {
           "branch": null,
-          "revision": "c9dcc6a114591e81e4a0934e8cc4a1ac8049beec",
-          "version": "8.2.0"
+          "revision": "43dcbc895c71b83310a50b16cc0abf97a544f3a9",
+          "version": "8.7.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
           "branch": null,
-          "revision": "6661ce1859adfe17f7615301609094aa97e2d6cb",
-          "version": "7.6.0"
+          "revision": "994ab84f90eddf8ad44155b685e0fce36808bf40",
+          "version": "7.8.0"
         }
       },
       {

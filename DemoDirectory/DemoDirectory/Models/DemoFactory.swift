@@ -74,7 +74,8 @@ class DemoFactory {
        viewController = FilterListDemo.tag()
        
      case .searchOnSubmit:
-       viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
+      viewController = VoiceInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
+//       viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
        
      case .searchAsYouType:
        viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
