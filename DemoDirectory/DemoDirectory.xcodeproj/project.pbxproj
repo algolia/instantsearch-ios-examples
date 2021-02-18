@@ -28,7 +28,7 @@
 		AF48C4DA25347C7100262367 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D925347C7100262367 /* Banner.swift */; };
 		AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */; };
 		AF48C4E225347CD300262367 /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4E125347CD300262367 /* TemplateViewController.swift */; };
-		AF521BCA25CC2148000F994C /* DynamicSortDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF521BC925CC2148000F994C /* DynamicSortDemoViewController.swift */; };
+		AF521BCA25CC2148000F994C /* SmartSortDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF521BC925CC2148000F994C /* SmartSortDemoViewController.swift */; };
 		AF6778CA22FB319200850ACC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778C822FB319200850ACC /* Main.storyboard */; };
 		AF6778CC22FB319300850ACC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CB22FB319300850ACC /* Assets.xcassets */; };
 		AF6778CF22FB319300850ACC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6778CD22FB319300850ACC /* LaunchScreen.storyboard */; };
@@ -112,7 +112,7 @@
 		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
 		AF48C4E125347CD300262367 /* TemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewController.swift; sourceTree = "<group>"; };
-		AF521BC925CC2148000F994C /* DynamicSortDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSortDemoViewController.swift; sourceTree = "<group>"; };
+		AF521BC925CC2148000F994C /* SmartSortDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSortDemoViewController.swift; sourceTree = "<group>"; };
 		AF521BCD25CC21A7000F994C /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../instantsearch-ios"; sourceTree = "<group>"; };
 		AF521BCE25CC21A7000F994C /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF6778C122FB319200850ACC /* DemoDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				AF6778F522FB34C000850ACC /* IndexSegmentDemoViewController.swift */,
-				AF521BC925CC2148000F994C /* DynamicSortDemoViewController.swift */,
+				AF521BC925CC2148000F994C /* SmartSortDemoViewController.swift */,
 			);
 			path = Sorting;
 			sourceTree = "<group>";
@@ -522,7 +522,7 @@
 				AFAA5C90248FDC8800EC7B95 /* DemoFactory.swift in Sources */,
 				AFAA5C8E248FDC6700EC7B95 /* Demo.swift in Sources */,
 				AF67793022FB34C000850ACC /* Helpers.swift in Sources */,
-				AF521BCA25CC2148000F994C /* DynamicSortDemoViewController.swift in Sources */,
+				AF521BCA25CC2148000F994C /* SmartSortDemoViewController.swift in Sources */,
 				AF0B718724C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift in Sources */,
 				AF67791A22FB34C000850ACC /* RefinementPersistentListDemoViewController.swift in Sources */,
 				AF4059732552D125003C8CDB /* ShopItem.swift in Sources */,

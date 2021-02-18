@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import InstantSearch
 
-class DynamicSortDemoViewController: UIViewController, SelectableSegmentController {
+class SmartSortDemoViewController: UIViewController, SelectableSegmentController {
     
   typealias HitType = ShopItem
   
@@ -35,12 +35,10 @@ class DynamicSortDemoViewController: UIViewController, SelectableSegmentControll
   let statsConnector: StatsConnector
   let statsController: LabelStatsController
   
-  let relevancyLabel: UILabel
-
   let mainStackView = UIStackView(frame: .zero)
   
-  let sortToggleView: DynamicSortToggleView
-  var dynamicSortToggleInteractor: DynamicSortToggleInteractor
+  let smartSortToggleView: SmartSortToggleControl
+  let smartSortConnector: SmartSortConnector
   
   let indexSegmentInteractor: IndexSegmentInteractor
   let indexSegmentControl: UISegmentedControl
@@ -50,27 +48,22 @@ class DynamicSortDemoViewController: UIViewController, SelectableSegmentControll
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     searcher = .init(appID: "C7RIRJRYR9", apiKey: "77af6d5ffb27caa5ff4937099fcb92e8", indexName: "test_Bestbuy_vr_price_asc")
     searchBar = .init()
-    sortToggleView = .init()
-    statsConnector = .init(searcher: searcher)
+    smartSortToggleView = .init()
     statsController = .init()
-    dynamicSortToggleInteractor = .init()
+    statsConnector = .init(searcher: searcher, controller: statsController)
+    smartSortConnector = .init(searcher: searcher, controller: smartSortToggleView)
     textFieldController = .init(searchBar: searchBar)
     queryInputConnector = .init(searcher: searcher, controller: textFieldController)
 
     hitsTableViewController = ResultsTableViewController()
     hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
-    relevancyLabel = .init()
     
     let items: [Int: Index] = .init(uniqueKeysWithValues: indices.map(searcher.client.index(withName:)).enumerated().map { ($0.offset, $0.element) })
     indexSegmentInteractor = .init(items: items, selected: 0)
     indexSegmentControl = .init()
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    
-    statsConnector.connectController(statsController)
-    dynamicSortToggleInteractor.connectController(sortToggleView)
-    dynamicSortToggleInteractor.connectSearcher(searcher)
-    
+        
     indexSegmentControl.addTarget(self, action: #selector(didSelectSegment), for: .valueChanged)
     indexSegmentInteractor.connectController(self) { index in
       switch index.name {
@@ -95,16 +88,11 @@ class DynamicSortDemoViewController: UIViewController, SelectableSegmentControll
     super.viewDidLoad()
     setupUI()
     searcher.search()
-    dynamicSortToggleInteractor.item = .relevancy
   }
     
   func setupUI() {
     title = "Amazing"
     view.backgroundColor = .white
-
-    searcher.onResults.subscribe(with: self) { (controller, response) in
-      controller.relevancyLabel.text = response.appliedRelevancyStrictness.flatMap { "Relevancy strictness: \($0), Nb sorted hits: \(response.nbSortedHits ?? 0), total hits count: \(response.nbHits ?? 0)" }
-    }.onQueue(.main)
     
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
@@ -114,17 +102,14 @@ class DynamicSortDemoViewController: UIViewController, SelectableSegmentControll
       .set(\.axis, to: .vertical)
       .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
     stackView.addArrangedSubview(searchBar)
+    indexSegmentControl.translatesAutoresizingMaskIntoConstraints = false
+    stackView.addArrangedSubview(indexSegmentControl)
     statsController.label.translatesAutoresizingMaskIntoConstraints = false
     statsController.label.numberOfLines = 0
     statsController.label.textAlignment = .center
     stackView.addArrangedSubview(statsController.label)
-    relevancyLabel.translatesAutoresizingMaskIntoConstraints = false
-    relevancyLabel.numberOfLines = 0
-//    stackView.addArrangedSubview(relevancyLabel)
-    indexSegmentControl.translatesAutoresizingMaskIntoConstraints = false
-    stackView.addArrangedSubview(indexSegmentControl)
-    sortToggleView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.addArrangedSubview(sortToggleView)
+    smartSortToggleView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.addArrangedSubview(smartSortToggleView)
     stackView.addArrangedSubview(hitsTableViewController.view)
     
     view.addSubview(stackView)
