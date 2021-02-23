@@ -68,6 +68,32 @@ class SmartSortDemoViewController: UIViewController {
     indexSegmentInteractor.connectSearcher(searcher: searcher)
   }
   
+  func lowLevelSnippet() {
+    
+    let searcher: SingleIndexSearcher = .init(appID: "YourApplicationID",
+                                              apiKey: "YourSearchOnlyAPIKey",
+                                              indexName: "virtual_replica_index")
+    
+    let smartSortInteractor = SmartSortInteractor()
+    let smartSortController: ButtonSmartSortController = .init()
+    
+    smartSortInteractor.connectSearcher(searcher)
+    
+    let smartSortpresenter: SmartSortTextualPresenter = { priority in
+      switch priority {
+      case .some(.hitsCount):
+        return ("Currently showing all results.", "Show more relevant results")
+      case .some(.relevancy):
+        return ("We removed some search results to show you the most relevants ones.", "Show all results")
+      default:
+        return nil
+      }
+    }
+
+    smartSortInteractor.connectController(smartSortController, presenter: smartSortpresenter)
+    
+  }
+  
   @objc func didSelectSegment(_ segmentedControl: UISegmentedControl) {
     onClick?(segmentedControl.selectedSegmentIndex)
   }

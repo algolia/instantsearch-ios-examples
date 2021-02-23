@@ -100,7 +100,7 @@ class DemoFactory {
      case .queryRuleCustomData:
        viewController = QueryRuleCustomDataDemoViewController()
       
-     case .dynamicSort:
+     case .smartSort:
        viewController = SmartSortDemoViewController()
      }
     
