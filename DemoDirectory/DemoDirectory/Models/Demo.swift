@@ -43,7 +43,7 @@ struct Demo: Codable {
     case querySuggestions = "query_suggestions"
     case relatedItems = "personalisation_related_items"
     case queryRuleCustomData = "query_rule_custom_data"
-    case smartSort = "dynamic_sort"
+    case relevantSort = "dynamic_sort"
   }
   
 }

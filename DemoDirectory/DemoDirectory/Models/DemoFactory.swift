@@ -100,8 +100,8 @@ class DemoFactory {
      case .queryRuleCustomData:
        viewController = QueryRuleCustomDataDemoViewController()
       
-     case .smartSort:
-       viewController = SmartSortDemoViewController()
+     case .relevantSort:
+       viewController = RelevantSortDemoViewController()
      }
     
     viewController.title = demo.name

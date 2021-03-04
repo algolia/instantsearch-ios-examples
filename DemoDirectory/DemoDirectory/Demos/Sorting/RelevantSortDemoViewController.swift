@@ -1,5 +1,5 @@
 //
-//  DynamicSortDemoViewController.swift
+//  RelevantSortDemoViewController.swift
 //  DemoDirectory
 //
 //  Created by Vladislav Fitc on 04/02/2021.
@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 import InstantSearch
 
-class SmartSortDemoViewController: UIViewController {
+class RelevantSortDemoViewController: UIViewController {
       
   let indices: [IndexName] = [
     "test_Bestbuy", // default
-    "test_Bestbuy_vr_price_asc", //smart sort
+    "test_Bestbuy_vr_price_asc", //relevant sort
     "test_Bestbuy_replica_price_asc", //replica
   ]
     
@@ -30,8 +30,8 @@ class SmartSortDemoViewController: UIViewController {
   let statsConnector: StatsConnector
   let statsController: LabelStatsController
   
-  let smartSortConnector: SmartSortConnector
-  let smartSortController: ButtonSmartSortController
+  let relevantSortConnector: RelevantSortConnector
+  let relevantSortController: ButtonRelevantSortController
   
   let hitsConnector: HitsConnector<ShopItem>
   let hitsTableViewController: ResultsTableViewController
@@ -41,11 +41,11 @@ class SmartSortDemoViewController: UIViewController {
                      apiKey: "77af6d5ffb27caa5ff4937099fcb92e8",
                      indexName: "test_Bestbuy_vr_price_asc")
     searchBar = .init()
-    smartSortController = .init()
+    relevantSortController = .init()
     searchBar.showsScopeBar = true
     statsController = .init()
     statsConnector = .init(searcher: searcher, controller: statsController)
-    smartSortConnector = .init(searcher: searcher, controller: smartSortController)
+    relevantSortConnector = .init(searcher: searcher, controller: relevantSortController)
     textFieldController = .init(searchBar: searchBar)
     queryInputConnector = .init(searcher: searcher, controller: textFieldController)
 
@@ -74,12 +74,12 @@ class SmartSortDemoViewController: UIViewController {
                                               apiKey: "YourSearchOnlyAPIKey",
                                               indexName: "virtual_replica_index")
     
-    let smartSortInteractor = SmartSortInteractor()
-    let smartSortController: ButtonSmartSortController = .init()
+    let relevantSortInteractor = RelevantSortInteractor()
+    let relevantSortController: ButtonRelevantSortController = .init()
     
-    smartSortInteractor.connectSearcher(searcher)
+    relevantSortInteractor.connectSearcher(searcher)
     
-    let smartSortpresenter: SmartSortTextualPresenter = { priority in
+    let relevantSortpresenter: RelevantSortTextualPresenter = { priority in
       switch priority {
       case .some(.hitsCount):
         return ("Currently showing all results.", "Show more relevant results")
@@ -90,7 +90,7 @@ class SmartSortDemoViewController: UIViewController {
       }
     }
 
-    smartSortInteractor.connectController(smartSortController, presenter: smartSortpresenter)
+    relevantSortInteractor.connectController(relevantSortController, presenter: relevantSortpresenter)
     
   }
   
@@ -125,8 +125,8 @@ class SmartSortDemoViewController: UIViewController {
     statsController.label.numberOfLines = 0
     statsController.label.textAlignment = .center
     stackView.addArrangedSubview(statsController.label)
-    smartSortController.view.translatesAutoresizingMaskIntoConstraints = false
-    stackView.addArrangedSubview(smartSortController.view)
+    relevantSortController.view.translatesAutoresizingMaskIntoConstraints = false
+    stackView.addArrangedSubview(relevantSortController.view)
     stackView.addArrangedSubview(hitsTableViewController.view)
     
     view.addSubview(stackView)
@@ -140,7 +140,7 @@ class SmartSortDemoViewController: UIViewController {
   
 }
 
-extension SmartSortDemoViewController: SelectableSegmentController {
+extension RelevantSortDemoViewController: SelectableSegmentController {
   
   func setSelected(_ selected: Int?) {
     searchBar.selectedScopeButtonIndex = selected ?? 0
@@ -152,7 +152,7 @@ extension SmartSortDemoViewController: SelectableSegmentController {
   
 }
 
-extension SmartSortDemoViewController: UISearchBarDelegate {
+extension RelevantSortDemoViewController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     onClick?(selectedScope)
