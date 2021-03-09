@@ -33,7 +33,8 @@ class DemoFactory {
        viewController = ToggleDefaultDemoViewController()
        
      case .facetList:
-       viewController = RefinementListDemoViewController()
+      viewController = DynamicFacetsDemoViewController()
+//       viewController = RefinementListDemoViewController()
        
      case .facetListPersistentSelection:
        viewController = RefinementPersistentListDemoViewController()
