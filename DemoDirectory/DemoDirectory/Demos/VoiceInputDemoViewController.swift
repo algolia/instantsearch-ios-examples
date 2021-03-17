@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import InstantSearch
-import VoiceOverlayPackage
+import InstantSearchVoiceOverlay
 
 class VoiceInputDemoViewController: UIViewController {
   
