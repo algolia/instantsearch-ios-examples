@@ -99,6 +99,9 @@ class DemoFactory {
       
      case .queryRuleCustomData:
        viewController = QueryRuleCustomDataDemoViewController()
+      
+     case .voiceSearch:
+        viewController = VoiceInputDemoViewController()
      }
     
     viewController.title = demo.name
