@@ -19,9 +19,6 @@
 		AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596E2552D125003C8CDB /* ResultsViewController.swift */; };
 		AF4059732552D125003C8CDB /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596F2552D125003C8CDB /* ShopItem.swift */; };
 		AF4059742552D125003C8CDB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059702552D125003C8CDB /* SearchViewController.swift */; };
-		AF40597D2552D1CD003C8CDB /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF40597C2552D1CD003C8CDB /* InstantSearchCore */; };
-		AF40597F2552D1CD003C8CDB /* InstantSearchInsights in Frameworks */ = {isa = PBXBuildFile; productRef = AF40597E2552D1CD003C8CDB /* InstantSearchInsights */; };
-		AF4059812552D1CD003C8CDB /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF4059802552D1CD003C8CDB /* InstantSearch */; };
 		AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF4059852552D1EB003C8CDB /* SDWebImage */; };
 		AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059932552D924003C8CDB /* RatingViewController.swift */; };
 		AF48C4D625347C6800262367 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D525347C6800262367 /* BannerViewController.swift */; };
@@ -79,6 +76,8 @@
 		AFAA5C8E248FDC6700EC7B95 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8D248FDC6700EC7B95 /* Demo.swift */; };
 		AFAA5C90248FDC8800EC7B95 /* DemoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */; };
 		AFC8074325DBF01200294E7E /* VoiceInputDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8074225DBF01200294E7E /* VoiceInputDemoViewController.swift */; };
+		AFB2771925FADE6A00901D75 /* DynamicFacetsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB2771825FADE6A00901D75 /* DynamicFacetsDemoViewController.swift */; };
+		AFB2771D25FADE9C00901D75 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AFB2771C25FADE9C00901D75 /* InstantSearch */; };
 		AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */; };
 		AFCAE43C24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
@@ -183,6 +182,9 @@
 		AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFactory.swift; sourceTree = "<group>"; };
 		AFAA5C91248FE2E900EC7B95 /* DemoDirectory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DemoDirectory.entitlements; sourceTree = "<group>"; };
 		AFC8074225DBF01200294E7E /* VoiceInputDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceInputDemoViewController.swift; sourceTree = "<group>"; };
+		AFB2771425FADDD300901D75 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../instantsearch-ios"; sourceTree = "<group>"; };
+		AFB2771525FADDD300901D75 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../algoliasearch-client-swift"; sourceTree = "<group>"; };
+		AFB2771825FADE6A00901D75 /* DynamicFacetsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicFacetsDemoViewController.swift; sourceTree = "<group>"; };
 		AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyItem.swift; sourceTree = "<group>"; };
 		AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSearchViewController.swift; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
@@ -196,8 +198,8 @@
 				AF40597D2552D1CD003C8CDB /* InstantSearchCore in Frameworks */,
 				AF4059812552D1CD003C8CDB /* InstantSearch in Frameworks */,
 				AFFE9E8F2602395D000C3AC9 /* InstantSearchVoiceOverlay in Frameworks */,
+				AFB2771D25FADE9C00901D75 /* InstantSearch in Frameworks */,
 				AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */,
-				AF40597F2552D1CD003C8CDB /* InstantSearchInsights in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +216,8 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFB2771525FADDD300901D75 /* algoliasearch-client-swift */,
+				AFB2771425FADDD300901D75 /* instantsearch-ios */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -323,6 +327,7 @@
 				AF6778EE22FB34C000850ACC /* RefinementListDemoViewController.swift */,
 				AF6778EF22FB34C000850ACC /* SegmentedDemoViewController.swift */,
 				AF6778F022FB34C000850ACC /* SingleIndexSnippetViewController.swift */,
+				AFB2771825FADE6A00901D75 /* DynamicFacetsDemoViewController.swift */,
 				AF6778F122FB34C000850ACC /* RefinementPersistentListDemoViewController.swift */,
 				AF6778F222FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift */,
 				AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */,
@@ -408,11 +413,9 @@
 			);
 			name = DemoDirectory;
 			packageProductDependencies = (
-				AF40597C2552D1CD003C8CDB /* InstantSearchCore */,
-				AF40597E2552D1CD003C8CDB /* InstantSearchInsights */,
-				AF4059802552D1CD003C8CDB /* InstantSearch */,
 				AF4059852552D1EB003C8CDB /* SDWebImage */,
 				AFFE9E8E2602395D000C3AC9 /* InstantSearchVoiceOverlay */,
+				AFB2771C25FADE9C00901D75 /* InstantSearch */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -465,7 +468,6 @@
 			);
 			mainGroup = AF6778B822FB319200850ACC;
 			packageReferences = (
-				AF40597B2552D1CD003C8CDB /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 				AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				AFFE9E8D2602395D000C3AC9 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
 			);
@@ -558,6 +560,7 @@
 				AF67792822FB34C000850ACC /* MovieCollectionViewCell.swift in Sources */,
 				AFCAE43C24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift in Sources */,
 				AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */,
+				AFB2771925FADE6A00901D75 /* DynamicFacetsDemoViewController.swift in Sources */,
 				AF0B717D24C99399005CFB27 /* SearchConnectorSearchViewController.swift in Sources */,
 				AF67792222FB34C000850ACC /* ToggleDemoViewController.swift in Sources */,
 				AF67792F22FB34C000850ACC /* CellConfigurable.swift in Sources */,
@@ -886,21 +889,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF40597C2552D1CD003C8CDB /* InstantSearchCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF40597B2552D1CD003C8CDB /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearchCore;
-		};
-		AF40597E2552D1CD003C8CDB /* InstantSearchInsights */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF40597B2552D1CD003C8CDB /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearchInsights;
-		};
-		AF4059802552D1CD003C8CDB /* InstantSearch */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF40597B2552D1CD003C8CDB /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearch;
-		};
 		AF4059852552D1EB003C8CDB /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */;
@@ -910,6 +898,9 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AFFE9E8D2602395D000C3AC9 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */;
 			productName = InstantSearchVoiceOverlay;
+		AFB2771C25FADE9C00901D75 /* InstantSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = InstantSearch;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
