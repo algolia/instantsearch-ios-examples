@@ -74,8 +74,7 @@ class DemoFactory {
        viewController = FilterListDemo.tag()
        
      case .searchOnSubmit:
-      viewController = VoiceInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
-//       viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
+       viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
        
      case .searchAsYouType:
        viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
@@ -100,6 +99,9 @@ class DemoFactory {
       
      case .queryRuleCustomData:
        viewController = QueryRuleCustomDataDemoViewController()
+      
+     case .voiceSearch:
+        viewController = VoiceInputDemoViewController()
      }
     
     viewController.title = demo.name
