@@ -14,17 +14,12 @@ import SDWebImageSwiftUI
 
 struct FacetListView: View {
 
-  let title: String
   @Binding var facets: [(Facet, Bool)]
   var select: (Facet) -> Void
-  @Binding var hitsCountDescription: String
 
   var body: some View {
     if #available(iOS 14.0, *) {
       ScrollView(showsIndicators: true) {
-        Text(hitsCountDescription)
-          .fontWeight(.medium)
-          .padding(.vertical, 5)
         LazyVStack() {
           ForEach(facets, id: \.0) { (facet, isSelected) in
             FacetRow(facet: facet, isSelected: isSelected).onTapGesture {
@@ -33,8 +28,7 @@ struct FacetListView: View {
             Divider()
           }
         }
-      }.navigationBarTitle(title)
-      .navigationBarTitleDisplayMode(.inline)
+      }
     } else {
       List(facets, id: \.0) { (facet, isSelected) in
         Text(facet.description)
@@ -51,7 +45,9 @@ class FacetListObservable: ObservableObject, FacetListController {
   var onClick: ((Facet) -> Void)?
         
   func setSelectableItems(selectableItems: [SelectableItem<Facet>]) {
-    self.facets = selectableItems
+    DispatchQueue.main.async {
+      self.facets = selectableItems
+    }
   }
   
   func reload() {
@@ -65,7 +61,9 @@ struct ContentView: View {
   @State private var showModal = false
   @ObservedObject var viewModel: AlgoliaViewModel = .init()
   @ObservedObject var statsObservable: StatsObservable = .init()
-    
+  @ObservedObject var hitsInteractor: HitsInteractor<SUIShopItem> = .init()
+  @ObservedObject var facetListObservable: FacetListObservable = .init()
+
     var body: some View {
       return VStack(spacing: 10) {
         HStack(alignment: .center, spacing: 5) {
@@ -73,25 +71,34 @@ struct ContentView: View {
         }.padding(.horizontal, 5)
         Text(statsObservable.stats)
           .fontWeight(.medium)
-        HitsView(hitsInteractor: viewModel.hitsInteractor) { item, index in
+        HitsView(hitsInteractor: hitsInteractor) { (item, _) in
           ShopItemRow(item: item)
+        } noResults: {
+          Text("No Results")
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
+
       }.onAppear {
-        self.viewModel.statsInteractor.connectController(statsObservable)
-        self.viewModel.searcher.search()
+        hitsInteractor.connectSearcher(viewModel.searcher)
+        viewModel.statsInteractor.connectController(statsObservable)
+        viewModel.facetListInteractor.connectController(facetListObservable, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+        viewModel.searcher.search()
       }
       .navigationBarTitle("Algolia & SwiftUI")
       .navigationBarItems(trailing:
-                            Button(action: { self.showModal.toggle() },
+                            Button(action: { withAnimation { showModal.toggle() } },
                                    label: {
                                     Image(systemName: "line.horizontal.3.decrease.circle")
                                       .font(.title)
                                    }).sheet(isPresented: $showModal, content: {
                                     NavigationView {
-                                      FacetListView(title: "Manufacturer",
-                                                    facets: $viewModel.facetListObservable.facets, select: viewModel.facetListObservable.onClick!,
-                                                    hitsCountDescription: $statsObservable.stats)
-
+                                      VStack {
+                                        Text(statsObservable.stats)
+                                          .fontWeight(.medium)
+                                        FacetListView(facets: $facetListObservable.facets,
+                                                      select: facetListObservable.onClick!)
+                                      }
+                                      .navigationBarTitle("Manufacturer")
                                     }
                                    })
       )
@@ -127,26 +134,19 @@ class AlgoliaViewModel: ObservableObject {
   }
   
   let searcher: SingleIndexSearcher
-  let hitsInteractor: HitsInteractor<SUIShopItem>
   let statsInteractor: StatsInteractor
-  var facetListInteractor: FacetListInteractor
-  var facetListObservable: FacetListObservable
+  let facetListInteractor: FacetListInteractor
   let filterState: FilterState
   
   init() {
     let searcher = SingleIndexSearcher(appID: "latency",
     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
     indexName: "bestbuy")
-    let hitsInteractor = HitsInteractor<SUIShopItem>(infiniteScrolling: .on(withOffset: 20), showItemsOnEmptyQuery: true)
     self.searcher = searcher
     self.statsInteractor = .init()
-    self.hitsInteractor = hitsInteractor
     self.facetListInteractor = .init()
     self.filterState = .init()
-    self.facetListObservable = .init()
     searcher.connectFilterState(filterState)
-    hitsInteractor.connectSearcher(searcher)
-    facetListInteractor.connectController(facetListObservable, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
     facetListInteractor.connectSearcher(searcher, with: "manufacturer")
     facetListInteractor.connectFilterState(filterState, with: "manufacturer", operator: .or)
     statsInteractor.connectSearcher(searcher)
@@ -188,13 +188,6 @@ struct ShopItemRow: View {
       }.multilineTextAlignment(.leading)
     }.frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 100, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 140, maxHeight: 140, alignment: .leading).padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
   }
-
-  init(title: String) {
-    self.title = title
-    self.subtitle = ""
-    self.details = ""
-    self.imageURL = URL(string: "google.com")!
-  }
   
   init(item: SUIShopItem?) {
     self.title = item?.name ?? ""
@@ -204,26 +197,32 @@ struct ShopItemRow: View {
   }
 }
 
-struct HitsView<Row: View, Item: Codable>: View {
+struct HitsView<Row: View, Item: Codable, NoResults: View>: View {
   
   @ObservedObject var hitsInteractor: HitsInteractor<Item>
   var content: (Item?, Int) -> Row
+  var noResults: () -> NoResults
   
-  init(hitsInteractor: HitsInteractor<Item>, @ViewBuilder content: @escaping (Item?, Int) -> Row) {
+  init(hitsInteractor: HitsInteractor<Item>, @ViewBuilder content: @escaping (Item?, Int) -> Row, @ViewBuilder noResults: @escaping () -> NoResults) {
     self.hitsInteractor = hitsInteractor
     self.content = content
+    self.noResults = noResults
     UIScrollView.appearance().keyboardDismissMode = .interactive
   }
         
   var body: some View {
     if #available(iOS 14.0, *) {
-      ScrollView(showsIndicators: false) {
-        LazyVStack() {
-          ForEach(0..<hitsInteractor.numberOfHits(), id: \.self) { index in
-            content(hitsInteractor.hit(atIndex: index), index).onAppear {
-              hitsInteractor.notifyForInfiniteScrolling(rowNumber: index)
+      if hitsInteractor.numberOfHits() == 0 {
+        noResults()
+      } else {
+        ScrollView(showsIndicators: false) {
+          LazyVStack() {
+            ForEach(0..<hitsInteractor.numberOfHits(), id: \.self) { index in
+              content(hitsInteractor.hit(atIndex: index), index).onAppear {
+                hitsInteractor.notifyForInfiniteScrolling(rowNumber: index)
+              }
+              Divider()
             }
-            Divider()
           }
         }
       }
