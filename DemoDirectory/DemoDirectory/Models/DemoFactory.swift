@@ -23,7 +23,8 @@ class DemoFactory {
      switch demoID {
      case .singleIndex:
       if #available(iOS 14.0, *) {
-        viewController = UIHostingController(rootView: ContentView())
+        let algoliaViewModel = AlgoliaViewModel()
+        viewController = UIHostingController(rootView: ContentView(viewModel: algoliaViewModel))
       } else {
         viewController = SingleIndexDemoViewController()
       }
