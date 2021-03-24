@@ -18,20 +18,14 @@ struct FacetListView: View {
   var select: (Facet) -> Void
 
   var body: some View {
-    if #available(iOS 14.0, *) {
-      ScrollView(showsIndicators: true) {
-        LazyVStack() {
-          ForEach(facets, id: \.0) { (facet, isSelected) in
-            FacetRow(facet: facet, isSelected: isSelected).onTapGesture {
-              select(facet)
-            }
-            Divider()
+    ScrollView(showsIndicators: true) {
+      VStack() {
+        ForEach(facets, id: \.0) { (facet, isSelected) in
+          FacetRow(facet: facet, isSelected: isSelected).onTapGesture {
+            select(facet)
           }
+          Divider()
         }
-      }
-    } else {
-      List(facets, id: \.0) { (facet, isSelected) in
-        Text(facet.description)
       }
     }
   }
@@ -66,9 +60,7 @@ struct ContentView: View {
 
     var body: some View {
       return VStack(spacing: 10) {
-        HStack(alignment: .center, spacing: 5) {
           SearchBar(text: $viewModel.query)
-        }.padding(.horizontal, 5)
         Text(statsObservable.stats)
           .fontWeight(.medium)
         HitsView(hitsInteractor: hitsInteractor) { (item, _) in
@@ -114,8 +106,8 @@ struct ContentView_Previews : PreviewProvider {
 }
 
 class StatsObservable: ObservableObject, StatsTextController {
-  @Published
-  var stats: String = "observable"
+  
+  @Published var stats: String = "observable"
   
   func setItem(_ item: String?) {
     stats = item ?? ""
@@ -211,10 +203,10 @@ struct HitsView<Row: View, Item: Codable, NoResults: View>: View {
   }
         
   var body: some View {
-    if #available(iOS 14.0, *) {
-      if hitsInteractor.numberOfHits() == 0 {
-        noResults()
-      } else {
+    if hitsInteractor.numberOfHits() == 0 {
+      noResults()
+    } else {
+      if #available(iOS 14.0, *) {
         ScrollView(showsIndicators: false) {
           LazyVStack() {
             ForEach(0..<hitsInteractor.numberOfHits(), id: \.self) { index in
@@ -225,11 +217,12 @@ struct HitsView<Row: View, Item: Codable, NoResults: View>: View {
             }
           }
         }
-      }
-    } else {
-      List(0..<hitsInteractor.numberOfHits(), id: \.self) { index in
-        content(hitsInteractor.hit(atIndex: index), index).onAppear {
-          hitsInteractor.notifyForInfiniteScrolling(rowNumber: index)
+      } else {
+        List(0..<hitsInteractor.numberOfHits(), id: \.self) { index in
+          content(hitsInteractor.hit(atIndex: index), index).onAppear {
+            hitsInteractor.notifyForInfiniteScrolling(rowNumber: index)
+          }
+          Divider()
         }
       }
     }
