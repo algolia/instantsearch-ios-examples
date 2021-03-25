@@ -10,16 +10,21 @@ import Foundation
 import SwiftUI
 import InstantSearchCore
 
-class QueryDispatcher: ObservableObject {
+class QueryInputObservable: ObservableObject, QueryInputController {
   
   @Published var query: String = "" {
     didSet {
-      searcher?.query = query
-      searcher?.search()
+      onQueryChanged?(query)
     }
   }
   
-  weak var searcher: Searcher?
+  var onQueryChanged: ((String?) -> Void)?
+  
+  var onQuerySubmitted: ((String?) -> Void)?
+  
+  func setQuery(_ query: String?) {
+    self.query = query ?? ""
+  }
   
 }
 

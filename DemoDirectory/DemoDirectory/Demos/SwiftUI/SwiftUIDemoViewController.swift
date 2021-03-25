@@ -12,8 +12,8 @@ import SwiftUI
 
 class SwiftUIDemoViewController: UIHostingController<ContentView> {
   
-  let viewModel = AlgoliaViewModel()
-
+  let viewModel = AlgoliaViewModel.test
+  
   init() {
     let contentView = ContentView()
     viewModel.setup(contentView)
@@ -27,37 +27,66 @@ class SwiftUIDemoViewController: UIHostingController<ContentView> {
   
 }
 
+extension AlgoliaViewModel {
+  static let test = AlgoliaViewModel(appID: "latency",
+                                     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
+                                     indexName: "bestbuy",
+                                     facetAttribute: "manufacturer")
+}
+
+
 class AlgoliaViewModel {
   
+  let appID: ApplicationID
+  let apiKey: APIKey
+  let indexName: IndexName
+  let facetAttribute: Attribute
+  
   let searcher: SingleIndexSearcher
+  let queryInputInteractor: QueryInputInteractor
   let hitsInteractor: HitsInteractor<SUIShopItem>
   let statsInteractor: StatsInteractor
   let facetListInteractor: FacetListInteractor
+  let currentFiltersInteractor: CurrentFiltersInteractor
   let filterState: FilterState
-  
-  init() {
-    InstantSearchCoreLogger.minLogSeverityLevel = .trace
-    Logger.minSeverityLevel = .trace
-    let searcher = SingleIndexSearcher(appID: "latency",
-    apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-    indexName: "bestbuy")
+    
+  init(appID: ApplicationID,
+       apiKey: APIKey,
+       indexName: IndexName,
+       facetAttribute: Attribute) {
+    self.appID = appID
+    self.apiKey = apiKey
+    self.indexName = indexName
+    self.facetAttribute = facetAttribute
+    let searcher = SingleIndexSearcher(appID: appID,
+                                       apiKey: apiKey,
+                                       indexName: indexName)
     self.searcher = searcher
     self.hitsInteractor = .init()
     self.statsInteractor = .init()
     self.facetListInteractor = .init()
     self.filterState = .init()
+    self.currentFiltersInteractor = .init()
+    self.queryInputInteractor = .init()
+    setupConnections()
+  }
+  
+  fileprivate func setupConnections() {
     searcher.connectFilterState(filterState)
     hitsInteractor.connectSearcher(searcher)
-    facetListInteractor.connectSearcher(searcher, with: "manufacturer")
-    facetListInteractor.connectFilterState(filterState, with: "manufacturer", operator: .or)
+    facetListInteractor.connectSearcher(searcher, with: facetAttribute)
+    facetListInteractor.connectFilterState(filterState, with: facetAttribute, operator: .or)
     statsInteractor.connectSearcher(searcher)
+    currentFiltersInteractor.connectFilterState(filterState)
+    queryInputInteractor.connectSearcher(searcher)
   }
   
   func setup(_ contentView: ContentView) {
-    contentView.queryDispatcher.searcher = searcher
     hitsInteractor.connectController(contentView.hitsObservable)
     statsInteractor.connectController(contentView.statsObservable)
     facetListInteractor.connectController(contentView.facetListObservable, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+    currentFiltersInteractor.connectController(contentView.currentFiltersObservable)
+    queryInputInteractor.connectController(contentView.queryInputObservable)
   }
     
 }
@@ -66,14 +95,15 @@ struct ContentView: View {
   
   @State private var showFacets = false
   
-  @ObservedObject var queryDispatcher: QueryDispatcher = .init()
   @ObservedObject var statsObservable: StatsObservable = .init()
   @ObservedObject var hitsObservable: HitsObservable<SUIShopItem> = .init()
   @ObservedObject var facetListObservable: FacetListObservable = .init()
+  @ObservedObject var currentFiltersObservable: CurrentFiltersObservable = .init()
+  @ObservedObject var queryInputObservable: QueryInputObservable = .init()
   
   var body: some View {
     return VStack(spacing: 10) {
-      SearchBar(text: $queryDispatcher.query)
+      SearchBar(text: $queryInputObservable.query)
       Text(statsObservable.stats)
         .fontWeight(.medium)
       HitsView(hitsObservable) { (item, _) in
@@ -87,31 +117,20 @@ struct ContentView: View {
     .navigationBarItems(trailing:
                           Button(action: { withAnimation { showFacets.toggle() } },
                                  label: {
-                                  Image(systemName: "line.horizontal.3.decrease.circle")
-                                    .font(.title)
+                                  if currentFiltersObservable.isEmpty {
+                                    Image(systemName: "line.horizontal.3.decrease.circle")
+                                      .font(.title)
+                                  } else {
+                                    Image(systemName: "line.horizontal.3.decrease.circle.fill")
+                                      .font(.title)
+                                  }
                                  }).sheet(isPresented: $showFacets, content: {
                                   NavigationView {
                                     FacetsScreen(statsObservable: statsObservable,
-                                                facetListObservable: facetListObservable)
+                                                 facetListObservable: facetListObservable)
                                   }
                                  })
     )
-  }
-}
-
-struct ContentView_Previews : PreviewProvider {
-  
-  static let viewModel = AlgoliaViewModel()
-  
-  static var previews: some View {
-    let contentView = ContentView()
-    let _ = viewModel.setup(contentView)
-    NavigationView {
-      contentView
-    }.onAppear {
-      viewModel.searcher.search()
-    }
-    
   }
 }
 
@@ -130,4 +149,20 @@ struct FacetsScreen: View {
     .navigationBarTitle("Manufacturer")
   }
   
+}
+
+struct ContentView_Previews : PreviewProvider {
+  
+  static let viewModel = AlgoliaViewModel.test
+  
+  static var previews: some View {
+    let contentView = ContentView()
+    let _ = viewModel.setup(contentView)
+    NavigationView {
+      contentView
+    }.onAppear {
+      viewModel.searcher.search()
+    }
+    
+  }
 }
