@@ -16,8 +16,8 @@ class SwiftUIDemoViewController: UIHostingController<ContentView> {
   
   init() {
     let contentView = ContentView()
-    viewModel.setup(contentView)
     super.init(rootView: contentView)
+    viewModel.setup(contentView)
     viewModel.searcher.search()
   }
   
@@ -84,7 +84,7 @@ class AlgoliaViewModel {
   func setup(_ contentView: ContentView) {
     hitsInteractor.connectController(contentView.hitsObservable)
     statsInteractor.connectController(contentView.statsObservable)
-    facetListInteractor.connectController(contentView.facetListObservable, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+    facetListInteractor.connectController(contentView.facetStorage, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
     currentFiltersInteractor.connectController(contentView.currentFiltersObservable)
     queryInputInteractor.connectController(contentView.queryInputObservable)
   }
@@ -97,7 +97,8 @@ struct ContentView: View {
   
   @ObservedObject var statsObservable: StatsObservable = .init()
   @ObservedObject var hitsObservable: HitsObservable<SUIShopItem> = .init()
-  @ObservedObject var facetListObservable: FacetListObservable = .init()
+//  @ObservedObject var facetListObservable: FacetListObservable = .init()
+  @ObservedObject var facetStorage: FacetStorage = .init()
   @ObservedObject var currentFiltersObservable: CurrentFiltersObservable = .init()
   @ObservedObject var queryInputObservable: QueryInputObservable = .init()
   
@@ -127,7 +128,7 @@ struct ContentView: View {
                                  }).sheet(isPresented: $showFacets, content: {
                                   NavigationView {
                                     FacetsScreen(statsObservable: statsObservable,
-                                                 facetListObservable: facetListObservable)
+                                                 facetStorage: facetStorage)
                                   }
                                  })
     )
@@ -137,14 +138,13 @@ struct ContentView: View {
 struct FacetsScreen: View {
   
   @ObservedObject var statsObservable: StatsObservable
-  @ObservedObject var facetListObservable: FacetListObservable
+  @ObservedObject var facetStorage: FacetStorage
   
   var body: some View {
     VStack {
       Text(statsObservable.stats)
         .fontWeight(.medium)
-      FacetListView(facets: $facetListObservable.facets,
-                    select: facetListObservable.onClick!)
+      FacetListView(facetStorage: facetStorage)
     }
     .navigationBarTitle("Manufacturer")
   }

@@ -11,6 +11,22 @@ import SwiftUI
 import InstantSearchCore
 import SDWebImageSwiftUI
 
+struct Hits_Previews : PreviewProvider {
+  
+  static let viewModel = AlgoliaViewModel.test
+  
+  static var previews: some View {
+    let contentView = ContentView()
+    let _ = viewModel.setup(contentView)
+    NavigationView {
+      contentView
+    }.onAppear {
+      viewModel.searcher.search()
+    }
+  }
+  
+}
+
 class HitsObservable<Item: Codable>: ObservableObject, HitsController {
     
   var hitsSource: HitsInteractor<Item>?
@@ -39,47 +55,59 @@ class HitsObservable<Item: Codable>: ObservableObject, HitsController {
 struct HitsView<Row: View, Item: Codable, NoResults: View>: View {
   
   @ObservedObject var hitsObservable: HitsObservable<Item>
-  var content: (Item?, Int) -> Row
-  var noResults: () -> NoResults
+  var row: (Item?, Int) -> Row
+  var noResults: (() -> NoResults)?
   
   init(_ hitsObservable: HitsObservable<Item>,
-       @ViewBuilder content: @escaping (Item?, Int) -> Row,
+       @ViewBuilder row: @escaping (Item?, Int) -> Row,
        @ViewBuilder noResults: @escaping () -> NoResults) {
     self.hitsObservable = hitsObservable
-    self.content = content
+    self.row = row
     self.noResults = noResults
     UIScrollView.appearance().keyboardDismissMode = .interactive
   }
+  
+  private func row(atIndex index: Int) -> some View {
+    VStack {
+      row(hitsObservable.item(atIndex: index), index).onAppear {
+        hitsObservable.notify(index: index)
+      }
+      Divider()
+    }
+  }
           
   var body: some View {
-    if hitsObservable.hitsCount == 0 {
-      noResults()
+    if let noResults = noResults?(), hitsObservable.hitsCount == 0 {
+      noResults
     } else {
       if #available(iOS 14.0, *) {
         ScrollView(showsIndicators: false) {
           LazyVStack() {
             ForEach(0..<hitsObservable.hitsCount, id: \.self) { index in
-              HStack {
-                Text("\(index)")
-                content(hitsObservable.item(atIndex: index), index).onAppear {
-                  hitsObservable.notify(index: index)
-                }
-              }
-              Divider()
+              row(atIndex: index)
             }
           }
         }
       } else {
         List(0..<hitsObservable.hitsCount, id: \.self) { index in
-          content(hitsObservable.item(atIndex: index), index).onAppear {
-            hitsObservable.notify(index: index)
-          }
-          Divider()
+          row(atIndex: index)
         }
       }
     }
   }
     
+}
+
+extension HitsView where NoResults == Never {
+  
+  init(_ hitsObservable: HitsObservable<Item>,
+       @ViewBuilder row: @escaping (Item?, Int) -> Row) {
+    self.hitsObservable = hitsObservable
+    self.row = row
+    self.noResults = nil
+    UIScrollView.appearance().keyboardDismissMode = .interactive
+  }
+  
 }
 
 struct SUIShopItem: Codable, Hashable {

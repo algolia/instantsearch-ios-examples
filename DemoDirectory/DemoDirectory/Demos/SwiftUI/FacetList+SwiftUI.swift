@@ -10,35 +10,50 @@ import Foundation
 import SwiftUI
 import InstantSearchCore
 
-class FacetListObservable: ObservableObject, FacetListController {
+class FacetStorage: ObservableObject, FacetListController {
   
-  @Published var facets: [(Facet, Bool)] = []
+  @Published var facets: [Facet]
+  @Published var selections: Set<String>
   
   var onClick: ((Facet) -> Void)?
-        
+  
+  init(facets: [Facet] = [], selections: Set<String> = [], onClick: ((Facet) -> Void)? = nil) {
+    self.facets = facets
+    self.selections = selections
+    self.onClick = onClick
+  }
+  
+  func select(_ facet: Facet) {
+    onClick?(facet)
+  }
+  
+  func isSelected(_ facet: Facet) -> Bool {
+    return selections.contains(facet.value)
+  }
+  
   func setSelectableItems(selectableItems: [SelectableItem<Facet>]) {
-    DispatchQueue.main.async {
-      self.facets = selectableItems
-    }
+    self.facets = selectableItems.map(\.item)
+    self.selections = Set(selectableItems.filter(\.isSelected).map(\.item.value))
   }
   
   func reload() {
     objectWillChange.send()
   }
-
+  
 }
 
 struct FacetListView: View {
 
-  @Binding var facets: [(Facet, Bool)]
-  var select: (Facet) -> Void
+  @ObservedObject var facetStorage: FacetStorage
 
   var body: some View {
     ScrollView(showsIndicators: true) {
       VStack() {
-        ForEach(facets, id: \.0) { (facet, isSelected) in
-          FacetRow(facet: facet, isSelected: isSelected)
-            .onTapGesture { select(facet) }
+        ForEach(facetStorage.facets, id: \.self) { facet in
+          FacetRow(facet: facet, isSelected: facetStorage.isSelected(facet))
+            .onTapGesture {
+              facetStorage.select(facet)
+            }
           Divider()
         }
       }.background(Color(.systemBackground))
@@ -66,4 +81,38 @@ struct FacetRow: View {
       }
     }
   }
+}
+
+
+struct Facets_Previews : PreviewProvider {
+  
+  static let test: [Facet] = {
+    [
+      ("Samsung", 356),
+      ("Sony", 236),
+      ("Insignia", 230),
+      ("Dynex", 202),
+      ("RocketFish", 193),
+      ("HP", 192),
+      ("Apple", 162),
+      ("LG", 141),
+      ("Metra", 132),
+      ("Microsoft", 121),
+      ("Logitech", 119),
+      ("ZAGG", 119),
+      ("Griffin Technology", 109),
+      ("Belkin", 104),
+    ].map { value, count in
+      Facet(value: value, count: count)
+    }
+  }()
+    
+  static var previews: some View {
+    NavigationView {
+      let storage = FacetStorage(facets: test)
+      let _ = storage.onClick = { facet in storage.selections.formSymmetricDifference([facet.value]) }
+      FacetListView(facetStorage: storage)
+    }
+  }
+  
 }
