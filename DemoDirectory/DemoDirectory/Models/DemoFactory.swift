@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwiftUI
 
 class DemoFactory {
   
@@ -23,8 +22,7 @@ class DemoFactory {
      switch demoID {
      case .singleIndex:
       if #available(iOS 14.0, *) {
-        let algoliaViewModel = AlgoliaViewModel()
-        viewController = UIHostingController(rootView: ContentView(viewModel: algoliaViewModel))
+        viewController = SwiftUIDemoViewController()
       } else {
         viewController = SingleIndexDemoViewController()
       }
