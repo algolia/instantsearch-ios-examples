@@ -11,22 +11,6 @@ import SwiftUI
 import InstantSearchCore
 import SDWebImageSwiftUI
 
-struct Hits_Previews : PreviewProvider {
-  
-  static let viewModel = AlgoliaViewModel.test
-  
-  static var previews: some View {
-    let contentView = ContentView()
-    let _ = viewModel.setup(contentView)
-    NavigationView {
-      contentView
-    }.onAppear {
-      viewModel.searcher.search()
-    }
-  }
-  
-}
-
 class HitsObservable<Item: Codable>: ObservableObject, HitsController {
     
   var hitsSource: HitsInteractor<Item>?
@@ -68,11 +52,8 @@ struct HitsView<Row: View, Item: Codable, NoResults: View>: View {
   }
   
   private func row(atIndex index: Int) -> some View {
-    VStack {
-      row(hitsObservable.item(atIndex: index), index).onAppear {
-        hitsObservable.notify(index: index)
-      }
-      Divider()
+    row(hitsObservable.item(atIndex: index), index).onAppear {
+      hitsObservable.notify(index: index)
     }
   }
           
@@ -85,12 +66,14 @@ struct HitsView<Row: View, Item: Codable, NoResults: View>: View {
           LazyVStack() {
             ForEach(0..<hitsObservable.hitsCount, id: \.self) { index in
               row(atIndex: index)
+              Divider()
             }
           }
         }
       } else {
         List(0..<hitsObservable.hitsCount, id: \.self) { index in
           row(atIndex: index)
+          Divider()
         }
       }
     }
@@ -108,14 +91,6 @@ extension HitsView where NoResults == Never {
     UIScrollView.appearance().keyboardDismissMode = .interactive
   }
   
-}
-
-struct SUIShopItem: Codable, Hashable {
-  let objectID: String
-  let name: String
-  let manufacturer: String?
-  let shortDescription: String?
-  let image: URL?
 }
 
 struct ShopItemRow: View {

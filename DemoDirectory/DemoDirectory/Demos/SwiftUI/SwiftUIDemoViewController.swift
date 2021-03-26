@@ -34,70 +34,12 @@ extension AlgoliaViewModel {
                                      facetAttribute: "manufacturer")
 }
 
-
-class AlgoliaViewModel {
-  
-  let appID: ApplicationID
-  let apiKey: APIKey
-  let indexName: IndexName
-  let facetAttribute: Attribute
-  
-  let searcher: SingleIndexSearcher
-  let queryInputInteractor: QueryInputInteractor
-  let hitsInteractor: HitsInteractor<SUIShopItem>
-  let statsInteractor: StatsInteractor
-  let facetListInteractor: FacetListInteractor
-  let currentFiltersInteractor: CurrentFiltersInteractor
-  let filterState: FilterState
-    
-  init(appID: ApplicationID,
-       apiKey: APIKey,
-       indexName: IndexName,
-       facetAttribute: Attribute) {
-    self.appID = appID
-    self.apiKey = apiKey
-    self.indexName = indexName
-    self.facetAttribute = facetAttribute
-    let searcher = SingleIndexSearcher(appID: appID,
-                                       apiKey: apiKey,
-                                       indexName: indexName)
-    self.searcher = searcher
-    self.hitsInteractor = .init()
-    self.statsInteractor = .init()
-    self.facetListInteractor = .init()
-    self.filterState = .init()
-    self.currentFiltersInteractor = .init()
-    self.queryInputInteractor = .init()
-    setupConnections()
-  }
-  
-  fileprivate func setupConnections() {
-    searcher.connectFilterState(filterState)
-    hitsInteractor.connectSearcher(searcher)
-    facetListInteractor.connectSearcher(searcher, with: facetAttribute)
-    facetListInteractor.connectFilterState(filterState, with: facetAttribute, operator: .or)
-    statsInteractor.connectSearcher(searcher)
-    currentFiltersInteractor.connectFilterState(filterState)
-    queryInputInteractor.connectSearcher(searcher)
-  }
-  
-  func setup(_ contentView: ContentView) {
-    hitsInteractor.connectController(contentView.hitsObservable)
-    statsInteractor.connectController(contentView.statsObservable)
-    facetListInteractor.connectController(contentView.facetStorage, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
-    currentFiltersInteractor.connectController(contentView.currentFiltersObservable)
-    queryInputInteractor.connectController(contentView.queryInputObservable)
-  }
-    
-}
-
 struct ContentView: View {
   
   @State private var showFacets = false
   
   @ObservedObject var statsObservable: StatsObservable = .init()
   @ObservedObject var hitsObservable: HitsObservable<SUIShopItem> = .init()
-//  @ObservedObject var facetListObservable: FacetListObservable = .init()
   @ObservedObject var facetStorage: FacetStorage = .init()
   @ObservedObject var currentFiltersObservable: CurrentFiltersObservable = .init()
   @ObservedObject var queryInputObservable: QueryInputObservable = .init()
@@ -166,3 +108,68 @@ struct ContentView_Previews : PreviewProvider {
     
   }
 }
+
+class AlgoliaViewModel {
+  
+  let appID: ApplicationID
+  let apiKey: APIKey
+  let indexName: IndexName
+  let facetAttribute: Attribute
+  
+  let searcher: SingleIndexSearcher
+  let queryInputInteractor: QueryInputInteractor
+  let hitsInteractor: HitsInteractor<SUIShopItem>
+  let statsInteractor: StatsInteractor
+  let facetListInteractor: FacetListInteractor
+  let currentFiltersInteractor: CurrentFiltersInteractor
+  let filterState: FilterState
+    
+  init(appID: ApplicationID,
+       apiKey: APIKey,
+       indexName: IndexName,
+       facetAttribute: Attribute) {
+    self.appID = appID
+    self.apiKey = apiKey
+    self.indexName = indexName
+    self.facetAttribute = facetAttribute
+    let searcher = SingleIndexSearcher(appID: appID,
+                                       apiKey: apiKey,
+                                       indexName: indexName)
+    self.searcher = searcher
+    self.hitsInteractor = .init()
+    self.statsInteractor = .init()
+    self.facetListInteractor = .init()
+    self.filterState = .init()
+    self.currentFiltersInteractor = .init()
+    self.queryInputInteractor = .init()
+    setupConnections()
+  }
+  
+  fileprivate func setupConnections() {
+    searcher.connectFilterState(filterState)
+    hitsInteractor.connectSearcher(searcher)
+    facetListInteractor.connectSearcher(searcher, with: facetAttribute)
+    facetListInteractor.connectFilterState(filterState, with: facetAttribute, operator: .or)
+    statsInteractor.connectSearcher(searcher)
+    currentFiltersInteractor.connectFilterState(filterState)
+    queryInputInteractor.connectSearcher(searcher)
+  }
+  
+  func setup(_ contentView: ContentView) {
+    hitsInteractor.connectController(contentView.hitsObservable)
+    statsInteractor.connectController(contentView.statsObservable)
+    facetListInteractor.connectController(contentView.facetStorage, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+    currentFiltersInteractor.connectController(contentView.currentFiltersObservable)
+    queryInputInteractor.connectController(contentView.queryInputObservable)
+  }
+    
+}
+
+struct SUIShopItem: Codable, Hashable {
+  let objectID: String
+  let name: String
+  let manufacturer: String?
+  let shortDescription: String?
+  let image: URL?
+}
+

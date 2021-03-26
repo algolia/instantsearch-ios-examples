@@ -56,7 +56,7 @@ struct FacetListView: View {
             }
           Divider()
         }
-      }.background(Color(.systemBackground))
+      }
     }
   }
 
@@ -68,21 +68,21 @@ struct FacetRow: View {
   var isSelected: Bool
   
   var body: some View {
-    HStack {
+    HStack(spacing: 0) {
       Text(facet.description)
         .font(.footnote)
-        .frame(maxWidth: .infinity, minHeight: 30, alignment: .leading)
-        .padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+        .frame(maxWidth: .infinity, minHeight: 30, maxHeight: .infinity, alignment: .leading)
       if isSelected {
         Image(systemName: "checkmark")
           .font(.footnote)
-          .frame(minWidth: 44, alignment: .trailing)
-          .padding(.trailing, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+          .frame(maxHeight: .infinity, alignment: .trailing)
       }
     }
+    .padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+    .background(Color(.systemBackground))
   }
+  
 }
-
 
 struct Facets_Previews : PreviewProvider {
   
@@ -109,8 +109,10 @@ struct Facets_Previews : PreviewProvider {
     
   static var previews: some View {
     NavigationView {
-      let storage = FacetStorage(facets: test)
-      let _ = storage.onClick = { facet in storage.selections.formSymmetricDifference([facet.value]) }
+      let storage = FacetStorage(facets: test, selections: ["Samsung"])
+      let _ = storage.onClick = { facet in
+        storage.selections.formSymmetricDifference([facet.value])
+      }
       FacetListView(facetStorage: storage)
     }
   }
