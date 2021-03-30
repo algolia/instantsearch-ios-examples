@@ -32,7 +32,7 @@ class SwiftUIDemoViewController: UIHostingController<ContentView> {
 struct ContentView: View {
   
   @ObservedObject var statsObservable: StatsObservableController
-  @ObservedObject var hitsObservable: HitsObservableController<SUIShopItem>
+  @ObservedObject var hitsObservable: HitsObservableController<Hit<SUIShopItem>>
   @ObservedObject var facetStorage: FacetListObservableController
   @ObservedObject var currentFiltersObservable: CurrentFiltersObservableController
   @ObservedObject var queryInputObservable: QueryInputObservableController
@@ -54,8 +54,8 @@ struct ContentView: View {
       SearchBar(text: $queryInputObservable.query)
       Text(statsObservable.stats)
         .fontWeight(.medium)
-      HitsList(hitsObservable) { (item, _) in
-        ShopItemRow(item: item)
+      HitsList(hitsObservable) { (hit, _) in
+        ShopItemRow(item: hit)
       } noResults: {
         Text("No Results")
           .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -151,7 +151,7 @@ class AlgoliaViewModel {
   
   let searcher: SingleIndexSearcher
   let queryInputInteractor: QueryInputInteractor
-  let hitsInteractor: HitsInteractor<SUIShopItem>
+  let hitsInteractor: HitsInteractor<Hit<SUIShopItem>>
   let statsInteractor: StatsInteractor
   let facetListInteractor: FacetListInteractor
   let currentFiltersInteractor: CurrentFiltersInteractor
@@ -214,6 +214,7 @@ extension AlgoliaViewModel {
 struct ShopItemRow: View {
   
   let title: String
+  let highlightedTitle: HighlightedString?
   let subtitle: String
   let details: String
   let imageURL: URL
@@ -228,8 +229,7 @@ struct ShopItemRow: View {
           .clipped()
           .frame(width: 100, height: 100, alignment: .leading)
         VStack(alignment: .leading, spacing: 5) {
-          Text(title)
-            .fontWeight(.heavy)
+          Text(highlightedString: highlightedTitle!, highlighted: { Text($0).foregroundColor(.blue) })
           Spacer()
             .frame(height: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           Text(subtitle)
@@ -243,12 +243,26 @@ struct ShopItemRow: View {
     }
   }
   
-  init(item: SUIShopItem?) {
-    self.title = item?.name ?? ""
-    self.subtitle = item?.manufacturer ?? ""
+  init(item: Hit<SUIShopItem>?) {
+    guard let item = item else {
+      self = .init()
+      return
+    }
+    self.title = item.object.name
+    self.subtitle = item.object.manufacturer ?? ""
     self.details = ""
-    self.imageURL = item?.image ?? URL(string: "google.com")!
+    self.imageURL = item.object.image ?? URL(string: "google.com")!
+    self.highlightedTitle = item.hightlightedString(forKey: "name")
   }
+  
+  init() {
+    self.title = ""
+    self.subtitle = ""
+    self.details = ""
+    self.imageURL = URL(string: "")!
+    self.highlightedTitle = .init(string: "")
+  }
+  
 }
 
 struct SUIShopItem: Codable, Hashable, CustomStringConvertible {
