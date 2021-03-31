@@ -19,7 +19,6 @@ class SwiftUIDemoViewController: UIHostingController<ContentView> {
     let contentView = ContentView()
     super.init(rootView: contentView)
     viewModel.setup(contentView)
-    viewModel.searcher.search()
     UIScrollView.appearance().keyboardDismissMode = .interactive
   }
   
@@ -32,96 +31,130 @@ class SwiftUIDemoViewController: UIHostingController<ContentView> {
 struct ContentView: View {
   
   @ObservedObject var statsObservable: StatsObservableController
-  @ObservedObject var hitsObservable: HitsObservableController<Hit<SUIShopItem>>
-  @ObservedObject var facetStorage: FacetListObservableController
+  @ObservedObject var hitsObservable: HitsObservableController<Hit<InstantSearchItem>>
+  @ObservedObject var facetListObservable: FacetListObservableController
   @ObservedObject var currentFiltersObservable: CurrentFiltersObservableController
   @ObservedObject var queryInputObservable: QueryInputObservableController
   @ObservedObject var filterClearObservable: FilterClearObservable
-
-  @State private var showFacets = false
+  @ObservedObject var suggestionsObservable: HitsObservableController<QuerySuggestion>
+  
+  @State private var isPresentingFacets = false
+  @State private var isEditing = false
   
   init() {
     statsObservable = .init()
     hitsObservable = .init()
-    facetStorage = .init()
+    facetListObservable = .init()
     currentFiltersObservable = .init()
     queryInputObservable = .init()
     filterClearObservable = .init()
+    suggestionsObservable = .init()
   }
   
   var body: some View {
-    return VStack(spacing: 7) {
-      SearchBar(text: $queryInputObservable.query)
+      VStack(spacing: 7) {
+        SmartSearchBar(text: $queryInputObservable.query,
+                       isEditing: $isEditing,
+                       submit: queryInputObservable.submit)
+        if isEditing {
+          suggestions()
+        } else {
+          results().onAppear {
+            hideKeyboard()
+          }
+        }
+      }
+      .navigationBarTitle("Algolia & SwiftUI")
+      .navigationBarItems(trailing: facetsButton())
+  }
+  
+  private func suggestions() -> some View {
+    HitsList(suggestionsObservable) { (hit, _) in
+      if let querySuggestion = hit?.query {
+        HStack {
+          Text(querySuggestion)
+            .padding(.vertical, 3)
+          Spacer()
+          Button(action: {
+            queryInputObservable.setQuery(querySuggestion)
+          }) {
+            Image(systemName: "arrow.up.backward").foregroundColor(.gray)
+          }
+        }
+        .padding(.vertical, 4)
+        .padding(.horizontal, 20)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          queryInputObservable.setQuery(hit?.query)
+          isEditing = false
+        }
+      } else {
+        EmptyView()
+      }
+      Divider()
+    }
+  }
+  
+  private func results() -> some View {
+    VStack {
       Text(statsObservable.stats)
         .fontWeight(.medium)
       HitsList(hitsObservable) { (hit, _) in
-        ShopItemRow(item: hit)
+        ShopItemRow(isitem: hit)
       } noResults: {
         Text("No Results")
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
-    .navigationBarTitle("Algolia & SwiftUI")
-    .navigationBarItems(trailing: facetsButton())
   }
   
   private func facetsButton() -> some View {
-    Button(action: { withAnimation { showFacets.toggle() } },
+    Button(action: { withAnimation { isPresentingFacets.toggle() } },
            label: {
             let imageName = currentFiltersObservable.isEmpty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
             Image(systemName: imageName)
               .font(.title)
-           }).sheet(isPresented: $showFacets,
+           }).sheet(isPresented: $isPresentingFacets,
                     content: facetsView)
 
   }
   
+  @ViewBuilder
+  private func facetContentView() -> some View {
+    let facetList = FacetList(facetListObservable) { facet, isSelected in
+      VStack {
+        FacetRow(facet: facet, isSelected: isSelected)
+        Divider()
+      }
+      .padding(.vertical, 7)
+      .background(Color(.systemBackground))
+    }
+    .navigationBarTitle("Brand")
+    if #available(iOS 14.0, *) {
+      facetList.toolbar {
+          ToolbarItem(placement: .bottomBar) {
+            Spacer()
+          }
+          ToolbarItem(placement: .bottomBar) {
+            Text(statsObservable.stats)
+          }
+          ToolbarItem(placement: .bottomBar) {
+            Spacer()
+          }
+          ToolbarItem(placement: .bottomBar) {
+            Button(action: filterClearObservable.clear,
+                   label: { Image(systemName: "trash") }
+            ).disabled(currentFiltersObservable.isEmpty)
+          }
+      }
+    } else {
+      facetList
+    }
+  }
+  
   private func facetsView() -> some View {
     NavigationView {
-      if #available(iOS 14.0, *) {
-        VStack {
-          FacetList(facetStorage) { facet, isSelected in
-            VStack {
-              FacetRow(facet: facet, isSelected: isSelected)
-              Divider()
-            }
-            .padding(.vertical, 7)
-            .background(Color(.systemBackground))
-          }
-        }
-        .navigationBarTitle("Manufacturer")
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-              Spacer()
-            }
-            ToolbarItem(placement: .bottomBar) {
-              Text(statsObservable.stats)
-            }
-            ToolbarItem(placement: .bottomBar) {
-              Spacer()
-            }
-            ToolbarItem(placement: .bottomBar) {
-              Button(action: filterClearObservable.clear,
-                     label: { Image(systemName: "trash") }
-              ).disabled(currentFiltersObservable.isEmpty)
-            }
-        }
-      } else {
-        VStack {
-          Text(statsObservable.stats)
-            .fontWeight(.medium)
-          FacetList(facetStorage) { facet, isSelected in
-            VStack {
-              FacetRow(facet: facet, isSelected: isSelected)
-                .background(Color(.green))
-              Divider()
-            }
-            .padding(.vertical, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-            .background(Color(.systemBackground))
-          }
-        }
-        .navigationBarTitle("Manufacturer")
-      }
+      facetContentView()
     }
   }
   
@@ -137,7 +170,7 @@ struct ContentView_Previews : PreviewProvider {
     NavigationView {
       contentView
     }.onAppear {
-      viewModel.searcher.search()
+
     }
   }
 }
@@ -150,8 +183,10 @@ class AlgoliaViewModel {
   let facetAttribute: Attribute
   
   let searcher: SingleIndexSearcher
+  let suggestionSearcher: SingleIndexSearcher
   let queryInputInteractor: QueryInputInteractor
-  let hitsInteractor: HitsInteractor<Hit<SUIShopItem>>
+  let hitsInteractor: HitsInteractor<Hit<InstantSearchItem>>
+  let suggestionsInteractor: HitsInteractor<QuerySuggestion>
   let statsInteractor: StatsInteractor
   let facetListInteractor: FacetListInteractor
   let currentFiltersInteractor: CurrentFiltersInteractor
@@ -166,11 +201,14 @@ class AlgoliaViewModel {
     self.apiKey = apiKey
     self.indexName = indexName
     self.facetAttribute = facetAttribute
-    let searcher = SingleIndexSearcher(appID: appID,
-                                       apiKey: apiKey,
-                                       indexName: indexName)
-    self.searcher = searcher
+    self.searcher = SingleIndexSearcher(appID: appID,
+                                        apiKey: apiKey,
+                                        indexName: indexName)
+    self.suggestionSearcher = .init(appID: appID,
+                                    apiKey: "af044fb0788d6bb15f807e4420592bc5",
+                                    indexName: "instantsearch_query_suggestions")
     self.hitsInteractor = .init()
+    self.suggestionsInteractor = .init()
     self.statsInteractor = .init()
     self.facetListInteractor = .init()
     self.filterState = .init()
@@ -191,15 +229,20 @@ class AlgoliaViewModel {
     filterClearInteractor.connectFilterState(filterState,
                                              filterGroupIDs: [.or(name: facetAttribute.rawValue, filterType: .facet)],
                                              clearMode: .specified)
+    suggestionsInteractor.connectSearcher(suggestionSearcher)
+    queryInputInteractor.connectSearcher(suggestionSearcher)
   }
   
   func setup(_ contentView: ContentView) {
     hitsInteractor.connectController(contentView.hitsObservable)
     statsInteractor.connectController(contentView.statsObservable)
-    facetListInteractor.connectController(contentView.facetStorage, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+    facetListInteractor.connectController(contentView.facetListObservable, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
     currentFiltersInteractor.connectController(contentView.currentFiltersObservable)
     queryInputInteractor.connectController(contentView.queryInputObservable)
     filterClearInteractor.connectController(contentView.filterClearObservable)
+    suggestionsInteractor.connectController(contentView.suggestionsObservable)
+    searcher.search()
+    suggestionSearcher.search()
   }
     
 }
@@ -207,8 +250,8 @@ class AlgoliaViewModel {
 extension AlgoliaViewModel {
   static let test = AlgoliaViewModel(appID: "latency",
                                      apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                                     indexName: "bestbuy",
-                                     facetAttribute: "manufacturer")
+                                     indexName: "instant_search",
+                                     facetAttribute: "brand")
 }
 
 struct ShopItemRow: View {
@@ -227,18 +270,21 @@ struct ShopItemRow: View {
           .indicator(.activity)
           .scaledToFit()
           .clipped()
-          .frame(width: 100, height: 100, alignment: .leading)
+          .frame(width: 100, height: 100, alignment: .topLeading)
         VStack(alignment: .leading, spacing: 5) {
           Text(highlightedString: highlightedTitle!, highlighted: { Text($0).foregroundColor(.blue) })
+            .font(.system(.headline))
           Spacer()
             .frame(height: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           Text(subtitle)
             .font(.system(size: 14, weight: .medium, design: .default))
           Text(details)
+            .font(.system(.caption))
+            .foregroundColor(.gray)
         }.multilineTextAlignment(.leading)
       }
       .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 100, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 140, maxHeight: 140, alignment: .leading)
-      .padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+      .padding(.horizontal, 20)
       Divider()
     }
   }
@@ -263,6 +309,18 @@ struct ShopItemRow: View {
     self.highlightedTitle = .init(string: "")
   }
   
+  init(isitem: Hit<InstantSearchItem>?) {
+    guard let item = isitem?.object else {
+      self = .init()
+      return
+    }
+    self.title = item.name
+    self.subtitle = item.brand ?? ""
+    self.details = item.description ?? ""
+    self.imageURL = item.image ?? URL(string: "google.com")!
+    self.highlightedTitle = isitem?.hightlightedString(forKey: "name")
+  }
+  
 }
 
 struct SUIShopItem: Codable, Hashable, CustomStringConvertible {
@@ -274,5 +332,72 @@ struct SUIShopItem: Codable, Hashable, CustomStringConvertible {
   
   var description: String {
     return name
+  }
+}
+
+struct InstantSearchItem: Codable, Hashable {
+  
+  let objectID: String
+  let name: String
+  let brand: String?
+  let description: String?
+  let image: URL?
+  let price: Double?
+  
+}
+
+struct SmartSearchBar: View {
+  
+  @Binding public var text: String
+  @Binding public var isEditing: Bool
+  public var submit: () -> Void
+  
+  var body: some View {
+    HStack {
+      TextField("Search ...", text: $text, onCommit: {
+        submit()
+        isEditing = false
+      })
+      .padding(7)
+      .padding(.horizontal, 25)
+      .background(Color(.systemGray5))
+      .cornerRadius(8)
+      .overlay(
+        HStack {
+          Image(systemName: "magnifyingglass")
+            .foregroundColor(.gray)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 8)
+            .disabled(true)
+          if isEditing && !text.isEmpty {
+            Button(action: {
+              text = ""
+            }) {
+              Image(systemName: "multiply.circle.fill")
+                .foregroundColor(.gray)
+                .padding(.trailing, 8)
+            }
+          }
+        }
+      )
+      .padding(.horizontal, 10)
+      .onTapGesture {
+        isEditing = true
+        //              mode = .suggestions
+      }
+      if isEditing {
+        Button(action: {
+          isEditing = false
+          //            queryInputObservable.query = ""
+          //            mode = .hits
+          //            hideKeyboard()
+        }) {
+          Text("Cancel")
+        }
+        .padding(.trailing, 10)
+        .transition(.move(edge: .trailing))
+        .animation(.default)
+      }
+    }
   }
 }
