@@ -78,6 +78,7 @@
 		AFAA5C8C248FD64700EC7B95 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */; };
 		AFAA5C8E248FDC6700EC7B95 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8D248FDC6700EC7B95 /* Demo.swift */; };
 		AFAA5C90248FDC8800EC7B95 /* DemoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */; };
+		AFBA4C302617DE3C009A8E14 /* ShopItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA4C2F2617DE3C009A8E14 /* ShopItemRow.swift */; };
 		AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */; };
 		AFCAE43C24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
@@ -170,6 +171,7 @@
 		AFAA5C8D248FDC6700EC7B95 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFactory.swift; sourceTree = "<group>"; };
 		AFAA5C91248FE2E900EC7B95 /* DemoDirectory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DemoDirectory.entitlements; sourceTree = "<group>"; };
+		AFBA4C2F2617DE3C009A8E14 /* ShopItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemRow.swift; sourceTree = "<group>"; };
 		AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyItem.swift; sourceTree = "<group>"; };
 		AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSearchViewController.swift; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				AFFB11F0260CAAE000E4E459 /* SwiftUIDemoViewController.swift */,
+				AFBA4C2F2617DE3C009A8E14 /* ShopItemRow.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				52C68BFD244DE97B008502D4 /* RelatedItemsDemoViewController.swift in Sources */,
 				AF9D2D30249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift in Sources */,
 				AF67793122FB34C000850ACC /* FacetListTableController.swift in Sources */,
+				AFBA4C302617DE3C009A8E14 /* ShopItemRow.swift in Sources */,
 				AF67793322FB34C000850ACC /* DemoHelper.swift in Sources */,
 				AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */,
 				AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */,
