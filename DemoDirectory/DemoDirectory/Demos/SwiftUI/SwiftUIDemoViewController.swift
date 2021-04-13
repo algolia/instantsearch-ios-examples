@@ -12,7 +12,7 @@ import SwiftUI
 
 class SwiftUIDemoViewController: UIHostingController<ContentView> {
   
-  let viewModel = AlgoliaViewModel.test(areFacetsSearchable: true)
+  let viewModel = AlgoliaController.test(areFacetsSearchable: true)
   
   init() {
     let contentView = ContentView(areFacetsSearchable: true)
@@ -38,7 +38,6 @@ struct ContentView: View {
   // Shared models
   @ObservedObject var currentFiltersObservable: CurrentFiltersObservableController
   @ObservedObject var switchIndexObservable: SwitchIndexObservableController
-
 
   // Suggestions models
   @ObservedObject var suggestionsObservable: HitsObservableController<QuerySuggestion>
@@ -238,7 +237,7 @@ struct Facets: View {
 
 struct ContentView_Previews : PreviewProvider {
   
-  static let viewModel = AlgoliaViewModel.test(areFacetsSearchable: true)
+  static let viewModel = AlgoliaController.test(areFacetsSearchable: true)
   
   static var previews: some View {
     let contentView = ContentView(areFacetsSearchable: viewModel.areFacetsSearchable)
@@ -251,7 +250,7 @@ struct ContentView_Previews : PreviewProvider {
 
 
 
-class AlgoliaViewModel {
+class AlgoliaController {
   
   let appID: ApplicationID
   let apiKey: APIKey
@@ -420,9 +419,9 @@ class AlgoliaViewModel {
   
 }
 
-extension AlgoliaViewModel {
-  static func test(areFacetsSearchable: Bool) -> AlgoliaViewModel {
-    AlgoliaViewModel(appID: "latency",
+extension AlgoliaController {
+  static func test(areFacetsSearchable: Bool) -> AlgoliaController {
+    AlgoliaController(appID: "latency",
                      apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                      indexName: "instant_search",
                      facetAttribute: "brand",
