@@ -44,8 +44,9 @@ class DynamicFacetsDemoViewController: UIViewController {
     super.viewDidLoad()
     setupUI()
     
+    searcher.indexQueryState.query.facets = ["brand", "color", "size", "country"]
     searcher.onResults.subscribe(with: self) { (controller, searchResponse) in
-      let isEmptyFacetOrder = searchResponse.rules?.consequence?.renderingContent?.facetMerchandising?.facetOrder.isEmpty ?? true
+      let isEmptyFacetOrder = searchResponse.rules?.consequence?.renderingContent?.facetMerchandising?.facetOrdering.facetValues.isEmpty ?? true
       controller.hintLabel.isHidden = !isEmptyFacetOrder
       controller.facetsTableViewController.view.isHidden = isEmptyFacetOrder
     }.onQueue(.main)
