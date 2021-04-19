@@ -17,7 +17,7 @@ struct ShopItemRow: View {
   let highlightedTitle: HighlightedString?
   let subtitle: String
   let details: String
-  let imageURL: URL
+  let imageURL: URL?
   let price: Double?
 
   var body: some View {
@@ -69,20 +69,7 @@ struct ShopItemRow: View {
       .flatMap(NSNumber.init)
       .flatMap(ShopItemRow.priceFormatter.string)
   }
-  
-  init(item: Hit<SUIShopItem>?) {
-    guard let item = item else {
-      self = .init()
-      return
-    }
-    self.title = item.object.name
-    self.subtitle = item.object.manufacturer ?? ""
-    self.details = ""
-    self.imageURL = item.object.image ?? URL(string: "google.com")!
-    self.highlightedTitle = item.hightlightedString(forKey: "name")
-    self.price = nil
-  }
-  
+    
   init(title: String = "",
        subtitle: String = "",
        details: String = "",
@@ -97,6 +84,21 @@ struct ShopItemRow: View {
     self.price = price
   }
   
+  init<T>(item: T,
+          title: KeyPath<T, String>? = nil,
+          subtitle: KeyPath<T, String>? = nil,
+          details: KeyPath<T, String>? = nil,
+          imageURL: KeyPath<T, URL?>? = nil,
+          highlightedTitle: KeyPath<T, HighlightedString?>? = nil,
+          price: KeyPath<T, Double?>? = nil) {
+    self.title = title.flatMap { item[keyPath: $0] } ?? ""
+    self.subtitle = subtitle.flatMap { item[keyPath: $0] } ?? ""
+    self.details = details.flatMap { item[keyPath: $0] } ?? ""
+    self.imageURL = imageURL.flatMap { item[keyPath: $0] }
+    self.highlightedTitle = highlightedTitle.flatMap { item[keyPath: $0] }
+    self.price = price.flatMap { item[keyPath: $0] }
+  }
+
   init(isitem: Hit<InstantSearchItem>?) {
     guard let item = isitem?.object else {
       self = .init()
@@ -122,6 +124,7 @@ struct ShopItemRow_Previews : PreviewProvider {
       imageURL: URL(string: "https://cdn-demo.algolia.com/bestbuy-0118/4897502_sb.jpg")!,
       highlightedTitle: .init(string: "Samsung - <em>Galaxy</em> S7 32GB - Black Onyx (AT&T)"),
       price: 694.99
-  )
+    )
   }
+  
 }
