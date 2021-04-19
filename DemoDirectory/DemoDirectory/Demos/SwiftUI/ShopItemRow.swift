@@ -30,8 +30,13 @@ struct ShopItemRow: View {
           .clipped()
           .frame(width: 100, height: 100, alignment: .center)
         VStack(alignment: .leading, spacing: 5) {
-          Text(highlightedString: highlightedTitle!, highlighted: { Text($0).foregroundColor(.blue) })
-            .font(.system(.headline))
+          if let highlightedTitle = highlightedTitle {
+            Text(highlightedString: highlightedTitle, highlighted: { Text($0).foregroundColor(.blue) })
+              .font(.system(.headline))
+          } else {
+            Text(title)
+              .font(.system(.headline))
+          }
           Spacer()
             .frame(height: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           Text(subtitle)
@@ -73,7 +78,7 @@ struct ShopItemRow: View {
   init(title: String = "",
        subtitle: String = "",
        details: String = "",
-       imageURL: URL = URL(string: "")!,
+       imageURL: URL? = nil,
        highlightedTitle: HighlightedString? = nil,
        price: Double? = nil) {
     self.title = title

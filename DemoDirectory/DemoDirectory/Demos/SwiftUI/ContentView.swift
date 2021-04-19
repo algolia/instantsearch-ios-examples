@@ -13,6 +13,7 @@ import SwiftUI
 struct ContentView: View {
   
   let areFacetsSearchable: Bool
+  let allowSuggestions: Bool = true
   
   @ObservedObject var queryInputController: QueryInputObservableController
   @ObservedObject var statsController: StatsObservableController
@@ -54,7 +55,7 @@ struct ContentView: View {
         SearchBar(text: $queryInputController.query,
                   isEditing: $isEditing,
                   onSubmit: queryInputController.submit)
-        if isEditing {
+        if isEditing && allowSuggestions {
           SuggestionsView(isEditing: $isEditing,
                           queryInputController: queryInputController,
                           suggestionsController: suggestionsController)
@@ -68,8 +69,11 @@ struct ContentView: View {
                 sortMenu()
               }
             }.padding(.horizontal, 20)
-            HitsList(hitsController) { (hit, _) in
-              ShopItemRow(isitem: hit)
+            HitsList(hitsController) { (hit, index) in
+              HStack {
+                Text("\(index)")
+                ShopItemRow(isitem: hit)
+              }
             } noResults: {
               Text("No Results")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -131,6 +135,20 @@ struct ContentView: View {
       return "Price descending"
     default:
       return indexName.rawValue
+    }
+  }
+  
+}
+
+struct ContentView_Previews : PreviewProvider {
+  
+  static let viewModel = AlgoliaController.test(areFacetsSearchable: true)
+  
+  static var previews: some View {
+    let contentView = ContentView(areFacetsSearchable: viewModel.areFacetsSearchable)
+    let _ = viewModel.setup(contentView)
+    NavigationView {
+      contentView
     }
   }
   

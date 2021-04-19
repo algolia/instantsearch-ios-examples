@@ -26,17 +26,3 @@ class SwiftUIDemoViewController: UIHostingController<ContentView> {
   }
   
 }
-
-struct ContentView_Previews : PreviewProvider {
-  
-  static let viewModel = AlgoliaController.test(areFacetsSearchable: true)
-  
-  static var previews: some View {
-    let contentView = ContentView(areFacetsSearchable: viewModel.areFacetsSearchable)
-    let _ = viewModel.setup(contentView)
-    NavigationView {
-      contentView
-    }
-  }
-  
-}
