@@ -62,7 +62,7 @@ class DynamicFacetsDemoViewController: UIViewController {
     
     hintLabel.translatesAutoresizingMaskIntoConstraints = false
     hintLabel.textAlignment = .center
-    hintLabel.text = "Type \"1\", \"12\" or \"123\" to trigger a rule"
+    hintLabel.text = "Type \"a\", \"ab\" or \"abc\" to trigger a rule"
     
     facetsTableViewController.view.translatesAutoresizingMaskIntoConstraints = false
     
