@@ -68,12 +68,9 @@ struct ContentView: View {
               if #available(iOS 14.0, *) {
                 sortMenu()
               }
-            }.padding(.horizontal, 20)
+            }
             HitsList(hitsController) { (hit, index) in
-              HStack {
-                Text("\(index)")
-                ShopItemRow(isitem: hit)
-              }
+              ShopItemRow(isitem: hit)
             } noResults: {
               Text("No Results")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -84,6 +81,7 @@ struct ContentView: View {
           }
         }
       }
+      .padding()
       .navigationBarTitle("Algolia & SwiftUI")
       .navigationBarItems(trailing: facetsButton())
       .sheet(isPresented: $isPresentingFacets) {

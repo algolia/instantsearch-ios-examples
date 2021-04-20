@@ -35,12 +35,12 @@ struct FacetsView: View {
           FacetRow(facet: facet, isSelected: isSelected)
           Divider()
         }
-        .padding(.vertical, 7)
       } noResults: {
         Text("No facets found")
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
+    .padding()
     .navigationBarTitle("Brand")
     
     if #available(iOS 14.0, *) {
