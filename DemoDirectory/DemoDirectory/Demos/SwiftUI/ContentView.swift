@@ -29,7 +29,7 @@ struct ContentView: View {
   // Facet list models
   @ObservedObject var facetSearchQueryInputController: QueryInputObservableController
   @ObservedObject var facetListController: FacetListObservableController
-  @ObservedObject var filterClearController: FilterClearObservable
+  @ObservedObject var filterClearController: FilterClearObservableController
   
   // State
   @State private var isPresentingFacets = false

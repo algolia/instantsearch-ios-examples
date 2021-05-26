@@ -18,7 +18,7 @@ struct FacetsView: View {
   @ObservedObject var facetListController: FacetListObservableController
   @ObservedObject var statsController: StatsObservableController
   @ObservedObject var currentFiltersController: CurrentFiltersObservableController
-  @ObservedObject var filterClearController: FilterClearObservable
+  @ObservedObject var filterClearController: FilterClearObservableController
 
   @State private var isEditingFacetSearch = false
   
