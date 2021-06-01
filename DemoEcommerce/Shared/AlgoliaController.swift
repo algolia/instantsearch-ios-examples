@@ -170,7 +170,8 @@ class AlgoliaController {
       searcher = .init(appID: "latency",
                                  apiKey: "af044fb0788d6bb15f807e4420592bc5",
                                  indexName: "instantsearch_query_suggestions")
-      hitsInteractor = .init()
+      searcher.indexQueryState.query.hitsPerPage = 20
+      hitsInteractor = .init(infiniteScrolling: .off)
       hitsInteractor.connectSearcher(searcher)
     }
     

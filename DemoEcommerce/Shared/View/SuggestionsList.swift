@@ -16,18 +16,20 @@ struct SuggestionsList: View {
   @ObservedObject var suggestionsObservable: HitsObservableController<QuerySuggestion>
   
   var body: some View {
-    HitsList(suggestionsObservable) { (hit, _) in
-      if let querySuggestion = hit?.query {
-        SuggestionRow(text: querySuggestion) { suggestion in
-          queryInputObservable.setQuery(suggestion)
-          isEditing = false
-        } onTypeAhead: { suggestion in
-          queryInputObservable.setQuery(suggestion)
-        }
+    HitsList(suggestionsObservable) { (suggestion, _) in
+      if let suggestion = suggestion {
+        SuggestionRow(suggestion: suggestion,
+                      onSelection: { suggestion in
+                        queryInputObservable.setQuery(suggestion)
+                        isEditing = false
+                      },
+                      onTypeAhead: { suggestion in
+                        queryInputObservable.setQuery(suggestion)
+                      })
+        Divider()
       } else {
-        EmptyView()
+        Color(.systemGreen)
       }
-      Divider()
     }
   }
   
