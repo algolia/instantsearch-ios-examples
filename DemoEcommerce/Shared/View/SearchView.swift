@@ -15,6 +15,7 @@ struct SearchView: View {
   @ObservedObject var switchIndexController: SwitchIndexObservableController
   @ObservedObject var suggestionsController: HitsObservableController<QuerySuggestion>
   @ObservedObject var statsController: StatsObservableController
+  @ObservedObject var loadingController: LoadingObservableController
     
   @State private var isEditing = false
     
@@ -22,12 +23,14 @@ struct SearchView: View {
               hitsController: HitsObservableController<Hit<InstantSearchItem>>,
               switchIndexController: SwitchIndexObservableController,
               suggestionsController: HitsObservableController<QuerySuggestion>,
-              statsController: StatsObservableController) {
+              statsController: StatsObservableController,
+              loadingController: LoadingObservableController) {
     self.queryInputController = queryInputController
     self.hitsController = hitsController
     self.suggestionsController = suggestionsController
     self.switchIndexController = switchIndexController
     self.statsController = statsController
+    self.loadingController = loadingController
   }
   
   var body: some View {
@@ -40,24 +43,32 @@ struct SearchView: View {
                         queryInputObservable: queryInputController,
                         suggestionsObservable: suggestionsController)
       } else {
-        VStack {
-          HStack {
-            Text(statsController.stats)
-              .fontWeight(.medium)
+        if loadingController.isLoading {
+          VStack {
             Spacer()
-            if #available(iOS 14.0, *) {
-              sortMenu()
+            ProgressView("Search in progress...")
+            Spacer()
+          }
+        } else {
+          VStack {
+            HStack {
+              Text(statsController.stats)
+                .fontWeight(.medium)
+              Spacer()
+              if #available(iOS 14.0, *) {
+                sortMenu()
+              }
+            }
+            HitsList(hitsController) { (hit, _) in
+              ShopItemRow(isitem: hit)
+            } noResults: {
+              Text("No Results")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
           }
-          HitsList(hitsController) { (hit, _) in
-            ShopItemRow(isitem: hit)
-          } noResults: {
-            Text("No Results")
-              .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .onAppear {
+            hideKeyboard()
           }
-        }
-        .onAppear {
-          hideKeyboard()
         }
       }
     }
@@ -101,7 +112,8 @@ extension SearchView {
               hitsController: viewModel.hitsController,
               switchIndexController: viewModel.switchIndexController,
               suggestionsController: viewModel.suggestionsController,
-              statsController: viewModel.statsController)
+              statsController: viewModel.statsController,
+              loadingController: viewModel.loadingController)
   }
   
 }

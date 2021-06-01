@@ -28,6 +28,7 @@ class AlgoliaController {
   let filterClearInteractor: FilterClearInteractor
   let switchIndexInteractor: SwitchIndexInteractor
   let hierarchicalInteractor: HierarchicalInteractor
+  let loadingInteractor: LoadingInteractor
   
   
   let ratingFacetListInteractor: FacetListInteractor
@@ -85,6 +86,7 @@ class AlgoliaController {
     self.hierarchicalInteractor = .init(hierarchicalAttributes: order, separator: " > ")
     self.freeShippingToggleInteractor = .init(item: .init(attribute: "free_shipping", boolValue: true))
     self.priceInteractor = .init()
+    self.loadingInteractor = .init()
     searcher.disjunctiveFacetsAttributes.insert("rating")
     setupConnections()
   }
@@ -121,6 +123,7 @@ class AlgoliaController {
     priceInteractor.connectSearcher(searcher, attribute: "price")
     priceInteractor.connectFilterState(filterState, attribute: "price")
     
+    loadingInteractor.connectSearcher(searcher)
     connectVM()
   }
     
@@ -139,6 +142,8 @@ class AlgoliaController {
     filterClearInteractor.connectController(viewModel.filterClearController)
     ratingFacetListInteractor.connectController(viewModel.ratingController)
     hierarchicalInteractor.connectController(viewModel.categoryHierarchicalController)
+    
+    loadingInteractor.connectController(viewModel.loadingController)
 
     viewModel.ratingController.didChangeSelected = { [weak self] rating in
       self?.filterState[or: "rating", Filter.Facet.self].removeAll()
@@ -231,4 +236,5 @@ class AlgoliaViewModel: ObservableObject {
   var freeShippingToggleController: FilterToggleObservableController<Filter.Facet> = .init(isSelected: false)
   var ratingController: RatingController = .init()
   var priceRangeController: RangeController = .init(range: 0...1, bounds: 0...1)
+  var loadingController: LoadingObservableController = .init()
 }
