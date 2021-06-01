@@ -133,7 +133,7 @@ struct FiltersView: View {
   func clearFiltersButton() -> some View {
     Button(action: filterClearController.clear,
            label: { Image(systemName: "arrow.uturn.backward.circle") }
-    ).disabled(currentFiltersController.isEmpty)
+    ).disabled(currentFiltersController.filters.isEmpty)
   }
 
 }

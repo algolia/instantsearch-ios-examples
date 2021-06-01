@@ -45,7 +45,7 @@ struct MainView: View {
       }
     },
     label: {
-      let imageName = currentFiltersController.isEmpty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
+      let imageName = currentFiltersController.filters.isEmpty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
       Image(systemName: imageName)
         .font(.title)
     })
