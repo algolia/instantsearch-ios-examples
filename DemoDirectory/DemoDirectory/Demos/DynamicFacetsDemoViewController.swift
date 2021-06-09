@@ -23,11 +23,14 @@ class DynamicFacetsDemoViewController: UIViewController {
   let filterState: FilterState
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = .init(client: .demo, indexName: "mobile_demo_dynamic_facets")
+    searcher = .init(client: .init(appID: "RVURKQXRHU", apiKey: "937e4e6ec422ff69fe89b569dba30180"), indexName: "test_facet_ordering")
     searchBar = .init()
     textFieldController = TextFieldController(textField: searchBar)
     queryInputConnector = .init(searcher: searcher, controller: textFieldController)
-    dynamicFacetsInteractor = .init(facetOrder: .init(), selections: [:])
+    dynamicFacetsInteractor = .init(selectionModeForAttribute: [
+                                      "color": .multiple,
+                                      "country": .multiple
+    ])
     facetsTableViewController = .init()
     filterState = .init()
     hintLabel = .init()
@@ -46,7 +49,7 @@ class DynamicFacetsDemoViewController: UIViewController {
     
     searcher.indexQueryState.query.facets = ["brand", "color", "size", "country"]
     searcher.onResults.subscribe(with: self) { (controller, searchResponse) in
-      let isEmptyFacetOrder = searchResponse.rules?.consequence?.renderingContent?.facetMerchandising?.facetOrdering.facetValues.isEmpty ?? true
+      let isEmptyFacetOrder = searchResponse.renderingContent?.facetOrdering?.values.isEmpty ?? true
       controller.hintLabel.isHidden = !isEmptyFacetOrder
       controller.facetsTableViewController.view.isHidden = isEmptyFacetOrder
     }.onQueue(.main)
