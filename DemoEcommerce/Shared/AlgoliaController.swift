@@ -235,6 +235,6 @@ class AlgoliaViewModel: ObservableObject {
   var categoryHierarchicalController: HierarchicalObservableController = .init()
   var freeShippingToggleController: FilterToggleObservableController<Filter.Facet> = .init(isSelected: false)
   var ratingController: RatingController = .init()
-  var priceRangeController: RangeController = .init(range: 0...1, bounds: 0...1)
+  var priceRangeController: NumberRangeObservableController<Int> = .init()
   var loadingController: LoadingObservableController = .init()
 }

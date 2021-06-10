@@ -17,7 +17,7 @@ struct FiltersView: View {
   @ObservedObject var categoryHierarchicalController: HierarchicalObservableController
   @ObservedObject var freeShippingToggleController: FilterToggleObservableController<Filter.Facet>
   @ObservedObject var ratingController: RatingController
-  @ObservedObject var priceRangeController: RangeController
+  @ObservedObject var priceRangeController: NumberRangeObservableController<Int>
   @ObservedObject var statsController: StatsObservableController
   @ObservedObject var currentFiltersController: CurrentFiltersObservableController
     
@@ -33,7 +33,7 @@ struct FiltersView: View {
        categoryHierarchicalController: HierarchicalObservableController,
        freeShippingToggleController: FilterToggleObservableController<Filter.Facet>,
        ratingController: RatingController,
-       priceRangeController: RangeController,
+       priceRangeController: NumberRangeObservableController<Int>,
        statsController: StatsObservableController,
        currentFiltersController: CurrentFiltersObservableController) {
     self.filterClearController = filterClearController
