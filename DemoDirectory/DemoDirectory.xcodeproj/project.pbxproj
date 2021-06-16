@@ -71,6 +71,7 @@
 		AF67793422FB34C000850ACC /* SearchStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790D22FB34C000850ACC /* SearchStateViewController.swift */; };
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
+		AF867CD3267A6CC6002D4D57 /* DynamicFacetsSwiftUIDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF867CD2267A6CC6002D4D57 /* DynamicFacetsSwiftUIDemoViewController.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
 		AF9618B724A0A42A00B471C8 /* Snippets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9618B624A0A42A00B471C8 /* Snippets.swift */; };
 		AF9D2D30249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9D2D2F249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift */; };
@@ -175,6 +176,7 @@
 		AF67790C22FB34C000850ACC /* DemoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoHelper.swift; sourceTree = "<group>"; };
 		AF67790D22FB34C000850ACC /* SearchStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStateViewController.swift; sourceTree = "<group>"; };
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
+		AF867CD2267A6CC6002D4D57 /* DynamicFacetsSwiftUIDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFacetsSwiftUIDemoViewController.swift; sourceTree = "<group>"; };
 		AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		AF9618B624A0A42A00B471C8 /* Snippets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippets.swift; sourceTree = "<group>"; };
 		AF9D2D2F249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexCommerceDemoViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyItem.swift; sourceTree = "<group>"; };
 		AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSearchViewController.swift; sourceTree = "<group>"; };
 		AFD15CC62678D63B00C1BB73 /* DynamicFacetsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicFacetsDemoViewController.swift; sourceTree = "<group>"; };
+		AFD15CC82678D87400C1BB73 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../instantsearch-ios"; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,6 +219,7 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFD15CC82678D87400C1BB73 /* instantsearch-ios */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -320,6 +324,7 @@
 				AF6778E922FB34C000850ACC /* ToggleDefaultDemoViewController.swift */,
 				AF6778EA22FB34C000850ACC /* CurrentFiltersDemoViewController.swift */,
 				AFD15CC62678D63B00C1BB73 /* DynamicFacetsDemoViewController.swift */,
+				AF867CD2267A6CC6002D4D57 /* DynamicFacetsSwiftUIDemoViewController.swift */,
 				AF6778EB22FB34C000850ACC /* StatsDemoViewController.swift */,
 				AF6778EC22FB34C000850ACC /* FilterListDemoViewController.swift */,
 				AF6778ED22FB34C000850ACC /* MultiIndexSnippetViewController.swift */,
@@ -568,6 +573,7 @@
 				AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */,
 				AF0B717924C99386005CFB27 /* MultiIndexSearchConnectorSearchViewController.swift in Sources */,
 				AF67791522FB34C000850ACC /* FilterListDemoViewController.swift in Sources */,
+				AF867CD3267A6CC6002D4D57 /* DynamicFacetsSwiftUIDemoViewController.swift in Sources */,
 				AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */,
 				AF4059712552D125003C8CDB /* ShopItemTableViewCell.swift in Sources */,
 				AF4059742552D125003C8CDB /* SearchViewController.swift in Sources */,
