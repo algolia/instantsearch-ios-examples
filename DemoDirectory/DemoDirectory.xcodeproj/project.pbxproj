@@ -77,6 +77,8 @@
 		AF71BC5B265EE74000EE1413 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF71BC5A265EE74000EE1413 /* InstantSearch */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
 		AF9618B724A0A42A00B471C8 /* Snippets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9618B624A0A42A00B471C8 /* Snippets.swift */; };
+		AF9C9B9A2672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9B992672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift */; };
+		AF9C9B9C26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9B9B26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift */; };
 		AF9D2D30249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9D2D2F249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift */; };
 		AF9D2D32249CED8200C0EAEB /* HitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9D2D31249CED8200C0EAEB /* HitView.swift */; };
 		AFAA5C8C248FD64700EC7B95 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */; };
@@ -173,6 +175,9 @@
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
 		AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		AF9618B624A0A42A00B471C8 /* Snippets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippets.swift; sourceTree = "<group>"; };
+		AF9C9B9826728819003BBAD2 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../instantsearch-ios"; sourceTree = "<group>"; };
+		AF9C9B992672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataSwiftUIDemo.swift; sourceTree = "<group>"; };
+		AF9C9B9B26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelevantSortSwiftUIDemo.swift; sourceTree = "<group>"; };
 		AF9D2D2F249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexCommerceDemoViewController.swift; sourceTree = "<group>"; };
 		AF9D2D31249CED8200C0EAEB /* HitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitView.swift; sourceTree = "<group>"; };
 		AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +216,7 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF9C9B9826728819003BBAD2 /* instantsearch-ios */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -398,6 +404,8 @@
 				AF1AF459262DC62E0049DCE7 /* FacetsView.swift */,
 				AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */,
 				AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */,
+				AF9C9B992672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift */,
+				AF9C9B9B26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -575,6 +583,7 @@
 				AF0B717D24C99399005CFB27 /* SearchConnectorSearchViewController.swift in Sources */,
 				AF67792222FB34C000850ACC /* ToggleDemoViewController.swift in Sources */,
 				AF67792F22FB34C000850ACC /* CellConfigurable.swift in Sources */,
+				AF9C9B9A2672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift in Sources */,
 				AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */,
 				AF1AF45A262DC62E0049DCE7 /* FacetsView.swift in Sources */,
 				AF0B717924C99386005CFB27 /* MultiIndexSearchConnectorSearchViewController.swift in Sources */,
@@ -585,6 +594,7 @@
 				AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */,
 				AF67793422FB34C000850ACC /* SearchStateViewController.swift in Sources */,
 				AFFB11F1260CAAE100E4E459 /* SwiftUIDemoViewController.swift in Sources */,
+				AF9C9B9C26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift in Sources */,
 				AF0B718324C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift in Sources */,
 				AF0B717B24C9938E005CFB27 /* HitsConnectorSearchViewController.swift in Sources */,
 			);
