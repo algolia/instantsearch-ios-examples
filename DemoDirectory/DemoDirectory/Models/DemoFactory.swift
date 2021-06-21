@@ -34,7 +34,7 @@ class DemoFactory {
       viewController = ToggleDefaultDemoViewController()
       
     case .dynamicFacets:
-      viewController = DynamicFacetsDemoViewController()
+      viewController = DynamicFacetsSwiftUIDemoViewController()
       
     case .facetList:
       viewController = RefinementListDemoViewController()

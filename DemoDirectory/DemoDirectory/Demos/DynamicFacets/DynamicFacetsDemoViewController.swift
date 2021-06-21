@@ -7,59 +7,25 @@
 //
 
 import Foundation
-import UIKit
 import InstantSearch
-  
-class DynamicFacetsDemoController {
-  
-  let searcher: SingleIndexSearcher
-  let queryInputConnector: QueryInputConnector
-  let dynamicFacetsInteractor: DynamicFacetsInteractor
-  let filterState: FilterState
-
-  init<QIC: QueryInputController, DFC: DynamicFacetsController>(queryInputController: QIC,
-                                                                dynamicFacetsController: DFC) {
-    searcher = .init(client: .init(appID: "RVURKQXRHU",
-                                   apiKey: "937e4e6ec422ff69fe89b569dba30180"),
-                     indexName: "test_facet_ordering")
-    queryInputConnector = .init(searcher: searcher, controller: queryInputController)
-    dynamicFacetsInteractor = .init(selectionModeForAttribute: [
-                                      "color": .multiple,
-                                      "country": .multiple
-    ])
-    filterState = .init()
-    
-    searcher.indexQueryState.query.facets = ["brand", "color", "size", "country"]
-    searcher.connectFilterState(filterState)
-    
-    dynamicFacetsInteractor.connectSearcher(searcher)
-    dynamicFacetsInteractor.connectFilterState(filterState, filterGroupForAttribute: [
-                                                "brand": ("f", .or),
-                                                "color" : ("f", .or),
-                                                "size": ("f", .or),
-                                                "country": ("f", .or)])
-    dynamicFacetsInteractor.connectController(dynamicFacetsController)
-    searcher.search()
-  }
-      
-}
+import UIKit
 
 class DynamicFacetsDemoViewController: UIViewController {
   
   let demoController: DynamicFacetsDemoController
   
+  let textFieldController: TextFieldController
+  let facetsTableViewController: DynamicFacetsTableViewController
+  
   let searchBar: UISearchTextField
   let hintLabel: UILabel
   
-  let textFieldController: TextFieldController
-  let facetsTableViewController: DynamicFacetsTableViewController
-    
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     searchBar = .init()
     textFieldController = TextFieldController(textField: searchBar)
     facetsTableViewController = .init()
     demoController = .init(queryInputController: textFieldController,
-                              dynamicFacetsController: facetsTableViewController)
+                           dynamicFacetsController: facetsTableViewController)
     hintLabel = .init()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
