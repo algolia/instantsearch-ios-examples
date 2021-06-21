@@ -18,8 +18,8 @@ struct SuggestionsView: View {
   
   var body: some View {
     HitsList(suggestionsController) { (hit, _) in
-      if let querySuggestion = hit?.query {
-        SuggestionRow(text: querySuggestion) { suggestion in
+      if let querySuggestion = hit {
+        SuggestionRow(suggestion: querySuggestion) { suggestion in
           queryInputController.setQuery(suggestion)
           isEditing = false
         } onTypeAhead: { suggestion in

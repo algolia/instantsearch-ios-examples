@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "InstantSearch",
-        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
-        "state": {
-          "branch": "feat/swiftui",
-          "revision": "71f9c4038a2f22b0d5706b7288d6a379670f74a1",
-          "version": null
-        }
-      },
-      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {

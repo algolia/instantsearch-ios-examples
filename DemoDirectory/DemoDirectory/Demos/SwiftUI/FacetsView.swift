@@ -57,7 +57,7 @@ struct FacetsView: View {
         ToolbarItem(placement: .bottomBar) {
           Button(action: filterClearController.clear,
                  label: { Image(systemName: "trash") }
-          ).disabled(currentFiltersController.isEmpty)
+          ).disabled(currentFiltersController.filters.isEmpty)
         }
       }
     } else {
