@@ -12,21 +12,13 @@ import InstantSearch
 class IndexSegmentDemoViewController: UIViewController {
   
   typealias HitType = Movie
+  
+  let controller: SortByDemoController
 
   let searchBar: UISearchBar
   
-  let searcher: SingleIndexSearcher
-  let queryInputInteractor: QueryInputInteractor
   let textFieldController: TextFieldController
-  let hitsInteractor: HitsInteractor<HitType>
   let hitsTableViewController: MovieHitsTableViewController<HitType>
-  let indexSegmentInteractor: IndexSegmentInteractor
-
-  let indexTitle: IndexName = "mobile_demo_movies"
-  let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
-  let indexYearDesc: IndexName = "mobile_demo_movies_year_desc"
-
-  let indexes: [Int: IndexName]
 
   let selectIndexAlertController: SelectIndexController = {
     let alert = UIAlertController(title: "Change Index",
@@ -39,17 +31,9 @@ class IndexSegmentDemoViewController: UIViewController {
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searchBar = UISearchBar()
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = TextFieldController(searchBar: searchBar)
-    self.hitsInteractor = .init()
     self.hitsTableViewController = .init()
-    self.queryInputInteractor = .init()
-    indexes = [
-      0 : indexTitle,
-      1 : indexYearAsc,
-      2 : indexYearDesc
-    ]
-    indexSegmentInteractor = IndexSegmentInteractor(items: indexes.mapValues(SearchClient.demo.index(withName:)))
+    self.controller = .init()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -64,20 +48,11 @@ class IndexSegmentDemoViewController: UIViewController {
   }
 
   private func setup() {
-    searcher.search()
-    searcher.isDisjunctiveFacetingEnabled = false
-
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
-
-    queryInputInteractor.connectController(textFieldController)
-    queryInputInteractor.connectSearcher(searcher)
-
-    indexSegmentInteractor.connectSearcher(searcher: searcher)
-
-    indexSegmentInteractor.connectController(selectIndexAlertController, presenter: { self.title(for: $0.name) } )
-    indexSegmentInteractor.onSelectedComputed.subscribe(with: self) { (controller, index) in
-      index.flatMap { controller.indexes[$0] }.flatMap(controller.setChangeIndexButton)
+    controller.hitsInteractor.connectController(hitsTableViewController)
+    controller.queryInputInteractor.connectController(textFieldController)
+    controller.indexSegmentInteractor.connectController(selectIndexAlertController, presenter: { self.title(for: $0.name) } )
+    controller.indexSegmentInteractor.onSelectedComputed.subscribe(with: self) { (viewController, index) in
+      index.flatMap { viewController.controller.indexes[$0] }.flatMap(viewController.setChangeIndexButton)
     }
   }
 
@@ -91,11 +66,11 @@ extension IndexSegmentDemoViewController {
   
   func title(for indexName: IndexName) -> String {
     switch indexName {
-    case indexTitle:
+    case controller.indexTitle:
       return "Default"
-    case indexYearAsc:
+    case controller.indexYearAsc:
       return "Year Asc"
-    case indexYearDesc:
+    case controller.indexYearDesc:
       return "Year Desc"
     default:
       return indexName.rawValue
@@ -112,7 +87,7 @@ extension IndexSegmentDemoViewController {
     title = "Movies"
     view.backgroundColor = .white
 
-    setChangeIndexButton(with: indexTitle)
+    setChangeIndexButton(with: controller.indexTitle)
 
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal

@@ -36,8 +36,6 @@ struct RelevantSortDemoView: View {
     }
   }
   
-  
-
 }
 
 

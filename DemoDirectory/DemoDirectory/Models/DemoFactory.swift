@@ -11,7 +11,11 @@ import UIKit
 
 class DemoFactory {
   
-  func viewController(for demo: Demo) throws -> UIViewController {
+  enum Framework {
+    case UIKit, SwiftUI
+  }
+  
+  func viewController(for demo: Demo, using framework: Framework) throws -> UIViewController {
     
     guard let demoID = Demo.ID(rawValue: demo.objectID) else {
       throw Error.demoNotImplemented
@@ -93,8 +97,14 @@ class DemoFactory {
        viewController = LoadingDemoViewController()
 
      case .hierarchical:
-       viewController = HierarchicalDemoViewController()
-       
+      switch framework {
+      case .SwiftUI:
+        viewController = HierarchicalSwiftUIDemoViewController()
+
+      case .UIKit:
+        viewController = HierarchicalDemoViewController()
+      }
+      
      case .querySuggestions:
        viewController = QuerySuggestionsDemoViewController()
       

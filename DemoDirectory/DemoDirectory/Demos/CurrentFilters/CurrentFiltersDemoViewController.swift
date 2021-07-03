@@ -112,3 +112,55 @@ private extension CurrentFiltersDemoViewController {
   }
 
 }
+
+import SwiftUI
+
+struct CurrentFiltersDemoSwiftUI: PreviewProvider {
+  
+  struct ContentView: View {
+    
+    @ObservedObject var currentFiltersController: CurrentFiltersObservableController
+    
+    var body: some View {
+      VStack {
+        Text("Filters")
+          .font(.title)
+        let filtersPerGroup = Dictionary(grouping: currentFiltersController.filters) { el in
+          el.id
+        }
+        .mapValues { $0.map(\.filter) }
+        .map { $0 }
+        ForEach(filtersPerGroup, id: \.key) { (group, filters) in
+          HStack {
+            Text(group.description)
+              .bold()
+              .padding(.leading, 5)
+            Spacer()
+          }
+          .padding(.vertical, 5)
+          .background(Color(.systemGray5))
+          ForEach(filters, id: \.self) { filter in
+            HStack {
+              Text(filter.description)
+                .padding(.leading, 5)
+              Spacer()
+            }
+          }
+        }
+        Spacer()
+      }
+    }
+    
+  }
+  
+  static var previews: some View {
+    ContentView(currentFiltersController: .init(filters: [
+      .init(filter: .facet(.init(attribute: "brand", stringValue: "sony")), id: .and(name: "groupA")),
+      .init(filter: .numeric(.init(attribute: "price", range: 50...100)), id: .and(name: "groupA")),
+      .init(filter: .tag("Free delivery"), id: .and(name: "groupA")),
+      .init(filter: .numeric(.init(attribute: "salesRank", operator: .lessThan, value: 100)), id: .and(name: "groupB")),
+      .init(filter: .tag("On Sale"), id: .and(name: "groupB"))
+    ]))
+  }
+  
+}

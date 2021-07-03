@@ -12,32 +12,21 @@ import UIKit
 
 class ClearFiltersDemoViewController: UIViewController {
 
-  let filterState: FilterState
+  let controller: ClearFiltersDemoController
+  
   let searchStateViewController: SearchStateViewController
-
-  let clearColorsConnector: FilterClearConnector
-  let clearExceptColorsConnector: FilterClearConnector
 
   let clearColorsController: FilterClearButtonController
   let clearExceptColorsController: FilterClearButtonController
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 
-    filterState = .init()
     searchStateViewController = .init()
-    let groupColor = FilterGroup.ID.or(name: "color", filterType: .facet)
 
     clearColorsController = .init(button: .init())
     clearExceptColorsController = .init(button: .init())
-    
-    clearColorsConnector = .init(filterState: filterState,
-                                 clearMode: .specified,
-                                 filterGroupIDs: [groupColor],
-                                 controller: clearColorsController)
-    clearExceptColorsConnector = .init(filterState: filterState,
-                                       clearMode: .except,
-                                       filterGroupIDs: [groupColor],
-                                       controller: clearExceptColorsController)
+    controller = .init(clearController: clearColorsController,
+                       clearExceptController: clearExceptColorsController)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
@@ -55,19 +44,9 @@ class ClearFiltersDemoViewController: UIViewController {
   }
 
   func setup() {
-
-    let categoryFacet = Filter.Facet(attribute: "category", value: "shoe")
-    let redFacet = Filter.Facet(attribute: "color", value: "red")
-    let greenFacet = Filter.Facet(attribute: "color", value: "green")
-    
-    filterState[and: "category"].add(categoryFacet)
-    filterState[or: "color"].add(redFacet, greenFacet)
-    filterState.notifyChange()
-    
     addChild(searchStateViewController)
     searchStateViewController.didMove(toParent: self)
-    searchStateViewController.connectFilterState(filterState)
-
+    searchStateViewController.connectFilterState(controller.filterState)
   }
 
   func setupUI() {
@@ -120,4 +99,26 @@ class ClearFiltersDemoViewController: UIViewController {
 
   }
 
+}
+
+import SwiftUI
+
+struct ClearFiltersDemoSwiftUI: PreviewProvider {
+  
+  struct ContentView: View {
+    
+    @ObservedObject var filterClearController: FilterClearObservableController
+    
+    var body: some View {
+      Button("Clear filters") {
+        filterClearController.clear()
+      }
+    }
+    
+  }
+  
+  static var previews: some View {
+    ContentView(filterClearController: .init())
+  }
+  
 }

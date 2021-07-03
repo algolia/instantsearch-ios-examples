@@ -20,69 +20,31 @@ extension CGFloat {
 
 class RefinementListDemoViewController: UIViewController {
   
-  let searcher: SingleIndexSearcher
-  let filterState: FilterState
+  let controller: RefinementListDemoController
 
   let searchStateViewController: SearchStateViewController
-  
-  let colorConnector: FacetListConnector
-  let categoryConnector: FacetListConnector
-  let promotionConnector: FacetListConnector
-
   let colorController: FacetListTableController
   let categoryController: FacetListTableController
   let promotionController: FacetListTableController
     
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    
-    searcher = .init(client: .demo, indexName: "mobile_demo_facet_list")
     searchStateViewController = .init()
-    filterState = .init()
     
     // Color
     let colorTitleDescriptor = TitleDescriptor(text: "And, IsRefined-AlphaAsc, I=3", color: .init(hexString: "#ffcc0000"))
     colorController = FacetListTableController(tableView: .init(), titleDescriptor: colorTitleDescriptor)
     
-    let colorPresenter = FacetListPresenter(sortBy: [.isRefined, .alphabetical(order: .ascending)], limit: 3)
-
-    colorConnector = .init(searcher: searcher,
-                           filterState: filterState,
-                           attribute: "color",
-                           selectionMode: .single,
-                           facets: [],
-                           operator: .and,
-                           controller: colorController,
-                           presenter: colorPresenter)
-    
     // Promotion
     let promotionTitleDescriptor = TitleDescriptor(text: "And, CountDesc, I=5", color: .init(hexString: "#ff669900"))
     promotionController = FacetListTableController(tableView: .init(), titleDescriptor: promotionTitleDescriptor)
-    
-    let promotionPresenter = FacetListPresenter(sortBy: [.count(order: .descending)], limit: 5)
-
-    promotionConnector = .init(searcher: searcher,
-                               filterState: filterState,
-                               attribute: "promotions",
-                               selectionMode: .multiple,
-                               facets: [],
-                               operator: .and,
-                               controller: promotionController,
-                               presenter: promotionPresenter)
-    
+        
     // Category
     let categoryTitleDescriptor = TitleDescriptor(text: "Or, CountDesc-AlphaAsc, I=5", color: .init(hexString: "#ff0099cc"))
     categoryController = .init(tableView: .init(), titleDescriptor: categoryTitleDescriptor)
     
-    let categoryRefinementListPresenter = FacetListPresenter(sortBy: [.count(order: .descending), .alphabetical(order: .ascending)], showEmptyFacets: false)
-    
-    categoryConnector = .init(searcher: searcher,
-                              filterState: filterState,
-                              attribute: "category",
-                              selectionMode: .multiple,
-                              facets: [],
-                              operator: .or,
-                              controller: categoryController,
-                              presenter: categoryRefinementListPresenter)
+    controller = .init(colorController: colorController,
+                       promotionController: promotionController,
+                       categoryController: categoryController)
     
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
@@ -102,18 +64,8 @@ class RefinementListDemoViewController: UIViewController {
 private extension RefinementListDemoViewController {
   
   func setup() {
-    
-    searchStateViewController.connectSearcher(searcher)
-    searchStateViewController.connectFilterState(filterState)
-    
-    // Predefined filter
-    let greenColor = Filter.Facet(attribute: "color", stringValue: "green")
-    let groupID = FilterGroup.ID.and(name: "color")
-    filterState.notify(.add(filter: greenColor, toGroupWithID: groupID))
-    
-    searcher.connectFilterState(filterState)
-    searcher.search()
-    
+    searchStateViewController.connectSearcher(controller.searcher)
+    searchStateViewController.connectFilterState(controller.filterState)
   }
   
 }

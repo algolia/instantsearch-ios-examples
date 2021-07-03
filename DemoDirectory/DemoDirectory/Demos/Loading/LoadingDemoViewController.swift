@@ -15,34 +15,30 @@ class LoadingDemoViewController: UIViewController {
   
   typealias HitType = Movie
   
+  let controller: LoadingDemoController
+
   let activityIndicator = UIActivityIndicatorView(style: .medium)
   
-  let searcher: SingleIndexSearcher
-  
   let searchBar: UISearchBar
-  let queryInputConnector: QueryInputConnector
+  
   let searchBarController: TextFieldController
   
-  let loadingConnector: LoadingConnector
   let loadingController: ActivityIndicatorController
   
-  let statsConnector: StatsConnector
   let statsController: LabelStatsController
   
-  let hitsConnector: HitsConnector<HitType>
   let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     searchBar = .init()
     searchBarController = .init(searchBar: searchBar)
-    queryInputConnector = QueryInputConnector(searcher: searcher, controller: searchBarController)
     statsController = .init(label: .init())
     loadingController = .init(activityIndicator: activityIndicator)
-    loadingConnector = .init(searcher: searcher, controller: loadingController)
-    statsConnector = .init(searcher: searcher, controller: statsController, presenter: DefaultPresenter.Stats.present)
     hitsTableViewController = MovieHitsTableViewController()
-    hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
+    self.controller = .init(queryInputController: searchBarController,
+                            loadingController: loadingController,
+                            statsController: statsController,
+                            hitsController: hitsTableViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -61,7 +57,6 @@ class LoadingDemoViewController: UIViewController {
     hitsTableViewController.didMove(toParent: self)
     activityIndicator.hidesWhenStopped = true
     hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    searcher.search()
   }
   
 }
@@ -97,4 +92,31 @@ private extension LoadingDemoViewController {
     stackView.pin(to: view.safeAreaLayoutGuide)
   }
 
+}
+
+import SwiftUI
+
+struct LoadingDemoSwiftUI: PreviewProvider {
+  
+  struct ContentView: View {
+    
+    @ObservedObject var loadingController: LoadingObservableController
+    
+    var body: some View {
+      VStack {
+        Text("Loading")
+        if #available(iOS 14.0, *) {
+          if loadingController.isLoading {
+            ProgressView()
+          }
+        }
+      }
+    }
+    
+  }
+  
+  static var previews: some View {
+    ContentView(loadingController: .init(isLoading: true))
+  }
+  
 }

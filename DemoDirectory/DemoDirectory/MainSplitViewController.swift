@@ -41,7 +41,7 @@ extension MainSplitViewController: DemoListViewControllerDelegate {
   
   func demoListViewController(_ demoListViewController: DemoListViewController, didSelect demo: Demo) {
     do {
-      let viewController = try demoFactory.viewController(for: demo)
+      let viewController = try demoFactory.viewController(for: demo, using: .SwiftUI)
       let navigationController = UINavigationController(rootViewController: viewController)
       showDetailViewController(navigationController, sender: self)
     } catch let error as DemoFactory.Error {

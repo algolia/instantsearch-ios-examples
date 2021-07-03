@@ -14,30 +14,21 @@ class StatsDemoViewController: UIViewController {
   
   let stackView = UIStackView()
   let searchBar = UISearchBar()
-  
-  let searcher: SingleIndexSearcher
+  let controller: StatsDemoController
   
   let textFieldController: TextFieldController
-  let queryInputConnector: QueryInputConnector
   
-  let statsConnector: StatsConnector
   let labelStatsController: LabelStatsController
   let attributedLabelStatsController: AttributedLabelStatsController
   
   init() {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
-    self.queryInputConnector = .init(searcher: searcher, controller: textFieldController)
     self.attributedLabelStatsController = AttributedLabelStatsController(label: .init())
     self.labelStatsController = LabelStatsController(label: .init())
-    self.statsConnector = .init(searcher: searcher, controller: labelStatsController) { stats -> String? in
-      guard let stats = stats else {
-        return nil
-      }
-      return "\(stats.totalHitsCount) hits in \(stats.processingTimeMS) ms"
-    }
+    self.controller = .init(queryInputController: textFieldController,
+                            statsController: labelStatsController,
+                            attributedStatsController: attributedLabelStatsController)
     super.init(nibName: .none, bundle: .none)
-    setup()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -47,21 +38,6 @@ class StatsDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureUI()
-  }
-  
-  private func setup() {
-    
-    statsConnector.interactor.connectController(attributedLabelStatsController) { stats -> NSAttributedString? in
-      guard let stats = stats else {
-        return nil
-      }
-      let string = NSMutableAttributedString()
-      string.append(NSAttributedString(string: "\(stats.totalHitsCount)", attributes: [NSAttributedString.Key.font: UIFont(name: "Chalkduster", size: 15)!]))
-      string.append(NSAttributedString(string: "  hits"))
-      return string
-    }
-    
-    searcher.search()
   }
   
 }
@@ -115,6 +91,26 @@ private extension StatsDemoViewController {
     
     stackView.pin(to: view.safeAreaLayoutGuide)
     
+  }
+  
+}
+
+import SwiftUI
+
+struct StatsDemoSwiftUI: PreviewProvider {
+    
+  struct ContentView: View {
+    
+    @ObservedObject var statsController: StatsObservableController
+    
+    var body: some View {
+      Text(statsController.stats)
+    }
+    
+  }
+  
+  static var previews: some View {
+    ContentView(statsController: .init(stats: "Hello World!"))
   }
   
 }

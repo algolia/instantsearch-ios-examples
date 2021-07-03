@@ -11,14 +11,10 @@ import UIKit
 import InstantSearch
 
 class ToggleDemoViewController: UIViewController {
+
+  let controller: ToggleDemoController
   
-  let searcher: SingleIndexSearcher
-  let filterState: FilterState
   let searchStateViewController: SearchStateViewController
-  
-  let sizeConstraintConnector: FilterToggleConnector<Filter.Numeric>
-  let vintageConnector: FilterToggleConnector<Filter.Tag>
-  let couponConnector: FilterToggleConnector<Filter.Facet>
   
   let mainStackView = UIStackView()
   let controlsStackView = UIStackView()
@@ -31,30 +27,17 @@ class ToggleDemoViewController: UIViewController {
   let couponLabel = UILabel()
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_toggle")
-    filterState = .init()
     searchStateViewController = SearchStateViewController()
-    
-    // Size constraint button
-    let sizeConstraintFilter = Filter.Numeric(attribute: "size", operator: .greaterThan, value: 40)
     sizeConstraintButtonController = SelectableFilterButtonController(button: .init())
-    sizeConstraintConnector = .init(filterState: filterState, filter: sizeConstraintFilter, controller: sizeConstraintButtonController)
-    
-    // Vintage tag button
-    let vintageFilter = Filter.Tag(value: "vintage")
     vintageButtonController = SelectableFilterButtonController(button: .init())
-    vintageConnector = .init(filterState: filterState, filter: vintageFilter, controller: vintageButtonController)
-    
-    // Coupon switch
-    let couponFacet = Filter.Facet(attribute: "promotions", stringValue: "coupon")
     couponSwitchController = FilterSwitchController(switch: .init())
-    couponConnector = .init(filterState: filterState, filter: couponFacet, controller: couponSwitchController)
-    
+    controller = .init(sizeConstraintButtonController: sizeConstraintButtonController,
+                                 vintageButtonController: vintageButtonController,
+                                 couponSwitchController: couponSwitchController)
+
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     
     setup()
-
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -72,10 +55,8 @@ class ToggleDemoViewController: UIViewController {
 private extension ToggleDemoViewController {
   
   func setup() {
-    searcher.connectFilterState(filterState)
-    searchStateViewController.connectSearcher(searcher)
-    searchStateViewController.connectFilterState(filterState)
-    searcher.search()    
+    searchStateViewController.connectSearcher(controller.searcher)
+    searchStateViewController.connectFilterState(controller.filterState)
   }
   
   func setupUI() {

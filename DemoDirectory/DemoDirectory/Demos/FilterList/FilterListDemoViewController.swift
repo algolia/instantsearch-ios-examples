@@ -10,94 +10,20 @@ import Foundation
 import InstantSearch
 import UIKit
 
-struct FilterListDemo {
-  
-  static func facet() -> FilterListDemoViewController<Filter.Facet> {
-    
-    let facetFilters: [Filter.Facet] = ["red", "blue", "green", "yellow", "black"].map {
-      .init(attribute: "color", stringValue: $0)
-    }
-    
-    return FilterListDemoViewController<Filter.Facet>(items: facetFilters, selectionMode: .multiple)
-    
-  }
-  
-  static func numeric() -> FilterListDemoViewController<Filter.Numeric> {
-        
-    let numericFilters: [Filter.Numeric] = [
-      .init(attribute: "price", operator: .lessThan, value: 5),
-      .init(attribute: "price", range: 5...10),
-      .init(attribute: "price", range: 10...25),
-      .init(attribute: "price", range: 25...100),
-      .init(attribute: "price", operator: .greaterThan, value: 100)
-    ]
-    
-    return FilterListDemoViewController<Filter.Numeric>(items: numericFilters, selectionMode: .single)
-    
-  }
-  
-  static func tag() -> FilterListDemoViewController<Filter.Tag> {
-    
-    let tagFilters: [Filter.Tag] = [
-      "coupon", "free shipping", "free return", "on sale", "no exchange"]
-    
-    return FilterListDemoViewController<Filter.Tag>(items: tagFilters, selectionMode: .multiple)
-    
-  }
-  
-}
-
-class FilterListDemoController<Filter: FilterType & Hashable, Controller: SelectableListController> where Controller.Item == Filter {
-  
-  let searcher: SingleIndexSearcher
-  let filterState: FilterState
-  let filterListConnector: FilterListConnector<Filter>
-  let filterListController: Controller
-  
-  init(filters: [Filter],
-       controller: Controller,
-       selectionMode: SelectionMode) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_list")
-    filterState = .init()
-    self.filterListController = controller
-    filterListConnector = .init(filterState: filterState,
-                                filters: filters,
-                                selectionMode: selectionMode,
-                                operator: .or,
-                                groupName: "filters",
-                                controller: controller)
-    searcher.isDisjunctiveFacetingEnabled = false
-    setup()
-  }
-  
-  func setup() {
-    searcher.search()
-    searcher.connectFilterState(filterState)
-  }
-
-}
-
 class FilterListDemoViewController<F: FilterType & Hashable>: UIViewController {
   
-  let searcher: SingleIndexSearcher
-  let filterState: FilterState
-  let filterListConnector: FilterListConnector<F>
+  let controller: FilterListDemoController<F>
+
   let filterListController: FilterListTableController<F>
   let searchStateViewController: SearchStateViewController
   
   init(items: [F], selectionMode: SelectionMode) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_list")
-    filterState = .init()
     filterListController = FilterListTableController(tableView: .init())
-    filterListConnector = .init(filterState: filterState,
-                                filters: items,
-                                selectionMode: selectionMode,
-                                operator: .or,
-                                groupName: "filters",
-                                controller: filterListController)
     searchStateViewController = SearchStateViewController()
+    controller = .init(filters: items,
+                       controller: filterListController,
+                       selectionMode: selectionMode)
     super.init(nibName: nil, bundle: nil)
-    searcher.isDisjunctiveFacetingEnabled = false
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -115,10 +41,8 @@ class FilterListDemoViewController<F: FilterType & Hashable>: UIViewController {
 private extension FilterListDemoViewController {
   
   func setup() {
-    searcher.search()
-    searcher.connectFilterState(filterState)
-    searchStateViewController.connectFilterState(filterState)
-    searchStateViewController.connectSearcher(searcher)
+    searchStateViewController.connectFilterState(controller.filterState)
+    searchStateViewController.connectSearcher(controller.searcher)
   }
   
   func setupUI() {
@@ -196,13 +120,13 @@ struct FilterList_Previews : PreviewProvider {
   static func selectableText(text: String, isSelected: Bool) -> some View {
     HStack {
       Text(text)
-        .frame(maxWidth: .infinity, alignment: .leading)
+      Spacer()
       if isSelected {
         Image(systemName: "checkmark")
-          .frame(alignment: .trailing)
           .foregroundColor(.accentColor)
       }
     }
+    .contentShape(Rectangle())
   }
   
   static var previews: some View {
@@ -210,34 +134,47 @@ struct FilterList_Previews : PreviewProvider {
     VStack {
       header(text: "color")
         .frame(maxHeight: 25)
-      FiltersList(facetFiltersObservableController) { filter, isSelected in
+      FilterList(facetFiltersObservableController) { filter, isSelected in
         selectableText(text: filter.value.description, isSelected: isSelected)
           .frame(idealHeight: 44)
           .padding(.horizontal, 5)
       }
-        .frame(maxHeight: .infinity)
+      .frame(maxHeight: .infinity)
+    }
+    FilterList(facetFiltersObservableController) { filter, isSelected in
+      HStack {
+        Text(filter.value.description)
+        Spacer()
+        if isSelected {
+          Image(systemName: "checkmark")
+            .foregroundColor(.accentColor)
+        }
+      }
+      .contentShape(Rectangle())
+      .frame(idealHeight: 44)
+      .padding(.horizontal, 5)
     }
     let _ = numericFiltersDemoController
     VStack {
       header(text: "price")
         .frame(maxHeight: 25)
-      FiltersList(numericFiltersObservableController) { filter, isSelected in
+      FilterList(numericFiltersObservableController) { filter, isSelected in
         selectableText(text: filter.description, isSelected: isSelected)
           .frame(idealHeight: 44)
           .padding(.horizontal, 5)
       }
-        .frame(maxHeight: .infinity)
+      .frame(maxHeight: .infinity)
     }
     let _ = tagFiltersDemoController
     VStack {
       header(text: "price")
         .frame(maxHeight: 25)
-      FiltersList(tagFiltersObservableController) { filter, isSelected in
+      FilterList(tagFiltersObservableController) { filter, isSelected in
         selectableText(text: filter.value.description, isSelected: isSelected)
           .frame(idealHeight: 44)
           .padding(.horizontal, 5)
       }
-        .frame(maxHeight: .infinity)
+      .frame(maxHeight: .infinity)
     }
   }
   

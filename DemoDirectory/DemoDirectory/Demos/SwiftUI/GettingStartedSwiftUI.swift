@@ -44,7 +44,7 @@ extension GettingStartedGuide.SwiftUI {
         VStack {
           HitsList(hitsObservable) { (hit, _) in
             VStack(alignment: .leading, spacing: 10) {
-              Text(hit?.name ?? "").padding(.all, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+              Text(hit?.name ?? "").padding(.all, 10)
               Divider()
             }
           } noResults: {
