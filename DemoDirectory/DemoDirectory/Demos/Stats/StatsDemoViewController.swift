@@ -101,7 +101,7 @@ struct StatsDemoSwiftUI: PreviewProvider {
     
   struct ContentView: View {
     
-    @ObservedObject var statsController: StatsObservableController
+    @ObservedObject var statsController: StatsTextObservableController
     
     var body: some View {
       Text(statsController.stats)

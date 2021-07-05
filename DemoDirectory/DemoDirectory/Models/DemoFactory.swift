@@ -59,7 +59,7 @@ class DemoFactory {
        viewController = RatingViewController()
 
      case .sortBy:
-       viewController = IndexSegmentDemoViewController()
+       viewController = SortByDemoViewController()
 
      case .currentFilters:
        viewController = CurrentFiltersDemoViewController()
@@ -113,6 +113,9 @@ class DemoFactory {
       
      case .queryRuleCustomData:
        viewController = QueryRuleCustomDataDemoViewController()
+      
+     case .relevantSort:
+      viewController = RelevantSortDemoViewController()
      }
     
     viewController.title = demo.name

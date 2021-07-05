@@ -30,6 +30,8 @@
 		AF48C4DA25347C7100262367 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D925347C7100262367 /* Banner.swift */; };
 		AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */; };
 		AF48C4E225347CD300262367 /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4E125347CD300262367 /* TemplateViewController.swift */; };
+		AF4CD87726906C8200D7A8AA /* RelevantSortDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CD87626906C8200D7A8AA /* RelevantSortDemoController.swift */; };
+		AF4CD87A2691296300D7A8AA /* SortBySwiftUIDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CD8792691296300D7A8AA /* SortBySwiftUIDemoViewController.swift */; };
 		AF521BF825CE151A000F994C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AF521BF725CE151A000F994C /* SDWebImageSwiftUI */; };
 		AF5BDC3D268C8653001F4A38 /* HierarchicalDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5BDC3C268C8653001F4A38 /* HierarchicalDemoController.swift */; };
 		AF5BDC3F268C8677001F4A38 /* HierarchicalSwiftUIDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5BDC3E268C8677001F4A38 /* HierarchicalSwiftUIDemoViewController.swift */; };
@@ -52,7 +54,7 @@
 		AF67791B22FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F222FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift */; };
 		AF67791C22FB34C000850ACC /* FilterNumericRangeDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */; };
 		AF67791D22FB34C000850ACC /* SearchInputDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */; };
-		AF67791E22FB34C000850ACC /* IndexSegmentDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F522FB34C000850ACC /* IndexSegmentDemoViewController.swift */; };
+		AF67791E22FB34C000850ACC /* SortByDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F522FB34C000850ACC /* SortByDemoViewController.swift */; };
 		AF67791F22FB34C000850ACC /* FacetSearchDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */; };
 		AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */; };
 		AF67792122FB34C000850ACC /* HighlightingDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F822FB34C000850ACC /* HighlightingDemoViewController.swift */; };
@@ -138,6 +140,9 @@
 		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
 		AF48C4E125347CD300262367 /* TemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewController.swift; sourceTree = "<group>"; };
+		AF4CD87626906C8200D7A8AA /* RelevantSortDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelevantSortDemoController.swift; sourceTree = "<group>"; };
+		AF4CD8782690ABF800D7A8AA /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../algoliasearch-client-swift"; sourceTree = "<group>"; };
+		AF4CD8792691296300D7A8AA /* SortBySwiftUIDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortBySwiftUIDemoViewController.swift; sourceTree = "<group>"; };
 		AF5BDC3C268C8653001F4A38 /* HierarchicalDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchicalDemoController.swift; sourceTree = "<group>"; };
 		AF5BDC3E268C8677001F4A38 /* HierarchicalSwiftUIDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchicalSwiftUIDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778C122FB319200850ACC /* DemoDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,7 +169,7 @@
 		AF6778F222FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNumericComparisonDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNumericRangeDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchInputDemoViewController.swift; sourceTree = "<group>"; };
-		AF6778F522FB34C000850ACC /* IndexSegmentDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexSegmentDemoViewController.swift; sourceTree = "<group>"; };
+		AF6778F522FB34C000850ACC /* SortByDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortByDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetSearchDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleIndexDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F822FB34C000850ACC /* HighlightingDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightingDemoViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +247,7 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF4CD8782690ABF800D7A8AA /* algoliasearch-client-swift */,
 				AF9C9B9826728819003BBAD2 /* instantsearch-ios */,
 			);
 			name = Frameworks;
@@ -276,6 +282,14 @@
 				AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */,
 			);
 			path = MultiIndex;
+			sourceTree = "<group>";
+		};
+		AF4CD87526906C7200D7A8AA /* RelevantSort */ = {
+			isa = PBXGroup;
+			children = (
+				AF4CD87626906C8200D7A8AA /* RelevantSortDemoController.swift */,
+			);
+			path = RelevantSort;
 			sourceTree = "<group>";
 		};
 		AF5BDC3B268C8640001F4A38 /* Hierarchical */ = {
@@ -352,6 +366,7 @@
 		AF6778E822FB34C000850ACC /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				AF4CD87526906C7200D7A8AA /* RelevantSort */,
 				AF7A7B09268E7EAF003C62A5 /* CurrentFilters */,
 				AF9D183C268CF10A00EC68EA /* FilterNumericRange */,
 				AF9D1839268CEF1F00EC68EA /* SortBy */,
@@ -497,7 +512,8 @@
 		AF9D1839268CEF1F00EC68EA /* SortBy */ = {
 			isa = PBXGroup;
 			children = (
-				AF6778F522FB34C000850ACC /* IndexSegmentDemoViewController.swift */,
+				AF6778F522FB34C000850ACC /* SortByDemoViewController.swift */,
+				AF4CD8792691296300D7A8AA /* SortBySwiftUIDemoViewController.swift */,
 				AF9D183A268CEF3900EC68EA /* SortByDemoController.swift */,
 			);
 			path = SortBy;
@@ -644,6 +660,7 @@
 				AF1AF466262DC92A0049DCE7 /* InstantSearchItem.swift in Sources */,
 				AF9D182C268CD05000EC68EA /* FilterListSwiftUIDemoViewController.swift in Sources */,
 				AF48C4E225347CD300262367 /* TemplateViewController.swift in Sources */,
+				AF4CD87726906C8200D7A8AA /* RelevantSortDemoController.swift in Sources */,
 				AF9D1838268CE23E00EC68EA /* LoadingDemoController.swift in Sources */,
 				AF67792722FB34C000850ACC /* MovieCell.swift in Sources */,
 				AF67791722FB34C000850ACC /* RefinementListDemoViewController.swift in Sources */,
@@ -668,6 +685,7 @@
 				AF0B718724C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift in Sources */,
 				AF67791A22FB34C000850ACC /* RefinementPersistentListDemoViewController.swift in Sources */,
 				AF4059732552D125003C8CDB /* ShopItem.swift in Sources */,
+				AF4CD87A2691296300D7A8AA /* SortBySwiftUIDemoViewController.swift in Sources */,
 				AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */,
 				AF67791622FB34C000850ACC /* MultiIndexSnippetViewController.swift in Sources */,
 				AF67791322FB34C000850ACC /* CurrentFiltersDemoViewController.swift in Sources */,
@@ -685,7 +703,7 @@
 				AF67792E22FB34C000850ACC /* MovieHitsTableViewController.swift in Sources */,
 				AF67792D22FB34C000850ACC /* UITableView+Convenience.swift in Sources */,
 				AF9D182A268CD01200EC68EA /* FilterListDemo.swift in Sources */,
-				AF67791E22FB34C000850ACC /* IndexSegmentDemoViewController.swift in Sources */,
+				AF67791E22FB34C000850ACC /* SortByDemoViewController.swift in Sources */,
 				AF67791822FB34C000850ACC /* SegmentedDemoViewController.swift in Sources */,
 				AF67792322FB34C000850ACC /* HierarchicalDemoViewController.swift in Sources */,
 				AF67791422FB34C000850ACC /* StatsDemoViewController.swift in Sources */,

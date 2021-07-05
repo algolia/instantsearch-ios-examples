@@ -16,7 +16,7 @@ struct ContentView: View {
   let allowSuggestions: Bool = true
   
   @ObservedObject var queryInputController: QueryInputObservableController
-  @ObservedObject var statsController: StatsObservableController
+  @ObservedObject var statsController: StatsTextObservableController
   @ObservedObject var hitsController: HitsObservableController<Hit<InstantSearchItem>>
   
   // Shared models

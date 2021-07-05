@@ -125,11 +125,9 @@ struct CurrentFiltersDemoSwiftUI: PreviewProvider {
       VStack {
         Text("Filters")
           .font(.title)
-        let filtersPerGroup = Dictionary(grouping: currentFiltersController.filters) { el in
-          el.id
-        }
-        .mapValues { $0.map(\.filter) }
-        .map { $0 }
+        let filtersPerGroup = Dictionary(grouping: currentFiltersController.filters) { $0.id }
+          .mapValues { $0.map(\.filter) }
+          .map { $0 }
         ForEach(filtersPerGroup, id: \.key) { (group, filters) in
           HStack {
             Text(group.description)

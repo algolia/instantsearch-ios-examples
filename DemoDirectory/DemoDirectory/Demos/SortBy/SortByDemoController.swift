@@ -14,10 +14,9 @@ class SortByDemoController {
   typealias HitType = Movie
 
   let searcher: SingleIndexSearcher
-  let queryInputInteractor: QueryInputInteractor
-  let hitsInteractor: HitsInteractor<HitType>
-  let indexSegmentInteractor: IndexSegmentInteractor
-  
+  let queryInputConnector: QueryInputConnector
+  let hitsConnector: HitsConnector<HitType>
+  let sortByConnector: SortByConnector
   
   let indexTitle: IndexName = "mobile_demo_movies"
   let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
@@ -27,22 +26,17 @@ class SortByDemoController {
   
   init() {
     self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
-    self.hitsInteractor = .init()
-    self.queryInputInteractor = .init()
+    self.queryInputConnector = .init(searcher: searcher)
+    self.hitsConnector = .init(searcher: searcher)
     indexes = [
       0 : indexTitle,
       1 : indexYearAsc,
       2 : indexYearDesc
     ]
-    indexSegmentInteractor = IndexSegmentInteractor(items: indexes.mapValues(SearchClient.demo.index(withName:)))
+    sortByConnector = .init(searcher: searcher, indicesNames: [indexTitle, indexYearAsc, indexYearDesc], selected: 0)
     
     searcher.search()
     searcher.isDisjunctiveFacetingEnabled = false
-    
-    hitsInteractor.connectSearcher(searcher)
-    queryInputInteractor.connectSearcher(searcher)
-    indexSegmentInteractor.connectSearcher(searcher: searcher)
-
   }
   
 }

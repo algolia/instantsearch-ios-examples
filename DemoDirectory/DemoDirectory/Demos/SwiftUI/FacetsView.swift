@@ -16,7 +16,7 @@ struct FacetsView: View {
   
   @ObservedObject var facetSearchQueryInputController: QueryInputObservableController
   @ObservedObject var facetListController: FacetListObservableController
-  @ObservedObject var statsController: StatsObservableController
+  @ObservedObject var statsController: StatsTextObservableController
   @ObservedObject var currentFiltersController: CurrentFiltersObservableController
   @ObservedObject var filterClearController: FilterClearObservableController
 

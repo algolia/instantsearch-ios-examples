@@ -1,5 +1,5 @@
 //
-//  IndexSegmentDemo.swift
+//  SortByDemoViewController.swift
 //  development-pods-instantsearch
 //
 //  Created by Guy Daher on 06/06/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import InstantSearch
 
-class IndexSegmentDemoViewController: UIViewController {
+class SortByDemoViewController: UIViewController {
   
   typealias HitType = Movie
   
@@ -48,17 +48,17 @@ class IndexSegmentDemoViewController: UIViewController {
   }
 
   private func setup() {
-    controller.hitsInteractor.connectController(hitsTableViewController)
-    controller.queryInputInteractor.connectController(textFieldController)
-    controller.indexSegmentInteractor.connectController(selectIndexAlertController, presenter: { self.title(for: $0.name) } )
-    controller.indexSegmentInteractor.onSelectedComputed.subscribe(with: self) { (viewController, index) in
+    controller.hitsConnector.connectController(hitsTableViewController)
+    controller.queryInputConnector.connectController(textFieldController)
+    controller.sortByConnector.connectController(selectIndexAlertController, presenter: { self.title(for: $0.name) } )
+    controller.sortByConnector.interactor.onSelectedComputed.subscribe(with: self) { (viewController, index) in
       index.flatMap { viewController.controller.indexes[$0] }.flatMap(viewController.setChangeIndexButton)
     }
   }
 
 }
 
-extension IndexSegmentDemoViewController {
+extension SortByDemoViewController {
   
   func index(for name: IndexName) -> Index {
     SearchClient.demo.index(withName: name)

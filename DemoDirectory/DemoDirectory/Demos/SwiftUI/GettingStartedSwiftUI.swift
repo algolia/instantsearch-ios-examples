@@ -28,7 +28,7 @@ extension GettingStartedGuide.SwiftUI {
     
     @ObservedObject var queryInputObservable: QueryInputObservableController = .init()
     @ObservedObject var hitsObservable: HitsObservableController<BestBuyItem> = .init()
-    @ObservedObject var statsObservable: StatsObservableController = .init()
+    @ObservedObject var statsObservable: StatsTextObservableController = .init()
     @ObservedObject var facetListObservable: FacetListObservableController = .init()
 
     @State private var isPresentingFacets = false
