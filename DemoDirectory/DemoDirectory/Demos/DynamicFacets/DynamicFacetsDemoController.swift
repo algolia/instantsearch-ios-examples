@@ -1,5 +1,5 @@
 //
-//  DynamicFacetsDemoController.swift
+//  DynamicFacetListDemoController.swift
 //  DemoDirectory
 //
 //  Created by Vladislav Fitc on 18/06/2021.
@@ -10,21 +10,21 @@ import Foundation
 
 import InstantSearch
   
-class DynamicFacetsDemoController {
+class DynamicFacetListDemoController {
   
   let searcher: SingleIndexSearcher
   let queryInputConnector: QueryInputConnector
-  let dynamicFacetsConnector: DynamicFacetsConnector<SingleIndexSearcher>
+  let DynamicFacetListConnector: DynamicFacetListConnector<SingleIndexSearcher>
   let filterState: FilterState
 
-  init<QIC: QueryInputController, DFC: DynamicFacetsController>(queryInputController: QIC,
-                                                                dynamicFacetsController: DFC) {
+  init<QIC: QueryInputController, DFC: DynamicFacetListController>(queryInputController: QIC,
+                                                                DynamicFacetListController: DFC) {
     searcher = .init(client: .init(appID: "RVURKQXRHU",
                                    apiKey: "937e4e6ec422ff69fe89b569dba30180"),
                      indexName: "test_facet_ordering")
     filterState = .init()
     queryInputConnector = .init(searcher: searcher, controller: queryInputController)
-    dynamicFacetsConnector = .init(searcher: searcher,
+    DynamicFacetListConnector = .init(searcher: searcher,
                                    filterState: filterState,
                                    selectionModeForAttribute: [
                                     "color": .multiple,
@@ -36,7 +36,7 @@ class DynamicFacetsDemoController {
                                     "size": ("size", .or),
                                     "country": ("country", .or)
                                    ],
-                                   controller: dynamicFacetsController)
+                                   controller: DynamicFacetListController)
     searcher.indexQueryState.query.facets = ["brand", "color", "size", "country"]
     searcher.connectFilterState(filterState)
     searcher.search()

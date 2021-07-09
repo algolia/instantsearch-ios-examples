@@ -1,5 +1,5 @@
 //
-//  DynamicFacetsDemoViewController.swift
+//  DynamicFacetListDemoViewController.swift
 //  DemoDirectory
 //
 //  Created by Vladislav Fitc on 04/03/2021.
@@ -10,12 +10,12 @@ import Foundation
 import InstantSearch
 import UIKit
 
-class DynamicFacetsDemoViewController: UIViewController {
+class DynamicFacetListDemoViewController: UIViewController {
   
-  let demoController: DynamicFacetsDemoController
+  let demoController: DynamicFacetListDemoController
   
   let textFieldController: TextFieldController
-  let facetsTableViewController: DynamicFacetsTableViewController
+  let facetsTableViewController: DynamicFacetListTableViewController
   
   let searchBar: UISearchTextField
   let hintLabel: UILabel
@@ -25,7 +25,7 @@ class DynamicFacetsDemoViewController: UIViewController {
     textFieldController = TextFieldController(textField: searchBar)
     facetsTableViewController = .init()
     demoController = .init(queryInputController: textFieldController,
-                           dynamicFacetsController: facetsTableViewController)
+                           DynamicFacetListController: facetsTableViewController)
     hintLabel = .init()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
