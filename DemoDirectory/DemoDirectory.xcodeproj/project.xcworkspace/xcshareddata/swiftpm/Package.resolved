@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AlgoliaSearchClient",
+        "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
+        "state": {
+          "branch": "feat/dynamic-faceting",
+          "revision": "20ac63213fa1a4e622732e504411df411b6b5f78",
+          "version": null
+        }
+      },
+      {
+        "package": "InstantSearch",
+        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
+        "state": {
+          "branch": "feat/dynamic-faceting",
+          "revision": "4c815f98ec8aa8a5c9794acdfedadc8ed3345222",
+          "version": null
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
+        "state": {
+          "branch": null,
+          "revision": "88b3ba211c0d604e60eab204c1baf8229c513399",
+          "version": "5.9.4"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+          "version": "1.4.2"
+        }
+      },
+      {
+        "package": "InstantSearchVoiceOverlay",
+        "repositoryURL": "https://github.com/algolia/voice-overlay-ios",
+        "state": {
+          "branch": null,
+          "revision": "55a1047be9e0d9e4d4295ef127cc31b3ef7b8b54",
+          "version": "1.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

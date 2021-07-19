@@ -63,10 +63,14 @@ class DemoFactory {
     case .clearFilters:
       viewController = ClearFiltersDemoViewController()
       
+   case .relevantSort:
+     viewController = RelevantSortDemoViewController()
+     
+   case .voiceSearch:
+      viewController = VoiceInputDemoViewController()
+
     case .multiIndex:
       viewController = MultiIndexDemoViewController()
-    //MultiIndexHitsConnectorSearchViewController()
-    //
     
     case .facetFilterList:
       viewController = FilterListDemo.facet()
@@ -103,9 +107,6 @@ class DemoFactory {
       
     case .queryRuleCustomData:
       viewController = QueryRuleCustomDataDemoViewController()
-      
-    case .voiceSearch:
-      viewController = VoiceInputDemoViewController()
     }
     
     viewController.title = demo.name
