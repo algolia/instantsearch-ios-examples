@@ -100,25 +100,3 @@ class ClearFiltersDemoViewController: UIViewController {
   }
 
 }
-
-import SwiftUI
-
-struct ClearFiltersDemoSwiftUI: PreviewProvider {
-  
-  struct ContentView: View {
-    
-    @ObservedObject var filterClearController: FilterClearObservableController
-    
-    var body: some View {
-      Button("Clear filters") {
-        filterClearController.clear()
-      }
-    }
-    
-  }
-  
-  static var previews: some View {
-    ContentView(filterClearController: .init())
-  }
-  
-}

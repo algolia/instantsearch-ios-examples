@@ -25,11 +25,7 @@ class DemoFactory {
      
      switch demoID {
      case .singleIndex:
-      if #available(iOS 14.0, *) {
-        viewController = SwiftUIDemoViewController()
-      } else {
-        viewController = SingleIndexDemoViewController()
-      }
+       viewController = SingleIndexDemoViewController()
        
      case .sffv:
        viewController = FacetSearchDemoViewController()
@@ -69,8 +65,6 @@ class DemoFactory {
        
      case .multiIndex:
        viewController = MultiIndexDemoViewController()
-        //MultiIndexHitsConnectorSearchViewController()
-        //
        
      case .facetFilterList:
        viewController = FilterListDemo.facet()
@@ -97,13 +91,7 @@ class DemoFactory {
        viewController = LoadingDemoViewController()
 
      case .hierarchical:
-      switch framework {
-      case .SwiftUI:
-        viewController = HierarchicalSwiftUIDemoViewController()
-
-      case .UIKit:
-        viewController = HierarchicalDemoViewController()
-      }
+       viewController = HierarchicalDemoViewController()
       
      case .querySuggestions:
        viewController = QuerySuggestionsDemoViewController()

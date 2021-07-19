@@ -93,30 +93,3 @@ private extension LoadingDemoViewController {
   }
 
 }
-
-import SwiftUI
-
-struct LoadingDemoSwiftUI: PreviewProvider {
-  
-  struct ContentView: View {
-    
-    @ObservedObject var loadingController: LoadingObservableController
-    
-    var body: some View {
-      VStack {
-        Text("Loading")
-        if #available(iOS 14.0, *) {
-          if loadingController.isLoading {
-            ProgressView()
-          }
-        }
-      }
-    }
-    
-  }
-  
-  static var previews: some View {
-    ContentView(loadingController: .init(isLoading: true))
-  }
-  
-}

@@ -17,9 +17,9 @@ class HierarchicalDemoController {
   
   struct HierarchicalCategory {
     static var base: Attribute = "hierarchicalCategories"
-    static var lvl0: Attribute { return Attribute(rawValue: base.description + ".lvl0")  }
-    static var lvl1: Attribute { return Attribute(rawValue: base.description + ".lvl1") }
-    static var lvl2: Attribute { return Attribute(rawValue: base.description + ".lvl2") }
+    static var lvl0: Attribute { "\(base).lvl0" }
+    static var lvl1: Attribute { "\(base).lvl1" }
+    static var lvl2: Attribute { "\(base).lvl2" }
   }
   
   let order = [

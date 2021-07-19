@@ -1,5 +1,5 @@
 //
-//  SortByDemoSwiftUIViewController.swift
+//  SortByDemoSwiftUI.swift
 //  DemoDirectory
 //
 //  Created by Vladislav Fitc on 04/07/2021.
@@ -10,17 +10,7 @@ import Foundation
 import InstantSearch
 import SwiftUI
 
-struct SortBySwiftUIDemo : PreviewProvider {
-  
-  static func viewController() -> UIViewController {
-    let contentView = ContentView(queryInputController: queryInputController,
-                                  selectableSegmentObservableController: selectableSegmentObservableController,
-                                  hitsController: hitsController)
-      .onAppear {
-        connect()
-      }
-    return UIHostingController(rootView: contentView)
-  }
+struct SortByDemoSwiftUI: PreviewProvider {
   
   struct ContentView: View {
     
