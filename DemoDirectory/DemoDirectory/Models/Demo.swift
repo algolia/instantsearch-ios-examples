@@ -44,6 +44,7 @@ struct Demo: Codable {
     case relatedItems = "personalisation_related_items"
     case queryRuleCustomData = "query_rule_custom_data"
     case relevantSort = "dynamic_sort"
+    case voiceSearch = "voice_search"
   }
   
 }

@@ -72,6 +72,7 @@
 		AF67793422FB34C000850ACC /* SearchStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790D22FB34C000850ACC /* SearchStateViewController.swift */; };
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
+		AF82C50826A5A00600609ECE /* VoiceInputDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C50726A5A00600609ECE /* VoiceInputDemoViewController.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
 		AF9618B724A0A42A00B471C8 /* Snippets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9618B624A0A42A00B471C8 /* Snippets.swift */; };
 		AF9D2D30249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9D2D2F249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift */; };
@@ -79,9 +80,11 @@
 		AFAA5C8C248FD64700EC7B95 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8B248FD64700EC7B95 /* MainSplitViewController.swift */; };
 		AFAA5C8E248FDC6700EC7B95 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8D248FDC6700EC7B95 /* Demo.swift */; };
 		AFAA5C90248FDC8800EC7B95 /* DemoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */; };
+		AFC8074325DBF01200294E7E /* VoiceInputDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8074225DBF01200294E7E /* VoiceInputDemoViewController.swift */; };
 		AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */; };
 		AFCAE43C24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
+		AFFE9E8F2602395D000C3AC9 /* InstantSearchVoiceOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AFFE9E8E2602395D000C3AC9 /* InstantSearchVoiceOverlay */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,19 @@
 			remoteInfo = DemoDirectory;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AFB5669625DC41AA001CAB3F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		52C68BFC244DE97B008502D4 /* RelatedItemsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedItemsDemoViewController.swift; sourceTree = "<group>"; };
@@ -113,8 +129,6 @@
 		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
 		AF48C4E125347CD300262367 /* TemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewController.swift; sourceTree = "<group>"; };
 		AF521BC925CC2148000F994C /* RelevantSortDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelevantSortDemoViewController.swift; sourceTree = "<group>"; };
-		AF521BCD25CC21A7000F994C /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../instantsearch-ios"; sourceTree = "<group>"; };
-		AF521BCE25CC21A7000F994C /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "algoliasearch-client-swift"; path = "../algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF6778C122FB319200850ACC /* DemoDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6778C422FB319200850ACC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF6778C922FB319200850ACC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,6 +177,7 @@
 		AF67790C22FB34C000850ACC /* DemoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoHelper.swift; sourceTree = "<group>"; };
 		AF67790D22FB34C000850ACC /* SearchStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStateViewController.swift; sourceTree = "<group>"; };
 		AF67790E22FB34C000850ACC /* NumericRangeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericRangeController.swift; sourceTree = "<group>"; };
+		AF82C50726A5A00600609ECE /* VoiceInputDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceInputDemoViewController.swift; sourceTree = SOURCE_ROOT; };
 		AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		AF9618B624A0A42A00B471C8 /* Snippets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippets.swift; sourceTree = "<group>"; };
 		AF9D2D2F249C26F900C0EAEB /* MultiIndexCommerceDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexCommerceDemoViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +186,7 @@
 		AFAA5C8D248FDC6700EC7B95 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFactory.swift; sourceTree = "<group>"; };
 		AFAA5C91248FE2E900EC7B95 /* DemoDirectory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DemoDirectory.entitlements; sourceTree = "<group>"; };
+		AFC8074225DBF01200294E7E /* VoiceInputDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceInputDemoViewController.swift; sourceTree = "<group>"; };
 		AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyItem.swift; sourceTree = "<group>"; };
 		AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSearchViewController.swift; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
@@ -183,6 +199,7 @@
 			files = (
 				AF40597D2552D1CD003C8CDB /* InstantSearchCore in Frameworks */,
 				AF4059812552D1CD003C8CDB /* InstantSearch in Frameworks */,
+				AFFE9E8F2602395D000C3AC9 /* InstantSearchVoiceOverlay in Frameworks */,
 				AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */,
 				AF40597F2552D1CD003C8CDB /* InstantSearchInsights in Frameworks */,
 			);
@@ -201,8 +218,6 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF521BCE25CC21A7000F994C /* algoliasearch-client-swift */,
-				AF521BCD25CC21A7000F994C /* instantsearch-ios */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -267,6 +282,7 @@
 				AF6778D822FB319300850ACC /* DemoDirectoryTests */,
 				AF6778C222FB319200850ACC /* Products */,
 				34555A2B870F3B8F9067E196 /* Frameworks */,
+				AF82C4FE26A59D1600609ECE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,6 +366,7 @@
 				AF40596F2552D125003C8CDB /* ShopItem.swift */,
 				AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */,
 				AF4059932552D924003C8CDB /* RatingViewController.swift */,
+				AF82C50726A5A00600609ECE /* VoiceInputDemoViewController.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -388,6 +405,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		AF82C4FE26A59D1600609ECE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AFC8074225DBF01200294E7E /* VoiceInputDemoViewController.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		AF95832F24DA18DB00122776 /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +430,7 @@
 				AF6778BD22FB319200850ACC /* Sources */,
 				AF6778BE22FB319200850ACC /* Frameworks */,
 				AF6778BF22FB319200850ACC /* Resources */,
+				AFB5669625DC41AA001CAB3F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -416,6 +442,7 @@
 				AF40597E2552D1CD003C8CDB /* InstantSearchInsights */,
 				AF4059802552D1CD003C8CDB /* InstantSearch */,
 				AF4059852552D1EB003C8CDB /* SDWebImage */,
+				AFFE9E8E2602395D000C3AC9 /* InstantSearchVoiceOverlay */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -470,6 +497,7 @@
 			packageReferences = (
 				AF40597B2552D1CD003C8CDB /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 				AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				AFFE9E8D2602395D000C3AC9 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
 			);
 			productRefGroup = AF6778C222FB319200850ACC /* Products */;
 			projectDirPath = "";
@@ -513,7 +541,9 @@
 				AF67792622FB34C000850ACC /* LoadingDemoViewController.swift in Sources */,
 				AF67792C22FB34C000850ACC /* MovieTableViewCell.swift in Sources */,
 				AF67791022FB34C000850ACC /* Actor.swift in Sources */,
+				AFC8074325DBF01200294E7E /* VoiceInputDemoViewController.swift in Sources */,
 				AF67791B22FB34C000850ACC /* FilterNumericComparisonDemoViewController.swift in Sources */,
+				AF82C50826A5A00600609ECE /* VoiceInputDemoViewController.swift in Sources */,
 				AF67792A22FB34C000850ACC /* ActorCollectionViewCell.swift in Sources */,
 				AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */,
 				AF9618B724A0A42A00B471C8 /* Snippets.swift in Sources */,
@@ -670,6 +700,8 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -724,6 +756,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -738,7 +772,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DemoDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -760,7 +799,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DemoDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -852,7 +896,7 @@
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.6.0;
+				minimumVersion = 7.8.0;
 			};
 		};
 		AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
@@ -861,6 +905,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.9.4;
+			};
+		};
+		AFFE9E8D2602395D000C3AC9 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/voice-overlay-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -885,6 +937,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		AFFE9E8E2602395D000C3AC9 /* InstantSearchVoiceOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFFE9E8D2602395D000C3AC9 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */;
+			productName = InstantSearchVoiceOverlay;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

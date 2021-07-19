@@ -102,6 +102,9 @@ class DemoFactory {
       
      case .relevantSort:
        viewController = RelevantSortDemoViewController()
+       
+     case .voiceSearch:
+        viewController = VoiceInputDemoViewController()
      }
     
     viewController.title = demo.name
