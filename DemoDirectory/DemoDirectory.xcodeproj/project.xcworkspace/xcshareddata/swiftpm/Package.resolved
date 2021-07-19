@@ -5,18 +5,18 @@
         "package": "AlgoliaSearchClient",
         "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
         "state": {
-          "branch": null,
-          "revision": "ae100dae329a5e3245b74b98d5ef99d42dfccf6b",
-          "version": "8.10.0"
+          "branch": "feat/dynamic-faceting",
+          "revision": "20ac63213fa1a4e622732e504411df411b6b5f78",
+          "version": null
         }
       },
       {
         "package": "InstantSearch",
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
-          "branch": null,
-          "revision": "b9dafc91a5f7cd1d9eb8c9eace6150ab401612d6",
-          "version": "7.11.1"
+          "branch": "feat/dynamic-faceting",
+          "revision": "4c815f98ec8aa8a5c9794acdfedadc8ed3345222",
+          "version": null
         }
       },
       {
