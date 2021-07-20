@@ -399,18 +399,11 @@
 				AF82C53426A618EE00609ECE /* DynamicFacets */,
 				AF82C52726A6176A00609ECE /* Filters */,
 				AF87B8F426A594350015F772 /* QueryRuleCustomData */,
-				AF4CD87526906C7200D7A8AA /* RelevantSort */,
 				AF7A7B09268E7EAF003C62A5 /* CurrentFilters */,
-				AF9D183C268CF10A00EC68EA /* FilterNumericRange */,
-				AFBE2B8326A74CC000F1E139 /* Sorting */,
-				AF9D1839268CEF1F00EC68EA /* SortBy */,
+				AFBE2B8326A74CC000F1E139 /* Sort */,
 				AF9D1832268CD2BC00EC68EA /* Clear */,
 				AF9D1831268CD2B600EC68EA /* Loading */,
 				AF9D1830268CD19100EC68EA /* Stats */,
-				AF9D182D268CD17500EC68EA /* Toggle */,
-				AF9D1826268CCFAB00EC68EA /* FilterList */,
-				AF9D1823268CBD0E00EC68EA /* RefinementList */,
-				AF5BDC3B268C8640001F4A38 /* Hierarchical */,
 				AFFB11EF260CAACF00E4E459 /* SwiftUI */,
 				AF0B717524C99368005CFB27 /* Widgets */,
 				AF6778ED22FB34C000850ACC /* MultiIndexSnippetViewController.swift */,
@@ -479,6 +472,11 @@
 		AF82C52726A6176A00609ECE /* Filters */ = {
 			isa = PBXGroup;
 			children = (
+				AF9D182D268CD17500EC68EA /* Toggle */,
+				AF9D183C268CF10A00EC68EA /* FilterNumericRange */,
+				AF9D1826268CCFAB00EC68EA /* FilterList */,
+				AF9D1823268CBD0E00EC68EA /* RefinementList */,
+				AF5BDC3B268C8640001F4A38 /* Hierarchical */,
 				AF82C52A26A6176A00609ECE /* SegmentedDemoViewController.swift */,
 				AF82C52B26A6176A00609ECE /* RefinementPersistentListDemoViewController.swift */,
 				AF82C52C26A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift */,
@@ -594,12 +592,14 @@
 			path = FilterNumericRange;
 			sourceTree = "<group>";
 		};
-		AFBE2B8326A74CC000F1E139 /* Sorting */ = {
+		AFBE2B8326A74CC000F1E139 /* Sort */ = {
 			isa = PBXGroup;
 			children = (
+				AF4CD87526906C7200D7A8AA /* RelevantSort */,
+				AF9D1839268CEF1F00EC68EA /* SortBy */,
 			);
-			name = Sorting;
-			path = DemoDirectory/Demos/Sorting;
+			name = Sort;
+			path = DemoDirectory/Demos/Sort;
 			sourceTree = SOURCE_ROOT;
 		};
 		AFFB11EF260CAACF00E4E459 /* SwiftUI */ = {
