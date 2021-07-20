@@ -12,7 +12,11 @@ import SwiftUI
 
 class DemoFactory {
   
-  func viewController(for demo: Demo) throws -> UIViewController {
+  enum Framework {
+    case UIKit, SwiftUI
+  }
+  
+  func viewController(for demo: Demo, using framework: Framework) throws -> UIViewController {
     
     guard let demoID = Demo.ID(rawValue: demo.objectID) else {
       throw Error.demoNotImplemented
@@ -55,7 +59,7 @@ class DemoFactory {
       viewController = RatingViewController()
       
     case .sortBy:
-      viewController = IndexSegmentDemoViewController()
+      viewController = SortByDemoViewController()
       
     case .currentFilters:
       viewController = CurrentFiltersDemoViewController()

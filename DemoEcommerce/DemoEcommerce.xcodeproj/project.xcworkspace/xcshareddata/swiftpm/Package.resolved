@@ -6,26 +6,17 @@
         "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
         "state": {
           "branch": null,
-          "revision": "ae100dae329a5e3245b74b98d5ef99d42dfccf6b",
-          "version": "8.10.0"
-        }
-      },
-      {
-        "package": "InstantSearch",
-        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
-        "state": {
-          "branch": "feat/swiftui",
-          "revision": "5290cdcfe9a637cbdcfd8e008fec4da5b2bfa3ca",
-          "version": null
+          "revision": "9bf1ebc83c35664752cad6de1b612e10891411be",
+          "version": "8.8.1"
         }
       },
       {
         "package": "SDWebImage",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "88b3ba211c0d604e60eab204c1baf8229c513399",
-          "version": "5.9.4"
+          "revision": "d1c75d839709b3f91c82ecf7d3c7665272090456",
+          "version": "5.11.0"
         }
       },
       {
@@ -33,8 +24,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI",
         "state": {
           "branch": null,
-          "revision": "4c7f169e39bc35d6b80d42b8eb8301bee9cd0907",
-          "version": "1.5.0"
+          "revision": "cd8625b7cf11a97698e180d28bb7d5d357196678",
+          "version": "2.0.2"
         }
       },
       {
@@ -47,12 +38,12 @@
         }
       },
       {
-        "package": "InstantSearchVoiceOverlay",
-        "repositoryURL": "https://github.com/algolia/voice-overlay-ios",
+        "package": "Sliders",
+        "repositoryURL": "https://github.com/spacenation/swiftui-sliders",
         "state": {
           "branch": null,
-          "revision": "55a1047be9e0d9e4d4295ef127cc31b3ef7b8b54",
-          "version": "1.2.0"
+          "revision": "5109792d45a53c3c41680b8bdb0602b5dde39c9a",
+          "version": "1.0.0"
         }
       }
     ]
