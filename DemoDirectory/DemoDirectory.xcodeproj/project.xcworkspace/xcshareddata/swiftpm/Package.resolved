@@ -6,8 +6,17 @@
         "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
         "state": {
           "branch": null,
-          "revision": "9bf1ebc83c35664752cad6de1b612e10891411be",
-          "version": "8.8.1"
+          "revision": "ae100dae329a5e3245b74b98d5ef99d42dfccf6b",
+          "version": "8.10.0"
+        }
+      },
+      {
+        "package": "InstantSearch",
+        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
+        "state": {
+          "branch": "feat/swiftui",
+          "revision": "5290cdcfe9a637cbdcfd8e008fec4da5b2bfa3ca",
+          "version": null
         }
       },
       {
@@ -35,6 +44,15 @@
           "branch": null,
           "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
           "version": "1.4.2"
+        }
+      },
+      {
+        "package": "InstantSearchVoiceOverlay",
+        "repositoryURL": "https://github.com/algolia/voice-overlay-ios",
+        "state": {
+          "branch": null,
+          "revision": "55a1047be9e0d9e4d4295ef127cc31b3ef7b8b54",
+          "version": "1.2.0"
         }
       }
     ]

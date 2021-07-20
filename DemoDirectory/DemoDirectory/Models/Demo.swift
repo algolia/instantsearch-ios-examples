@@ -22,6 +22,7 @@ struct Demo: Codable {
     case toggle = "filter_toggle"
     case toggleDefault = "filter_toggle_default"
     case facetList = "facet_list"
+    case DynamicFacetList = "dynamic_facets"
     case facetListPersistentSelection = "facet_list_persistent"
     case segmented = "filter_segment"
 //    case allFilterList = "filter_list_all"
@@ -44,6 +45,7 @@ struct Demo: Codable {
     case relatedItems = "personalisation_related_items"
     case queryRuleCustomData = "query_rule_custom_data"
     case relevantSort = "dynamic_sort"
+    case voiceSearch = "voice_search"
   }
   
 }

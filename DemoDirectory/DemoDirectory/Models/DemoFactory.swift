@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class DemoFactory {
   
@@ -20,96 +21,102 @@ class DemoFactory {
     guard let demoID = Demo.ID(rawValue: demo.objectID) else {
       throw Error.demoNotImplemented
     }
-        
-     let viewController: UIViewController
+    
+    let viewController: UIViewController
+    
+    switch demoID {
+    case .singleIndex:
+      viewController = SingleIndexDemoViewController()
+      
+    case .sffv:
+      viewController = FacetSearchDemoViewController()
+      
+    case .toggle:
+      viewController = ToggleDemoViewController()
+      
+    case .toggleDefault:
+      viewController = ToggleDefaultDemoViewController()
+      
+    case .DynamicFacetList:
+      viewController = DynamicFacetListSwiftUIDemoViewController()
+      
+    case .facetList:
+      viewController = RefinementListDemoViewController()
+      
+    case .facetListPersistentSelection:
+      viewController = RefinementPersistentListDemoViewController()
+      
+    case .segmented:
+      viewController = SegmentedDemoViewController()
+      
+    case .filterNumericComparison:
+      viewController = FilterNumericComparisonDemoViewController()
+      
+    case .filterNumericRange:
+      viewController = FilterNumericRangeDemoViewController()
+      
+    case .filterRating:
+      viewController = RatingViewController()
+      
+    case .sortBy:
+      viewController = SortByDemoViewController()
+      
+    case .currentFilters:
+      viewController = CurrentFiltersDemoViewController()
+      
+    case .clearFilters:
+      viewController = ClearFiltersDemoViewController()
+      
+   case .relevantSort:
+     viewController = RelevantSortDemoViewController()
      
-     switch demoID {
-     case .singleIndex:
-       viewController = SingleIndexDemoViewController()
-       
-     case .sffv:
-       viewController = FacetSearchDemoViewController()
-       
-     case .toggle:
-       viewController = ToggleDemoViewController()
-       
-     case .toggleDefault:
-       viewController = ToggleDefaultDemoViewController()
-       
-     case .facetList:
-       viewController = RefinementListDemoViewController()
-       
-     case .facetListPersistentSelection:
-       viewController = RefinementPersistentListDemoViewController()
-       
-     case .segmented:
-       viewController = SegmentedDemoViewController()
+   case .voiceSearch:
+      viewController = VoiceInputDemoViewController()
 
-     case .filterNumericComparison:
-       viewController = FilterNumericComparisonDemoViewController()
-
-     case .filterNumericRange:
-       viewController = FilterNumericRangeDemoViewController()
+    case .multiIndex:
+      viewController = MultiIndexDemoViewController()
+    
+    case .facetFilterList:
+      viewController = FilterListDemo.facet()
       
-     case .filterRating:
-       viewController = RatingViewController()
-
-     case .sortBy:
-       viewController = SortByDemoViewController()
-
-     case .currentFilters:
-       viewController = CurrentFiltersDemoViewController()
-       
-     case .clearFilters:
-       viewController = ClearFiltersDemoViewController()
-       
-     case .multiIndex:
-       viewController = MultiIndexDemoViewController()
-       
-     case .facetFilterList:
-       viewController = FilterListDemo.facet()
-             
-     case .numericFilterList:
-       viewController = FilterListDemo.numeric()
-       
-     case .tagFilterList:
-       viewController = FilterListDemo.tag()
-       
-     case .searchOnSubmit:
-       viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
-       
-     case .searchAsYouType:
-       viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
-       
-     case .stats:
-       viewController = StatsDemoViewController()
-       
-     case .highlighting:
-       viewController = HighlightingDemoViewController()
-       
-     case .loading:
-       viewController = LoadingDemoViewController()
-
-     case .hierarchical:
-       viewController = HierarchicalDemoViewController()
+    case .numericFilterList:
+      viewController = FilterListDemo.numeric()
       
-     case .querySuggestions:
-       viewController = QuerySuggestionsDemoViewController()
+    case .tagFilterList:
+      viewController = FilterListDemo.tag()
       
-     case .relatedItems:
-       viewController = RelatedItemsDemoViewController()
+    case .searchOnSubmit:
+      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchOnSubmit)
       
-     case .queryRuleCustomData:
-       viewController = QueryRuleCustomDataDemoViewController()
+    case .searchAsYouType:
+      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
       
-     case .relevantSort:
-      viewController = RelevantSortDemoViewController()
-     }
+    case .stats:
+      viewController = StatsDemoViewController()
+      
+    case .highlighting:
+      viewController = HighlightingDemoViewController()
+      
+    case .loading:
+      viewController = LoadingDemoViewController()
+      
+    case .hierarchical:
+      viewController = HierarchicalDemoViewController()
+      
+    case .querySuggestions:
+      viewController = QuerySuggestionsDemoViewController()
+      
+    case .relatedItems:
+      viewController = RelatedItemsDemoViewController()
+      
+    case .queryRuleCustomData:
+      viewController = QueryRuleCustomDataDemoViewController()
+    }
     
     viewController.title = demo.name
-     
-     return viewController
-   }
+    
+    return viewController
+  }
   
 }
 
