@@ -14,9 +14,9 @@
         "package": "InstantSearch",
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
-          "branch": "feat/swiftui",
-          "revision": "5290cdcfe9a637cbdcfd8e008fec4da5b2bfa3ca",
-          "version": null
+          "branch": null,
+          "revision": "a144d9d27cded34cb3c0e03d86f4a7a66136e476",
+          "version": "7.13.1"
         }
       },
       {
