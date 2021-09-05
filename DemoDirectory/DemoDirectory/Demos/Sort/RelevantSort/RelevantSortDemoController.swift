@@ -15,7 +15,7 @@ class RelevantSortDemoController {
     let name: String
   }
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<Item>
   let switchIndexInteractor: SwitchIndexInteractor

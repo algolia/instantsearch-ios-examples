@@ -20,7 +20,7 @@ class AlgoliaController {
   let facetList: FacetListViewModel
   let facetSearch: FacetSearchViewModel
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputInteractor: QueryInputInteractor
   let hitsInteractor: HitsInteractor<Hit<InstantSearchItem>>
   let statsInteractor: StatsInteractor
@@ -40,9 +40,9 @@ class AlgoliaController {
     self.apiKey = apiKey
     self.indexName = indexName
     self.facetAttribute = facetAttribute
-    self.searcher = SingleIndexSearcher(appID: appID,
-                                        apiKey: apiKey,
-                                        indexName: indexName)
+    self.searcher = HitsSearcher(appID: appID,
+                                 apiKey: apiKey,
+                                 indexName: indexName)
     self.hitsInteractor = .init()
     self.statsInteractor = .init()
     self.filterState = .init()
@@ -110,7 +110,7 @@ class AlgoliaController {
   
   class SuggestionsViewModel {
     
-    let searcher: SingleIndexSearcher
+    let searcher: HitsSearcher
     let hitsInteractor: HitsInteractor<QuerySuggestion>
 
     init() {

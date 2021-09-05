@@ -11,7 +11,7 @@ import InstantSearch
 
 class FilterNumericRangeDemoController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   
   let primarySliderConnector: NumberRangeConnector<Double>
@@ -19,7 +19,7 @@ class FilterNumericRangeDemoController {
   
   init(primaryController: NumericRangeController,
        secondaryController: NumericRangeController) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
     self.filterState = .init()
     
     primarySliderConnector = .init(searcher: searcher,

@@ -11,9 +11,9 @@ import InstantSearch
 
 class SingleIndexSnippetViewController: UIViewController {
   
-  let searcher: SingleIndexSearcher = .init(appID: "latency",
-                                            apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                                            indexName: "bestbuy")
+  let searcher: HitsSearcher = .init(appID: "latency",
+                                     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
+                                     indexName: "bestbuy")
   
   let filterState: FilterState = .init()
   

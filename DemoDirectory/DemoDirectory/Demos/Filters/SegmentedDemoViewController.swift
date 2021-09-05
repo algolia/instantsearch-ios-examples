@@ -14,7 +14,7 @@ class SegmentedDemoViewController: UIViewController {
 
   let genderAttribute = Attribute("gender")
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
 
   let genderInteractor: SelectableSegmentInteractor<Int, Filter.Facet>
@@ -27,7 +27,7 @@ class SegmentedDemoViewController: UIViewController {
   let female = Filter.Facet(attribute: "gender", stringValue: "female")
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_segment")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_filter_segment")
     let items: [Int: Filter.Facet] = [
       0: male,
       1: female

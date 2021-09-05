@@ -14,7 +14,7 @@ typealias QuerySuggestionsDemoViewController = SearchViewController
 
 class DemoListViewController: UIViewController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   let hitsInteractor: HitsInteractor<Demo>
   let textFieldController: TextFieldController
@@ -27,7 +27,7 @@ class DemoListViewController: UIViewController {
   weak var delegate: DemoListViewControllerDelegate?
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_home")
+    searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_home")
     filterState = .init()
     hitsInteractor = HitsInteractor(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
     groupedDemos = []

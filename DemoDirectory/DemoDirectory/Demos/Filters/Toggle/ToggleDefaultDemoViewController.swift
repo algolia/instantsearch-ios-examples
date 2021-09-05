@@ -12,7 +12,7 @@ import InstantSearch
 
 class ToggleDefaultDemoViewController: UIViewController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   let searchStateViewController: SearchStateViewController
   

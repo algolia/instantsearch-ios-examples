@@ -173,7 +173,7 @@ extension SearchStateViewController {
     filterClearInteractor.connectController(clearRefinementsController)
   }
   
-  func connectSearcher(_ searcher: SingleIndexSearcher) {
+  func connectSearcher(_ searcher: HitsSearcher) {
     loadingInteractor.connectSearcher(searcher)
     statsInteractor.connectSearcher(searcher)
   }

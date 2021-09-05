@@ -13,7 +13,7 @@ class SortByDemoController {
   
   typealias HitType = Movie
 
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<HitType>
   let sortByConnector: SortByConnector
@@ -25,7 +25,7 @@ class SortByDemoController {
   let indexes: [Int: IndexName]
   
   init() {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputConnector = .init(searcher: searcher)
     self.hitsConnector = .init(searcher: searcher)
     indexes = [

@@ -12,9 +12,9 @@ import InstantSearch
   
 class DynamicFacetListDemoController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
-  let DynamicFacetListConnector: DynamicFacetListConnector<SingleIndexSearcher>
+  let DynamicFacetListConnector: DynamicFacetListConnector<HitsSearcher>
   let filterState: FilterState
 
   init<QIC: QueryInputController, DFC: DynamicFacetListController>(queryInputController: QIC,

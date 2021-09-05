@@ -16,7 +16,7 @@ class SingleIndexDemoViewController: UIViewController {
   
   let searchBar = UISearchBar()
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   
   let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
@@ -28,7 +28,7 @@ class SingleIndexDemoViewController: UIViewController {
   let hitsTableViewController: ResultsTableViewController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
+    searcher = HitsSearcher(client: .demo, indexName: "instant_search")
     textFieldController = .init(searchBar: searchBar)
     queryInputConnector = .init(searcher: searcher, controller: textFieldController)
 
