@@ -69,7 +69,7 @@ class RelatedItemsDemoViewController: UIViewController {
     
 
     
-    searcher.indexQueryState.query.hitsPerPage = 3
+    searcher.request.query.hitsPerPage = 3
     
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectController(hitsTableViewController)

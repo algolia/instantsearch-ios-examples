@@ -75,7 +75,7 @@ class AlgoliaController {
     filterClearInteractor.connectFilterState(filterState,
                                              filterGroupIDs: [.or(name: facetAttribute.rawValue, filterType: .facet)],
                                              clearMode: .specified)
-    switchIndexInteractor.connectSearcher(searcher)
+    switchIndexInteractor.connect(searcher)
     
     queryInputInteractor.connectSearcher(suggestions.searcher)
     

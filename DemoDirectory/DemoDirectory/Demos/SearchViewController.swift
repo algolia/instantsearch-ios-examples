@@ -28,7 +28,7 @@ public class SearchViewController: UIViewController {
   let resultsHitsInteractor: HitsInteractor<ShopItem>
   let resultsViewController: ResultsViewController
   
-  let multiIndexHitsConnector: MultiIndexHitsConnector
+  let compositeSearcher: CompositeSearcher
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     
@@ -43,11 +43,12 @@ public class SearchViewController: UIViewController {
     queryInputInteractor = .init()
     textFieldController = .init(searchBar: searchController.searchBar)
     
-    multiIndexHitsConnector = .init(appID: appID, apiKey: apiKey, indexModules: [
-        .init(indexName: suggestionsIndex, hitsInteractor: suggestionsHitsInteractor),
-        .init(indexName: resultsIndex, hitsInteractor: resultsHitsInteractor)
-    ])
-        
+    compositeSearcher = .init(appID: appID, apiKey: apiKey)
+    let suggestionsSearcher = compositeSearcher.addHitsSearcher(indexName: suggestionsIndex)
+    let resultsSearchers = compositeSearcher.addHitsSearcher(indexName: resultsIndex)
+    suggestionsHitsInteractor.connectSearcher(suggestionsSearcher)
+    resultsHitsInteractor.connectSearcher(resultsSearchers)
+    
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     
     setup()
@@ -83,7 +84,7 @@ public class SearchViewController: UIViewController {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     
-    queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
+    queryInputInteractor.connect(compositeSearcher)
     queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectController(suggestionsViewController)
     
@@ -95,7 +96,7 @@ public class SearchViewController: UIViewController {
     resultsHitsInteractor.connectController(resultsViewController)
     
     suggestionsViewController.isHighlightingInverted = true
-    multiIndexHitsConnector.searcher.search()
+    compositeSearcher.search()
   }
   
 }

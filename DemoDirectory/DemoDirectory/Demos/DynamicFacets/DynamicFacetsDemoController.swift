@@ -37,7 +37,7 @@ class DynamicFacetListDemoController {
                                     "country": ("country", .or)
                                    ],
                                    controller: DynamicFacetListController)
-    searcher.indexQueryState.query.facets = ["brand", "color", "size", "country"]
+    searcher.request.query.facets = ["brand", "color", "size", "country"]
     searcher.connectFilterState(filterState)
     searcher.search()
   }
