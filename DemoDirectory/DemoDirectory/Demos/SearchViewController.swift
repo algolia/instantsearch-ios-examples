@@ -84,7 +84,7 @@ public class SearchViewController: UIViewController {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     
-    queryInputInteractor.connect(compositeSearcher)
+    queryInputInteractor.connectSearcher(compositeSearcher)
     queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectController(suggestionsViewController)
     

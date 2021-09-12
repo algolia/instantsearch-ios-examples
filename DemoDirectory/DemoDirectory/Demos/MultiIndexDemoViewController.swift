@@ -79,17 +79,14 @@ class MultiIndexDemoViewController: UIViewController {
     
   let textFieldController: TextFieldController
   
-  let queryInputInteractor: QueryInputInteractor
+  let queryInputConnector: QueryInputConnector
   let searchBar: UISearchBar
-  let hitsViewController: MultiIndexHitsViewController
   
   let compositeSearcher: CompositeSearcher
-  let moviesSearcher: HitsSearcher
-  let actorsSearcher: HitsSearcher
+  let moviesHitsConnector: HitsConnector<Movie>
+  let actorsHitsConnector: HitsConnector<Hit<Actor>>
   
-  let moviesHitsInteractor: HitsInteractor<Movie>
-  let actorsHitsInteractor: HitsInteractor<Hit<Actor>>
-  
+  let hitsViewController: MultiIndexHitsViewController
   
   init() {
     searchBar = UISearchBar()
@@ -98,25 +95,18 @@ class MultiIndexDemoViewController: UIViewController {
     
     hitsViewController = .init()
     
-    
     compositeSearcher = CompositeSearcher(appID: SearchClient.demo.applicationID,
                                           apiKey: SearchClient.demo.apiKey)
     
-    moviesSearcher = compositeSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.movies.indexName)
-    actorsSearcher = compositeSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.actors.indexName)
+    let moviesSearcher = compositeSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.movies.indexName)
+    let actorsSearcher = compositeSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.actors.indexName)
     
-    queryInputInteractor = .init()
-    queryInputInteractor.connect(compositeSearcher)
-    queryInputInteractor.connectController(textFieldController)
-    
-    moviesHitsInteractor = .init()
-    actorsHitsInteractor = .init()
-    
-    moviesHitsInteractor.connectSearcher(moviesSearcher)
-    actorsHitsInteractor.connectSearcher(actorsSearcher)
-    
-    moviesHitsInteractor.connectController(hitsViewController.moviesCollectionViewController)
-    actorsHitsInteractor.connectController(hitsViewController.actorsCollectionViewController)
+    queryInputConnector = .init(searcher: compositeSearcher,
+                                controller: textFieldController)
+    moviesHitsConnector = .init(searcher: moviesSearcher,
+                                controller: hitsViewController.moviesCollectionViewController)
+    actorsHitsConnector = .init(searcher: actorsSearcher,
+                                controller: hitsViewController.actorsCollectionViewController)
     
     super.init(nibName: nil, bundle: nil)
     setup()
@@ -254,7 +244,6 @@ class MultiIndexHitsViewController: UIViewController {
   
   let moviesCollectionViewController: MoviesCollectionViewController
   let actorsCollectionViewController: ActorsCollectionViewController
-
   
   init() {
     let moviesFlowLayout = UICollectionViewFlowLayout()
@@ -271,7 +260,6 @@ class MultiIndexHitsViewController: UIViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -311,7 +299,10 @@ class MultiIndexHitsViewController: UIViewController {
   }
   
   func configureCollectionView() {
-    [moviesCollectionViewController, actorsCollectionViewController].forEach { controller in
+    [
+      moviesCollectionViewController,
+      actorsCollectionViewController
+    ].forEach { controller in
       controller.view?.translatesAutoresizingMaskIntoConstraints = false
       controller.view?.backgroundColor = .clear
     }
