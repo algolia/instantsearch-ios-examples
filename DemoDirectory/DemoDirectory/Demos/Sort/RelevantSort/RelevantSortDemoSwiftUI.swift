@@ -46,7 +46,7 @@ struct RelevantSortDemoSwiftUI : PreviewProvider {
               }
             }
           } label: {
-            Label(label(for: switchIndexController.selected), systemImage: "arrow.up.arrow.down.circle")
+            Label(label(for: switchIndexController.selectedIndexName), systemImage: "arrow.up.arrow.down.circle")
           }
         }
         Text(statsController.stats)

@@ -86,7 +86,7 @@ struct SortByDemoSwiftUI: PreviewProvider {
     }
     demoController.queryInputConnector.connectController(queryInputController)
     demoController.hitsConnector.connectController(hitsController)
-    demoController.sortByConnector.connectController(selectableSegmentObservableController, presenter: { title(for: $0.name) })
+//    demoController.switchIndexConnector.connectController(<#T##controller: SwitchIndexController##SwitchIndexController#>)
   }
 
   

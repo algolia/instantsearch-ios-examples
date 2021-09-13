@@ -78,7 +78,7 @@ class MovieTableViewCell: UITableViewCell, MovieCell {
     
     artworkImageView.widthAnchor.constraint(equalTo: artworkImageView.heightAnchor).isActive = true
     
-    mainStackView.pin(to: contentView)
+    mainStackView.pin(to: contentView, insets: .init(top: 10, left: 3, bottom: -3, right: -3))
   }
   
 }
