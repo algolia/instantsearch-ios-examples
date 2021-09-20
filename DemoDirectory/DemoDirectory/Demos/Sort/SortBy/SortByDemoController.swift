@@ -22,16 +22,35 @@ class SortByDemoController {
   let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
   let indexYearDesc: IndexName = "mobile_demo_movies_year_desc"
   
+  let indices: [IndexName] = [
+    "mobile_demo_movies",
+    "mobile_demo_movies_year_asc",
+    "mobile_demo_movies_year_desc"
+  ]
+  
   init() {
     self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputConnector = .init(searcher: searcher)
     self.hitsConnector = .init(searcher: searcher)
     switchIndexConnector = .init(searcher: searcher,
-                                 indexNames: [indexTitle, indexYearAsc, indexYearDesc],
+                                 indexNames: indices,
                                  selectedIndexName: indexTitle)
     
     searcher.search()
     searcher.isDisjunctiveFacetingEnabled = false
+  }
+  
+  func title(for indexName: IndexName) -> String {
+    switch indexName {
+    case indexTitle:
+      return "Default"
+    case indexYearAsc:
+      return "Year Asc"
+    case indexYearDesc:
+      return "Year Desc"
+    default:
+      return indexName.rawValue
+    }
   }
   
 }

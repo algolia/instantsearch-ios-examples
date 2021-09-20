@@ -39,10 +39,10 @@ struct RelevantSortDemoSwiftUI : PreviewProvider {
           .padding(.all, 5)
         if #available(iOS 14.0, *) {
           Menu {
-            ForEach(0 ..< switchIndexController.indexNames.count, id: \.self) { index in
-              let indexName = switchIndexController.indexNames[index]
+            ForEach(0 ..< switchIndexController.indicesNames.count, id: \.self) { index in
+              let indexName = switchIndexController.indicesNames[index]
               Button(label(for: indexName)) {
-                switchIndexController.select(indexName)
+                switchIndexController.selectIndexWithName(indexName)
               }
             }
           } label: {
