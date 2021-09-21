@@ -13,7 +13,7 @@ import InstantSearch
 class SearchConnectorSearchViewController: UIViewController {
     
   let searchController: UISearchController
-  let searchConnector: SingleIndexSearchConnector<BestBuyItem>
+  let searchConnector: SearchConnector<BestBuyItem>
   let hitsTableViewController: HitsTableViewController<BestBuyTableViewCellConfigurator>
 //  let statsInteractor: StatsInteractor
     
@@ -21,7 +21,7 @@ class SearchConnectorSearchViewController: UIViewController {
     hitsTableViewController = .init(style: .plain)
     searchController = .init(searchResultsController: hitsTableViewController)
 //    statsInteractor = .init()
-    searchConnector = SingleIndexSearchConnector(appID: "latency",
+    searchConnector = SearchConnector(appID: "latency",
                           apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                           indexName: "bestbuy",
                           searchController: searchController,
