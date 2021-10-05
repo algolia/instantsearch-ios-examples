@@ -53,9 +53,6 @@ extension GettingStartedGuide.SwiftUI {
               .frame(maxWidth: .infinity, maxHeight: .infinity)
           }
         }
-        .onAppear {
-//          hideKeyboard()
-        }
       }
       .navigationBarTitle("Algolia & SwiftUI")
       .navigationBarItems(trailing: facetsButton())

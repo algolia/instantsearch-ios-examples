@@ -21,6 +21,7 @@ class VoiceInputDemoViewController: UIViewController {
                                                                  apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                                                  indexName: "bestbuy",
                                                                  queryInputController: textFieldController,
+                                                                 hitsInteractor: .init(),
                                                                  hitsController: hitsTableViewController)
   let hitsTableViewController: BestBuyHitsViewController = .init()
   let voiceOverlayController: VoiceOverlayController = .init()

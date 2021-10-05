@@ -18,7 +18,7 @@ enum HitsAndFacetsSearchExample {
     let queryInputConnector: QueryInputConnector
     let textFieldController: TextFieldController
 
-    let searcher: CompositeSearcher
+    let searcher: MultiSearcher
     let brandFacetsInteractor: FacetListInteractor
     let productsHitsInteractor: HitsInteractor<ShopItem>
     

@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/algolia/algoliasearch-client-swift",
         "state": {
           "branch": "feat/client-level-search",
-          "revision": "fa9a540081483bb44ea7e1747c7b7628a5462848",
+          "revision": "0e3305a449286934eb58b316961829faa2b6088f",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {
           "branch": null,
-          "revision": "76dd4b49110b8624317fc128e7fa0d8a252018bc",
-          "version": "5.11.1"
+          "revision": "88b3ba211c0d604e60eab204c1baf8229c513399",
+          "version": "5.9.4"
         }
       },
       {

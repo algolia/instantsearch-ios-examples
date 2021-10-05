@@ -82,7 +82,7 @@ class MultiIndexDemoViewController: UIViewController {
   let queryInputConnector: QueryInputConnector
   let searchBar: UISearchBar
   
-  let compositeSearcher: CompositeSearcher
+  let multiSearcher: MultiSearcher
   let moviesHitsConnector: HitsConnector<Movie>
   let actorsHitsConnector: HitsConnector<Hit<Actor>>
   
@@ -95,13 +95,13 @@ class MultiIndexDemoViewController: UIViewController {
     
     hitsViewController = .init()
     
-    compositeSearcher = CompositeSearcher(appID: SearchClient.demo.applicationID,
-                                          apiKey: SearchClient.demo.apiKey)
+    multiSearcher = MultiSearcher(appID: SearchClient.demo.applicationID,
+                                  apiKey: SearchClient.demo.apiKey)
     
-    let moviesSearcher = compositeSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.movies.indexName)
-    let actorsSearcher = compositeSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.actors.indexName)
+    let moviesSearcher = multiSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.movies.indexName)
+    let actorsSearcher = multiSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.actors.indexName)
     
-    queryInputConnector = .init(searcher: compositeSearcher,
+    queryInputConnector = .init(searcher: multiSearcher,
                                 controller: textFieldController)
     moviesHitsConnector = .init(searcher: moviesSearcher,
                                 controller: hitsViewController.moviesCollectionViewController)
@@ -126,7 +126,7 @@ class MultiIndexDemoViewController: UIViewController {
 private extension MultiIndexDemoViewController {
     
   func setup() {
-    compositeSearcher.search()
+    multiSearcher.search()
     addChild(hitsViewController)
     hitsViewController.didMove(toParent: self)
   }

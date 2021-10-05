@@ -33,8 +33,8 @@ public class SearchViewController: UIViewController {
   let resultsHitsInteractor: HitsInteractor<ShopItem>
   let resultsViewController: ResultsViewController
   
-  // Composite searcher which aggregates hits and suggestions search
-  let compositeSearcher: CompositeSearcher
+  // Multi searcher which aggregates hits and suggestions search
+  let multiSearcher: MultiSearcher
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     suggestionsHitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
@@ -48,7 +48,7 @@ public class SearchViewController: UIViewController {
     queryInputInteractor = .init()
     textFieldController = .init(searchBar: searchController.searchBar)
     
-    compositeSearcher = .init(appID: appID, apiKey: apiKey)
+    multiSearcher = .init(appID: appID, apiKey: apiKey)
     
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     
@@ -85,13 +85,13 @@ public class SearchViewController: UIViewController {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     
-    let suggestionsSearcher = compositeSearcher.addHitsSearcher(indexName: suggestionsIndex)
+    let suggestionsSearcher = multiSearcher.addHitsSearcher(indexName: suggestionsIndex)
     suggestionsHitsInteractor.connectSearcher(suggestionsSearcher)
 
-    let resultsSearchers = compositeSearcher.addHitsSearcher(indexName: resultsIndex)
+    let resultsSearchers = multiSearcher.addHitsSearcher(indexName: resultsIndex)
     resultsHitsInteractor.connectSearcher(resultsSearchers)
     
-    queryInputInteractor.connectSearcher(compositeSearcher)
+    queryInputInteractor.connectSearcher(multiSearcher)
     queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectController(suggestionsViewController)
     
@@ -103,7 +103,7 @@ public class SearchViewController: UIViewController {
     resultsHitsInteractor.connectController(resultsViewController)
     
     suggestionsViewController.isHighlightingInverted = true
-    compositeSearcher.search()
+    multiSearcher.search()
   }
   
 }

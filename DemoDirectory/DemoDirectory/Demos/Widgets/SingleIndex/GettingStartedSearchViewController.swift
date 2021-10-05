@@ -149,6 +149,7 @@ extension GettingStartedGuide.StepTwo {
     lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
     lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
                                                                    searchController: searchController,
+                                                                   hitsInteractor: .init(),
                                                                    hitsController: hitsViewController)
     let hitsViewController: BestBuyHitsViewController = .init()
     
@@ -181,6 +182,7 @@ extension GettingStartedGuide.StepThree {
     lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
     lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
                                                                    searchController: searchController,
+                                                                   hitsInteractor: .init(),
                                                                    hitsController: hitsViewController)
     let hitsViewController: BestBuyHitsViewController = .init()
     
@@ -227,6 +229,7 @@ extension GettingStartedGuide.StepFour {
     lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
     lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
                                                                    searchController: searchController,
+                                                                   hitsInteractor: .init(),
                                                                    hitsController: hitsViewController)
     let hitsViewController: BestBuyHitsViewController = .init()
     let statsInteractor: StatsInteractor = .init()
@@ -273,6 +276,7 @@ extension GettingStartedGuide.StepFive {
     lazy var searchController: UISearchController = .init(searchResultsController: hitsTableViewController)
     lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
                                                                    searchController: searchController,
+                                                                   hitsInteractor: .init(),
                                                                    hitsController: hitsTableViewController)
     let hitsTableViewController: BestBuyHitsViewController = .init()
     let statsInteractor: StatsInteractor = .init()
@@ -333,6 +337,7 @@ extension GettingStartedGuide.StepSix {
     lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
     lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
                                                                    searchController: searchController,
+                                                                   hitsInteractor: .init(),
                                                                    hitsController: hitsViewController,
                                                                    filterState: filterState)
     let hitsViewController: BestBuyHitsViewController = .init()
@@ -397,6 +402,7 @@ extension GettingStartedGuide.StepSeven {
     lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
     lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
                                                                    searchController: searchController,
+                                                                   hitsInteractor: .init(),
                                                                    hitsController: hitsViewController,
                                                                    filterState: filterState)
     let hitsViewController: BestBuyHitsViewController = .init()

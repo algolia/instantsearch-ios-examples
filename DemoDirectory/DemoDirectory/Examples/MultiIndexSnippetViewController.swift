@@ -18,7 +18,7 @@ enum MultiIndexSearchExample {
     let queryInputConnector: QueryInputConnector
     let textFieldController: TextFieldController
 
-    let searcher: CompositeSearcher
+    let searcher: MultiSearcher
     let actorHitsInteractor: HitsInteractor<Actor>
     let movieHitsInteractor: HitsInteractor<Movie>
     
