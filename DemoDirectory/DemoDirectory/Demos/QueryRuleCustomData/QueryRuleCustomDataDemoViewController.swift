@@ -38,7 +38,7 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
     self.bannerViewController = BannerViewController()
     self.queryInputConnector = .init(searcher: searcher, controller: textFieldController)
     self.statsConnector = .init(searcher: searcher, controller: statsController)
-    self.hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
+    self.hitsConnector = .init(searcher: searcher, interactor: .init(), controller: hitsTableViewController)
     self.queryRuleCustomDataConnector = .init(searcher: searcher, controller: bannerViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()

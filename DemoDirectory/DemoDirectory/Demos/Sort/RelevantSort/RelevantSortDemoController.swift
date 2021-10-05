@@ -38,7 +38,7 @@ class RelevantSortDemoController {
     self.queryInputConnector = .init(searcher: searcher, controller: queryInputController)
     self.switchIndexInteractor = .init(indexNames: indices, selectedIndexName: indices.first!)
     self.relevantSortConnector = .init(searcher: searcher, controller: relevantSortController)
-    self.hitsConnector = .init(searcher: searcher, controller: hitsController)
+    self.hitsConnector = .init(searcher: searcher, interactor: .init(), controller: hitsController)
     self.statsConnector = .init(searcher: searcher, controller: statsController)
     switchIndexInteractor.connectSearcher(searcher)
     switchIndexInteractor.connectController(switchIndexController)

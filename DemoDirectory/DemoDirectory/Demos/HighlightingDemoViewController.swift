@@ -29,7 +29,7 @@ class HighlightingDemoViewController: UIViewController {
     self.textFieldController = .init(searchBar: searchBar)
     self.hitsTableViewController = MovieHitsTableViewController()
     queryInputConnector = .init(searcher: searcher, controller: textFieldController)
-    hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
+    hitsConnector = .init(searcher: searcher, interactor: .init(), controller: hitsTableViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }

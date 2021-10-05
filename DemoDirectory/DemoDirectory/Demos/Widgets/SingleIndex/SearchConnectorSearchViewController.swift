@@ -25,6 +25,7 @@ class SearchConnectorSearchViewController: UIViewController {
                           apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                           indexName: "bestbuy",
                           searchController: searchController,
+                                                 hitsInteractor: .init(),
                           hitsController: hitsTableViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 //    statsInteractor.connectController(self)

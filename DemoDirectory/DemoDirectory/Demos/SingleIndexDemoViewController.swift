@@ -36,7 +36,9 @@ class SingleIndexDemoViewController: UIViewController {
     statsConnector = .init(searcher: searcher, controller: statsController)
 
     hitsTableViewController = ResultsTableViewController()
-    hitsConnector = .init(searcher: searcher, controller: hitsTableViewController)
+    hitsConnector = .init(searcher: searcher,
+                          interactor: .init(),
+                          controller: hitsTableViewController)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 

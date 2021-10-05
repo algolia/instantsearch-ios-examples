@@ -35,6 +35,7 @@ class LoadingDemoController {
                            controller: statsController,
                            presenter: DefaultPresenter.Stats.present)
     hitsConnector = .init(searcher: searcher,
+                          interactor: .init(),
                           controller: hitsController)
     searcher.search()
   }
