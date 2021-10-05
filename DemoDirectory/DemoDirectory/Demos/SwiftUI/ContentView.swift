@@ -56,8 +56,8 @@ struct ContentView: View {
                   isEditing: $isEditing,
                   onSubmit: queryInputController.submit)
         if isEditing && allowSuggestions {
-          SuggestionsView(isEditing: $isEditing,
-                          queryInputController: queryInputController,
+          SuggestionsView(query: $queryInputController.query,
+                          isEditing: $isEditing,
                           suggestionsController: suggestionsController)
         } else {
           VStack {
@@ -77,7 +77,7 @@ struct ContentView: View {
             }
           }
           .onAppear {
-            hideKeyboard()
+//            hideKeyboard()
           }
         }
       }

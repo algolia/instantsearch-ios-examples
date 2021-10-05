@@ -119,6 +119,7 @@
 		AFBE2B9A26A7508800F1E139 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AFBE2B9926A7508800F1E139 /* InstantSearch */; };
 		AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */; };
 		AFCAE43C24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */; };
+		AFCDD9FD27075D9200BEF2A7 /* GettingStartedSwiftUI_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDD9FC27075D9200BEF2A7 /* GettingStartedSwiftUI_iOS15.swift */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
 		AFFB11F1260CAAE100E4E459 /* SwiftUIDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB11F0260CAAE000E4E459 /* SwiftUIDemoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -246,6 +247,7 @@
 		AFBE2B8826A74D4E00F1E139 /* VoiceInputDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceInputDemoViewController.swift; sourceTree = "<group>"; };
 		AFCAE43924D1D5E000FD6A7D /* BestBuyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyItem.swift; sourceTree = "<group>"; };
 		AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSearchViewController.swift; sourceTree = "<group>"; };
+		AFCDD9FC27075D9200BEF2A7 /* GettingStartedSwiftUI_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSwiftUI_iOS15.swift; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
 		AFFB11F0260CAAE000E4E459 /* SwiftUIDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDemoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -615,6 +617,7 @@
 				AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */,
 				AF9C9B992672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift */,
 				AF9C9B9B26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift */,
+				AFCDD9FC27075D9200BEF2A7 /* GettingStartedSwiftUI_iOS15.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */,
 				AF87B8F626A594480015F772 /* QueryRuleCustomDataDemoSwiftUI.swift in Sources */,
 				AF5BDC3F268C8677001F4A38 /* HierarchicalDemoSwiftUI.swift in Sources */,
+				AFCDD9FD27075D9200BEF2A7 /* GettingStartedSwiftUI_iOS15.swift in Sources */,
 				AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */,
 				AF67792122FB34C000850ACC /* HighlightingDemoViewController.swift in Sources */,
 				AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */,
@@ -1027,7 +1031,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JF98Q6D3JZ;
+				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = DemoDirectory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1049,6 +1053,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = DemoDirectoryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1069,6 +1074,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = DemoDirectoryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

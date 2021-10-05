@@ -26,23 +26,23 @@ extension GettingStartedGuide.SwiftUI {
 
   struct ContentView: View {
     
-    @ObservedObject var queryInputObservable: QueryInputObservableController = .init()
-    @ObservedObject var hitsObservable: HitsObservableController<BestBuyItem> = .init()
-    @ObservedObject var statsObservable: StatsTextObservableController = .init()
-    @ObservedObject var facetListObservable: FacetListObservableController = .init()
+    @ObservedObject var queryInputController: QueryInputObservableController = .init()
+    @ObservedObject var hitsController: HitsObservableController<BestBuyItem> = .init()
+    @ObservedObject var statsController: StatsTextObservableController = .init()
+    @ObservedObject var facetsController: FacetListObservableController = .init()
 
     @State private var isPresentingFacets = false
     @State private var isEditing = false
     
     var body: some View {
       VStack(spacing: 7) {
-        SearchBar(text: $queryInputObservable.query,
+        SearchBar(text: $queryInputController.query,
                   isEditing: $isEditing,
-                  onSubmit: queryInputObservable.submit)
-        Text(statsObservable.stats)
+                  onSubmit: queryInputController.submit)
+        Text(statsController.stats)
           .fontWeight(.medium)
         VStack {
-          HitsList(hitsObservable) { (hit, _) in
+          HitsList(hitsController) { (hit, _) in
             VStack(alignment: .leading, spacing: 10) {
               Text(hit?.name ?? "").padding(.all, 10)
               Divider()
@@ -53,29 +53,35 @@ extension GettingStartedGuide.SwiftUI {
           }
         }
         .onAppear {
-          hideKeyboard()
+//          hideKeyboard()
         }
       }
       .navigationBarTitle("Algolia & SwiftUI")
       .navigationBarItems(trailing: facetsButton())
-      .sheet(isPresented: $isPresentingFacets, content: facets)
+      .sheet(isPresented: $isPresentingFacets, content: facetsView)
     }
     
     @ViewBuilder
-    private func facets() -> some View {
-      NavigationView {
-        FacetList(facetListObservable) { facet, isSelected in
-          VStack {
-            FacetRow(facet: facet, isSelected: isSelected)
-            Divider()
+    private func facetsView() -> some View {
+      VStack {
+        Text("Brand")
+          .font(.title)
+          .bold()
+          .frame(maxWidth: .infinity, alignment: .leading)
+        ScrollView {
+          FacetList(facetsController) { facet, isSelected in
+            VStack {
+              FacetRow(facet: facet, isSelected: isSelected)
+              Divider()
+            }
+            .padding(.vertical, 7)
+          } noResults: {
+            Text("No facets found")
+              .frame(maxWidth: .infinity, maxHeight: .infinity)
           }
-          .padding(.vertical, 7)
-        } noResults: {
-          Text("No facets found")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .navigationBarTitle("Brand")
       }
+      .padding()
     }
     
     private func facetsButton() -> some View {
@@ -136,10 +142,10 @@ struct GettingStartedPreviews : PreviewProvider {
   static let algoliaController = GettingStartedGuide.SwiftUI.AlgoliaController()
   
   static func connect(_ algoliaController: GettingStartedGuide.SwiftUI.AlgoliaController, _ contentView: GettingStartedGuide.SwiftUI.ContentView) {
-    algoliaController.hitsInteractor.connectController(contentView.hitsObservable)
-    algoliaController.statsInteractor.connectController(contentView.statsObservable)
-    algoliaController.queryInputInteractor.connectController(contentView.queryInputObservable)
-    algoliaController.facetListInteractor.connectController(contentView.facetListObservable, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+    algoliaController.hitsInteractor.connectController(contentView.hitsController)
+    algoliaController.statsInteractor.connectController(contentView.statsController)
+    algoliaController.queryInputInteractor.connectController(contentView.queryInputController)
+    algoliaController.facetListInteractor.connectController(contentView.facetsController, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
   }
   
   static var previews: some View {

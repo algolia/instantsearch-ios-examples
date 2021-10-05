@@ -12,23 +12,23 @@ import SwiftUI
 
 struct SuggestionsView: View {
   
+  @Binding var query: String
   @Binding var isEditing: Bool
-  @ObservedObject var queryInputController: QueryInputObservableController
   @ObservedObject var suggestionsController: HitsObservableController<QuerySuggestion>
   
   var body: some View {
     HitsList(suggestionsController) { (hit, _) in
       if let querySuggestion = hit {
         SuggestionRow(suggestion: querySuggestion) { suggestion in
-          queryInputController.setQuery(suggestion)
+          query = suggestion
           isEditing = false
         } onTypeAhead: { suggestion in
-          queryInputController.setQuery(suggestion)
+          query = suggestion
         }
+        Divider()
       } else {
         EmptyView()
       }
-      Divider()
     }
   }
   
