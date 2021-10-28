@@ -18,7 +18,7 @@ class RelevantSortDemoController {
   let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<Item>
-  let sortByConnector: SortByConnector<HitsSearcher>
+  let sortByConnector: SortByConnector
   let relevantSortConnector: RelevantSortConnector
   let statsConnector: StatsConnector
   

@@ -16,7 +16,7 @@ class SortByDemoController {
   let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<HitType>
-  let sortByConnector: SortByConnector<HitsSearcher>
+  let sortByConnector: SortByConnector
   
   
   let indexTitle: IndexName = "mobile_demo_movies"

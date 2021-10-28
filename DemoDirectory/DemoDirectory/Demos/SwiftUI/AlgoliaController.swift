@@ -30,6 +30,10 @@ class AlgoliaController {
   let sortByInteractor: SortByInteractor
   
   let areFacetsSearchable: Bool
+  
+  let indexMain: IndexName = "instant_search"
+  let indexPriceAsc: IndexName = "instant_search_price_asc"
+  let indexPriceDesc: IndexName = "instant_search_price_desc"
     
   init(appID: ApplicationID,
        apiKey: APIKey,
@@ -50,9 +54,9 @@ class AlgoliaController {
     self.queryInputInteractor = .init()
     self.filterClearInteractor = .init()
     self.sortByInteractor = .init(items: [
-      1: "instant_search",
-      2: "instant_search_price_asc",
-      3: "instant_search_price_desc"
+      1: indexMain,
+      2: indexPriceAsc,
+      3: indexPriceDesc
     ], selected: 1)
     self.suggestions = .init()
     self.facetList = .init()
@@ -73,7 +77,7 @@ class AlgoliaController {
     filterClearInteractor.connectFilterState(filterState,
                                              filterGroupIDs: [.or(name: facetAttribute.rawValue, filterType: .facet)],
                                              clearMode: .specified)
-    sortByInteractor.connectSearcher(searcher: searcher)
+    sortByInteractor.connectSearcher(searcher)
     
     queryInputInteractor.connectSearcher(suggestions.searcher)
     
@@ -93,13 +97,15 @@ class AlgoliaController {
     currentFiltersInteractor.connectController(contentView.currentFiltersController)
     queryInputInteractor.connectController(contentView.queryInputController)
     filterClearInteractor.connectController(contentView.filterClearController)
-    sortByInteractor.connectController(contentView.sortByController) { indexName in
+    sortByInteractor.connectController(contentView.sortByController) { [indexMain = self.indexMain,
+                                                                        indexPriceAsc = self.indexPriceAsc,
+                                                                        indexPriceDesc = self.indexPriceDesc] indexName in
       switch indexName {
-      case "instant_search":
+      case indexMain:
         return "Featured"
-      case "instant_search_price_asc":
+      case indexPriceAsc:
         return "Price ascending"
-      case "instant_search_price_desc":
+      case indexPriceDesc:
         return "Price descending"
       default:
         return indexName.rawValue
