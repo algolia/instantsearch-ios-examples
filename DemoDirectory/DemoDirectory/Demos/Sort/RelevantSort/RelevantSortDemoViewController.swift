@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import InstantSearch
+import InstantSearchCore
+import InstantSearchSwiftUI
 import UIKit
 import SwiftUI
 
