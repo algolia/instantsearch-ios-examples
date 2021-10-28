@@ -27,7 +27,7 @@ class AlgoliaController {
   let currentFiltersInteractor: CurrentFiltersInteractor
   let filterState: FilterState
   let filterClearInteractor: FilterClearInteractor
-  let switchIndexInteractor: SwitchIndexInteractor
+  let sortByInteractor: SortByInteractor
   
   let areFacetsSearchable: Bool
     
@@ -49,13 +49,11 @@ class AlgoliaController {
     self.currentFiltersInteractor = .init()
     self.queryInputInteractor = .init()
     self.filterClearInteractor = .init()
-    self.switchIndexInteractor = .init(
-      indexNames: [
-        "instant_search",
-        "instant_search_price_asc",
-        "instant_search_price_desc"
-      ],
-      selectedIndexName: "instant_search")
+    self.sortByInteractor = .init(items: [
+      1: "instant_search",
+      2: "instant_search_price_asc",
+      3: "instant_search_price_desc"
+    ], selected: 1)
     self.suggestions = .init()
     self.facetList = .init()
     self.facetSearch = .init(appID: appID,
@@ -75,7 +73,7 @@ class AlgoliaController {
     filterClearInteractor.connectFilterState(filterState,
                                              filterGroupIDs: [.or(name: facetAttribute.rawValue, filterType: .facet)],
                                              clearMode: .specified)
-    switchIndexInteractor.connectSearcher(searcher)
+    sortByInteractor.connectSearcher(searcher: searcher)
     
     queryInputInteractor.connectSearcher(suggestions.searcher)
     
@@ -95,7 +93,18 @@ class AlgoliaController {
     currentFiltersInteractor.connectController(contentView.currentFiltersController)
     queryInputInteractor.connectController(contentView.queryInputController)
     filterClearInteractor.connectController(contentView.filterClearController)
-    switchIndexInteractor.connectController(contentView.switchIndexController)
+    sortByInteractor.connectController(contentView.sortByController) { indexName in
+      switch indexName {
+      case "instant_search":
+        return "Featured"
+      case "instant_search_price_asc":
+        return "Price ascending"
+      case "instant_search_price_desc":
+        return "Price descending"
+      default:
+        return indexName.rawValue
+      }
+    }
     
     suggestions.setup(contentView)
     
@@ -115,8 +124,8 @@ class AlgoliaController {
 
     init() {
       searcher = .init(appID: "latency",
-                                 apiKey: "af044fb0788d6bb15f807e4420592bc5",
-                                 indexName: "instantsearch_query_suggestions")
+                       apiKey: "af044fb0788d6bb15f807e4420592bc5",
+                       indexName: "instantsearch_query_suggestions")
       hitsInteractor = .init()
       hitsInteractor.connectSearcher(searcher)
     }

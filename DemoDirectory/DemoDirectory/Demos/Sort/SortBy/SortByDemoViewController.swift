@@ -13,7 +13,7 @@ class SortByDemoViewController: UIViewController {
   
   typealias HitType = Movie
   
-  var selectIndexWithName: (IndexName) -> Void  = { _ in }
+  var onClick: ((Int) -> Void)? = nil
   
   let controller: SortByDemoController
 
@@ -45,7 +45,7 @@ class SortByDemoViewController: UIViewController {
     searchController.searchBar.delegate = self
     controller.hitsConnector.connectController(hitsTableViewController)
     controller.queryInputConnector.connectController(textFieldController)
-    controller.switchIndexConnector.connectController(self)
+    controller.sortByConnector.connectController(self, presenter: controller.title(for:))
   }
 
 }
@@ -53,16 +53,20 @@ class SortByDemoViewController: UIViewController {
 extension SortByDemoViewController: UISearchBarDelegate {
     
   func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-    selectIndexWithName(controller.indices[selectedScope])
+    onClick?(selectedScope)
   }
   
 }
 
-extension SortByDemoViewController: SwitchIndexController {
+extension SortByDemoViewController: SelectableSegmentController {
+      
+  func setItems(items: [Int: String]) {
+    searchController.searchBar.scopeButtonTitles = items.sorted(by: \.key).map(\.value)
+  }
+
   
-  func set(indicesNames: [IndexName], selected: IndexName) {
-    searchController.searchBar.scopeButtonTitles = indicesNames.map(controller.title(for:))
-    if let index = indicesNames.firstIndex(of: selected) {
+  func setSelected(_ selected: Int?) {
+    if let index = selected {
       searchController.searchBar.selectedScopeButtonIndex = index
     }
   }

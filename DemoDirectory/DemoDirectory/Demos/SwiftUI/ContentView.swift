@@ -22,7 +22,7 @@ struct ContentView: View {
   
   // Shared models
   @ObservedObject var currentFiltersController: CurrentFiltersObservableController
-  @ObservedObject var switchIndexController: SwitchIndexObservableController
+  @ObservedObject var sortByController: SelectableSegmentObservableController
 
   // Suggestions models
   @ObservedObject var suggestionsController: HitsObservableController<QuerySuggestion>
@@ -45,7 +45,7 @@ struct ContentView: View {
     queryInputController = .init()
     filterClearController = .init()
     suggestionsController = .init()
-    switchIndexController = .init()
+    sortByController = .init()
     facetSearchQueryInputController = .init()
     facetListController = .init()
     self.areFacetsSearchable = areFacetsSearchable
@@ -97,14 +97,16 @@ struct ContentView: View {
   @available(iOS 14.0, *)
   private func sortMenu() -> some View {
     Menu {
-      ForEach(0 ..< switchIndexController.indicesNames.count, id: \.self) { index in
-        let indexName = switchIndexController.indicesNames[index]
-        Button(label(for: indexName)) {
-          switchIndexController.selectIndexWithName(indexName)
+      ForEach(0 ..< sortByController.segmentsTitles.count, id: \.self) { index in
+        let indexName = sortByController.segmentsTitles[index]
+        Button(indexName) {
+          sortByController.select(index)
         }
       }
     } label: {
-      Label(label(for: switchIndexController.selectedIndexName), systemImage: "arrow.up.arrow.down.circle")
+      if let index = sortByController.selectedSegmentIndex {
+        Label(sortByController.segmentsTitles[index], systemImage: "arrow.up.arrow.down.circle")
+      }
     }
   }
   
@@ -120,20 +122,7 @@ struct ContentView: View {
         .font(.title)
     })
   }
-  
-  private func label(for indexName: IndexName) -> String {
-    switch indexName {
-    case "instant_search":
-      return "Featured"
-    case "instant_search_price_asc":
-      return "Price ascending"
-    case "instant_search_price_desc":
-      return "Price descending"
-    default:
-      return indexName.rawValue
-    }
-  }
-  
+    
 }
 
 struct ContentView_Previews : PreviewProvider {

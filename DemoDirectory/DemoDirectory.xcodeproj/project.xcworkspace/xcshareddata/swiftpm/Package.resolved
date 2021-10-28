@@ -11,12 +11,21 @@
         }
       },
       {
+        "package": "InstantSearch",
+        "repositoryURL": "https://github.com/algolia/instantsearch-ios",
+        "state": {
+          "branch": "refactor/searchers",
+          "revision": "cf87fef211b1e40dc79f0449df640d266f5f9c49",
+          "version": null
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage",
         "state": {
           "branch": null,
-          "revision": "88b3ba211c0d604e60eab204c1baf8229c513399",
-          "version": "5.9.4"
+          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
+          "version": "5.12.1"
         }
       },
       {

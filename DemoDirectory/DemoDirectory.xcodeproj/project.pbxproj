@@ -21,7 +21,6 @@
 		AF1AF45E262DC6580049DCE7 /* AlgoliaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */; };
 		AF1AF466262DC92A0049DCE7 /* InstantSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */; };
 		AF26923126EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF26923026EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift */; };
-		AF39CE8A26E539C800A9A611 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF39CE8926E539C800A9A611 /* InstantSearch */; };
 		AF4059712552D125003C8CDB /* ShopItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */; };
 		AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596E2552D125003C8CDB /* ResultsViewController.swift */; };
 		AF4059732552D125003C8CDB /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596F2552D125003C8CDB /* ShopItem.swift */; };
@@ -78,6 +77,9 @@
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
 		AF7A7B08268D2860003C62A5 /* ToggleDemoSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7A7B07268D2860003C62A5 /* ToggleDemoSwiftUI.swift */; };
+		AF7FEB14272B34AD0003BE62 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB13272B34AD0003BE62 /* InstantSearch */; };
+		AF7FEB16272B34AD0003BE62 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB15272B34AD0003BE62 /* InstantSearchCore */; };
+		AF7FEB18272B34AD0003BE62 /* InstantSearchInsights in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */; };
 		AF82C53026A6176A00609ECE /* SegmentedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52A26A6176A00609ECE /* SegmentedDemoViewController.swift */; };
 		AF82C53126A6176A00609ECE /* RefinementPersistentListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52B26A6176A00609ECE /* RefinementPersistentListDemoViewController.swift */; };
 		AF82C53226A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52C26A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift */; };
@@ -145,7 +147,6 @@
 		AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoliaController.swift; sourceTree = "<group>"; };
 		AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSearchItem.swift; sourceTree = "<group>"; };
 		AF26923026EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsAndFacetsSearchExample.swift; sourceTree = "<group>"; };
-		AF39CE8826E538B400A9A611 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "instantsearch-ios"; path = "../../instantsearch-ios"; sourceTree = "<group>"; };
 		AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemTableViewCell.swift; sourceTree = "<group>"; };
 		AF40596E2552D125003C8CDB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		AF40596F2552D125003C8CDB /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
@@ -252,10 +253,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF39CE8A26E539C800A9A611 /* InstantSearch in Frameworks */,
+				AF7FEB14272B34AD0003BE62 /* InstantSearch in Frameworks */,
 				AFBE2B8C26A74D9F00F1E139 /* InstantSearchVoiceOverlay in Frameworks */,
+				AF7FEB16272B34AD0003BE62 /* InstantSearchCore in Frameworks */,
 				AF521BF825CE151A000F994C /* SDWebImageSwiftUI in Frameworks */,
 				AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */,
+				AF7FEB18272B34AD0003BE62 /* InstantSearchInsights in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +275,6 @@
 		34555A2B870F3B8F9067E196 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF39CE8826E538B400A9A611 /* instantsearch-ios */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -642,7 +644,9 @@
 				AF4059852552D1EB003C8CDB /* SDWebImage */,
 				AF521BF725CE151A000F994C /* SDWebImageSwiftUI */,
 				AFBE2B8B26A74D9F00F1E139 /* InstantSearchVoiceOverlay */,
-				AF39CE8926E539C800A9A611 /* InstantSearch */,
+				AF7FEB13272B34AD0003BE62 /* InstantSearch */,
+				AF7FEB15272B34AD0003BE62 /* InstantSearchCore */,
+				AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -698,6 +702,7 @@
 				AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				AF521BF625CE151A000F994C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				AFBE2B8A26A74D9F00F1E139 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
+				AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 			);
 			productRefGroup = AF6778C222FB319200850ACC /* Products */;
 			projectDirPath = "";
@@ -1131,6 +1136,14 @@
 				minimumVersion = 1.5.0;
 			};
 		};
+		AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/instantsearch-ios";
+			requirement = {
+				branch = refactor/searchers;
+				kind = branch;
+			};
+		};
 		AFBE2B8A26A74D9F00F1E139 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/voice-overlay-ios";
@@ -1142,10 +1155,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF39CE8926E539C800A9A611 /* InstantSearch */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = InstantSearch;
-		};
 		AF4059852552D1EB003C8CDB /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */;
@@ -1155,6 +1164,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF521BF625CE151A000F994C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		AF7FEB13272B34AD0003BE62 /* InstantSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearch;
+		};
+		AF7FEB15272B34AD0003BE62 /* InstantSearchCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchCore;
+		};
+		AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchInsights;
 		};
 		AFBE2B8B26A74D9F00F1E139 /* InstantSearchVoiceOverlay */ = {
 			isa = XCSwiftPackageProductDependency;

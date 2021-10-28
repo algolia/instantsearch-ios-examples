@@ -16,26 +16,23 @@ class SortByDemoController {
   let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<HitType>
-  let switchIndexConnector: SwitchIndexConnector
+  let sortByConnector: SortByConnector<HitsSearcher>
+  
   
   let indexTitle: IndexName = "mobile_demo_movies"
   let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
   let indexYearDesc: IndexName = "mobile_demo_movies_year_desc"
-  
-  let indices: [IndexName] = [
-    "mobile_demo_movies",
-    "mobile_demo_movies_year_asc",
-    "mobile_demo_movies_year_desc"
-  ]
-  
+    
   init() {
-    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = HitsSearcher(client: .demo,
+                                 indexName: indexTitle)
     self.queryInputConnector = .init(searcher: searcher)
     self.hitsConnector = .init(searcher: searcher)
-    switchIndexConnector = .init(searcher: searcher,
-                                 indexNames: indices,
-                                 selectedIndexName: indexTitle)
-    
+    sortByConnector = .init(searcher: searcher,
+                            indicesNames: [indexTitle,
+                                           indexYearAsc,
+                                           indexYearDesc],
+                            selected: 0)
     searcher.search()
     searcher.isDisjunctiveFacetingEnabled = false
   }
