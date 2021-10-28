@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import InstantSearch
+import InstantSearchSwiftUI
 import SwiftUI
 
 struct FacetsView: View {
