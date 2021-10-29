@@ -36,6 +36,9 @@ struct SearchView: View {
   
   var body: some View {
     VStack(spacing: 7) {
+      SearchBar(text: $queryInputController.query,
+                isEditing: $isEditing,
+                onSubmit: queryInputController.submit)
       if isEditing {
         SuggestionsList(isEditing: $isEditing,
                         queryInputObservable: queryInputController,
@@ -65,19 +68,7 @@ struct SearchView: View {
         }
       }
     }
-    .searchable(text: $queryInputController.query) {
-      ForEach(suggestionsController.hits, id: \.?.query) { suggestion in
-        if let suggestion = suggestion {
-          if let highlightedValue = suggestion.highlighted {
-            let highlightedValueString = HighlightedString(string: highlightedValue)
-            Text(highlightedString: highlightedValueString) { Text($0).bold() }.searchCompletion(suggestion.query)
-          } else {
-            Text(suggestion.query).searchCompletion(suggestion.query)
-          }
-        }
-      }
-    }
-    .navigationBarTitle("Algolia & SwiftUI")
+    .navigationTitle("Algolia & SwiftUI")
     .padding([.horizontal, .top])
   }
   

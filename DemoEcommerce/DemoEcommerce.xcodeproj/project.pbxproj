@@ -828,8 +828,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.14.0;
 			};
 		};
 		AFBD420A2621B65700093F52 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {

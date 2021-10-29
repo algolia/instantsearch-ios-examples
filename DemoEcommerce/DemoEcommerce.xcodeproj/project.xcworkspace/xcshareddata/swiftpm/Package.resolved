@@ -14,9 +14,9 @@
         "package": "InstantSearch",
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
-          "branch": "master",
-          "revision": "2cdbff6c100b10cd6b290ccedf9a0e33417d9d09",
-          "version": null
+          "branch": null,
+          "revision": "28f09dcfc326d7a8846b83e3cd80d795bfc6c686",
+          "version": "7.14.0"
         }
       },
       {
