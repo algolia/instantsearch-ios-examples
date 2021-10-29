@@ -80,6 +80,7 @@
 		AF7FEB14272B34AD0003BE62 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB13272B34AD0003BE62 /* InstantSearch */; };
 		AF7FEB16272B34AD0003BE62 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB15272B34AD0003BE62 /* InstantSearchCore */; };
 		AF7FEB18272B34AD0003BE62 /* InstantSearchInsights in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */; };
+		AF7FEB2A272C3D880003BE62 /* InstantSearchSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB29272C3D880003BE62 /* InstantSearchSwiftUI */; };
 		AF82C53026A6176A00609ECE /* SegmentedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52A26A6176A00609ECE /* SegmentedDemoViewController.swift */; };
 		AF82C53126A6176A00609ECE /* RefinementPersistentListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52B26A6176A00609ECE /* RefinementPersistentListDemoViewController.swift */; };
 		AF82C53226A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52C26A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift */; };
@@ -254,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7FEB14272B34AD0003BE62 /* InstantSearch in Frameworks */,
+				AF7FEB2A272C3D880003BE62 /* InstantSearchSwiftUI in Frameworks */,
 				AFBE2B8C26A74D9F00F1E139 /* InstantSearchVoiceOverlay in Frameworks */,
 				AF7FEB16272B34AD0003BE62 /* InstantSearchCore in Frameworks */,
 				AF521BF825CE151A000F994C /* SDWebImageSwiftUI in Frameworks */,
@@ -647,6 +649,7 @@
 				AF7FEB13272B34AD0003BE62 /* InstantSearch */,
 				AF7FEB15272B34AD0003BE62 /* InstantSearchCore */,
 				AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */,
+				AF7FEB29272C3D880003BE62 /* InstantSearchSwiftUI */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -1179,6 +1182,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearchInsights;
+		};
+		AF7FEB29272C3D880003BE62 /* InstantSearchSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchSwiftUI;
 		};
 		AFBE2B8B26A74D9F00F1E139 /* InstantSearchVoiceOverlay */ = {
 			isa = XCSwiftPackageProductDependency;

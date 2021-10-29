@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/algolia/instantsearch-ios",
         "state": {
           "branch": "refactor/searchers",
-          "revision": "1d6129c7f50e7b10eabfdb26a88d7b6e6097d830",
+          "revision": "0fb839dd79da2929e5469fb6b563f1a2b372cbe8",
           "version": null
         }
       },
