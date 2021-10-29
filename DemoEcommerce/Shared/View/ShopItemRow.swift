@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import InstantSearch
-import SDWebImageSwiftUI
 
 struct ShopItemRow: View {
   
@@ -25,13 +24,19 @@ struct ShopItemRow: View {
   var body: some View {
     VStack(alignment: .leading) {
       HStack(alignment: .top, spacing: 20) {
-        WebImage(url: imageURL)
-          .resizable()
-          .indicator(.activity)
-          .scaledToFit()
-          .clipped()
-          .frame(width: 100, height: 100, alignment: .top)
-          .padding(.top, 10)
+        AsyncImage(
+          url: imageURL,
+          content: { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+          },
+          placeholder: {
+            ProgressView()
+          })
+          .frame(width: 70,
+                 height: 70)
+          .padding()
         VStack(alignment: .leading, spacing: 10) {
           Text(highlightedString: highlightedTitle!, highlighted: { Text($0).foregroundColor(.accentColor) })
             .font(.title2)

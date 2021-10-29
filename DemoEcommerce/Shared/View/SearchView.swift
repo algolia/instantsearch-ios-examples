@@ -36,9 +36,6 @@ struct SearchView: View {
   
   var body: some View {
     VStack(spacing: 7) {
-      SearchBar(text: $queryInputController.query,
-                isEditing: $isEditing,
-                onSubmit: queryInputController.submit)
       if isEditing {
         SuggestionsList(isEditing: $isEditing,
                         queryInputObservable: queryInputController,
@@ -56,9 +53,7 @@ struct SearchView: View {
               Text(statsController.stats)
                 .fontWeight(.medium)
               Spacer()
-              if #available(iOS 14.0, *) {
-                sortMenu()
-              }
+              sortMenu()
             }
             HitsList(hitsController) { (hit, _) in
               ShopItemRow(isitem: hit)
@@ -70,11 +65,22 @@ struct SearchView: View {
         }
       }
     }
+    .searchable(text: $queryInputController.query) {
+      ForEach(suggestionsController.hits, id: \.?.query) { suggestion in
+        if let suggestion = suggestion {
+          if let highlightedValue = suggestion.highlighted {
+            let highlightedValueString = HighlightedString(string: highlightedValue)
+            Text(highlightedString: highlightedValueString) { Text($0).bold() }.searchCompletion(suggestion.query)
+          } else {
+            Text(suggestion.query).searchCompletion(suggestion.query)
+          }
+        }
+      }
+    }
     .navigationBarTitle("Algolia & SwiftUI")
     .padding([.horizontal, .top])
   }
   
-  @available(iOS 14.0, *)
   private func sortMenu() -> some View {
     Menu {
       ForEach(0 ..< switchIndexController.indexNames.count, id: \.self) { index in

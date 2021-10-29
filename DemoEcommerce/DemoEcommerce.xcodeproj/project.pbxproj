@@ -12,6 +12,10 @@
 		AF7FEB2D272C421B0003BE62 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB2C272C421B0003BE62 /* InstantSearch */; };
 		AF7FEB2F272C421B0003BE62 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB2E272C421B0003BE62 /* InstantSearchCore */; };
 		AF7FEB31272C421B0003BE62 /* InstantSearchSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB30272C421B0003BE62 /* InstantSearchSwiftUI */; };
+		AF7FEB33272C48E00003BE62 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB32272C48E00003BE62 /* InstantSearch */; };
+		AF7FEB35272C48E00003BE62 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB34272C48E00003BE62 /* InstantSearchCore */; };
+		AF7FEB37272C48E00003BE62 /* InstantSearchSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB36272C48E00003BE62 /* InstantSearchSwiftUI */; };
+		AF7FEB39272C49D90003BE62 /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB38272C49D90003BE62 /* Sliders */; };
 		AFBD41D02621AEED00093F52 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD41CF2621AEED00093F52 /* Tests_iOS.swift */; };
 		AFBD41DB2621AEED00093F52 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD41DA2621AEED00093F52 /* Tests_macOS.swift */; };
 		AFBD41DD2621AEED00093F52 /* DemoEcommerceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD41B42621AEEB00093F52 /* DemoEcommerceApp.swift */; };
@@ -35,7 +39,6 @@
 		AFBD423A2621D32500093F52 /* SearchableFacetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD42382621D32500093F52 /* SearchableFacetList.swift */; };
 		AFBD424B26233E8D00093F52 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD424A26233E8D00093F52 /* ExpandableView.swift */; };
 		AFBD424C26233E8D00093F52 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD424A26233E8D00093F52 /* ExpandableView.swift */; };
-		AFBD42642623A96C00093F52 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AFBD42632623A96C00093F52 /* SDWebImageSwiftUI */; };
 		AFF5F1A3262EE0CF00813EF5 /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = AFF5F1A2262EE0CF00813EF5 /* Sliders */; };
 		AFF5F1BF262F915500813EF5 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5F1BE262F915500813EF5 /* RatingController.swift */; };
 		AFF5F1C0262F915500813EF5 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5F1BE262F915500813EF5 /* RatingController.swift */; };
@@ -105,7 +108,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFBD42642623A96C00093F52 /* SDWebImageSwiftUI in Frameworks */,
+				AF7FEB39272C49D90003BE62 /* Sliders in Frameworks */,
+				AF7FEB35272C48E00003BE62 /* InstantSearchCore in Frameworks */,
+				AF7FEB33272C48E00003BE62 /* InstantSearch in Frameworks */,
+				AF7FEB37272C48E00003BE62 /* InstantSearchSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +276,10 @@
 			);
 			name = "DemoEcommerce (macOS)";
 			packageProductDependencies = (
-				AFBD42632623A96C00093F52 /* SDWebImageSwiftUI */,
+				AF7FEB32272C48E00003BE62 /* InstantSearch */,
+				AF7FEB34272C48E00003BE62 /* InstantSearchCore */,
+				AF7FEB36272C48E00003BE62 /* InstantSearchSwiftUI */,
+				AF7FEB38272C49D90003BE62 /* Sliders */,
 			);
 			productName = "DemoEcommerce (macOS)";
 			productReference = AFBD41C32621AEED00093F52 /* DemoEcommerce.app */;
@@ -588,7 +597,7 @@
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -612,7 +621,7 @@
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -857,12 +866,27 @@
 			package = AF7FEB2B272C421B0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearchSwiftUI;
 		};
-		AFBD420B2621B65800093F52 /* SDWebImageSwiftUI */ = {
+		AF7FEB32272C48E00003BE62 /* InstantSearch */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFBD420A2621B65700093F52 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
+			package = AF7FEB2B272C421B0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearch;
 		};
-		AFBD42632623A96C00093F52 /* SDWebImageSwiftUI */ = {
+		AF7FEB34272C48E00003BE62 /* InstantSearchCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7FEB2B272C421B0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchCore;
+		};
+		AF7FEB36272C48E00003BE62 /* InstantSearchSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF7FEB2B272C421B0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchSwiftUI;
+		};
+		AF7FEB38272C49D90003BE62 /* Sliders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFF5F1A1262EE0CF00813EF5 /* XCRemoteSwiftPackageReference "swiftui-sliders" */;
+			productName = Sliders;
+		};
+		AFBD420B2621B65800093F52 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AFBD420A2621B65700093F52 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
