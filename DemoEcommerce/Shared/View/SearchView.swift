@@ -7,6 +7,7 @@
 
 import SwiftUI
 import InstantSearch
+import InstantSearchSwiftUI
 
 struct SearchView: View {
   
@@ -14,7 +15,7 @@ struct SearchView: View {
   @ObservedObject var hitsController: HitsObservableController<Hit<InstantSearchItem>>
   @ObservedObject var switchIndexController: SwitchIndexObservableController
   @ObservedObject var suggestionsController: HitsObservableController<QuerySuggestion>
-  @ObservedObject var statsController: StatsObservableController
+  @ObservedObject var statsController: StatsTextObservableController
   @ObservedObject var loadingController: LoadingObservableController
     
   @State private var isEditing = false
@@ -23,7 +24,7 @@ struct SearchView: View {
               hitsController: HitsObservableController<Hit<InstantSearchItem>>,
               switchIndexController: SwitchIndexObservableController,
               suggestionsController: HitsObservableController<QuerySuggestion>,
-              statsController: StatsObservableController,
+              statsController: StatsTextObservableController,
               loadingController: LoadingObservableController) {
     self.queryInputController = queryInputController
     self.hitsController = hitsController
@@ -65,9 +66,6 @@ struct SearchView: View {
               Text("No Results")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-          }
-          .onAppear {
-            hideKeyboard()
           }
         }
       }

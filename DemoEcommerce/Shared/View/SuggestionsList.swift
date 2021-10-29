@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import InstantSearch
+import InstantSearchSwiftUI
 
 struct SuggestionsList: View {
   

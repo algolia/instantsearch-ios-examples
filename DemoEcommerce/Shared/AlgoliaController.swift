@@ -7,6 +7,7 @@
 
 import Foundation
 import InstantSearch
+import InstantSearchSwiftUI
 import Combine
 
 class AlgoliaController {
@@ -224,7 +225,7 @@ extension AlgoliaController {
 
 class AlgoliaViewModel: ObservableObject {
   var queryInputController: QueryInputObservableController = .init()
-  var statsController: StatsObservableController = .init()
+  var statsController: StatsTextObservableController = .init()
   var hitsController: HitsObservableController<Hit<InstantSearchItem>> = .init()
   var switchIndexController: SwitchIndexObservableController = .init()
   var suggestionsController: HitsObservableController<QuerySuggestion> = .init()

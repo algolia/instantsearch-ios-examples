@@ -7,6 +7,7 @@
 
 import SwiftUI
 import InstantSearch
+import InstantSearchSwiftUI
 import Sliders
 
 struct FiltersView: View {
@@ -18,7 +19,7 @@ struct FiltersView: View {
   @ObservedObject var freeShippingToggleController: FilterToggleObservableController<Filter.Facet>
   @ObservedObject var ratingController: RatingController
   @ObservedObject var priceRangeController: NumberRangeObservableController<Int>
-  @ObservedObject var statsController: StatsObservableController
+  @ObservedObject var statsController: StatsTextObservableController
   @ObservedObject var currentFiltersController: CurrentFiltersObservableController
     
   // State
@@ -34,7 +35,7 @@ struct FiltersView: View {
        freeShippingToggleController: FilterToggleObservableController<Filter.Facet>,
        ratingController: RatingController,
        priceRangeController: NumberRangeObservableController<Int>,
-       statsController: StatsObservableController,
+       statsController: StatsTextObservableController,
        currentFiltersController: CurrentFiltersObservableController) {
     self.filterClearController = filterClearController
     self.facetSearchQueryInputController = facetSearchQueryInputController
@@ -97,7 +98,13 @@ struct FiltersView: View {
   }
   
   func hierarchical() -> some View {
-    HierarchicalList(hierarchicalController: categoryHierarchicalController)
+    HierarchicalList(categoryHierarchicalController) { facet, nestingLevel, isSelected in
+      HierarchicalFacetRow(facet: facet,
+                           nestingLevel: nestingLevel,
+                           isSelected: isSelected)
+        .frame(height: 30)
+      Divider()
+    }
   }
   
   func toggle() -> some View {

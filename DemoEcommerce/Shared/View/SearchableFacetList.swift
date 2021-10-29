@@ -7,7 +7,9 @@
 
 import Foundation
 import InstantSearch
+import InstantSearchSwiftUI
 import SwiftUI
+
 
 struct SearchableFacetList: View {
   
