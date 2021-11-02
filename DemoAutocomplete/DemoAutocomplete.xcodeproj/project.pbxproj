@@ -18,6 +18,9 @@
 		AF7FEBAC272CAC5E0003BE62 /* DemoAutocompleteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7FEBAB272CAC5E0003BE62 /* DemoAutocompleteUITestsLaunchTests.swift */; };
 		AF7FEBBA272CAD330003BE62 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEBB9272CAD330003BE62 /* InstantSearch */; };
 		AF7FEBBC272CAD330003BE62 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEBBB272CAD330003BE62 /* InstantSearchCore */; };
+		AF7FEBBF272CB4540003BE62 /* MultiIndexSnippetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7FEBBD272CB4540003BE62 /* MultiIndexSnippetViewController.swift */; };
+		AF7FEBC0272CB4540003BE62 /* HitsAndFacetsSearchExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7FEBBE272CB4540003BE62 /* HitsAndFacetsSearchExample.swift */; };
+		AF7FEBC2272CC06C0003BE62 /* QuerySuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7FEBC1272CC06C0003BE62 /* QuerySuggestions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		AF7FEBA5272CAC5E0003BE62 /* DemoAutocompleteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoAutocompleteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7FEBA9272CAC5E0003BE62 /* DemoAutocompleteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAutocompleteUITests.swift; sourceTree = "<group>"; };
 		AF7FEBAB272CAC5E0003BE62 /* DemoAutocompleteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAutocompleteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AF7FEBBD272CB4540003BE62 /* MultiIndexSnippetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiIndexSnippetViewController.swift; path = ../../../../Desktop/MultiIndexSnippetViewController.swift; sourceTree = "<group>"; };
+		AF7FEBBE272CB4540003BE62 /* HitsAndFacetsSearchExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HitsAndFacetsSearchExample.swift; path = ../../../../Desktop/HitsAndFacetsSearchExample.swift; sourceTree = "<group>"; };
+		AF7FEBC1272CC06C0003BE62 /* QuerySuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuerySuggestions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				AF7FEB88272CAC5D0003BE62 /* AppDelegate.swift */,
 				AF7FEB8A272CAC5D0003BE62 /* SceneDelegate.swift */,
 				AF7FEB8C272CAC5D0003BE62 /* ViewController.swift */,
+				AF7FEBC1272CC06C0003BE62 /* QuerySuggestions.swift */,
+				AF7FEBBE272CB4540003BE62 /* HitsAndFacetsSearchExample.swift */,
+				AF7FEBBD272CB4540003BE62 /* MultiIndexSnippetViewController.swift */,
 				AF7FEB8E272CAC5D0003BE62 /* Main.storyboard */,
 				AF7FEB91272CAC5E0003BE62 /* Assets.xcassets */,
 				AF7FEB93272CAC5E0003BE62 /* LaunchScreen.storyboard */,
@@ -270,7 +279,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7FEB8D272CAC5D0003BE62 /* ViewController.swift in Sources */,
+				AF7FEBBF272CB4540003BE62 /* MultiIndexSnippetViewController.swift in Sources */,
 				AF7FEB89272CAC5D0003BE62 /* AppDelegate.swift in Sources */,
+				AF7FEBC0272CB4540003BE62 /* HitsAndFacetsSearchExample.swift in Sources */,
+				AF7FEBC2272CC06C0003BE62 /* QuerySuggestions.swift in Sources */,
 				AF7FEB8B272CAC5D0003BE62 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
