@@ -15,65 +15,58 @@ import SwiftUI
 // QS with recent searches
 // QS with recent searches and categories
 
+enum Demo: Int, CaseIterable {
+  case querySuggestions
+  case facetsAndHits
+  case multiHits
+  case querySuggestionsAndRecentSearches
+  
+  var title: String {
+    switch self {
+    case .facetsAndHits:
+      return "Facets and hits search"
+    case .multiHits:
+      return "Multi-index search"
+    case .querySuggestions:
+      return "Query suggestions"
+    case .querySuggestionsAndRecentSearches:
+      return "Query suggestions and recent searches"
+    }
+  }
+}
 
-class ViewController: UIViewController {
-
-  func button(title: String) -> UIButton {
-    let button = UIButton()
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(.black, for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.layer.borderColor = UIColor.black.cgColor
-    button.layer.borderWidth = 1
-    button.layer.cornerRadius = 5
-    button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-    button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-    return button
+class ViewController: UITableViewController {
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return Demo.allCases.count
   }
   
-  lazy var querySuggestionsButton: UIButton = button(title: "Query suggestions")
-  lazy var facetHitsButton: UIButton = button(title: "Facets + Hits")
-  lazy var multiHitsButton: UIButton = button(title: "MultiHits")
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    let stackView = UIStackView()
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.distribution = .equalCentering
-    stackView.spacing = 10
-    view.addSubview(stackView)
-    additionalSafeAreaInsets = .init(top: 0, left: 7, bottom: 0, right: 7)
-    NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-      stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-    ])
-    stackView.addArrangedSubview(UIView())
-    stackView.addArrangedSubview(querySuggestionsButton)
-    stackView.addArrangedSubview(facetHitsButton)
-    stackView.addArrangedSubview(multiHitsButton)
-    stackView.addArrangedSubview(UIView())
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "demoCell", for: indexPath)
+    if let demo = Demo(rawValue: indexPath.row) {
+      cell.textLabel?.text = demo.title
+    }
+    cell.accessoryType = .disclosureIndicator
+    return cell
   }
   
-  @objc func didTapButton(_ sender: UIButton) {
-    let viewController: UIViewController
-    switch sender {
-    case querySuggestionsButton:
-      viewController = QuerySuggestions.SearchViewController()
-    case facetHitsButton:
-      viewController = HitsAndFacetsSearchExample.SearchViewController()
-    case multiHitsButton:
-      viewController = MultiIndexSearchExample.SearchViewController()
-    default:
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let demo = Demo(rawValue: indexPath.row) else {
       return
     }
-    viewController.title = sender.title(for: .normal)
+    let viewController: UIViewController
+    switch demo {
+    case .querySuggestions:
+      viewController = QuerySuggestions.SearchViewController()
+    case .multiHits:
+      viewController = MultiIndexSearchExample.SearchViewController()
+    case .facetsAndHits:
+      viewController = HitsAndFacetsSearchExample.SearchViewController()
+    case .querySuggestionsAndRecentSearches:
+      viewController = QuerySuggestionsAndRecentSearches.SearchViewController()
+    }
     navigationController?.pushViewController(viewController, animated: true)
   }
-
 
 }
 
