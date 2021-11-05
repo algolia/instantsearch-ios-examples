@@ -6,33 +6,33 @@
 //
 
 import UIKit
-import InstantSearch
-import SwiftUI
-
-// QS
-// QS with hits
-// QS with categories
-// QS with recent searches
-// QS with recent searches and categories
 
 enum Demo: Int, CaseIterable {
+  
   case querySuggestions
-  case facetsAndHits
-  case multiHits
+  case voiceSearch
+  case multiIndex
+  case querySuggestionsAndCategories
   case querySuggestionsAndRecentSearches
+  case querySuggestionsAndHits
   
   var title: String {
     switch self {
-    case .facetsAndHits:
-      return "Facets and hits search"
-    case .multiHits:
-      return "Multi-index search"
     case .querySuggestions:
       return "Query suggestions"
+    case .voiceSearch:
+      return "Voice search"
+    case .multiIndex:
+      return "Multi-index search"
+    case .querySuggestionsAndCategories:
+      return "Query suggestions and categories"
     case .querySuggestionsAndRecentSearches:
       return "Query suggestions and recent searches"
+    case .querySuggestionsAndHits:
+      return "Query suggestions and hits"
     }
   }
+  
 }
 
 class ViewController: UITableViewController {
@@ -54,17 +54,29 @@ class ViewController: UITableViewController {
     guard let demo = Demo(rawValue: indexPath.row) else {
       return
     }
+    
     let viewController: UIViewController
+    
     switch demo {
     case .querySuggestions:
       viewController = QuerySuggestions.SearchViewController()
-    case .multiHits:
-      viewController = MultiIndexSearchExample.SearchViewController()
-    case .facetsAndHits:
-      viewController = HitsAndFacetsSearchExample.SearchViewController()
+    
+    case .voiceSearch:
+      viewController = VoiceSearch.SearchViewController()
+      
+    case .multiIndex:
+      viewController = MultiIndex.SearchViewController()
+      
+    case .querySuggestionsAndCategories:
+      viewController = QuerySuggestionsAndCategories.SearchViewController()
+      
     case .querySuggestionsAndRecentSearches:
       viewController = QuerySuggestionsAndRecentSearches.SearchViewController()
+      
+    case .querySuggestionsAndHits:
+      viewController = QuerySuggestionsAndHits.SearchViewController()
     }
+    
     navigationController?.pushViewController(viewController, animated: true)
   }
 
