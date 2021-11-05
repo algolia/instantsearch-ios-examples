@@ -1,6 +1,6 @@
 //
 //  SearchResultsController.swift
-//  DemoAutocomplete
+//  Examples
 //
 //  Created by Vladislav Fitc on 05/11/2021.
 //

@@ -1,15 +1,15 @@
 //
-//  QuerySuggestions.swift
-//  DemoAutocomplete
+//  SearchViewController.swift
+//  Examples
 //
-//  Created by Vladislav Fitc on 30/10/2021.
+//  Created by Vladislav Fitc on 05/11/2021.
 //
 
 import Foundation
 import UIKit
 import InstantSearch
 
-enum QuerySuggestions {
+enum QuerySuggestionsAndHits {
   
   class SearchViewController: UIViewController {
     
@@ -18,27 +18,23 @@ enum QuerySuggestions {
     let queryInputConnector: QueryInputConnector
     let textFieldController: TextFieldController
 
-    let hitsSearcher: HitsSearcher
-    let hitsInteractor: HitsInteractor<QuerySuggestion>
+    let searcher: MultiSearcher
+    let suggestionsInteractor: HitsInteractor<QuerySuggestion>
+    let hitsInteractor: HitsInteractor<Product>
     
     let searchResultsController: SearchResultsController
-    
+      
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-      hitsSearcher = .init(appID: "latency",
-                           apiKey: "afc3dd66dd1293e2e2736a5a51b05c0a",
-                           indexName: "instantsearch_query_suggestions")
-      searchResultsController = .init()
-      hitsInteractor = .init()
+      searcher = .init(appID: "latency",
+                       apiKey: "6be0576ff61c053d5f9a3225e2a90f76")
+      searchResultsController = .init(style: .plain)
+      suggestionsInteractor = .init(infiniteScrolling: .off)
+      hitsInteractor = .init(infiniteScrolling: .off)
       searchController = .init(searchResultsController: searchResultsController)
       textFieldController = .init(searchBar: searchController.searchBar)
-      queryInputConnector = .init(searcher: hitsSearcher,
+      queryInputConnector = .init(searcher: searcher,
                                   controller: textFieldController)
-      hitsInteractor.connectSearcher(hitsSearcher)
-      hitsInteractor.connectController(searchResultsController)
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-      searchResultsController.didSelectSuggestion = { [weak self] in
-        self?.queryInputConnector.interactor.query = $0
-      }
     }
     
     required init?(coder: NSCoder) {
@@ -47,8 +43,18 @@ enum QuerySuggestions {
     
     override func viewDidLoad() {
       super.viewDidLoad()
+      
       configureUI()
-      hitsSearcher.search()
+      
+      let suggestionsSearcher = searcher.addHitsSearcher(indexName: "instant_search_demo_query_suggestions")
+      suggestionsInteractor.connectSearcher(suggestionsSearcher)
+      searchResultsController.suggestionsHitsInteractor = suggestionsInteractor
+      
+      let hitsSearchers = searcher.addHitsSearcher(indexName: "instant_search")
+      hitsInteractor.connectSearcher(hitsSearchers)
+      searchResultsController.hitsInteractor = hitsInteractor
+      
+      searcher.search()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,8 +63,8 @@ enum QuerySuggestions {
     }
     
     func configureUI() {
-      title = "Query suggestions"
       view.backgroundColor = .white
+      definesPresentationContext = true
       searchController.hidesNavigationBarDuringPresentation = false
       searchController.showsSearchResultsController = true
       searchController.automaticallyShowsCancelButton = false
@@ -66,5 +72,5 @@ enum QuerySuggestions {
     }
     
   }
-
+  
 }

@@ -1,6 +1,6 @@
 //
 //  SearchViewController.swift
-//  DemoAutocomplete
+//  Examples
 //
 //  Created by Vladislav Fitc on 03/11/2021.
 //

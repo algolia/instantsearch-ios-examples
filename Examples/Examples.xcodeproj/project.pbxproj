@@ -220,7 +220,7 @@
 		AF7FEB7C272CAC5D0003BE62 = {
 			isa = PBXGroup;
 			children = (
-				AF7FEB87272CAC5D0003BE62 /* DemoAutocomplete */,
+				AF7FEB87272CAC5D0003BE62 /* Examples */,
 				AFAE5501273363CE00B52A43 /* QuerySuggestions */,
 				AFAE551F2733E07A00B52A43 /* VoiceSearch */,
 				AFAE55372733E09300B52A43 /* MultiIndex */,
@@ -246,7 +246,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF7FEB87272CAC5D0003BE62 /* DemoAutocomplete */ = {
+		AF7FEB87272CAC5D0003BE62 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
 				AF7FEB88272CAC5D0003BE62 /* AppDelegate.swift */,
@@ -261,7 +261,7 @@
 				AF7FEB93272CAC5E0003BE62 /* LaunchScreen.storyboard */,
 				AF7FEB96272CAC5E0003BE62 /* Info.plist */,
 			);
-			path = DemoAutocomplete;
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		AFAE5501273363CE00B52A43 /* QuerySuggestions */ = {
@@ -929,7 +929,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DemoAutocomplete/Info.plist;
+				INFOPLIST_FILE = Examples/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -957,7 +957,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DemoAutocomplete/Info.plist;
+				INFOPLIST_FILE = Examples/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

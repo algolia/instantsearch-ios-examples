@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  DemoAutocomplete
+//  Examples
 //
 //  Created by Vladislav Fitc on 30/10/2021.
 //

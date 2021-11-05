@@ -1,6 +1,6 @@
 //
 //  SearchSuggestionTableViewCell.swift
-//  DemoAutocomplete
+//  Examples
 //
 //  Created by Vladislav Fitc on 04/11/2021.
 //
