@@ -77,10 +77,6 @@
 		AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790E22FB34C000850ACC /* NumericRangeController.swift */; };
 		AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778C422FB319200850ACC /* AppDelegate.swift */; };
 		AF7A7B08268D2860003C62A5 /* ToggleDemoSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7A7B07268D2860003C62A5 /* ToggleDemoSwiftUI.swift */; };
-		AF7FEB14272B34AD0003BE62 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB13272B34AD0003BE62 /* InstantSearch */; };
-		AF7FEB16272B34AD0003BE62 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB15272B34AD0003BE62 /* InstantSearchCore */; };
-		AF7FEB18272B34AD0003BE62 /* InstantSearchInsights in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */; };
-		AF7FEB2A272C3D880003BE62 /* InstantSearchSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AF7FEB29272C3D880003BE62 /* InstantSearchSwiftUI */; };
 		AF82C53026A6176A00609ECE /* SegmentedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52A26A6176A00609ECE /* SegmentedDemoViewController.swift */; };
 		AF82C53126A6176A00609ECE /* RefinementPersistentListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52B26A6176A00609ECE /* RefinementPersistentListDemoViewController.swift */; };
 		AF82C53226A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82C52C26A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift */; };
@@ -97,6 +93,10 @@
 		AF87B8F326A593250015F772 /* StatsDemoSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF87B8F226A593250015F772 /* StatsDemoSwiftUI.swift */; };
 		AF87B8F626A594480015F772 /* QueryRuleCustomDataDemoSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF87B8F526A594480015F772 /* QueryRuleCustomDataDemoSwiftUI.swift */; };
 		AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D1C0023DF3E3F00CB415F /* RangeSlider.swift */; };
+		AF8F5198273DA96300CE1AA1 /* InstantSearchSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AF8F5197273DA96300CE1AA1 /* InstantSearchSwiftUI */; };
+		AF8F519A273DA96300CE1AA1 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF8F5199273DA96300CE1AA1 /* InstantSearchCore */; };
+		AF8F519C273DA96300CE1AA1 /* InstantSearchInsights in Frameworks */ = {isa = PBXBuildFile; productRef = AF8F519B273DA96300CE1AA1 /* InstantSearchInsights */; };
+		AF8F519E273DA96300CE1AA1 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF8F519D273DA96300CE1AA1 /* InstantSearch */; };
 		AF9C9B9A2672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9B992672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift */; };
 		AF9C9B9C26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9B9B26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift */; };
 		AF9D1825268CBD2100EC68EA /* RefinementListDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9D1824268CBD2100EC68EA /* RefinementListDemoController.swift */; };
@@ -254,13 +254,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF7FEB14272B34AD0003BE62 /* InstantSearch in Frameworks */,
-				AF7FEB2A272C3D880003BE62 /* InstantSearchSwiftUI in Frameworks */,
 				AFBE2B8C26A74D9F00F1E139 /* InstantSearchVoiceOverlay in Frameworks */,
-				AF7FEB16272B34AD0003BE62 /* InstantSearchCore in Frameworks */,
 				AF521BF825CE151A000F994C /* SDWebImageSwiftUI in Frameworks */,
+				AF8F519A273DA96300CE1AA1 /* InstantSearchCore in Frameworks */,
+				AF8F5198273DA96300CE1AA1 /* InstantSearchSwiftUI in Frameworks */,
+				AF8F519E273DA96300CE1AA1 /* InstantSearch in Frameworks */,
 				AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */,
-				AF7FEB18272B34AD0003BE62 /* InstantSearchInsights in Frameworks */,
+				AF8F519C273DA96300CE1AA1 /* InstantSearchInsights in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,10 +646,10 @@
 				AF4059852552D1EB003C8CDB /* SDWebImage */,
 				AF521BF725CE151A000F994C /* SDWebImageSwiftUI */,
 				AFBE2B8B26A74D9F00F1E139 /* InstantSearchVoiceOverlay */,
-				AF7FEB13272B34AD0003BE62 /* InstantSearch */,
-				AF7FEB15272B34AD0003BE62 /* InstantSearchCore */,
-				AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */,
-				AF7FEB29272C3D880003BE62 /* InstantSearchSwiftUI */,
+				AF8F5197273DA96300CE1AA1 /* InstantSearchSwiftUI */,
+				AF8F5199273DA96300CE1AA1 /* InstantSearchCore */,
+				AF8F519B273DA96300CE1AA1 /* InstantSearchInsights */,
+				AF8F519D273DA96300CE1AA1 /* InstantSearch */,
 			);
 			productName = DemoDirectory;
 			productReference = AF6778C122FB319200850ACC /* DemoDirectory.app */;
@@ -705,7 +705,7 @@
 				AF4059842552D1EB003C8CDB /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				AF521BF625CE151A000F994C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				AFBE2B8A26A74D9F00F1E139 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
-				AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
+				AF8F5196273DA96300CE1AA1 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 			);
 			productRefGroup = AF6778C222FB319200850ACC /* Products */;
 			projectDirPath = "";
@@ -1139,12 +1139,12 @@
 				minimumVersion = 1.5.0;
 			};
 		};
-		AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
+		AF8F5196273DA96300CE1AA1 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/algolia/instantsearch-ios";
 			requirement = {
-				branch = refactor/searchers;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.15.0;
 			};
 		};
 		AFBE2B8A26A74D9F00F1E139 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */ = {
@@ -1168,25 +1168,25 @@
 			package = AF521BF625CE151A000F994C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
-		AF7FEB13272B34AD0003BE62 /* InstantSearch */ = {
+		AF8F5197273DA96300CE1AA1 /* InstantSearchSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearch;
+			package = AF8F5196273DA96300CE1AA1 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchSwiftUI;
 		};
-		AF7FEB15272B34AD0003BE62 /* InstantSearchCore */ = {
+		AF8F5199273DA96300CE1AA1 /* InstantSearchCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			package = AF8F5196273DA96300CE1AA1 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearchCore;
 		};
-		AF7FEB17272B34AD0003BE62 /* InstantSearchInsights */ = {
+		AF8F519B273DA96300CE1AA1 /* InstantSearchInsights */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			package = AF8F5196273DA96300CE1AA1 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearchInsights;
 		};
-		AF7FEB29272C3D880003BE62 /* InstantSearchSwiftUI */ = {
+		AF8F519D273DA96300CE1AA1 /* InstantSearch */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF7FEB12272B34AD0003BE62 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearchSwiftUI;
+			package = AF8F5196273DA96300CE1AA1 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearch;
 		};
 		AFBE2B8B26A74D9F00F1E139 /* InstantSearchVoiceOverlay */ = {
 			isa = XCSwiftPackageProductDependency;
