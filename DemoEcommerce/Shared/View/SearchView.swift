@@ -56,9 +56,7 @@ struct SearchView: View {
               Text(statsController.stats)
                 .fontWeight(.medium)
               Spacer()
-              if #available(iOS 14.0, *) {
-                sortMenu()
-              }
+              sortMenu()
             }
             HitsList(hitsController) { (hit, _) in
               ShopItemRow(isitem: hit)
@@ -70,11 +68,10 @@ struct SearchView: View {
         }
       }
     }
-    .navigationBarTitle("Algolia & SwiftUI")
+    .navigationTitle("Algolia & SwiftUI")
     .padding([.horizontal, .top])
   }
   
-  @available(iOS 14.0, *)
   private func sortMenu() -> some View {
     Menu {
       ForEach(0 ..< switchIndexController.indexNames.count, id: \.self) { index in
