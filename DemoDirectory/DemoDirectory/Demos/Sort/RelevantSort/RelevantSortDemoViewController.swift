@@ -16,13 +16,13 @@ class RelevantSortDemoViewController: UIViewController {
   
   let controller: RelevantSortDemoController
   let relevantSortController = RelevantSortObservableController()
-  let switchIndexController = SwitchIndexObservableController()
+  let sortByController = SelectableSegmentObservableController()
   let hitsController = HitsObservableController<RelevantSortDemoController.Item>()
   let queryInputController = QueryInputObservableController()
   let statsController = StatsTextObservableController()
   
   init() {
-    self.controller = .init(switchIndexController: switchIndexController,
+    self.controller = .init(sortByController: sortByController,
                             relevantSortController: relevantSortController,
                             hitsController: hitsController,
                             queryInputController: queryInputController,
@@ -37,7 +37,7 @@ class RelevantSortDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     let contentView = RelevantSortDemoSwiftUI.ContentView(queryInputController: queryInputController,
-                                                          switchIndexController: switchIndexController,
+                                                          sortByController: sortByController,
                                                           relevantSortController: relevantSortController,
                                                           hitsController: hitsController,
                                                           statsController: statsController)

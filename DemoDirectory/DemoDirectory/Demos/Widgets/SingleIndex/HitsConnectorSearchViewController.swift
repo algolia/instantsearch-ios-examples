@@ -25,9 +25,9 @@ class HitsConnectorSearchViewController: UIViewController {
     searchController = .init(searchResultsController: hitsTableViewController)
     textFieldController = .init(searchBar: searchController.searchBar)
     
-    let searcher = SingleIndexSearcher(appID: "latency",
-                                       apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                                       indexName: "bestbuy")
+    let searcher = HitsSearcher(appID: "latency",
+                                apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
+                                indexName: "bestbuy")
     hitsConnector = HitsConnector(searcher: searcher)
     queryInputInteractor = .init()
     statsInteractor = .init()

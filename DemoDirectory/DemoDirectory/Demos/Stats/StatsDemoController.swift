@@ -12,14 +12,14 @@ import UIKit
 
 class StatsDemoController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let statsConnector: StatsConnector
   let queryInputConnector: QueryInputConnector
 
   init<QI: QueryInputController, SC: LabelStatsController, ASC: AttributedLabelStatsController>(queryInputController: QI,
                                                                                                 statsController: SC,
                                                                                                 attributedStatsController: ASC) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.queryInputConnector = .init(searcher: searcher, controller: queryInputController)
     self.statsConnector = .init(searcher: searcher, controller: statsController) { stats -> String? in
       guard let stats = stats else {

@@ -12,7 +12,7 @@ import InstantSearch
 
 class FilterNumericComparisonDemoViewController: UIViewController {
 
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
 
   let yearConnector: FilterComparisonConnector<Int>
@@ -28,7 +28,7 @@ class FilterNumericComparisonDemoViewController: UIViewController {
   let stepperLabel = UILabel()
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_filter_numeric_comparison")
     self.filterState = .init()
 
     yearTextFieldController = NumericTextFieldController()

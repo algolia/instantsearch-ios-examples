@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import InstantSearch
+import InstantSearchSwiftUI
 import SDWebImageSwiftUI
 
 struct ShopItemRow: View {

@@ -16,7 +16,7 @@ class SearchInputDemoViewController: UIViewController {
   
   let searchTriggeringMode: SearchTriggeringMode
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   
   let queryInputConnector: QueryInputConnector
   
@@ -29,7 +29,7 @@ class SearchInputDemoViewController: UIViewController {
   init(searchTriggeringMode: SearchTriggeringMode) {
     self.searchBar = .init()
     self.searchTriggeringMode = searchTriggeringMode
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
     self.queryInputConnector = QueryInputConnector(searcher: searcher,
                                                    searchTriggeringMode: searchTriggeringMode,

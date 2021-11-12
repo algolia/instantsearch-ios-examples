@@ -11,7 +11,7 @@ import InstantSearch
 
 class ToggleDemoController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   
   let sizeConstraintConnector: FilterToggleConnector<Filter.Numeric>
@@ -21,7 +21,7 @@ class ToggleDemoController {
   init(sizeConstraintButtonController: SelectableFilterButtonController<Filter.Numeric>,
        vintageButtonController: SelectableFilterButtonController<Filter.Tag>,
        couponSwitchController: FilterSwitchController<Filter.Facet>) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_filter_toggle")
+    searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_filter_toggle")
     filterState = .init()
     
     // Size constraint button

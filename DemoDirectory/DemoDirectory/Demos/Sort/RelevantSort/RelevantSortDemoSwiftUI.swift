@@ -16,22 +16,13 @@ struct RelevantSortDemoSwiftUI : PreviewProvider {
   struct ContentView: View {
     
     @ObservedObject var queryInputController: QueryInputObservableController
-    @ObservedObject var switchIndexController: SwitchIndexObservableController
+    @ObservedObject var sortByController: SelectableSegmentObservableController
     @ObservedObject var relevantSortController: RelevantSortObservableController
     @ObservedObject var hitsController: HitsObservableController<RelevantSortDemoController.Item>
     @ObservedObject var statsController: StatsTextObservableController
     
     @State var isEditing: Bool = false
-    
-    private func label(for indexName: IndexName) -> String {
-      switch indexName {
-      case "test_Bestbuy": return "Most relevant"
-      case "test_Bestbuy_vr_price_asc": return "Relevant Sort - Lowest Price"
-      case "test_Bestbuy_replica_price_asc": return "Hard Sort - Lowest Price"
-      default: return ""
-      }
-    }
-    
+        
     var body: some View {
       VStack {
         SearchBar(text: $queryInputController.query,
@@ -39,14 +30,16 @@ struct RelevantSortDemoSwiftUI : PreviewProvider {
           .padding(.all, 5)
         if #available(iOS 14.0, *) {
           Menu {
-            ForEach(0 ..< switchIndexController.indexNames.count, id: \.self) { index in
-              let indexName = switchIndexController.indexNames[index]
-              Button(label(for: indexName)) {
-                switchIndexController.select(indexName)
+            ForEach(0 ..< sortByController.segmentsTitles.count, id: \.self) { index in
+              let indexName = sortByController.segmentsTitles[index]
+              Button(indexName) {
+                sortByController.select(index)
               }
             }
           } label: {
-            Label(label(for: switchIndexController.selected), systemImage: "arrow.up.arrow.down.circle")
+            if let selectedSegmentIndex = sortByController.selectedSegmentIndex {
+              Label(sortByController.segmentsTitles[selectedSegmentIndex], systemImage: "arrow.up.arrow.down.circle")
+            }
           }
         }
         Text(statsController.stats)
@@ -76,12 +69,12 @@ struct RelevantSortDemoSwiftUI : PreviewProvider {
   }
   
   static let relevantSortController = RelevantSortObservableController()
-  static let switchIndexController = SwitchIndexObservableController()
+  static let sortByController = SelectableSegmentObservableController()
   static let hitsController = HitsObservableController<RelevantSortDemoController.Item>()
   static let queryInputController = QueryInputObservableController()
   static let statsController = StatsTextObservableController()
   
-  static let demoController = RelevantSortDemoController(switchIndexController: switchIndexController,
+  static let demoController = RelevantSortDemoController(sortByController: sortByController,
                                                          relevantSortController: relevantSortController,
                                                          hitsController: hitsController,
                                                          queryInputController: queryInputController,
@@ -90,10 +83,10 @@ struct RelevantSortDemoSwiftUI : PreviewProvider {
   static var previews: some View {
     let _ = (demoController,
              relevantSortController,
-             switchIndexController,
+             sortByController,
              queryInputController)
     ContentView(queryInputController: queryInputController,
-                switchIndexController: switchIndexController,
+                sortByController: sortByController,
                 relevantSortController: relevantSortController,
                 hitsController: hitsController,
                 statsController: statsController)

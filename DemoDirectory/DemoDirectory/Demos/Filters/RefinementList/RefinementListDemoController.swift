@@ -11,7 +11,7 @@ import InstantSearch
 
 class RefinementListDemoController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   
   let colorConnector: FacetListConnector

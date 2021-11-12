@@ -88,7 +88,7 @@ struct QRCDContentView_Previews : PreviewProvider {
   
   class ViewModel {
         
-    let searcher: SingleIndexSearcher
+    let searcher: HitsSearcher
     let queryInputInteractor: QueryInputInteractor
     let queryInputController: QueryInputObservableController
 
@@ -99,7 +99,7 @@ struct QRCDContentView_Previews : PreviewProvider {
     let bannerController: BannerObservableController
     
     init() {
-      searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
+      searcher = HitsSearcher(client: .demo, indexName: "instant_search")
       self.queryInputInteractor = .init()
       self.queryInputController = .init()
       self.hitsInteractor = .init()

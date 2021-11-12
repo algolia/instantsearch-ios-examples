@@ -53,9 +53,6 @@ extension GettingStartedGuide.SwiftUI {
               .frame(maxWidth: .infinity, maxHeight: .infinity)
           }
         }
-        .onAppear {
-//          hideKeyboard()
-        }
       }
       .navigationBarTitle("Algolia & SwiftUI")
       .navigationBarItems(trailing: facetsButton())
@@ -102,7 +99,7 @@ extension GettingStartedGuide.SwiftUI {
   
   class AlgoliaController {
     
-    let searcher: SingleIndexSearcher
+    let searcher: HitsSearcher
     let queryInputInteractor: QueryInputInteractor
     let hitsInteractor: HitsInteractor<BestBuyItem>
     let statsInteractor: StatsInteractor
@@ -111,7 +108,7 @@ extension GettingStartedGuide.SwiftUI {
     let facetListInteractor: FacetListInteractor
 
     init() {
-      self.searcher = SingleIndexSearcher(appID: "latency",
+      self.searcher = HitsSearcher(appID: "latency",
                                           apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                           indexName: "bestbuy")
       self.queryInputInteractor = .init()

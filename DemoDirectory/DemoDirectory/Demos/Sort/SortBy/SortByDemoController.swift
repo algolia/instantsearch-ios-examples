@@ -13,30 +13,41 @@ class SortByDemoController {
   
   typealias HitType = Movie
 
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<HitType>
   let sortByConnector: SortByConnector
   
+  
   let indexTitle: IndexName = "mobile_demo_movies"
   let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
   let indexYearDesc: IndexName = "mobile_demo_movies_year_desc"
-
-  let indexes: [Int: IndexName]
-  
+    
   init() {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = HitsSearcher(client: .demo,
+                                 indexName: indexTitle)
     self.queryInputConnector = .init(searcher: searcher)
     self.hitsConnector = .init(searcher: searcher)
-    indexes = [
-      0 : indexTitle,
-      1 : indexYearAsc,
-      2 : indexYearDesc
-    ]
-    sortByConnector = .init(searcher: searcher, indicesNames: [indexTitle, indexYearAsc, indexYearDesc], selected: 0)
-    
+    sortByConnector = .init(searcher: searcher,
+                            indicesNames: [indexTitle,
+                                           indexYearAsc,
+                                           indexYearDesc],
+                            selected: 0)
     searcher.search()
     searcher.isDisjunctiveFacetingEnabled = false
+  }
+  
+  func title(for indexName: IndexName) -> String {
+    switch indexName {
+    case indexTitle:
+      return "Default"
+    case indexYearAsc:
+      return "Year Asc"
+    case indexYearDesc:
+      return "Year Desc"
+    default:
+      return indexName.rawValue
+    }
   }
   
 }

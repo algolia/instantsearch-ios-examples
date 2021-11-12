@@ -20,16 +20,20 @@ class AlgoliaController {
   let facetList: FacetListViewModel
   let facetSearch: FacetSearchViewModel
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputInteractor: QueryInputInteractor
   let hitsInteractor: HitsInteractor<Hit<InstantSearchItem>>
   let statsInteractor: StatsInteractor
   let currentFiltersInteractor: CurrentFiltersInteractor
   let filterState: FilterState
   let filterClearInteractor: FilterClearInteractor
-  let switchIndexInteractor: SwitchIndexInteractor
+  let sortByInteractor: SortByInteractor
   
   let areFacetsSearchable: Bool
+  
+  let indexMain: IndexName = "instant_search"
+  let indexPriceAsc: IndexName = "instant_search_price_asc"
+  let indexPriceDesc: IndexName = "instant_search_price_desc"
     
   init(appID: ApplicationID,
        apiKey: APIKey,
@@ -40,22 +44,20 @@ class AlgoliaController {
     self.apiKey = apiKey
     self.indexName = indexName
     self.facetAttribute = facetAttribute
-    self.searcher = SingleIndexSearcher(appID: appID,
-                                        apiKey: apiKey,
-                                        indexName: indexName)
+    self.searcher = HitsSearcher(appID: appID,
+                                 apiKey: apiKey,
+                                 indexName: indexName)
     self.hitsInteractor = .init()
     self.statsInteractor = .init()
     self.filterState = .init()
     self.currentFiltersInteractor = .init()
     self.queryInputInteractor = .init()
     self.filterClearInteractor = .init()
-    self.switchIndexInteractor = .init(
-      indexNames: [
-        "instant_search",
-        "instant_search_price_asc",
-        "instant_search_price_desc"
-      ],
-      selectedIndexName: "instant_search")
+    self.sortByInteractor = .init(items: [
+      1: indexMain,
+      2: indexPriceAsc,
+      3: indexPriceDesc
+    ], selected: 1)
     self.suggestions = .init()
     self.facetList = .init()
     self.facetSearch = .init(appID: appID,
@@ -75,7 +77,7 @@ class AlgoliaController {
     filterClearInteractor.connectFilterState(filterState,
                                              filterGroupIDs: [.or(name: facetAttribute.rawValue, filterType: .facet)],
                                              clearMode: .specified)
-    switchIndexInteractor.connectSearcher(searcher)
+    sortByInteractor.connectSearcher(searcher)
     
     queryInputInteractor.connectSearcher(suggestions.searcher)
     
@@ -95,7 +97,20 @@ class AlgoliaController {
     currentFiltersInteractor.connectController(contentView.currentFiltersController)
     queryInputInteractor.connectController(contentView.queryInputController)
     filterClearInteractor.connectController(contentView.filterClearController)
-    switchIndexInteractor.connectController(contentView.switchIndexController)
+    sortByInteractor.connectController(contentView.sortByController) { [indexMain = self.indexMain,
+                                                                        indexPriceAsc = self.indexPriceAsc,
+                                                                        indexPriceDesc = self.indexPriceDesc] indexName in
+      switch indexName {
+      case indexMain:
+        return "Featured"
+      case indexPriceAsc:
+        return "Price ascending"
+      case indexPriceDesc:
+        return "Price descending"
+      default:
+        return indexName.rawValue
+      }
+    }
     
     suggestions.setup(contentView)
     
@@ -110,13 +125,13 @@ class AlgoliaController {
   
   class SuggestionsViewModel {
     
-    let searcher: SingleIndexSearcher
+    let searcher: HitsSearcher
     let hitsInteractor: HitsInteractor<QuerySuggestion>
 
     init() {
       searcher = .init(appID: "latency",
-                                 apiKey: "af044fb0788d6bb15f807e4420592bc5",
-                                 indexName: "instantsearch_query_suggestions")
+                       apiKey: "af044fb0788d6bb15f807e4420592bc5",
+                       indexName: "instantsearch_query_suggestions")
       hitsInteractor = .init()
       hitsInteractor.connectSearcher(searcher)
     }

@@ -13,7 +13,7 @@ class LoadingDemoController {
   
   typealias HitType = Movie
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let hitsConnector: HitsConnector<HitType>
   let queryInputConnector: QueryInputConnector
   let loadingConnector: LoadingConnector
@@ -26,7 +26,7 @@ class LoadingDemoController {
                            loadingController: LC,
                            statsController: SC,
                            hitsController: HC) where HC.DataSource == HitsInteractor<HitType> {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
     queryInputConnector = QueryInputConnector(searcher: searcher,
                                               controller: queryInputController)
     loadingConnector = .init(searcher: searcher,

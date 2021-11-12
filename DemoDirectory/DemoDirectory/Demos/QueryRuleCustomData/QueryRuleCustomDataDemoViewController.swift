@@ -16,7 +16,7 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   
   let searchBar = UISearchBar()
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   
   let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
@@ -31,7 +31,7 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   let bannerViewController: BannerViewController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
+    self.searcher = HitsSearcher(client: .demo, indexName: "instant_search")
     self.textFieldController = .init(searchBar: searchBar)
     self.statsController = .init(label: .init())
     self.hitsTableViewController = ResultsTableViewController()

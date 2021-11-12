@@ -15,18 +15,18 @@ class RelevantSortDemoController {
     let name: String
   }
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<Item>
-  let switchIndexInteractor: SwitchIndexInteractor
+  let sortByConnector: SortByConnector
   let relevantSortConnector: RelevantSortConnector
   let statsConnector: StatsConnector
   
-  init<SIC: SwitchIndexController, RSC: RelevantSortController, HC: HitsController, QIC: QueryInputController, SC: StatsTextController>(switchIndexController: SIC,
-                                                                                                               relevantSortController: RSC,
-                                                                                                               hitsController: HC,
-                                                                                                               queryInputController: QIC,
-                                                                                                               statsController: SC) where RSC.Item == RelevantSortConnector.TextualRepresentation?, HC.DataSource == HitsInteractor<Item> {
+  init<SSC: SelectableSegmentController, RSC: RelevantSortController, HC: HitsController, QIC: QueryInputController, SC: StatsTextController>(sortByController: SSC,
+                                                                                                                                              relevantSortController: RSC,
+                                                                                                                                              hitsController: HC,
+                                                                                                                                              queryInputController: QIC,
+                                                                                                                                              statsController: SC) where RSC.Item == RelevantSortConnector.TextualRepresentation?, HC.DataSource == HitsInteractor<Item>, SSC.SegmentKey == Int {
     let indices: [IndexName] = [
       "test_Bestbuy",
       "test_Bestbuy_vr_price_asc",
@@ -35,13 +35,29 @@ class RelevantSortDemoController {
     self.searcher = .init(appID: "C7RIRJRYR9",
                           apiKey: "6861aeb4f69b81db206d49ddb9f1dc1e",
                           indexName: indices.first!)
-    self.queryInputConnector = .init(searcher: searcher, controller: queryInputController)
-    self.switchIndexInteractor = .init(indexNames: indices, selectedIndexName: indices.first!)
-    self.relevantSortConnector = .init(searcher: searcher, controller: relevantSortController)
-    self.hitsConnector = .init(searcher: searcher, interactor: .init(), controller: hitsController)
-    self.statsConnector = .init(searcher: searcher, controller: statsController)
-    switchIndexInteractor.connectSearcher(searcher)
-    switchIndexInteractor.connectController(switchIndexController)
+    self.queryInputConnector = .init(searcher: searcher,
+                                     controller: queryInputController)
+    self.sortByConnector = .init(searcher: searcher,
+                                 indicesNames: indices,
+                                 selected: 0,
+                                 controller: sortByController) { indexName in
+      switch indexName {
+      case "test_Bestbuy":
+        return "Most relevant"
+      case "test_Bestbuy_vr_price_asc":
+        return "Relevant Sort - Lowest Price"
+      case "test_Bestbuy_replica_price_asc":
+        return "Hard Sort - Lowest Price"
+      default:
+        return indexName.rawValue
+      }
+    }
+    self.relevantSortConnector = .init(searcher: searcher,
+                                       controller: relevantSortController)
+    self.hitsConnector = .init(searcher: searcher,
+                               controller: hitsController)
+    self.statsConnector = .init(searcher: searcher,
+                                controller: statsController)
     searcher.search()
   }
   

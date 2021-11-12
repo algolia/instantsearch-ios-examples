@@ -21,15 +21,6 @@ struct SortByDemoSwiftUI: PreviewProvider {
     
     @State var isEditing: Bool = false
     
-    private func label(for indexName: IndexName) -> String {
-      switch indexName {
-      case "test_Bestbuy": return "Most relevant"
-      case "test_Bestbuy_vr_price_asc": return "Relevant Sort - Lowest Price"
-      case "test_Bestbuy_replica_price_asc": return "Hard Sort - Lowest Price"
-      default: return ""
-      }
-    }
-    
     var body: some View {
       VStack {
         SearchBar(text: $queryInputController.query,
@@ -72,21 +63,10 @@ struct SortByDemoSwiftUI: PreviewProvider {
   static let hitsController = HitsObservableController<Movie>()
   
   static func connect() {
-    func title(for indexName: IndexName) -> String {
-      switch indexName {
-      case demoController.indexTitle:
-        return "Default"
-      case demoController.indexYearAsc:
-        return "Year Asc"
-      case demoController.indexYearDesc:
-        return "Year Desc"
-      default:
-        return indexName.rawValue
-      }
-    }
     demoController.queryInputConnector.connectController(queryInputController)
     demoController.hitsConnector.connectController(hitsController)
-    demoController.sortByConnector.connectController(selectableSegmentObservableController, presenter: { title(for: $0.name) })
+    demoController.sortByConnector.connectController(selectableSegmentObservableController,
+                                                     presenter: demoController.title(for:))
   }
 
   

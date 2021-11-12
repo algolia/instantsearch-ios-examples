@@ -12,7 +12,7 @@ import InstantSearch
 
 class RefinementPersistentListDemoViewController: UIViewController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   
   let colorConnector: FacetListConnector

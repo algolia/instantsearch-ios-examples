@@ -14,7 +14,7 @@ typealias QuerySuggestionsDemoViewController = SearchViewController
 
 class DemoListViewController: UIViewController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   let hitsInteractor: HitsInteractor<Demo>
   let textFieldController: TextFieldController
@@ -27,12 +27,12 @@ class DemoListViewController: UIViewController {
   weak var delegate: DemoListViewControllerDelegate?
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_home")
+    searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_home")
     filterState = .init()
     hitsInteractor = HitsInteractor(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)
     groupedDemos = []
     
-    searcher.indexQueryState.query.hitsPerPage = 40
+    searcher.request.query.hitsPerPage = 40
     searcher.connectFilterState(filterState)
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectFilterState(filterState)
@@ -112,7 +112,7 @@ extension DemoListViewController: UITableViewDelegate {
   
 }
 
-protocol DemoListViewControllerDelegate: class {
+protocol DemoListViewControllerDelegate: AnyObject {
   
   func demoListViewController(_ demoListViewController: DemoListViewController, didSelect demo: Demo)
   

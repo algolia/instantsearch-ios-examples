@@ -8,6 +8,7 @@
 
 import Foundation
 import InstantSearch
+import InstantSearchSwiftUI
 import SwiftUI
 
 class SwiftUIDemoViewController: UIHostingController<ContentView> {

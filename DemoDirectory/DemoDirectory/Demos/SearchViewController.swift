@@ -12,26 +12,31 @@ import InstantSearch
 
 public class SearchViewController: UIViewController {
   
+  // Constants
   let appID: ApplicationID = "latency"
   let apiKey: APIKey = "afc3dd66dd1293e2e2736a5a51b05c0a"
   let suggestionsIndex: IndexName = "instantsearch_query_suggestions"
   let resultsIndex: IndexName = "instant_search"
   
+  // Search controller responsible for the presentation of suggestions
   let searchController: UISearchController
   
+  // Query input interactor + controller
   let queryInputInteractor: QueryInputInteractor
   let textFieldController: TextFieldController
     
+  // Search suggestions interactor + controller
   let suggestionsHitsInteractor: HitsInteractor<Hit<QuerySuggestion>>
   let suggestionsViewController: QuerySuggestionsViewController
   
+  // Search results interactor + controller
   let resultsHitsInteractor: HitsInteractor<ShopItem>
   let resultsViewController: ResultsViewController
   
-  let multiIndexHitsConnector: MultiIndexHitsConnector
+  // Multi searcher which aggregates hits and suggestions search
+  let multiSearcher: MultiSearcher
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    
     suggestionsHitsInteractor = .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true)
     suggestionsViewController = .init(style: .plain)
     
@@ -43,11 +48,8 @@ public class SearchViewController: UIViewController {
     queryInputInteractor = .init()
     textFieldController = .init(searchBar: searchController.searchBar)
     
-    multiIndexHitsConnector = .init(appID: appID, apiKey: apiKey, indexModules: [
-        .init(indexName: suggestionsIndex, hitsInteractor: suggestionsHitsInteractor),
-        .init(indexName: resultsIndex, hitsInteractor: resultsHitsInteractor)
-    ])
-        
+    multiSearcher = .init(appID: appID, apiKey: apiKey)
+    
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     
     setup()
@@ -83,7 +85,13 @@ public class SearchViewController: UIViewController {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     
-    queryInputInteractor.connectSearcher(multiIndexHitsConnector.searcher)
+    let suggestionsSearcher = multiSearcher.addHitsSearcher(indexName: suggestionsIndex)
+    suggestionsHitsInteractor.connectSearcher(suggestionsSearcher)
+
+    let resultsSearchers = multiSearcher.addHitsSearcher(indexName: resultsIndex)
+    resultsHitsInteractor.connectSearcher(resultsSearchers)
+    
+    queryInputInteractor.connectSearcher(multiSearcher)
     queryInputInteractor.connectController(textFieldController)
     queryInputInteractor.connectController(suggestionsViewController)
     
@@ -95,7 +103,7 @@ public class SearchViewController: UIViewController {
     resultsHitsInteractor.connectController(resultsViewController)
     
     suggestionsViewController.isHighlightingInverted = true
-    multiIndexHitsConnector.searcher.search()
+    multiSearcher.search()
   }
   
 }

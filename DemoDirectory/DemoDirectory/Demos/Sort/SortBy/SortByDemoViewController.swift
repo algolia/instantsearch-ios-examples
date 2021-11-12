@@ -13,26 +13,20 @@ class SortByDemoViewController: UIViewController {
   
   typealias HitType = Movie
   
+  var onClick: ((Int) -> Void)? = nil
+  
   let controller: SortByDemoController
 
-  let searchBar: UISearchBar
-  
+  let searchController: UISearchController
   let textFieldController: TextFieldController
   let hitsTableViewController: MovieHitsTableViewController<HitType>
-
-  let selectIndexAlertController: SelectIndexController = {
-    let alert = UIAlertController(title: "Change Index",
-                                  message: "Please select a new index",
-                                  preferredStyle: .actionSheet)
-    return .init(alertController: alert)
-  }()
-
+  
   private let cellIdentifier = "CellID"
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searchBar = UISearchBar()
-    self.textFieldController = TextFieldController(searchBar: searchBar)
     self.hitsTableViewController = .init()
+    self.searchController = .init(searchResultsController: hitsTableViewController)
+    self.textFieldController = TextFieldController(searchBar: searchController.searchBar)
     self.controller = .init()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
@@ -48,76 +42,54 @@ class SortByDemoViewController: UIViewController {
   }
 
   private func setup() {
+    searchController.searchBar.delegate = self
     controller.hitsConnector.connectController(hitsTableViewController)
     controller.queryInputConnector.connectController(textFieldController)
-    controller.sortByConnector.connectController(selectIndexAlertController, presenter: { self.title(for: $0.name) } )
-    controller.sortByConnector.interactor.onSelectedComputed.subscribe(with: self) { (viewController, index) in
-      index.flatMap { viewController.controller.indexes[$0] }.flatMap(viewController.setChangeIndexButton)
-    }
+    controller.sortByConnector.connectController(self, presenter: controller.title(for:))
   }
 
 }
 
-extension SortByDemoViewController {
-  
-  func index(for name: IndexName) -> Index {
-    SearchClient.demo.index(withName: name)
+extension SortByDemoViewController: UISearchBarDelegate {
+    
+  func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    onClick?(selectedScope)
   }
   
-  func title(for indexName: IndexName) -> String {
-    switch indexName {
-    case controller.indexTitle:
-      return "Default"
-    case controller.indexYearAsc:
-      return "Year Asc"
-    case controller.indexYearDesc:
-      return "Year Desc"
-    default:
-      return indexName.rawValue
+}
+
+extension SortByDemoViewController: SelectableSegmentController {
+      
+  func setItems(items: [Int: String]) {
+    searchController.searchBar.scopeButtonTitles = items.sorted(by: \.key).map(\.value)
+  }
+
+  
+  func setSelected(_ selected: Int?) {
+    if let index = selected {
+      searchController.searchBar.selectedScopeButtonIndex = index
     }
   }
   
-  func setChangeIndexButton(with index: IndexName) {
-    let title = "Sort by: \(self.title(for: index))"
-    navigationItem.rightBarButtonItem = .init(title: title, style: .done, target: self, action: #selector(self.editButtonTapped(sender:)))
-  }
+}
 
+
+extension SortByDemoViewController {
+  
   fileprivate func setupUI() {
-
     title = "Movies"
     view.backgroundColor = .white
-
-    setChangeIndexButton(with: controller.indexTitle)
-
-    searchBar.translatesAutoresizingMaskIntoConstraints = false
-    searchBar.searchBarStyle = .minimal
-    searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-    addChild(hitsTableViewController)
-    hitsTableViewController.didMove(toParent: self)
-  
-    let tableView = hitsTableViewController.tableView!
-    
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-    
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.spacing = .px16
-    
-    stackView.addArrangedSubview(searchBar)
-    stackView.addArrangedSubview(tableView)
-    
-    view.addSubview(stackView)
-
-    stackView.pin(to: view.safeAreaLayoutGuide)
-
+    definesPresentationContext = true
+    navigationItem.searchController = searchController
+    hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.showsSearchResultsController = true
+    searchController.automaticallyShowsCancelButton = false
   }
-
-  @objc func editButtonTapped(sender: UIBarButtonItem) {
-    selectIndexAlertController.alertController.popoverPresentationController?.barButtonItem = sender
-    present(selectIndexAlertController.alertController, animated: true, completion: nil)
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    searchController.isActive = true
   }
 
 }

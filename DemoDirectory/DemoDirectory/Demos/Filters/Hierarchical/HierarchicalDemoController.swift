@@ -11,7 +11,7 @@ import InstantSearch
 
 class HierarchicalDemoController {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let filterState: FilterState
   let hierarchicalConnector: HierarchicalConnector
   
@@ -29,7 +29,7 @@ class HierarchicalDemoController {
   ]
   
   init<Controller: HierarchicalController>(controller: Controller) where Controller.Item == [HierarchicalFacet] {
-    searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_hierarchical")
+    searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_hierarchical")
     filterState = .init()
     hierarchicalConnector = .init(searcher: searcher,
                                   filterState: filterState,

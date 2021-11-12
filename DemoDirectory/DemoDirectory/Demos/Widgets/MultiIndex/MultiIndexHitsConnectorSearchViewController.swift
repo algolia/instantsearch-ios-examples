@@ -15,7 +15,7 @@ class MultiIndexHitsConnectorSearchViewController: UIViewController {
   let searchBar: UISearchBar
   let textFieldController: TextFieldController
   let queryInputConnector: QueryInputConnector
-
+  
   let hitsConnector: MultiIndexHitsConnector
   let hitsViewController: MultiIndexWidgetHitsViewController
 

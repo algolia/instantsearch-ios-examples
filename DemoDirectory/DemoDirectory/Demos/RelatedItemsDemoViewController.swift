@@ -14,19 +14,19 @@ class RelatedItemsDemoViewController: UIViewController {
   
   let stackView = UIStackView()
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let hitsInteractor: HitsInteractor<Hit<Product>>
   let hitsTableViewController: EcommerceHitsTableViewController
   
-  let relatedItemSearcher: SingleIndexSearcher
+  let relatedItemSearcher: HitsSearcher
   let relatedHitsInteractor: HitsInteractor<Hit<Product>>
   let relatedHitsTableViewController: EcommerceHitsTableViewController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
+    self.searcher = HitsSearcher(client: .demo, indexName: "instant_search")
     self.hitsInteractor = .init(settings: .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true))
     self.hitsTableViewController = EcommerceHitsTableViewController()
-    self.relatedItemSearcher = SingleIndexSearcher(client: .demo, indexName: "instant_search")
+    self.relatedItemSearcher = HitsSearcher(client: .demo, indexName: "instant_search")
     self.relatedHitsInteractor = .init()
     self.relatedHitsTableViewController = EcommerceHitsTableViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -69,7 +69,7 @@ class RelatedItemsDemoViewController: UIViewController {
     
 
     
-    searcher.indexQueryState.query.hitsPerPage = 3
+    searcher.request.query.hitsPerPage = 3
     
     hitsInteractor.connectSearcher(searcher)
     hitsInteractor.connectController(hitsTableViewController)

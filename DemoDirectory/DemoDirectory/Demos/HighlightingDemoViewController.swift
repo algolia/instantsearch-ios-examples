@@ -16,7 +16,7 @@ class HighlightingDemoViewController: UIViewController {
   
   let searchBar = UISearchBar()
 
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
 
   let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
@@ -25,7 +25,7 @@ class HighlightingDemoViewController: UIViewController {
   let hitsTableViewController: MovieHitsTableViewController<HitType>
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = SingleIndexSearcher(client: .demo, indexName: "mobile_demo_movies")
+    self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_movies")
     self.textFieldController = .init(searchBar: searchBar)
     self.hitsTableViewController = MovieHitsTableViewController()
     queryInputConnector = .init(searcher: searcher, controller: textFieldController)

@@ -17,12 +17,12 @@ class VoiceInputDemoViewController: UIViewController {
   let voiceInputButton: UIButton = .init()
 
   lazy var textFieldController: TextFieldController = .init(searchBar: searchBar)
-  lazy var searchConnector: SingleIndexSearchConnector<BestBuyItem> = .init(appID: "latency",
-                                                                            apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                                                                            indexName: "bestbuy",
-                                                                            queryInputController: textFieldController,
-                                                                            hitsInteractor: .init(),
-                                                                            hitsController: hitsTableViewController)
+  lazy var searchConnector: SearchConnector<BestBuyItem> = .init(appID: "latency",
+                                                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
+                                                                 indexName: "bestbuy",
+                                                                 queryInputController: textFieldController,
+                                                                 hitsInteractor: .init(),
+                                                                 hitsController: hitsTableViewController)
   let hitsTableViewController: BestBuyHitsViewController = .init()
   let voiceOverlayController: VoiceOverlayController = .init()
   

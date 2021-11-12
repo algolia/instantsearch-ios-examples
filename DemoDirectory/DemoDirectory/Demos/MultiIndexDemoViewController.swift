@@ -78,11 +78,16 @@ enum MultiIndexDemoSection: CaseIterable {
 class MultiIndexDemoViewController: UIViewController {
     
   let textFieldController: TextFieldController
+  
   let queryInputConnector: QueryInputConnector
-  let multiIndexHitsConnector: MultiIndexHitsConnector
   let searchBar: UISearchBar
+  
+  let multiSearcher: MultiSearcher
+  let moviesHitsConnector: HitsConnector<Movie>
+  let actorsHitsConnector: HitsConnector<Hit<Actor>>
+  
   let hitsViewController: MultiIndexHitsViewController
-
+  
   init() {
     searchBar = UISearchBar()
     
@@ -90,17 +95,18 @@ class MultiIndexDemoViewController: UIViewController {
     
     hitsViewController = .init()
     
-    let indexModules: [MultiIndexHitsConnector.IndexModule] = [
-      .init(indexName: MultiIndexDemoSection.movies.indexName, hitsInteractor: HitsInteractor<Movie>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)),
-      .init(indexName: MultiIndexDemoSection.actors.indexName, hitsInteractor: HitsInteractor<Hit<Actor>>(infiniteScrolling: .on(withOffset: 10), showItemsOnEmptyQuery: true)),
-    ]
+    multiSearcher = MultiSearcher(appID: SearchClient.demo.applicationID,
+                                  apiKey: SearchClient.demo.apiKey)
     
-    multiIndexHitsConnector = .init(appID: SearchClient.demo.applicationID,
-                                    apiKey: SearchClient.demo.apiKey,
-                                    indexModules: indexModules,
-                                    controller: hitsViewController)
+    let moviesSearcher = multiSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.movies.indexName)
+    let actorsSearcher = multiSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.actors.indexName)
     
-    queryInputConnector = .init(searcher: multiIndexHitsConnector.searcher, controller: textFieldController)
+    queryInputConnector = .init(searcher: multiSearcher,
+                                controller: textFieldController)
+    moviesHitsConnector = .init(searcher: moviesSearcher,
+                                controller: hitsViewController.moviesCollectionViewController)
+    actorsHitsConnector = .init(searcher: actorsSearcher,
+                                controller: hitsViewController.actorsCollectionViewController)
     
     super.init(nibName: nil, bundle: nil)
     setup()
@@ -120,7 +126,7 @@ class MultiIndexDemoViewController: UIViewController {
 private extension MultiIndexDemoViewController {
     
   func setup() {
-    multiIndexHitsConnector.searcher.search()
+    multiSearcher.search()
     addChild(hitsViewController)
     hitsViewController.didMove(toParent: self)
   }
@@ -146,96 +152,15 @@ private extension MultiIndexDemoViewController {
 
 }
 
-class MultiIndexHitsViewController: UIViewController, MultiIndexHitsController {
+class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HitsController {
   
-  let moviesCollectionView: UICollectionView
-  let actorsCollectionView: UICollectionView
-  
-  weak var hitsSource: MultiIndexHitsSource?
-  
-  init() {
-    let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.scrollDirection = .horizontal
-    moviesCollectionView = .init(frame: .zero, collectionViewLayout: flowLayout)
-    
-    let actorsFlowLayout = UICollectionViewFlowLayout()
-    actorsFlowLayout.scrollDirection = .horizontal
-    actorsCollectionView = .init(frame: .zero, collectionViewLayout: actorsFlowLayout)
-        
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func reload() {
-    moviesCollectionView.reloadData()
-    actorsCollectionView.reloadData()
-  }
-  
-  func scrollToTop() {
-    moviesCollectionView.scrollToFirstNonEmptySection()
-    actorsCollectionView.scrollToFirstNonEmptySection()
-  }
-  
-  func section(for collectionView: UICollectionView) -> MultiIndexDemoSection? {
-    switch collectionView {
-    case moviesCollectionView:
-      return .movies
-      
-    case actorsCollectionView:
-      return .actors
-
-    default:
-      return .none
-    }
-  }
+  var hitsSource: HitsInteractor<Movie>?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupUI()
+    collectionView.backgroundColor = .clear
+    collectionView.register(HitCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.movies.cellIdentifier)
   }
-  
-  func setupUI() {
-    configureCollectionView()
-    moviesCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-    actorsCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    
-    let stackView = UIStackView()
-      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
-      .set(\.axis, to: .vertical)
-      .set(\.spacing, to: .px16)
-    
-    stackView.addArrangedSubview(UILabel()
-                                  .set(\.text, to: MultiIndexDemoSection.movies.title)
-                                  .set(\.font, to: .systemFont(ofSize: 15, weight: .black))
-    )
-    stackView.addArrangedSubview(moviesCollectionView)
-    stackView.addArrangedSubview(UILabel()
-                                  .set(\.text, to: MultiIndexDemoSection.actors.title)
-                                  .set(\.font, to: .systemFont(ofSize: 15, weight: .black))
-    )
-    stackView.addArrangedSubview(actorsCollectionView)
-    
-    view.addSubview(stackView)
-    stackView.pin(to: view.safeAreaLayoutGuide, insets: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
-  }
-  
-  func configureCollectionView() {
-    moviesCollectionView.register(HitCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.movies.cellIdentifier)
-    actorsCollectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.actors.cellIdentifier)
-    [moviesCollectionView, actorsCollectionView].forEach { collectionView in
-      collectionView.translatesAutoresizingMaskIntoConstraints = false
-      collectionView.dataSource = self
-      collectionView.delegate = self
-      collectionView.backgroundColor = .clear
-    }
-  }
-  
-}
-
-extension MultiIndexHitsViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
@@ -250,46 +175,137 @@ extension MultiIndexHitsViewController: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    guard let section = section(for: collectionView) else { return .zero }
-    switch section {
-    case .movies:
-      return CGSize(width: collectionView.bounds.width / 2 - 10, height: collectionView.bounds.height - 10)
-
-    case .actors:
-      return CGSize(width: collectionView.bounds.width / 3, height: 40)
-    }
+    return CGSize(width: collectionView.bounds.width / 2 - 10, height: collectionView.bounds.height - 10)
   }
-
+  
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return hitsSource?.numberOfHits() ?? 0
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultiIndexDemoSection.movies.cellIdentifier, for: indexPath)
+    
+    if let item: Movie = hitsSource?.hit(atIndex: indexPath.row),
+      let cell = cell as? HitCollectionViewCell {
+      HitViewModel.movie(item).configure(cell.hitView)
+    }
+    
+    return cell
+  }
+  
 }
 
-
-extension MultiIndexHitsViewController: UICollectionViewDataSource {
+class ActorsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HitsController {
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    guard let section = self.section(for: collectionView) else { return 0 }
-    return hitsSource?.numberOfHits(inSection: section.index) ?? 0
+  var hitsSource: HitsInteractor<Hit<Actor>>?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    collectionView.backgroundColor = .clear
+    collectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.actors.cellIdentifier)
+  }
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 10
+  }
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 10
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: collectionView.bounds.width / 3, height: 40)
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return hitsSource?.numberOfHits() ?? 0
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    guard let section = self.section(for: collectionView) else { return UICollectionViewCell() }
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultiIndexDemoSection.actors.cellIdentifier, for: indexPath)
     
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: section.cellIdentifier, for: indexPath)
-    
-    switch section {
-    case .movies:
-      if let item: Movie = try? hitsSource?.hit(atIndex: indexPath.row, inSection: section.index),
-        let cell = cell as? HitCollectionViewCell {
-        HitViewModel.movie(item).configure(cell.hitView)
-      }
-      
-    case .actors:
-      if let actor: Hit<Actor> = try? hitsSource?.hit(atIndex: indexPath.row, inSection: section.index) {
-        (cell as? ActorCollectionViewCell).flatMap(ActorHitCollectionViewCellViewState().configure)?(actor)
-      }
+    if let actor = hitsSource?.hit(atIndex: indexPath.row) {
+      (cell as? ActorCollectionViewCell).flatMap(ActorHitCollectionViewCellViewState().configure)?(actor)
     }
 
     return cell
+  }
+  
+}
+
+
+class MultiIndexHitsViewController: UIViewController {
+  
+  let moviesCollectionViewController: MoviesCollectionViewController
+  let actorsCollectionViewController: ActorsCollectionViewController
+  
+  init() {
+    let moviesFlowLayout = UICollectionViewFlowLayout()
+    moviesFlowLayout.scrollDirection = .horizontal
+    moviesCollectionViewController = .init(collectionViewLayout: moviesFlowLayout)
+
+    let actorsFlowLayout = UICollectionViewFlowLayout()
+    actorsFlowLayout.scrollDirection = .horizontal
+    actorsCollectionViewController = .init(collectionViewLayout: actorsFlowLayout)
+        
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
+  }
+  
+  func setupUI() {
+    configureCollectionView()
+    
+    addChild(moviesCollectionViewController)
+    moviesCollectionViewController.didMove(toParent: self)
+    
+    addChild(actorsCollectionViewController)
+    actorsCollectionViewController.didMove(toParent: self)
+    
+    moviesCollectionViewController.collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    actorsCollectionViewController.collectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    
+    let stackView = UIStackView()
+      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
+      .set(\.axis, to: .vertical)
+      .set(\.spacing, to: .px16)
+    
+    stackView.addArrangedSubview(UILabel()
+                                  .set(\.text, to: MultiIndexDemoSection.movies.title)
+                                  .set(\.font, to: .systemFont(ofSize: 15, weight: .black))
+    )
+    stackView.addArrangedSubview(moviesCollectionViewController.collectionView)
+    stackView.addArrangedSubview(UILabel()
+                                  .set(\.text, to: MultiIndexDemoSection.actors.title)
+                                  .set(\.font, to: .systemFont(ofSize: 15, weight: .black))
+    )
+    stackView.addArrangedSubview(actorsCollectionViewController.collectionView)
+    
+    view.addSubview(stackView)
+    stackView.pin(to: view.safeAreaLayoutGuide, insets: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
+  }
+  
+  func configureCollectionView() {
+    [
+      moviesCollectionViewController,
+      actorsCollectionViewController
+    ].forEach { controller in
+      controller.view?.translatesAutoresizingMaskIntoConstraints = false
+      controller.view?.backgroundColor = .clear
+    }
   }
   
 }
