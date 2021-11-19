@@ -38,7 +38,8 @@ class DemoFactory {
       viewController = ToggleDefaultDemoViewController()
       
     case .DynamicFacetList:
-      viewController = DynamicFacetListDemoViewController()
+      viewController = VoiceInputDemoViewController()
+//      viewController = DynamicFacetListDemoViewController()
       
     case .facetList:
       viewController = RefinementListDemoViewController()

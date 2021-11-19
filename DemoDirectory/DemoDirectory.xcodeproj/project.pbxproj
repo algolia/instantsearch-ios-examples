@@ -20,7 +20,6 @@
 		AF1AF45A262DC62E0049DCE7 /* FacetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF459262DC62E0049DCE7 /* FacetsView.swift */; };
 		AF1AF45E262DC6580049DCE7 /* AlgoliaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */; };
 		AF1AF466262DC92A0049DCE7 /* InstantSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */; };
-		AF26923126EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF26923026EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift */; };
 		AF4059712552D125003C8CDB /* ShopItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */; };
 		AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596E2552D125003C8CDB /* ResultsViewController.swift */; };
 		AF4059732552D125003C8CDB /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596F2552D125003C8CDB /* ShopItem.swift */; };
@@ -47,7 +46,6 @@
 		AF67791322FB34C000850ACC /* CurrentFiltersDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778EA22FB34C000850ACC /* CurrentFiltersDemoViewController.swift */; };
 		AF67791422FB34C000850ACC /* StatsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778EB22FB34C000850ACC /* StatsDemoViewController.swift */; };
 		AF67791522FB34C000850ACC /* FilterListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778EC22FB34C000850ACC /* FilterListDemoViewController.swift */; };
-		AF67791622FB34C000850ACC /* MultiIndexSnippetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778ED22FB34C000850ACC /* MultiIndexSnippetViewController.swift */; };
 		AF67791722FB34C000850ACC /* RefinementListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778EE22FB34C000850ACC /* RefinementListDemoViewController.swift */; };
 		AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F022FB34C000850ACC /* SingleIndexSnippetViewController.swift */; };
 		AF67791C22FB34C000850ACC /* FilterNumericRangeDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */; };
@@ -147,7 +145,6 @@
 		AF1AF459262DC62E0049DCE7 /* FacetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetsView.swift; sourceTree = "<group>"; };
 		AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoliaController.swift; sourceTree = "<group>"; };
 		AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSearchItem.swift; sourceTree = "<group>"; };
-		AF26923026EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsAndFacetsSearchExample.swift; sourceTree = "<group>"; };
 		AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemTableViewCell.swift; sourceTree = "<group>"; };
 		AF40596E2552D125003C8CDB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		AF40596F2552D125003C8CDB /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
@@ -177,7 +174,6 @@
 		AF6778EA22FB34C000850ACC /* CurrentFiltersDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentFiltersDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778EB22FB34C000850ACC /* StatsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778EC22FB34C000850ACC /* FilterListDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListDemoViewController.swift; sourceTree = "<group>"; };
-		AF6778ED22FB34C000850ACC /* MultiIndexSnippetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiIndexSnippetViewController.swift; sourceTree = "<group>"; };
 		AF6778EE22FB34C000850ACC /* RefinementListDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefinementListDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F022FB34C000850ACC /* SingleIndexSnippetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleIndexSnippetViewController.swift; sourceTree = "<group>"; };
 		AF6778F322FB34C000850ACC /* FilterNumericRangeDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNumericRangeDemoViewController.swift; sourceTree = "<group>"; };
@@ -354,7 +350,6 @@
 		AF6778C322FB319200850ACC /* DemoDirectory */ = {
 			isa = PBXGroup;
 			children = (
-				AF702C8126EE52A100C8E87E /* Examples */,
 				AFAA5C91248FE2E900EC7B95 /* DemoDirectory.entitlements */,
 				AF6778C422FB319200850ACC /* AppDelegate.swift */,
 				AF6778E722FB34C000850ACC /* DemoListViewController.swift */,
@@ -456,15 +451,6 @@
 				52C68BFE244DF0DC008502D4 /* EcommerceHitsTableViewController.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		AF702C8126EE52A100C8E87E /* Examples */ = {
-			isa = PBXGroup;
-			children = (
-				AF26923026EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift */,
-				AF6778ED22FB34C000850ACC /* MultiIndexSnippetViewController.swift */,
-			);
-			path = Examples;
 			sourceTree = "<group>";
 		};
 		AF7A7B09268E7EAF003C62A5 /* CurrentFilters */ = {
@@ -754,7 +740,6 @@
 				AF82C53826A618EE00609ECE /* DynamicFacetsDemoController.swift in Sources */,
 				AF67792622FB34C000850ACC /* LoadingDemoViewController.swift in Sources */,
 				AF67792C22FB34C000850ACC /* MovieTableViewCell.swift in Sources */,
-				AF26923126EB6A5B006AC4AA /* HitsAndFacetsSearchExample.swift in Sources */,
 				AF67791022FB34C000850ACC /* Actor.swift in Sources */,
 				AF1AF45E262DC6580049DCE7 /* AlgoliaController.swift in Sources */,
 				AF67792A22FB34C000850ACC /* ActorCollectionViewCell.swift in Sources */,
@@ -774,7 +759,6 @@
 				AF4CD87A2691296300D7A8AA /* SortByDemoSwiftUI.swift in Sources */,
 				AF87B8E726A4F3160015F772 /* FilterNumberRangeDemoSwiftUI.swift in Sources */,
 				AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */,
-				AF67791622FB34C000850ACC /* MultiIndexSnippetViewController.swift in Sources */,
 				AF87B8EF26A592090015F772 /* ClearFiltersDemoSwiftUI.swift in Sources */,
 				AF67791322FB34C000850ACC /* CurrentFiltersDemoViewController.swift in Sources */,
 				AF48C4DA25347C7100262367 /* Banner.swift in Sources */,

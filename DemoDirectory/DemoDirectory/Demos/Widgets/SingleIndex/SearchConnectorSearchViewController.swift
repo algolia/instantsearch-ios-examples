@@ -13,8 +13,8 @@ import InstantSearch
 class SearchConnectorSearchViewController: UIViewController {
     
   let searchController: UISearchController
-  let searchConnector: SearchConnector<BestBuyItem>
-  let hitsTableViewController: HitsTableViewController<BestBuyTableViewCellConfigurator>
+  let searchConnector: SearchConnector<Item>
+  let hitsTableViewController: SearchResultsViewController
 //  let statsInteractor: StatsInteractor
     
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

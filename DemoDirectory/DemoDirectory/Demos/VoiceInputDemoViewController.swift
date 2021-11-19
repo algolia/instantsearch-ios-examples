@@ -11,72 +11,106 @@ import UIKit
 import InstantSearch
 import InstantSearchVoiceOverlay
 
-class VoiceInputDemoViewController: UIViewController {
+class VoiceInputDemoViewController: UIViewController, UISearchBarDelegate {
   
-  let searchBar: UISearchBar = .init()
-  let voiceInputButton: UIButton = .init()
+  let searcher: HitsSearcher
+  let searchConnector: SearchConnector<Item>
+  
+  let searchController: UISearchController
+  let searchResultsController: SearchResultsViewController
+  let voiceOverlayController: VoiceOverlayController
 
-  lazy var textFieldController: TextFieldController = .init(searchBar: searchBar)
-  lazy var searchConnector: SearchConnector<BestBuyItem> = .init(appID: "latency",
-                                                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                                                                 indexName: "bestbuy",
-                                                                 queryInputController: textFieldController,
-                                                                 hitsInteractor: .init(),
-                                                                 hitsController: hitsTableViewController)
-  let hitsTableViewController: BestBuyHitsViewController = .init()
-  let voiceOverlayController: VoiceOverlayController = .init()
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    searcher = .init(appID: "latency",
+                     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
+                     indexName: "instant_search")
+    searchResultsController = .init()
+    voiceOverlayController = .init()
+    searchController = .init(searchResultsController: searchResultsController)
+    searchConnector = .init(searcher: searcher,
+                            searchController: searchController,
+                            hitsInteractor: .init(),
+                            hitsController: searchResultsController)
+    searchConnector.connect()
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    searchConnector.connect()
-    searchConnector.hitsConnector.searcher.search()
-    setupUI()
+    configureUI()
+    searcher.search()
   }
   
-  func setupUI() {
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    searchController.isActive = true
+  }
+  
+  func configureUI() {
+    title = "Voice Search"
     view.backgroundColor = .white
-    
-    // Setup search bar
-    searchBar.translatesAutoresizingMaskIntoConstraints = false
-    searchBar.searchBarStyle = .minimal
-    
-    // Setup voice input button
-    voiceInputButton.translatesAutoresizingMaskIntoConstraints = false
-    voiceInputButton.setImage(UIImage(systemName: "mic"), for: .normal)
-    voiceInputButton.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
-    voiceInputButton.addTarget(self, action: #selector(didTapVoiceInputButton), for: .touchUpInside)
-
-    // Setup layout
-    let headerStackView = UIStackView()
-    headerStackView.translatesAutoresizingMaskIntoConstraints = false
-    headerStackView.addArrangedSubview(searchBar)
-    headerStackView.addArrangedSubview(voiceInputButton)
-
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    view.addSubview(stackView)
-    NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ])
-    stackView.addArrangedSubview(headerStackView)
-    stackView.addArrangedSubview(hitsTableViewController.view)
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.showsSearchResultsController = true
+    searchController.automaticallyShowsCancelButton = false
+    navigationItem.searchController = searchController
+    searchController.searchBar.setImage(UIImage(systemName: "mic.fill"), for: .bookmark, state: .normal)
+    searchController.searchBar.showsBookmarkButton = true
+    searchController.searchBar.delegate = self
   }
   
-  @objc func didTapVoiceInputButton() {
-    voiceOverlayController.start(on: self) { [weak self] (text, isFinal, _) in
+  func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+    voiceOverlayController.start(on: self.navigationController!) { [weak self] (text, isFinal, _) in
       self?.searchConnector.queryInputConnector.interactor.query = text
     } errorHandler: { error in
       guard let error = error else { return }
-      let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-      alertController.addAction(.init(title: "OK", style: .cancel, handler: .none))
       DispatchQueue.main.async { [weak self] in
-        self?.present(alertController, animated: true, completion: nil)
+        self?.present(error)
       }
     }
+  }
+  
+  func present(_ error: Error) {
+    let alertController = UIAlertController(title: "Error",
+                                            message: error.localizedDescription,
+                                            preferredStyle: .alert)
+    alertController.addAction(.init(title: "OK",
+                                    style: .cancel,
+                                    handler: .none))
+    navigationController?.present(alertController,
+                                  animated: true,
+                                  completion: nil)
+  }
+
+  
+  class SearchResultsViewController: UITableViewController, HitsController {
+    
+    var hitsSource: HitsInteractor<Item>?
+      
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+        
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      hitsSource?.numberOfHits() ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = hitsSource?.hit(atIndex: indexPath.row)?.name
+      return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      if let _ = hitsSource?.hit(atIndex: indexPath.row) {
+        // Handle hit selection
+      }
+    }
+    
   }
   
 }

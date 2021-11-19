@@ -70,38 +70,44 @@ enum GettingStartedGuide {
  Structure must conform to `Codable` protocol to work properly with `InstantSearch`. Add the following declaration to ViewController.swift file.
  */
 
-struct BestBuyItem: Codable {
+struct Item: Codable {
   let name: String
 }
 
 /**
  ## Hits view controller
  
- In this example we use `HitsTableViewController` which is the basic implementation of `HitsController` protocol.
- It is a generic view controller parametrized with implementation of `TableViewCellConfigurable` protocol.
+ In this example we use `UITableViewController` which conforms to `HitsController` protocol.
  This implementation defines how to bind the record's data to the `UITableViewCell` instance.
  The following implementation binds the name of the fetched item to textLabel's text property of the cell.
  */
 
-struct BestBuyTableViewCellConfigurator: TableViewCellConfigurable {
-   
-  let model: BestBuyItem
+class SearchResultsViewController: UITableViewController, HitsController {
   
-  init(model: BestBuyItem, indexPath: IndexPath) {
-    self.model = model
+  var hitsSource: HitsInteractor<Item>?
+    
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+  }
+      
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    hitsSource?.numberOfHits() ?? 0
   }
   
-  func configure(_ cell: UITableViewCell) {
-    cell.textLabel?.text = model.name
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    cell.textLabel?.text = hitsSource?.hit(atIndex: indexPath.row)?.name
+    return cell
   }
-
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let _ = hitsSource?.hit(atIndex: indexPath.row) {
+      // Handle hit selection
+    }
+  }
+  
 }
-
-/**
- Finally, let's define a convenient typealias for `HitsTableViewController` parametrized with `CellConfigurator` defined above.
-*/
-
-typealias BestBuyHitsViewController = HitsTableViewController<BestBuyTableViewCellConfigurator>
 
 /**
  ## Fill the ViewController
@@ -113,18 +119,8 @@ extension GettingStartedGuide.StepOne {
   
   class ViewController: UIViewController {
     
-    let searchController: UISearchController
-    let hitsViewController: BestBuyHitsViewController
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-      hitsViewController = .init()
-      searchController = .init(searchResultsController: hitsViewController)
-      super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
+    lazy var searchController = UISearchController(searchResultsController: hitsViewController)
+    let hitsViewController = SearchResultsViewController()
     
   }
 
@@ -135,7 +131,7 @@ extension GettingStartedGuide.StepOne {
  ## Initialize your searcher
  
  We have the necessary view controllers, now it's time to add some search logic.
- The central part of our search experience is the Searcher. The Searcher performs search requests and obtains search results. Almost all InstantSearch components are connected with the Searcher. In this tutorial we only target one index, so we will instantiate a SingleIndexSearcher with the proper credentials.
+ The central part of our search experience is the Searcher. The Searcher performs search requests and obtains search results. Almost all InstantSearch components are connected with the Searcher. In this tutorial we only target one index, so we will instantiate a HitsSearcher with the proper credentials.
  Then add `searchConnector` property to view controller. Initialize it passing searcher, search controller and hits view controller. In the end, add activate the search connector by calling its `connect()` and then `searcher.search()` to launch the first empty search request immediately.
  */
 
@@ -143,48 +139,46 @@ extension GettingStartedGuide.StepTwo {
 
   class ViewController: UIViewController {
         
+    lazy var searchController = UISearchController(searchResultsController: hitsViewController)
+    let hitsViewController = SearchResultsViewController()
+    
     let searcher = HitsSearcher(appID: "latency",
                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                 indexName: "bestbuy")
-    lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
-    lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
-                                                                   searchController: searchController,
-                                                                   hitsInteractor: .init(),
-                                                                   hitsController: hitsViewController)
-    let hitsViewController: BestBuyHitsViewController = .init()
+    lazy var searchConnector = SearchConnector<Item>(searcher: searcher,
+                                                     searchController: searchController,
+                                                     hitsInteractor: .init(),
+                                                     hitsController: hitsViewController)
     
     override func viewDidLoad() {
       super.viewDidLoad()
       searchConnector.connect()
       searcher.search()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-      searchController.searchBar.becomeFirstResponder()
-    }
-            
+                
   }
   
 }
 
 /**
- The search logic is fully functional now, but it's not ready to use yet. We need a few more lines of code to setup the UI appearance. Add `setupUI` function to the view controller and call it from the `viewDidLoad` method. Finally, let's override `viewDidAppear` function and add set search bar the first responder so that the search controller present results immediately after the view controller appearance. We are all set now. Build and run your project and you will see the basic search experience with instant results!
+ The search logic is fully functional now, but it's not ready to use yet. We need a few more lines of code to setup the UI appearance. Add `setupUI` function to the view controller and call it from the `viewDidLoad` method. Finally, let's override `viewDidAppear` function and set search controller active so that the search controller present results immediately after the view controller appearance. We are all set now. Build and run your project and you will see the basic search experience with instant results!
  */
 
 extension GettingStartedGuide.StepThree {
   
   class ViewController: UIViewController {
         
+    
+    lazy var searchController = UISearchController(searchResultsController: hitsViewController)
+    let hitsViewController = SearchResultsViewController()
+
     let searcher = HitsSearcher(appID: "latency",
                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                 indexName: "bestbuy")
-    lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
-    lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
-                                                                   searchController: searchController,
-                                                                   hitsInteractor: .init(),
-                                                                   hitsController: hitsViewController)
-    let hitsViewController: BestBuyHitsViewController = .init()
+    lazy var searchConnector = SearchConnector<Item>(searcher: searcher,
+                                                     searchController: searchController,
+                                                     hitsInteractor: .init(),
+                                                     hitsController: hitsViewController)
     
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -195,7 +189,7 @@ extension GettingStartedGuide.StepThree {
     
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
-      searchController.searchBar.becomeFirstResponder()
+      searchController.isActive = true
     }
     
     func setupUI() {
@@ -215,24 +209,24 @@ extension GettingStartedGuide.StepThree {
  ## Add Stats
  Now let's make our search experience more user-friendly by providing an additional feedback about search results. Along the way, you will discover how extend your search experience with different InstantSearch modules. Showing the hits count gives the user a complete undestanding about search results immediately without need of additional interaction. Let's add a `Stats` components. Stats interactor extracts search meta-data from the response and provides an interface to present it to the user.
  - Add stats interactor to view controller
- - Initialize it in the init method of view controller
  - Connect stats interactor to searcher using `connectSearcher` method
  */
 
 extension GettingStartedGuide.StepFour {
   
   class ViewController: UIViewController {
-        
+    
+    lazy var searchController = UISearchController(searchResultsController: hitsViewController)
+    let hitsViewController = SearchResultsViewController()
+
     let searcher = HitsSearcher(appID: "latency",
                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                 indexName: "bestbuy")
-    lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
-    lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
-                                                                   searchController: searchController,
-                                                                   hitsInteractor: .init(),
-                                                                   hitsController: hitsViewController)
-    let hitsViewController: BestBuyHitsViewController = .init()
-    let statsInteractor: StatsInteractor = .init()
+    lazy var searchConnector = SearchConnector<Item>(searcher: searcher,
+                                                     searchController: searchController,
+                                                     hitsInteractor: .init(),
+                                                     hitsController: hitsViewController)
+    let statsInteractor = StatsInteractor()
     
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -244,7 +238,7 @@ extension GettingStartedGuide.StepFour {
     
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
-      searchController.searchBar.becomeFirstResponder()
+      searchController.isActive = true
     }
     
     func setupUI() {
@@ -270,16 +264,17 @@ extension GettingStartedGuide.StepFive {
  
   class ViewController: UIViewController {
         
+    lazy var searchController = UISearchController(searchResultsController: hitsTableViewController)
+    let hitsTableViewController = SearchResultsViewController()
+
     let searcher = HitsSearcher(appID: "latency",
                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                 indexName: "bestbuy")
-    lazy var searchController: UISearchController = .init(searchResultsController: hitsTableViewController)
-    lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
-                                                                   searchController: searchController,
-                                                                   hitsInteractor: .init(),
-                                                                   hitsController: hitsTableViewController)
-    let hitsTableViewController: BestBuyHitsViewController = .init()
-    let statsInteractor: StatsInteractor = .init()
+    lazy var searchConnector = SearchConnector<Item>(searcher: searcher,
+                                                     searchController: searchController,
+                                                     hitsInteractor: .init(),
+                                                     hitsController: hitsTableViewController)
+    let statsInteractor = StatsInteractor()
     
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -292,7 +287,7 @@ extension GettingStartedGuide.StepFive {
     
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
-      searchController.searchBar.becomeFirstResponder()
+      searchController.isActive = true
     }
     
     func setupUI() {
@@ -319,7 +314,7 @@ extension GettingStartedGuide.StepFive.ViewController: StatsTextController {
  Build and run your application: on each keystroke the updated search results count is shown. Now you have an idea of how InstantSearch modules are organized.
  - Each module has an `Interactor` containing a business-logic of the module.
  - Each `Interactor` has a corresponding `Controller` protocol defining the interaction with a UI component.
- `InstantSearch` provides a few basic implementations of `Controller` protocol for `UIKit` components such as `HitsTableViewController` (which we use in this tutorial), `TextFieldController`, `ActivityIndicatorController`. Feel free to use them to discover the abilities of `InstantSearch` with minimal effort. In your own project you might want implement more custom UI and behaviour. So, it's up to you to create an implementations of `Controller` protocol and to connect them to a corresponding interactors.
+ `InstantSearch` provides a few basic implementations of `Controller` protocol for `UIKit` components such as `HitsTableViewController`, `TextFieldController`, `ActivityIndicatorController`. Feel free to use them to discover the abilities of `InstantSearch` with minimal effort. In your own project you might want implement more custom UI and behaviour. So, it's up to you to create an implementations of `Controller` protocol and to connect them to a corresponding interactors.
  */
 
 /** ## Filter your results: RefinementList
@@ -331,26 +326,27 @@ extension GettingStartedGuide.StepSix {
   
   class ViewController: UIViewController {
         
+    lazy var searchController = UISearchController(searchResultsController: hitsViewController)
+    let hitsViewController = SearchResultsViewController()
+
     let searcher = HitsSearcher(appID: "latency",
                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                 indexName: "bestbuy")
-    lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
-    lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
-                                                                   searchController: searchController,
-                                                                   hitsInteractor: .init(),
-                                                                   hitsController: hitsViewController,
-                                                                   filterState: filterState)
-    let hitsViewController: BestBuyHitsViewController = .init()
-    let statsInteractor: StatsInteractor = .init()
-    let filterState: FilterState = .init()
-    lazy var categoryConnector: FacetListConnector = .init(searcher: searcher,
-                                                           filterState: filterState,
-                                                           attribute: "category",
-                                                           operator: .and,
-                                                           controller: categoryListController)
+    lazy var searchConnector = SearchConnector<Item>(searcher: searcher,
+                                                     searchController: searchController,
+                                                     hitsInteractor: .init(),
+                                                     hitsController: hitsViewController,
+                                                     filterState: filterState)
+    let statsInteractor = StatsInteractor()
+    let filterState = FilterState()
+    lazy var categoryConnector = FacetListConnector(searcher: searcher,
+                                                    filterState: filterState,
+                                                    attribute: "category",
+                                                    operator: .and,
+                                                    controller: categoryListController)
     
-    lazy var categoryListController: FacetListTableController = .init(tableView: categoryTableViewController.tableView)
-    let categoryTableViewController: UITableViewController = .init()
+    lazy var categoryListController = FacetListTableController(tableView: categoryTableViewController.tableView)
+    let categoryTableViewController = UITableViewController()
     
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -364,7 +360,7 @@ extension GettingStartedGuide.StepSix {
     
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
-      searchController.searchBar.becomeFirstResponder()
+      searchController.isActive = true
     }
     
     func setupUI() {
@@ -396,26 +392,27 @@ extension GettingStartedGuide.StepSeven {
   
   class ViewController: UIViewController {
         
+    lazy var searchController = UISearchController(searchResultsController: hitsViewController)
+    let hitsViewController = SearchResultsViewController()
+
     let searcher = HitsSearcher(appID: "latency",
                                 apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
                                 indexName: "bestbuy")
-    lazy var searchController: UISearchController = .init(searchResultsController: hitsViewController)
-    lazy var searchConnector: SearchConnector<BestBuyItem> = .init(searcher: searcher,
-                                                                   searchController: searchController,
-                                                                   hitsInteractor: .init(),
-                                                                   hitsController: hitsViewController,
-                                                                   filterState: filterState)
-    let hitsViewController: BestBuyHitsViewController = .init()
-    let statsInteractor: StatsInteractor = .init()
-    let filterState: FilterState = .init()
-    lazy var categoryConnector: FacetListConnector = .init(searcher: searcher,
-                                                           filterState: filterState,
-                                                           attribute: "category",
-                                                           operator: .and,
-                                                           controller: categoryListController)
+    lazy var searchConnector = SearchConnector<Item>(searcher: searcher,
+                                                     searchController: searchController,
+                                                     hitsInteractor: .init(),
+                                                     hitsController: hitsViewController,
+                                                     filterState: filterState)
+    let statsInteractor = StatsInteractor()
+    let filterState = FilterState()
+    lazy var categoryConnector = FacetListConnector(searcher: searcher,
+                                                    filterState: filterState,
+                                                    attribute: "category",
+                                                    operator: .and,
+                                                    controller: categoryListController)
     
-    lazy var categoryListController: FacetListTableController = .init(tableView: categoryTableViewController.tableView)
-    let categoryTableViewController: UITableViewController = .init()
+    lazy var categoryListController = FacetListTableController(tableView: categoryTableViewController.tableView)
+    let categoryTableViewController = UITableViewController()
     
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -429,7 +426,7 @@ extension GettingStartedGuide.StepSeven {
     
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
-      searchController.searchBar.becomeFirstResponder()
+      searchController.isActive = true
     }
     
     func setupUI() {

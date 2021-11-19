@@ -14,10 +14,10 @@ class HitsConnectorSearchViewController: UIViewController {
   
   let searchController: UISearchController
   var textFieldController: TextFieldController
-  let hitsTableViewController: HitsTableViewController<BestBuyTableViewCellConfigurator>
+  let hitsTableViewController: SearchResultsViewController
 
   let queryInputInteractor: QueryInputInteractor
-  let hitsConnector: HitsConnector<BestBuyItem>
+  let hitsConnector: HitsConnector<Item>
   let statsInteractor: StatsInteractor
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

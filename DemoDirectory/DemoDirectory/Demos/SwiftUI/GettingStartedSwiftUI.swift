@@ -28,7 +28,7 @@ extension GettingStartedGuide.SwiftUI {
   struct ContentView: View {
     
     @ObservedObject var queryInputController: QueryInputObservableController = .init()
-    @ObservedObject var hitsController: HitsObservableController<BestBuyItem> = .init()
+    @ObservedObject var hitsController: HitsObservableController<Item> = .init()
     @ObservedObject var statsController: StatsTextObservableController = .init()
     @ObservedObject var facetsController: FacetListObservableController = .init()
 
@@ -101,7 +101,7 @@ extension GettingStartedGuide.SwiftUI {
     
     let searcher: HitsSearcher
     let queryInputInteractor: QueryInputInteractor
-    let hitsInteractor: HitsInteractor<BestBuyItem>
+    let hitsInteractor: HitsInteractor<Item>
     let statsInteractor: StatsInteractor
     
     let filterState: FilterState

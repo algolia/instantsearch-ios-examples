@@ -1,16 +1,19 @@
 //
 //  SearchViewController.swift
-//  DemoDirectory
+//  CategoriesHits
 //
-//  Created by Vladislav Fitc on 10/09/2021.
-//  Copyright © 2021 Algolia. All rights reserved.
+//  Created by Vladislav Fitc on 19/11/2021.
 //
 
 import Foundation
-import InstantSearch
 import UIKit
+import InstantSearch
 
-enum QuerySuggestionsAndCategories {
+enum CategoriesHits {
+  
+  struct Item: Codable {
+    let name: String
+  }
   
   class SearchViewController: UIViewController {
     
@@ -21,16 +24,16 @@ enum QuerySuggestionsAndCategories {
 
     let searcher: MultiSearcher
     let categoriesInteractor: FacetListInteractor
-    let suggestionsInteractor: HitsInteractor<QuerySuggestion>
+    let hitsInteractor: HitsInteractor<Item>
     
     let searchResultsController: SearchResultsController
-    
+      
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
       searcher = .init(appID: "latency",
-                       apiKey: "afc3dd66dd1293e2e2736a5a51b05c0a")
-      searchResultsController = .init()
+                       apiKey: "6be0576ff61c053d5f9a3225e2a90f76")
+      searchResultsController = .init(style: .plain)
       categoriesInteractor = .init()
-      suggestionsInteractor = .init(infiniteScrolling: .off)
+      hitsInteractor = .init(infiniteScrolling: .off)
       searchController = .init(searchResultsController: searchResultsController)
       textFieldController = .init(searchBar: searchController.searchBar)
       queryInputConnector = .init(searcher: searcher,
@@ -51,14 +54,10 @@ enum QuerySuggestionsAndCategories {
                                                       attribute: "categories")
       categoriesInteractor.connectFacetSearcher(facetsSearcher)
       searchResultsController.categoriesInteractor = categoriesInteractor
-
-      let suggestionsSearcher = searcher.addHitsSearcher(indexName: "instantsearch_query_suggestions")
-      suggestionsInteractor.connectSearcher(suggestionsSearcher)
-      searchResultsController.suggestionsInteractor = suggestionsInteractor
       
-      searchResultsController.didSelectSuggestion = { [weak self] suggestion in
-        self?.queryInputConnector.interactor.query = suggestion
-      }
+      let hitsSearchers = searcher.addHitsSearcher(indexName: "instant_search")
+      hitsInteractor.connectSearcher(hitsSearchers)
+      searchResultsController.hitsInteractor = hitsInteractor
       
       searcher.search()
     }
@@ -78,5 +77,5 @@ enum QuerySuggestionsAndCategories {
     }
     
   }
-
+  
 }
