@@ -129,6 +129,12 @@
 		AF5089EB2766CAF600F30F18 /* SearchSuggestionTableViewCell+QuerySuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchSuggestionTableViewCell+QuerySuggestion.swift"; sourceTree = "<group>"; };
 		AF5089F12766CCCF00F30F18 /* CategoryTableViewCell+Facet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryTableViewCell+Facet.swift"; sourceTree = "<group>"; };
 		AF5089FD2766CF2D00F30F18 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
+		AF508A0C2766D71D00F30F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AF508A0D2766D73700F30F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AF508A0E2766D75100F30F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AF508A0F2766D77200F30F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AF508A102766D78C00F30F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AF508A112766D7A800F30F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AF7FEB85272CAC5D0003BE62 /* Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7FEB88272CAC5D0003BE62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7FEB8A272CAC5D0003BE62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -273,6 +279,7 @@
 				AF46A75A2747EF9D004E86F3 /* SceneDelegate.swift */,
 				AF46A76A2747EFDE004E86F3 /* SearchViewController.swift */,
 				AF46A76C2747EFE9004E86F3 /* SearchResultsController.swift */,
+				AF508A112766D7A800F30F18 /* README.md */,
 				AF46A7612747EF9F004E86F3 /* Assets.xcassets */,
 				AF46A7632747EF9F004E86F3 /* LaunchScreen.storyboard */,
 				AF46A7662747EF9F004E86F3 /* Info.plist */,
@@ -365,6 +372,7 @@
 				AFAE55292733E07C00B52A43 /* Assets.xcassets */,
 				AFAE552B2733E07C00B52A43 /* LaunchScreen.storyboard */,
 				AFAE552E2733E07C00B52A43 /* Info.plist */,
+				AF508A0C2766D71D00F30F18 /* README.md */,
 			);
 			path = VoiceSearch;
 			sourceTree = "<group>";
@@ -379,6 +387,7 @@
 				AFAE55412733E09400B52A43 /* Assets.xcassets */,
 				AFAE55432733E09400B52A43 /* LaunchScreen.storyboard */,
 				AFAE55462733E09400B52A43 /* Info.plist */,
+				AF508A0D2766D73700F30F18 /* README.md */,
 			);
 			path = MultiIndex;
 			sourceTree = "<group>";
@@ -393,6 +402,7 @@
 				AFAE55592733E13100B52A43 /* Assets.xcassets */,
 				AFAE555B2733E13100B52A43 /* LaunchScreen.storyboard */,
 				AFAE555E2733E13100B52A43 /* Info.plist */,
+				AF508A0E2766D75100F30F18 /* README.md */,
 			);
 			path = QuerySuggestionsCategories;
 			sourceTree = "<group>";
@@ -407,6 +417,7 @@
 				AFAE55712733E19900B52A43 /* Assets.xcassets */,
 				AFAE55732733E19900B52A43 /* LaunchScreen.storyboard */,
 				AFAE55762733E19900B52A43 /* Info.plist */,
+				AF508A0F2766D77200F30F18 /* README.md */,
 			);
 			path = QuerySuggestionsRecentSearches;
 			sourceTree = "<group>";
@@ -421,6 +432,7 @@
 				AFAE55892733E1C500B52A43 /* Assets.xcassets */,
 				AFAE558B2733E1C500B52A43 /* LaunchScreen.storyboard */,
 				AFAE558E2733E1C500B52A43 /* Info.plist */,
+				AF508A102766D78C00F30F18 /* README.md */,
 			);
 			path = QuerySuggestionsHits;
 			sourceTree = "<group>";

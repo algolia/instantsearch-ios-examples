@@ -1,1 +1,1 @@
-#  QuerySuggestions
+#  Query Suggestions implementation example 
