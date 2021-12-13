@@ -19,6 +19,9 @@ extension QuerySuggestionsAndRecentSearches {
     
     var onSelection: ((String) -> Void)?
     
+    private let headerTitleFontSize: CGFloat = 15
+    private let headerTitleHeight: CGFloat = 28
+    
     enum Section: Int, CaseIterable {
       case recentSearches
       case querySuggestions
@@ -47,6 +50,7 @@ extension QuerySuggestionsAndRecentSearches {
       super.viewDidLoad()
       tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.querySuggestions.cellReuseIdentifier)
       tableView.register(UITableViewCell.self, forCellReuseIdentifier: Section.recentSearches.cellReuseIdentifier)
+      tableView.sectionHeaderTopPadding = 0
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -107,7 +111,105 @@ extension QuerySuggestionsAndRecentSearches {
         return isEmpty ? nil : section.header
       }
     }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+      guard let section = Section(rawValue: indexPath.section) else { return .none }
+      switch section {
+      case .recentSearches:
+        return .delete
         
+      case .querySuggestions:
+        return .none
+      }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      guard let section = Section(rawValue: indexPath.section) else { return }
+      switch section {
+      case .recentSearches:
+        deleteRecentSearch(atIndex: indexPath.row)
+        
+      case .querySuggestions:
+        break
+      }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      guard let section = Section(rawValue: section) else { return 0 }
+      switch section {
+      case .recentSearches:
+        return recentSearches.isEmpty ? 0 : headerTitleHeight
+      
+      case .querySuggestions:
+        return headerTitleHeight
+      }
+    }
+            
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+      guard let section = Section(rawValue: section) else { return nil }
+      if case(.recentSearches) = section, !recentSearches.isEmpty {
+        let header = SectionHeader(frame: .zero)
+        header.label.font = .systemFont(ofSize: headerTitleFontSize, weight: .semibold)
+        header.label.text = Section.recentSearches.header
+        header.button.addTarget(self, action: #selector(clearRecentSearches), for: .touchUpInside)
+        return header
+      } else {
+        return nil
+      }
+    }
+    
+    private func deleteRecentSearch(atIndex index: Int) {
+      recentSearches.remove(at: index)
+      tableView.beginUpdates()
+      tableView.reloadSections([Section.recentSearches.rawValue], with: .automatic)
+      tableView.endUpdates()
+    }
+    
+    @objc private func clearRecentSearches() {
+      recentSearches.removeAll()
+      tableView.beginUpdates()
+      tableView.reloadSections([Section.recentSearches.rawValue], with: .automatic)
+      tableView.endUpdates()
+    }
+        
+  }
+  
+}
+
+private class SectionHeader: UIView {
+  
+  let label = UILabel()
+  let button = UIButton()
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    
+    label.textColor = UIColor.secondaryLabel
+    label.translatesAutoresizingMaskIntoConstraints = false
+    
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(systemName: "trash"), for: .normal)
+    
+    let separator = UIView()
+    separator.translatesAutoresizingMaskIntoConstraints = false
+    
+    let stackView = UIStackView()
+    stackView.distribution = .fill
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.addArrangedSubview(label)
+    stackView.addArrangedSubview(separator)
+    stackView.addArrangedSubview(button)
+    addSubview(stackView)
+    NSLayoutConstraint.activate([
+      stackView.topAnchor.constraint(equalTo: topAnchor),
+      stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+      stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+    ])
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
 }
