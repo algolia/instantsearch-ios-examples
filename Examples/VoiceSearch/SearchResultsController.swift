@@ -13,11 +13,13 @@ extension VoiceSearch {
   
   class SearchResultsController: UITableViewController, HitsController {
     
-    var hitsSource: HitsInteractor<Product>?
+    var hitsSource: HitsInteractor<Hit<Product>>?
+    
+    let productCellID = "productCellID"
     
     override func viewDidLoad() {
       super.viewDidLoad()
-      tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: "cellID")
+      tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: productCellID)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,7 +27,7 @@ extension VoiceSearch {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+      let cell = tableView.dequeueReusableCell(withIdentifier: productCellID, for: indexPath)
       if
         let productTableViewCell = cell as? ProductTableViewCell,
         let product = hitsSource?.hit(atIndex: indexPath.row) {

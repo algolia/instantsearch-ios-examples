@@ -32,7 +32,7 @@ extension QuerySuggestionsAndRecentSearches {
         }
       }
       
-      var cellID: String {
+      var cellReuseIdentifier: String {
         switch self {
         case .querySuggestions:
           return "suggestion"
@@ -45,8 +45,8 @@ extension QuerySuggestionsAndRecentSearches {
         
     override func viewDidLoad() {
       super.viewDidLoad()
-      tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.querySuggestions.cellID)
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: Section.recentSearches.cellID)
+      tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.querySuggestions.cellReuseIdentifier)
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: Section.recentSearches.cellReuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,12 +68,12 @@ extension QuerySuggestionsAndRecentSearches {
       let cell: UITableViewCell
       switch section {
       case .recentSearches:
-        cell = tableView.dequeueReusableCell(withIdentifier: Section.recentSearches.cellID, for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.recentSearches.cellReuseIdentifier, for: indexPath)
         cell.imageView?.image = UIImage(systemName: "clock.arrow.circlepath")
         cell.textLabel?.text = recentSearches[indexPath.row]
         
       case .querySuggestions:
-        cell = tableView.dequeueReusableCell(withIdentifier: Section.querySuggestions.cellID, for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.querySuggestions.cellReuseIdentifier, for: indexPath)
         if
           let suggestionCell = cell as? SearchSuggestionTableViewCell,
           let suggestion = hitsSource?.hit(atIndex: indexPath.row) {

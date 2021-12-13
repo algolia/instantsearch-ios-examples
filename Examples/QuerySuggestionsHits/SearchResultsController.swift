@@ -25,6 +25,15 @@ extension QuerySuggestionsAndHits {
           return "Products"
         }
       }
+      
+      var cellReuseIdentifier: String {
+        switch self {
+        case .suggestions:
+          return "suggestionCellID"
+        case .hits:
+          return "productCellID"
+        }
+      }
           
       init?(section: Int) {
         self.init(rawValue: section)
@@ -46,7 +55,7 @@ extension QuerySuggestionsAndHits {
       }
     }
     
-    weak var hitsInteractor: HitsInteractor<Product>? {
+    weak var hitsInteractor: HitsInteractor<Hit<Product>>? {
       didSet {
         oldValue?.onResultsUpdated.cancelSubscription(for: tableView)
         guard let interactor = hitsInteractor else { return }
@@ -58,8 +67,8 @@ extension QuerySuggestionsAndHits {
     
     override func viewDidLoad() {
       super.viewDidLoad()
-      tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: "suggestion")
-      tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: "product")
+      tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.suggestions.cellReuseIdentifier)
+      tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: Section.hits.cellReuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -84,7 +93,7 @@ extension QuerySuggestionsAndHits {
       
       switch section {
       case .suggestions:
-        cell = tableView.dequeueReusableCell(withIdentifier: "suggestion", for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.suggestions.cellReuseIdentifier, for: indexPath)
         if
           let searchSuggestionCell = cell as? SearchSuggestionTableViewCell,
           let suggestion = suggestionsHitsInteractor?.hit(atIndex: indexPath.row) {
@@ -92,7 +101,7 @@ extension QuerySuggestionsAndHits {
         }
 
       case .hits:
-        cell = tableView.dequeueReusableCell(withIdentifier: "product", for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.hits.cellReuseIdentifier, for: indexPath)
         if
           let productTableViewCell = cell as? ProductTableViewCell,
           let product = hitsInteractor?.hit(atIndex: indexPath.row) {

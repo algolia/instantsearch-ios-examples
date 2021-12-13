@@ -20,7 +20,7 @@ enum VoiceSearch {
     let textFieldController: TextFieldController
     
     let hitsSearcher: HitsSearcher
-    let hitsInteractor: HitsInteractor<Product>
+    let hitsInteractor: HitsInteractor<Hit<Product>>
 
     let searchResultsController: SearchResultsController
     let voiceOverlayController: VoiceOverlayController

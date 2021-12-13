@@ -20,7 +20,7 @@ enum QuerySuggestionsAndHits {
 
     let searcher: MultiSearcher
     let suggestionsInteractor: HitsInteractor<QuerySuggestion>
-    let hitsInteractor: HitsInteractor<Product>
+    let hitsInteractor: HitsInteractor<Hit<Product>>
     
     let searchResultsController: SearchResultsController
       

@@ -46,6 +46,8 @@ extension MultiIndex {
       
     }
     
+    let cellReuseIdentifier = "cellID"
+    
     func numberOfHits(in section: Section) -> Int {
       switch section {
       case .actors:
@@ -90,7 +92,7 @@ extension MultiIndex {
     
     override func viewDidLoad() {
       super.viewDidLoad()
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -103,7 +105,7 @@ extension MultiIndex {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+      let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
       guard let section = Section(indexPath: indexPath) else { return cell }
       cell.tintColor = .lightGray
       cell.imageView?.image = section.image

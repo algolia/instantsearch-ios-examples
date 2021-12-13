@@ -10,11 +10,7 @@ import UIKit
 import InstantSearch
 
 enum CategoriesHits {
-  
-  struct Item: Codable {
-    let name: String
-  }
-  
+    
   class SearchViewController: UIViewController {
     
     let searchController: UISearchController
@@ -24,7 +20,7 @@ enum CategoriesHits {
 
     let searcher: MultiSearcher
     let categoriesInteractor: FacetListInteractor
-    let hitsInteractor: HitsInteractor<Item>
+    let hitsInteractor: HitsInteractor<Hit<Product>>
     
     let searchResultsController: SearchResultsController
       

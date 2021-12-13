@@ -24,17 +24,25 @@ extension CategoriesHits {
         case .categories:
           return "Categories"
         case .hits:
-          return "Hits"
+          return "Products"
         }
       }
       
-      var cellID: String {
+      var cellReuseIdentifier: String {
         switch self {
         case .categories:
           return "categories"
         case .hits:
           return "hits"
         }
+      }
+      
+      init?(section: Int) {
+        self.init(rawValue: section)
+      }
+      
+      init?(indexPath: IndexPath) {
+        self.init(section: indexPath.section)
       }
                   
     }
@@ -49,7 +57,7 @@ extension CategoriesHits {
       }
     }
     
-    weak var hitsInteractor: HitsInteractor<Item>? {
+    weak var hitsInteractor: HitsInteractor<Hit<Product>>? {
       didSet {
         oldValue?.onResultsUpdated.cancelSubscription(for: tableView)
         guard let interactor = hitsInteractor else { return }
@@ -61,7 +69,8 @@ extension CategoriesHits {
     
     override func viewDidLoad() {
       super.viewDidLoad()
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: Section.categories.cellID)
+      tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: Section.categories.cellReuseIdentifier)
+      tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: Section.hits.cellReuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -81,16 +90,22 @@ extension CategoriesHits {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
 
-      let cell = tableView.dequeueReusableCell(withIdentifier: Section.categories.cellID, for: indexPath)
+      let cell: UITableViewCell
       
       switch section {
       case .categories:
-        if let category = categoriesInteractor?.items[indexPath.row] {
-          cell.textLabel?.text = category.value
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.categories.cellReuseIdentifier, for: indexPath)
+        if
+          let categoryCell = cell as? CategoryTableViewCell,
+          let category = categoriesInteractor?.items[indexPath.row] {
+          categoryCell.setup(with: category)
         }
       case .hits:
-        if let hit = hitsInteractor?.hit(atIndex: indexPath.row) {
-          cell.textLabel?.text = hit.name
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.hits.cellReuseIdentifier, for: indexPath)
+        if
+          let productTableViewCell = cell as? ProductTableViewCell,
+          let hit = hitsInteractor?.hit(atIndex: indexPath.row) {
+          productTableViewCell.setup(with: hit)
         }
       }
       
@@ -106,6 +121,16 @@ extension CategoriesHits {
         return nil
       default:
         return section.title
+      }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      guard let section = Section(indexPath: indexPath) else { return 0 }
+      switch section {
+      case .categories:
+        return 44
+      case .hits:
+        return 100
       }
     }
     

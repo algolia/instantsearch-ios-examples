@@ -28,7 +28,7 @@ extension QuerySuggestionsAndCategories {
         }
       }
       
-      var cellID: String {
+      var cellReuseIdentifier: String {
         switch self {
         case .categories:
           return "categories"
@@ -61,8 +61,8 @@ extension QuerySuggestionsAndCategories {
     
     override func viewDidLoad() {
       super.viewDidLoad()
-      tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.suggestions.cellID)
-      tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: Section.categories.cellID)
+      tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.suggestions.cellReuseIdentifier)
+      tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: Section.categories.cellReuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,14 +86,14 @@ extension QuerySuggestionsAndCategories {
       
       switch section {
       case .categories:
-        cell = tableView.dequeueReusableCell(withIdentifier: Section.categories.cellID, for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.categories.cellReuseIdentifier, for: indexPath)
         if
           let category = categoriesInteractor?.items[indexPath.row],
           let categoryCell = cell as? CategoryTableViewCell {
             categoryCell.setup(with: category)
         }
       case .suggestions:
-        cell = tableView.dequeueReusableCell(withIdentifier: Section.suggestions.cellID, for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: Section.suggestions.cellReuseIdentifier, for: indexPath)
         if
           let suggestion = suggestionsInteractor?.hit(atIndex: indexPath.row),
           let suggestionCell = cell as? SearchSuggestionTableViewCell {

@@ -28,6 +28,7 @@ class ProductTableViewCell: UITableViewCell {
   }
   
   private func layout() {
+    itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
     itemImageView.translatesAutoresizingMaskIntoConstraints = false
     itemImageView.clipsToBounds = true
     itemImageView.contentMode = .scaleAspectFit
@@ -67,13 +68,6 @@ class ProductTableViewCell: UITableViewCell {
       mainStackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
       mainStackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
     ])
-  }
-  
-  func setup(with product: Product) {
-    itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    itemImageView.sd_setImage(with: product.image)
-    titleLabel.text = product.name
-    subtitleLabel.text = product.description
   }
   
 }

@@ -20,18 +20,5 @@ class CategoryTableViewCell: UITableViewCell {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  func setup(with facet: Facet) {
-    guard let textLabel = textLabel else { return }
-    if let rawHighlighted = facet.highlighted {
-      let highlightedValue = HighlightedString(string: rawHighlighted)
-      textLabel.attributedText = NSAttributedString(highlightedString: highlightedValue,
-                                                    attributes: [
-                                                      .font: UIFont.systemFont(ofSize: textLabel.font.pointSize, weight: .bold)
-                                                    ])
-    } else {
-      textLabel.text = facet.value
-    }
-  }
-  
+    
 }
