@@ -291,13 +291,13 @@
 			isa = PBXGroup;
 			children = (
 				AF7FEB87272CAC5D0003BE62 /* Examples */,
-				AFAE5501273363CE00B52A43 /* QuerySuggestions */,
-				AFAE551F2733E07A00B52A43 /* VoiceSearch */,
-				AFAE55372733E09300B52A43 /* MultiIndex */,
-				AFAE554F2733E12E00B52A43 /* QuerySuggestionsCategories */,
-				AFAE55672733E19700B52A43 /* QuerySuggestionsRecentSearches */,
-				AFAE557F2733E1C400B52A43 /* QuerySuggestionsHits */,
 				AF46A7572747EF9D004E86F3 /* CategoriesHits */,
+				AFAE55372733E09300B52A43 /* MultiIndex */,
+				AFAE5501273363CE00B52A43 /* QuerySuggestions */,
+				AFAE554F2733E12E00B52A43 /* QuerySuggestionsCategories */,
+				AFAE557F2733E1C400B52A43 /* QuerySuggestionsHits */,
+				AFAE55672733E19700B52A43 /* QuerySuggestionsRecentSearches */,
+				AFAE551F2733E07A00B52A43 /* VoiceSearch */,
 				AF7FEB86272CAC5D0003BE62 /* Products */,
 				AFAE55152733643D00B52A43 /* Frameworks */,
 			);
