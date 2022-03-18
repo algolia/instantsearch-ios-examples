@@ -16,7 +16,7 @@ class MainSplitViewController: UISplitViewController {
   let demoFactory: DemoFactory
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    demoListViewController = .init()
+    demoListViewController = .init(nibName: nil, bundle: nil)
     demoFactory = .init()
     demoListNavigationController = UINavigationController(rootViewController: demoListViewController)
     demoListNavigationController.navigationBar.prefersLargeTitles = true
@@ -29,7 +29,6 @@ class MainSplitViewController: UISplitViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    preferredDisplayMode = 
     demoListViewController.title = "InstantSearch"
     demoListViewController.delegate = self
     viewControllers = [demoListNavigationController]
