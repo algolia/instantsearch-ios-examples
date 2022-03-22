@@ -167,6 +167,32 @@ extension HitViewModel {
 //      }
   }
   
+  static func ecomProductItem(_ item: Hit<StoreItem>) -> HitViewModel {
+    return HitViewModel()
+      .set(\.imageViewConfigurator) { imageView in
+        imageView.sd_setImage(with: item.object.images.first, completed: .none)
+        imageView.contentMode = .scaleAspectFit
+      }
+      .set(\.mainTitleConfigurator) { label in
+        label.text = item.object.name
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.numberOfLines = 0
+      }
+      .set(\.secondaryTitleConfigurator) { label in
+        label.text = item.object.brand
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+      }
+      .set(\.detailsTitleConfigurator) { label in
+        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.numberOfLines = 0
+      }
+//      .set(\.auxilaryTitleConfigurator) { label in
+//        label.text = "$100"
+//        label.font = .systemFont(ofSize: 25, weight: .bold)
+//      }
+  }
+
+  
 }
 
 class HitTableViewCell: UITableViewCell {

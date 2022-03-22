@@ -15,6 +15,8 @@
 		AF0B717D24C99399005CFB27 /* SearchConnectorSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0B717C24C99399005CFB27 /* SearchConnectorSearchViewController.swift */; };
 		AF0B718324C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */; };
 		AF0B718724C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0B718624C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift */; };
+		AF1115E827E7EA9F008D2736 /* StoreItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1115E727E7EA9F008D2736 /* StoreItemsTableViewController.swift */; };
+		AF1115EA27E7F96A008D2736 /* StoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1115E927E7F96A008D2736 /* StoreItem.swift */; };
 		AF1AF452262DC5AB0049DCE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF451262DC5AB0049DCE7 /* ContentView.swift */; };
 		AF1AF456262DC5D20049DCE7 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF455262DC5D20049DCE7 /* SuggestionsView.swift */; };
 		AF1AF45A262DC62E0049DCE7 /* FacetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF459262DC62E0049DCE7 /* FacetsView.swift */; };
@@ -26,6 +28,12 @@
 		AF4059742552D125003C8CDB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059702552D125003C8CDB /* SearchViewController.swift */; };
 		AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF4059852552D1EB003C8CDB /* SDWebImage */; };
 		AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059932552D924003C8CDB /* RatingViewController.swift */; };
+		AF46AE4327E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4227E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift */; };
+		AF46AE4627E8DD9100966236 /* SearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4427E8DD9100966236 /* SearchSuggestionTableViewCell.swift */; };
+		AF46AE4727E8DD9100966236 /* SearchSuggestionTableViewCell+QuerySuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4527E8DD9100966236 /* SearchSuggestionTableViewCell+QuerySuggestion.swift */; };
+		AF46AE4927E8DD9800966236 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4827E8DD9800966236 /* ProductTableViewCell.swift */; };
+		AF46AE4B27E8DD9E00966236 /* ProductTableViewCell+ProductHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4A27E8DD9E00966236 /* ProductTableViewCell+ProductHit.swift */; };
+		AF46AE4D27EA7C0100966236 /* UITableView+EmptyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4C27EA7C0100966236 /* UITableView+EmptyMessage.swift */; };
 		AF48C4D625347C6800262367 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D525347C6800262367 /* BannerViewController.swift */; };
 		AF48C4DA25347C7100262367 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4D925347C7100262367 /* Banner.swift */; };
 		AF48C4DE25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */; };
@@ -52,13 +60,10 @@
 		AF67791D22FB34C000850ACC /* SearchInputDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */; };
 		AF67791E22FB34C000850ACC /* SortByDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F522FB34C000850ACC /* SortByDemoViewController.swift */; };
 		AF67791F22FB34C000850ACC /* FacetSearchDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */; };
-		AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */; };
-		AF67792122FB34C000850ACC /* HighlightingDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F822FB34C000850ACC /* HighlightingDemoViewController.swift */; };
 		AF67792222FB34C000850ACC /* ToggleDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778F922FB34C000850ACC /* ToggleDemoViewController.swift */; };
 		AF67792322FB34C000850ACC /* HierarchicalDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778FA22FB34C000850ACC /* HierarchicalDemoViewController.swift */; };
 		AF67792422FB34C000850ACC /* ClearFiltersDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778FB22FB34C000850ACC /* ClearFiltersDemoViewController.swift */; };
 		AF67792522FB34C000850ACC /* MultiIndexDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */; };
-		AF67792622FB34C000850ACC /* LoadingDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778FD22FB34C000850ACC /* LoadingDemoViewController.swift */; };
 		AF67792722FB34C000850ACC /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6778FF22FB34C000850ACC /* MovieCell.swift */; };
 		AF67792822FB34C000850ACC /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790022FB34C000850ACC /* MovieCollectionViewCell.swift */; };
 		AF67792922FB34C000850ACC /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67790122FB34C000850ACC /* UIView+Layout.swift */; };
@@ -140,6 +145,8 @@
 		AF0B717C24C99399005CFB27 /* SearchConnectorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConnectorSearchViewController.swift; sourceTree = "<group>"; };
 		AF0B718224C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexWidgetHitsViewController.swift; sourceTree = "<group>"; };
 		AF0B718624C9C182005CFB27 /* BestBuyTableViewCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuyTableViewCellConfigurator.swift; sourceTree = "<group>"; };
+		AF1115E727E7EA9F008D2736 /* StoreItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItemsTableViewController.swift; sourceTree = "<group>"; };
+		AF1115E927E7F96A008D2736 /* StoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItem.swift; sourceTree = "<group>"; };
 		AF1AF451262DC5AB0049DCE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF1AF455262DC5D20049DCE7 /* SuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsView.swift; sourceTree = "<group>"; };
 		AF1AF459262DC62E0049DCE7 /* FacetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetsView.swift; sourceTree = "<group>"; };
@@ -150,6 +157,12 @@
 		AF40596F2552D125003C8CDB /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		AF4059702552D125003C8CDB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AF4059932552D924003C8CDB /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		AF46AE4227E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexMergedListDemoViewController.swift; sourceTree = "<group>"; };
+		AF46AE4427E8DD9100966236 /* SearchSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSuggestionTableViewCell.swift; path = ../../../Examples/Examples/SearchSuggestionTableViewCell.swift; sourceTree = "<group>"; };
+		AF46AE4527E8DD9100966236 /* SearchSuggestionTableViewCell+QuerySuggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SearchSuggestionTableViewCell+QuerySuggestion.swift"; path = "../../../Examples/Examples/SearchSuggestionTableViewCell+QuerySuggestion.swift"; sourceTree = "<group>"; };
+		AF46AE4827E8DD9800966236 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductTableViewCell.swift; path = ../../../Examples/Examples/ProductTableViewCell.swift; sourceTree = "<group>"; };
+		AF46AE4A27E8DD9E00966236 /* ProductTableViewCell+ProductHit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductTableViewCell+ProductHit.swift"; path = "../../../Examples/Examples/ProductTableViewCell+ProductHit.swift"; sourceTree = "<group>"; };
+		AF46AE4C27EA7C0100966236 /* UITableView+EmptyMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+EmptyMessage.swift"; sourceTree = "<group>"; };
 		AF48C4D525347C6800262367 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
 		AF48C4D925347C7100262367 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		AF48C4DD25347CAB00262367 /* QueryRuleCustomDataDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRuleCustomDataDemoViewController.swift; sourceTree = "<group>"; };
@@ -180,13 +193,10 @@
 		AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchInputDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F522FB34C000850ACC /* SortByDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortByDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacetSearchDemoViewController.swift; sourceTree = "<group>"; };
-		AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleIndexDemoViewController.swift; sourceTree = "<group>"; };
-		AF6778F822FB34C000850ACC /* HighlightingDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightingDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778F922FB34C000850ACC /* ToggleDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778FA22FB34C000850ACC /* HierarchicalDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HierarchicalDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778FB22FB34C000850ACC /* ClearFiltersDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearFiltersDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiIndexDemoViewController.swift; sourceTree = "<group>"; };
-		AF6778FD22FB34C000850ACC /* LoadingDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingDemoViewController.swift; sourceTree = "<group>"; };
 		AF6778FF22FB34C000850ACC /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		AF67790022FB34C000850ACC /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		AF67790122FB34C000850ACC /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
@@ -308,6 +318,15 @@
 			path = MultiIndex;
 			sourceTree = "<group>";
 		};
+		AF46AE4E27EA93AE00966236 /* MultiIndex */ = {
+			isa = PBXGroup;
+			children = (
+				AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */,
+				AF46AE4227E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift */,
+			);
+			path = MultiIndex;
+			sourceTree = "<group>";
+		};
 		AF4CD87526906C7200D7A8AA /* RelevantSort */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +403,7 @@
 				AFAA5C8D248FDC6700EC7B95 /* Demo.swift */,
 				AFAA5C8F248FDC8800EC7B95 /* DemoFactory.swift */,
 				AF48C4D925347C7100262367 /* Banner.swift */,
+				AF1115E927E7F96A008D2736 /* StoreItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -391,6 +411,7 @@
 		AF6778E822FB34C000850ACC /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				AF46AE4E27EA93AE00966236 /* MultiIndex */,
 				AF82C53426A618EE00609ECE /* DynamicFacets */,
 				AF82C52726A6176A00609ECE /* Filters */,
 				AF87B8F426A594350015F772 /* QueryRuleCustomData */,
@@ -404,13 +425,15 @@
 				AF6778F022FB34C000850ACC /* SingleIndexSnippetViewController.swift */,
 				AF6778F422FB34C000850ACC /* SearchInputDemoViewController.swift */,
 				AF6778F622FB34C000850ACC /* FacetSearchDemoViewController.swift */,
-				AF6778F722FB34C000850ACC /* SingleIndexDemoViewController.swift */,
+				AF46AE4427E8DD9100966236 /* SearchSuggestionTableViewCell.swift */,
+				AF46AE4827E8DD9800966236 /* ProductTableViewCell.swift */,
+				AF46AE4A27E8DD9E00966236 /* ProductTableViewCell+ProductHit.swift */,
+				AF46AE4527E8DD9100966236 /* SearchSuggestionTableViewCell+QuerySuggestion.swift */,
 				52C68BFC244DE97B008502D4 /* RelatedItemsDemoViewController.swift */,
-				AF6778F822FB34C000850ACC /* HighlightingDemoViewController.swift */,
-				AF6778FC22FB34C000850ACC /* MultiIndexDemoViewController.swift */,
 				AFBE2B8826A74D4E00F1E139 /* VoiceInputDemoViewController.swift */,
 				AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */,
 				AF40596E2552D125003C8CDB /* ResultsViewController.swift */,
+				AF46AE4C27EA7C0100966236 /* UITableView+EmptyMessage.swift */,
 				AF4059702552D125003C8CDB /* SearchViewController.swift */,
 				AF40596F2552D125003C8CDB /* ShopItem.swift */,
 				AF40596D2552D125003C8CDB /* ShopItemTableViewCell.swift */,
@@ -440,6 +463,7 @@
 			children = (
 				AF67790622FB34C000850ACC /* UITableView+Convenience.swift */,
 				AF67790722FB34C000850ACC /* MovieHitsTableViewController.swift */,
+				AF1115E727E7EA9F008D2736 /* StoreItemsTableViewController.swift */,
 				AF67790822FB34C000850ACC /* CellConfigurable.swift */,
 				AF67790922FB34C000850ACC /* Helpers.swift */,
 				AF67790A22FB34C000850ACC /* FacetListTableController.swift */,
@@ -548,7 +572,6 @@
 		AF9D1831268CD2B600EC68EA /* Loading */ = {
 			isa = PBXGroup;
 			children = (
-				AF6778FD22FB34C000850ACC /* LoadingDemoViewController.swift */,
 				AF87B8F026A592F50015F772 /* LoadingDemoSwiftUI.swift */,
 				AF9D1837268CE23E00EC68EA /* LoadingDemoController.swift */,
 			);
@@ -738,10 +761,10 @@
 				AF67791722FB34C000850ACC /* RefinementListDemoViewController.swift in Sources */,
 				AF67791C22FB34C000850ACC /* FilterNumericRangeDemoViewController.swift in Sources */,
 				AF82C53826A618EE00609ECE /* DynamicFacetsDemoController.swift in Sources */,
-				AF67792622FB34C000850ACC /* LoadingDemoViewController.swift in Sources */,
 				AF67792C22FB34C000850ACC /* MovieTableViewCell.swift in Sources */,
 				AF67791022FB34C000850ACC /* Actor.swift in Sources */,
 				AF1AF45E262DC6580049DCE7 /* AlgoliaController.swift in Sources */,
+				AF1115EA27E7F96A008D2736 /* StoreItem.swift in Sources */,
 				AF67792A22FB34C000850ACC /* ActorCollectionViewCell.swift in Sources */,
 				AF9D1834268CD32000EC68EA /* StatsDemoController.swift in Sources */,
 				AF67793622FB34DA00850ACC /* AppDelegate.swift in Sources */,
@@ -785,11 +808,9 @@
 				AF67793122FB34C000850ACC /* FacetListTableController.swift in Sources */,
 				AFBA4C302617DE3C009A8E14 /* ShopItemRow.swift in Sources */,
 				AF67793322FB34C000850ACC /* DemoHelper.swift in Sources */,
-				AF67792022FB34C000850ACC /* SingleIndexDemoViewController.swift in Sources */,
 				AF87B8F626A594480015F772 /* QueryRuleCustomDataDemoSwiftUI.swift in Sources */,
 				AF5BDC3F268C8677001F4A38 /* HierarchicalDemoSwiftUI.swift in Sources */,
 				AF67791922FB34C000850ACC /* SingleIndexSnippetViewController.swift in Sources */,
-				AF67792122FB34C000850ACC /* HighlightingDemoViewController.swift in Sources */,
 				AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */,
 				AF67791222FB34C000850ACC /* ToggleDefaultDemoViewController.swift in Sources */,
 				AF82C53226A6176A00609ECE /* FilterNumericComparisonDemoViewController.swift in Sources */,
@@ -802,12 +823,15 @@
 				AF67793522FB34C000850ACC /* NumericRangeController.swift in Sources */,
 				AF82C53A26A618EE00609ECE /* DynamicFacetsSwiftUIDemoViewController.swift in Sources */,
 				AF0B717D24C99399005CFB27 /* SearchConnectorSearchViewController.swift in Sources */,
+				AF46AE4D27EA7C0100966236 /* UITableView+EmptyMessage.swift in Sources */,
 				AF67792222FB34C000850ACC /* ToggleDemoViewController.swift in Sources */,
 				AF67792F22FB34C000850ACC /* CellConfigurable.swift in Sources */,
 				AF9C9B9A2672894C003BBAD2 /* QueryRuleCustomDataSwiftUIDemo.swift in Sources */,
 				AF9D183B268CEF3900EC68EA /* SortByDemoController.swift in Sources */,
 				AF9D1836268CE12200EC68EA /* ClearFiltersDemoController.swift in Sources */,
+				AF46AE4627E8DD9100966236 /* SearchSuggestionTableViewCell.swift in Sources */,
 				AF82C53126A6176A00609ECE /* RefinementPersistentListDemoViewController.swift in Sources */,
+				AF46AE4927E8DD9800966236 /* ProductTableViewCell.swift in Sources */,
 				AF82C53926A618EE00609ECE /* DynamicFacetsDemoViewController.swift in Sources */,
 				AFCAE43A24D1D5E000FD6A7D /* BestBuyItem.swift in Sources */,
 				AF1AF45A262DC62E0049DCE7 /* FacetsView.swift in Sources */,
@@ -815,15 +839,19 @@
 				AF9D1828268CCFCA00EC68EA /* FilterListDemoController.swift in Sources */,
 				AF87B8ED26A4F8060015F772 /* RelevantSortDemoSwiftUI.swift in Sources */,
 				AF9D182F268CD18100EC68EA /* ToggleDemoController.swift in Sources */,
+				AF46AE4B27E8DD9E00966236 /* ProductTableViewCell+ProductHit.swift in Sources */,
 				AF67791522FB34C000850ACC /* FilterListDemoViewController.swift in Sources */,
 				AF8D1C0123DF3E3F00CB415F /* RangeSlider.swift in Sources */,
 				AF9D1825268CBD2100EC68EA /* RefinementListDemoController.swift in Sources */,
 				AF4059712552D125003C8CDB /* ShopItemTableViewCell.swift in Sources */,
+				AF1115E827E7EA9F008D2736 /* StoreItemsTableViewController.swift in Sources */,
+				AF46AE4727E8DD9100966236 /* SearchSuggestionTableViewCell+QuerySuggestion.swift in Sources */,
 				AF4059742552D125003C8CDB /* SearchViewController.swift in Sources */,
 				AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */,
 				AF67793422FB34C000850ACC /* SearchStateViewController.swift in Sources */,
 				AF87B8EB26A4F7E20015F772 /* RelevantSortDemoViewController.swift in Sources */,
 				AFFB11F1260CAAE100E4E459 /* SwiftUIDemoViewController.swift in Sources */,
+				AF46AE4327E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift in Sources */,
 				AF9C9B9C26780489003BBAD2 /* RelevantSortSwiftUIDemo.swift in Sources */,
 				AF0B718324C99DA3005CFB27 /* MultiIndexWidgetHitsViewController.swift in Sources */,
 				AF82C53026A6176A00609ECE /* SegmentedDemoViewController.swift in Sources */,
@@ -996,6 +1024,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RDFJYUV23;
 				INFOPLIST_FILE = DemoDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1020,6 +1049,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JF98Q6D3JZ;
 				INFOPLIST_FILE = DemoDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

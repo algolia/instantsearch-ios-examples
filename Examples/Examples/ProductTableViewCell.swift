@@ -31,15 +31,15 @@ class ProductTableViewCell: UITableViewCell {
     itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
     itemImageView.translatesAutoresizingMaskIntoConstraints = false
     itemImageView.clipsToBounds = true
-    itemImageView.contentMode = .scaleAspectFit
+    itemImageView.contentMode = .scaleAspectFill
     itemImageView.layer.masksToBounds = true
 
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.font = .systemFont(ofSize: 12, weight: .bold)
+    titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
     titleLabel.numberOfLines = 2
     
     subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-    subtitleLabel.font = .systemFont(ofSize: 10, weight: .regular)
+    subtitleLabel.font = .systemFont(ofSize: 13, weight: .regular)
     subtitleLabel.textColor = .gray
     subtitleLabel.numberOfLines = 0
             

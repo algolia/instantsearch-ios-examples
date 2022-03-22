@@ -38,8 +38,8 @@ extension HitViewModel {
 
 enum MultiIndexDemoSection: CaseIterable {
   
-  case movies
   case actors
+  case movies
   
   var index: Int {
     return MultiIndexDemoSection.allCases.firstIndex(of: self)!

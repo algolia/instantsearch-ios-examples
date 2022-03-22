@@ -11,47 +11,49 @@ import UIKit
 import InstantSearch
 import SDWebImage
 
-public class ResultsViewController: UITableViewController, HitsController {
-    
-  public var hitsSource: HitsInteractor<ShopItem>?
+class ResultsViewController: UIViewController {
   
-  let cellID = "cellID"
+  let stackView: UIStackView
+  let hitsViewController: StoreItemsTableViewController
+  let statsController: LabelStatsController
+  let loadingController: ActivityIndicatorController
   
-  public override init(style: UITableView.Style) {
-    super.init(style: style)
-    tableView.register(ShopItemTableViewCell.self, forCellReuseIdentifier: cellID)
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    stackView = .init(frame: .zero)
+    hitsViewController = .init(style: .plain)
+    statsController = .init(label: .init())
+    loadingController = .init(activityIndicator: .init())
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    addChild(hitsViewController)
+    hitsViewController.didMove(toParent: self)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public func reload() {
-    tableView.reloadData()
-  }
-  
-  public func scrollToTop() {
-    tableView.scrollToFirstNonEmptySection()
-  }
-  
-  public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return hitsSource?.numberOfHits() ?? 0
-  }
-  
-  public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard
-      let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? ShopItemTableViewCell,
-      let item = hitsSource?.hit(atIndex: indexPath.row) else {
-        return .init()
-    }
-    cell.itemImageView.sd_setImage(with: item.image)
-    cell.titleLabel.text = item.name
-    cell.subtitleLabel.text = item.brand
-    return cell
-  }
-  
-  public override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.axis = .vertical
+    view.addSubview(stackView)
+    NSLayoutConstraint.activate([
+      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+    ])
+    statsController.label.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    statsController.label.translatesAutoresizingMaskIntoConstraints = false
+    loadingController.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    loadingController.activityIndicator.hidesWhenStopped = true
+    let statsContainer = UIView()
+    statsContainer.translatesAutoresizingMaskIntoConstraints = false
+    statsContainer.addSubview(statsController.label)
+    statsController.label.pin(to: statsContainer, insets: .init(top: 0, left: 20, bottom: -5, right: -5))
+    stackView.addArrangedSubview(statsContainer)
+    stackView.addArrangedSubview(loadingController.activityIndicator)
+    stackView.addArrangedSubview(hitsViewController.view)
   }
   
 }

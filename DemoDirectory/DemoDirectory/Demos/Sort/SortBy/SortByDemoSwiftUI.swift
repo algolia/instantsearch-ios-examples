@@ -17,7 +17,7 @@ struct SortByDemoSwiftUI: PreviewProvider {
     
     @ObservedObject var queryInputController: QueryInputObservableController
     @ObservedObject var selectableSegmentObservableController: SelectableSegmentObservableController
-    @ObservedObject var hitsController: HitsObservableController<Movie>
+    @ObservedObject var hitsController: HitsObservableController<Hit<StoreItem>>
     
     @State var isEditing: Bool = false
     
@@ -44,7 +44,7 @@ struct SortByDemoSwiftUI: PreviewProvider {
           VStack {
             HStack {
               hit.flatMap {
-                Text("\($0.title) (\($0.year))")
+                Text("\($0.object.name) (\($0.object.brand))")
               }
               Spacer()
             }
@@ -60,7 +60,7 @@ struct SortByDemoSwiftUI: PreviewProvider {
   static let demoController = SortByDemoController()
   static let queryInputController = QueryInputObservableController()
   static let selectableSegmentObservableController = SelectableSegmentObservableController()
-  static let hitsController = HitsObservableController<Movie>()
+  static let hitsController = HitsObservableController<Hit<StoreItem>>()
   
   static func connect() {
     demoController.queryInputConnector.connectController(queryInputController)

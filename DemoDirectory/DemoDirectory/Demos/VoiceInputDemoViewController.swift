@@ -14,25 +14,27 @@ import InstantSearchVoiceOverlay
 class VoiceInputDemoViewController: UIViewController, UISearchBarDelegate {
   
   let searcher: HitsSearcher
-  let searchConnector: SearchConnector<Item>
+  let searchConnector: SearchConnector<Hit<StoreItem>>
   
   let searchController: UISearchController
-  let searchResultsController: SearchResultsViewController
+  let statsConnector: StatsConnector
+  let resultsViewController: ResultsViewController
   let voiceOverlayController: VoiceOverlayController
 
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    searcher = .init(appID: "latency",
-                     apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db",
-                     indexName: "instant_search")
-    searchResultsController = .init()
+  init() {
+    searcher = .init(client: .newDemo,
+                     indexName: Index.Ecommerce.products)
+    resultsViewController = .init()
     voiceOverlayController = .init()
-    searchController = .init(searchResultsController: searchResultsController)
+    searchController = .init(searchResultsController: resultsViewController)
+    statsConnector = .init(searcher: searcher,
+                           controller: resultsViewController.statsController)
     searchConnector = .init(searcher: searcher,
                             searchController: searchController,
                             hitsInteractor: .init(),
-                            hitsController: searchResultsController)
+                            hitsController: resultsViewController.hitsViewController)
     searchConnector.connect()
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    super.init(nibName: nil, bundle: nil)
   }
   
   required init?(coder: NSCoder) {
@@ -41,7 +43,7 @@ class VoiceInputDemoViewController: UIViewController, UISearchBarDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureUI()
+    setupUI()
     searcher.search()
   }
   
@@ -50,7 +52,7 @@ class VoiceInputDemoViewController: UIViewController, UISearchBarDelegate {
     searchController.isActive = true
   }
   
-  func configureUI() {
+  private func setupUI() {
     title = "Voice Search"
     view.backgroundColor = .white
     searchController.hidesNavigationBarDuringPresentation = false
@@ -85,32 +87,4 @@ class VoiceInputDemoViewController: UIViewController, UISearchBarDelegate {
                                   completion: nil)
   }
 
-  
-  class SearchResultsViewController: UITableViewController, HitsController {
-    
-    var hitsSource: HitsInteractor<Item>?
-      
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    }
-        
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      hitsSource?.numberOfHits() ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      cell.textLabel?.text = hitsSource?.hit(atIndex: indexPath.row)?.name
-      return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      if let _ = hitsSource?.hit(atIndex: indexPath.row) {
-        // Handle hit selection
-      }
-    }
-    
-  }
-  
 }
