@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 import InstantSearch
 
-typealias QuerySuggestionsDemoViewController = SearchViewController
-
 class DemoListViewController: UITableViewController {
   
   let searcher: HitsSearcher

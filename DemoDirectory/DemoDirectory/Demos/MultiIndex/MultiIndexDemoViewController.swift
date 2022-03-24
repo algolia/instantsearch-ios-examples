@@ -10,36 +10,10 @@ import Foundation
 import InstantSearch
 import UIKit
 
-extension HitViewModel {
-  
-  static func movie(_ movie: Movie) -> Self {
-    return HitViewModel()
-      .set(\.imageViewConfigurator) { imageView in
-        imageView.sd_setImage(with: movie.image, completed: .none)
-        imageView.contentMode = .scaleAspectFit
-      }
-      .set(\.mainTitleConfigurator) { label in
-        label.text = movie.title
-        label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.numberOfLines = 0
-      }
-      .set(\.secondaryTitleConfigurator) { label in
-        label.text = "\(movie.year)"
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-      }
-      .set(\.detailsTitleConfigurator) { label in
-        label.text = movie.genre.joined(separator: ", ")
-        label.font = .systemFont(ofSize: 12, weight: .light)
-        label.numberOfLines = 0
-      }
-  }
-  
-}
-
 enum MultiIndexDemoSection: CaseIterable {
   
-  case actors
-  case movies
+  case suggestions
+  case products
   
   var index: Int {
     return MultiIndexDemoSection.allCases.firstIndex(of: self)!
@@ -47,44 +21,44 @@ enum MultiIndexDemoSection: CaseIterable {
   
   var title: String {
     switch self {
-    case .actors:
-      return "Actors"
-    case .movies:
-      return "Movies"
+    case .suggestions:
+      return "Popular searches"
+    case .products:
+      return "Products"
     }
   }
   
   var indexName: IndexName {
     switch self {
-    case .actors:
-      return "mobile_demo_actors"
+    case .suggestions:
+      return Index.Ecommerce.suggestions
       
-    case .movies:
-      return "mobile_demo_movies"
+    case .products:
+      return Index.Ecommerce.products
     }
   }
   
   var cellIdentifier: String {
     switch self {
-    case .actors:
-      return "actorCell"
-    case .movies:
-      return "movieCell"
+    case .suggestions:
+      return "suggestionsCell"
+    case .products:
+      return "productCell"
     }
   }
   
 }
 
 class MultiIndexDemoViewController: UIViewController {
-    
+  
   let textFieldController: TextFieldController
   
   let queryInputConnector: QueryInputConnector
   let searchBar: UISearchBar
   
   let multiSearcher: MultiSearcher
-  let moviesHitsConnector: HitsConnector<Movie>
-  let actorsHitsConnector: HitsConnector<Hit<Actor>>
+  let suggestionsHitsConnector: HitsConnector<QuerySuggestion>
+  let productsHitsConnector: HitsConnector<Hit<StoreItem>>
   
   let hitsViewController: MultiIndexHitsViewController
   
@@ -95,18 +69,18 @@ class MultiIndexDemoViewController: UIViewController {
     
     hitsViewController = .init()
     
-    multiSearcher = MultiSearcher(appID: SearchClient.demo.applicationID,
-                                  apiKey: SearchClient.demo.apiKey)
+    multiSearcher = MultiSearcher(appID: SearchClient.newDemo.applicationID,
+                                  apiKey: SearchClient.newDemo.apiKey)
     
-    let moviesSearcher = multiSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.movies.indexName)
-    let actorsSearcher = multiSearcher.addHitsSearcher(indexName: MultiIndexDemoSection.actors.indexName)
+    let suggestionsSearcher = multiSearcher.addHitsSearcher(indexName: Index.Ecommerce.suggestions)
+    let productsSearcher = multiSearcher.addHitsSearcher(indexName: Index.Ecommerce.products)
     
     queryInputConnector = .init(searcher: multiSearcher,
                                 controller: textFieldController)
-    moviesHitsConnector = .init(searcher: moviesSearcher,
-                                controller: hitsViewController.moviesCollectionViewController)
-    actorsHitsConnector = .init(searcher: actorsSearcher,
-                                controller: hitsViewController.actorsCollectionViewController)
+    productsHitsConnector = .init(searcher: productsSearcher,
+                                  controller: hitsViewController.productsCollectionViewController)
+    suggestionsHitsConnector = .init(searcher: suggestionsSearcher,
+                                     controller: hitsViewController.suggestionsCollectionViewController)
     
     super.init(nibName: nil, bundle: nil)
     setup()
@@ -124,7 +98,7 @@ class MultiIndexDemoViewController: UIViewController {
 }
 
 private extension MultiIndexDemoViewController {
-    
+  
   func setup() {
     multiSearcher.search()
     addChild(hitsViewController)
@@ -149,17 +123,17 @@ private extension MultiIndexDemoViewController {
     stackView.addArrangedSubview(hitsViewController.view)
     stackView.addArrangedSubview(UIView().set(\.translatesAutoresizingMaskIntoConstraints, to: false))
   }
-
+  
 }
 
-class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HitsController {
+class ProductsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HitsController {
   
-  var hitsSource: HitsInteractor<Movie>?
+  var hitsSource: HitsInteractor<Hit<StoreItem>>?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.backgroundColor = .clear
-    collectionView.register(HitCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.movies.cellIdentifier)
+    collectionView.register(StoreItemCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.products.cellIdentifier)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -169,7 +143,7 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 10
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 10
   }
@@ -183,29 +157,25 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultiIndexDemoSection.movies.cellIdentifier, for: indexPath)
-    
-    if let item: Movie = hitsSource?.hit(atIndex: indexPath.row),
-      let cell = cell as? HitCollectionViewCell {
-      HitViewModel.movie(item).configure(cell.hitView)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultiIndexDemoSection.products.cellIdentifier, for: indexPath)
+    if let item = hitsSource?.hit(atIndex: indexPath.row) {
+      (cell as? StoreItemCollectionViewCell)?.setup(with: item)
     }
-    
     return cell
   }
   
 }
 
-class ActorsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HitsController {
+class SuggestionsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HitsController {
   
-  var hitsSource: HitsInteractor<Hit<Actor>>?
+  var hitsSource: HitsInteractor<QuerySuggestion>?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.backgroundColor = .clear
-    collectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.actors.cellIdentifier)
+    collectionView.register(SuggestionCollectionViewCell.self, forCellWithReuseIdentifier: MultiIndexDemoSection.suggestions.cellIdentifier)
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
   }
@@ -213,7 +183,7 @@ class ActorsCollectionViewController: UICollectionViewController, UICollectionVi
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 10
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 10
   }
@@ -227,13 +197,10 @@ class ActorsCollectionViewController: UICollectionViewController, UICollectionVi
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultiIndexDemoSection.actors.cellIdentifier, for: indexPath)
-    
-    if let actor = hitsSource?.hit(atIndex: indexPath.row) {
-      (cell as? ActorCollectionViewCell).flatMap(ActorHitCollectionViewCellViewState().configure)?(actor)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultiIndexDemoSection.suggestions.cellIdentifier, for: indexPath)
+    if let suggestion = hitsSource?.hit(atIndex: indexPath.row) {
+      (cell as? SuggestionCollectionViewCell)?.setup(with: suggestion)
     }
-
     return cell
   }
   
@@ -242,18 +209,18 @@ class ActorsCollectionViewController: UICollectionViewController, UICollectionVi
 
 class MultiIndexHitsViewController: UIViewController {
   
-  let moviesCollectionViewController: MoviesCollectionViewController
-  let actorsCollectionViewController: ActorsCollectionViewController
+  let suggestionsCollectionViewController: SuggestionsCollectionViewController
+  let productsCollectionViewController: ProductsCollectionViewController
   
   init() {
-    let moviesFlowLayout = UICollectionViewFlowLayout()
-    moviesFlowLayout.scrollDirection = .horizontal
-    moviesCollectionViewController = .init(collectionViewLayout: moviesFlowLayout)
-
-    let actorsFlowLayout = UICollectionViewFlowLayout()
-    actorsFlowLayout.scrollDirection = .horizontal
-    actorsCollectionViewController = .init(collectionViewLayout: actorsFlowLayout)
-        
+    let productsFlowLayout = UICollectionViewFlowLayout()
+    productsFlowLayout.scrollDirection = .horizontal
+    productsCollectionViewController = .init(collectionViewLayout: productsFlowLayout)
+    
+    let suggestionsFlowLayout = UICollectionViewFlowLayout()
+    suggestionsFlowLayout.scrollDirection = .horizontal
+    suggestionsCollectionViewController = .init(collectionViewLayout: suggestionsFlowLayout)
+    
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -269,14 +236,14 @@ class MultiIndexHitsViewController: UIViewController {
   func setupUI() {
     configureCollectionView()
     
-    addChild(moviesCollectionViewController)
-    moviesCollectionViewController.didMove(toParent: self)
+    addChild(productsCollectionViewController)
+    productsCollectionViewController.didMove(toParent: self)
     
-    addChild(actorsCollectionViewController)
-    actorsCollectionViewController.didMove(toParent: self)
+    addChild(suggestionsCollectionViewController)
+    suggestionsCollectionViewController.didMove(toParent: self)
     
-    moviesCollectionViewController.collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-    actorsCollectionViewController.collectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    suggestionsCollectionViewController.collectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    productsCollectionViewController.collectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     
     let stackView = UIStackView()
       .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
@@ -284,24 +251,27 @@ class MultiIndexHitsViewController: UIViewController {
       .set(\.spacing, to: .px16)
     
     stackView.addArrangedSubview(UILabel()
-                                  .set(\.text, to: MultiIndexDemoSection.movies.title)
-                                  .set(\.font, to: .systemFont(ofSize: 15, weight: .black))
+      .set(\.text, to: MultiIndexDemoSection.suggestions.title)
+      .set(\.font, to: .systemFont(ofSize: 15, weight: .semibold))
     )
-    stackView.addArrangedSubview(moviesCollectionViewController.collectionView)
+    stackView.addArrangedSubview(suggestionsCollectionViewController.collectionView)
+    
     stackView.addArrangedSubview(UILabel()
-                                  .set(\.text, to: MultiIndexDemoSection.actors.title)
-                                  .set(\.font, to: .systemFont(ofSize: 15, weight: .black))
+      .set(\.text, to: MultiIndexDemoSection.products.title)
+      .set(\.font, to: .systemFont(ofSize: 15, weight: .semibold))
     )
-    stackView.addArrangedSubview(actorsCollectionViewController.collectionView)
+    stackView.addArrangedSubview(productsCollectionViewController.collectionView)
     
     view.addSubview(stackView)
-    stackView.pin(to: view.safeAreaLayoutGuide, insets: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
+    stackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.pin(to: view.safeAreaLayoutGuide, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
   }
   
   func configureCollectionView() {
     [
-      moviesCollectionViewController,
-      actorsCollectionViewController
+      productsCollectionViewController,
+      suggestionsCollectionViewController
     ].forEach { controller in
       controller.view?.translatesAutoresizingMaskIntoConstraints = false
       controller.view?.backgroundColor = .clear

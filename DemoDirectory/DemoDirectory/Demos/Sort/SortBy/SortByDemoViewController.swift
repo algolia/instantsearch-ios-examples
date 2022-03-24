@@ -20,10 +20,10 @@ class SortByDemoViewController: UIViewController {
   let resultsViewController: ResultsViewController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.resultsViewController = .init()
+    self.controller = .init()
+    self.resultsViewController = .init(searcher: controller.searcher)
     self.searchController = .init(searchResultsController: resultsViewController)
     self.textFieldController = TextFieldController(searchBar: searchController.searchBar)
-    self.controller = .init()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }

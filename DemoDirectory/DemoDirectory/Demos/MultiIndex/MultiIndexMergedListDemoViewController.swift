@@ -136,7 +136,7 @@ extension QuerySuggestionsAndHits {
     override func viewDidLoad() {
       super.viewDidLoad()
       tableView.register(SearchSuggestionTableViewCell.self, forCellReuseIdentifier: Section.suggestions.cellReuseIdentifier)
-      tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: Section.hits.cellReuseIdentifier)
+      tableView.register(StoreItemTableViewCell.self, forCellReuseIdentifier: Section.hits.cellReuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -171,7 +171,7 @@ extension QuerySuggestionsAndHits {
       case .hits:
         cell = tableView.dequeueReusableCell(withIdentifier: Section.hits.cellReuseIdentifier, for: indexPath)
         if
-          let productTableViewCell = cell as? ProductTableViewCell,
+          let productTableViewCell = cell as? StoreItemTableViewCell,
           let product = hitsInteractor?.hit(atIndex: indexPath.row) {
             productTableViewCell.setup(with: product)
         }

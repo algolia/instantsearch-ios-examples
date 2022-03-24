@@ -18,25 +18,19 @@ class SearchInputDemoViewController: UIViewController {
   
   let searchController: UISearchController
   let textFieldController: TextFieldController
-  let statsConnector: StatsConnector
   let queryInputConnector: QueryInputConnector
-  let loadingConnector: LoadingConnector
   let resultsViewController: ResultsViewController
   
   init(searchTriggeringMode: SearchTriggeringMode) {
     searcher = .init(client: .newDemo,
                      indexName: Index.Ecommerce.products)
-    resultsViewController = .init()
+    resultsViewController = .init(searcher: searcher)
     searchController = .init(searchResultsController: resultsViewController)
     textFieldController = .init(searchBar: searchController.searchBar)
     queryInputConnector = .init(searcher: searcher,
                                 searchTriggeringMode: searchTriggeringMode,
                                 controller: textFieldController)
-    statsConnector = .init(searcher: searcher,
-                           controller: resultsViewController.statsController)
     hitsInteractor = .init()
-    loadingConnector = .init(searcher: searcher,
-                             controller: resultsViewController.loadingController)
     super.init(nibName: .none, bundle: .none)
     setup()
   }

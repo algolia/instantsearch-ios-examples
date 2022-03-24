@@ -44,7 +44,7 @@ struct SortByDemoSwiftUI: PreviewProvider {
           VStack {
             HStack {
               hit.flatMap {
-                Text("\($0.object.name) (\($0.object.brand))")
+                Text("\($0.object.name) (\($0.object.brand ?? ""))")
               }
               Spacer()
             }

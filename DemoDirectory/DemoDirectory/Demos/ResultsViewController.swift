@@ -15,15 +15,21 @@ class ResultsViewController: UIViewController {
   
   let stackView: UIStackView
   let hitsViewController: StoreItemsTableViewController
+  
+  let statsConnector: StatsConnector
   let statsController: LabelStatsController
+  
+  let loadingConnector: LoadingConnector
   let loadingController: ActivityIndicatorController
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+  init(searcher: HitsSearcher) {
     stackView = .init(frame: .zero)
     hitsViewController = .init(style: .plain)
     statsController = .init(label: .init())
+    statsConnector = .init(searcher: searcher, controller: statsController)
     loadingController = .init(activityIndicator: .init())
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    loadingConnector = .init(searcher: searcher, controller: loadingController)
+    super.init(nibName: nil, bundle: nil)
     addChild(hitsViewController)
     hitsViewController.didMove(toParent: self)
   }

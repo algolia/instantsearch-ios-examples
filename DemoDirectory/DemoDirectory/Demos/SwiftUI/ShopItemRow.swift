@@ -124,7 +124,7 @@ struct ShopItemRow: View {
       return
     }
     self.title = item.name
-    self.subtitle = item.brand
+    self.subtitle = item.brand ?? ""
     self.details = ""//item.description ?? ""
     self.imageURL = item.images.first ?? URL(string: "google.com")!
     self.highlightedTitle = product?.hightlightedString(forKey: "name")

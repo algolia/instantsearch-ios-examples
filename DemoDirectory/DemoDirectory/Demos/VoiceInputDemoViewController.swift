@@ -17,18 +17,15 @@ class VoiceInputDemoViewController: UIViewController, UISearchBarDelegate {
   let searchConnector: SearchConnector<Hit<StoreItem>>
   
   let searchController: UISearchController
-  let statsConnector: StatsConnector
   let resultsViewController: ResultsViewController
   let voiceOverlayController: VoiceOverlayController
 
   init() {
     searcher = .init(client: .newDemo,
                      indexName: Index.Ecommerce.products)
-    resultsViewController = .init()
+    resultsViewController = .init(searcher: searcher)
     voiceOverlayController = .init()
     searchController = .init(searchResultsController: resultsViewController)
-    statsConnector = .init(searcher: searcher,
-                           controller: resultsViewController.statsController)
     searchConnector = .init(searcher: searcher,
                             searchController: searchController,
                             hitsInteractor: .init(),

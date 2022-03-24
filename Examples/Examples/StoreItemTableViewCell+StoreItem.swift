@@ -1,5 +1,5 @@
 //
-//  ProductTableViewCell+ProductHit.swift
+//  StoreItemTableViewCell+StoreItem.swift
 //  Examples
 //
 //  Created by Vladislav Fitc on 13/12/2021.
@@ -10,7 +10,7 @@ import UIKit
 import AlgoliaSearchClient
 import InstantSearchCore
 
-extension ProductTableViewCell {
+extension StoreItemView {
   
   func setup(with productHit: Hit<StoreItem>) {
     let product = productHit.object
@@ -33,7 +33,26 @@ extension ProductTableViewCell {
       subtitleLabel.text = product.brand
     }
     
+    if let price = product.price {
+      priceLabel.text = "\(price.value) €"
+    }
+    
   }
   
 }
 
+extension StoreItemCollectionViewCell {
+  
+  func setup(with productHit: Hit<StoreItem>) {
+    storeItemView.setup(with: productHit)
+  }
+  
+}
+
+extension StoreItemTableViewCell {
+  
+  func setup(with productHit: Hit<StoreItem>) {
+    storeItemView.setup(with: productHit)
+  }
+  
+}

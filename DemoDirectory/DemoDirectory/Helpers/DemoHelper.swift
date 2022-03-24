@@ -13,6 +13,7 @@ import InstantSearchCore
 extension SearchClient {
   static let demo = Self(appID: "latency", apiKey: "1f6fd3a6fb973cb08419fe7d288fa4db")
   static let newDemo = Self(appID: "latency", apiKey: "927c3fe76d4b52c5a2912973f35a3077")
+  static let recommend = Self(appID: "XX85YRZZMV", apiKey: "d17ff64e913b3293cfba3d3665480217")
 }
 
 extension Index {
@@ -21,6 +22,10 @@ extension Index {
     return SearchClient.demo.index(withName: demoIndexName)
   }
   
+}
+
+extension IndexName {
+  static let recommend: IndexName = "test_FLAGSHIP_ECOM_recommend"
 }
 
 extension Index {

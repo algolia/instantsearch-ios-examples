@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import InstantSearch
 
-public class SearchViewController: UIViewController {
+public class QuerySuggestionsDemoViewController: UIViewController {
   
   // Search controller responsible for the presentation of suggestions
   let searchController: UISearchController
@@ -20,8 +20,8 @@ public class SearchViewController: UIViewController {
   let textFieldController: TextFieldController
     
   // Search suggestions interactor + controller
-  let suggestionsHitsInteractor: HitsInteractor<Hit<QuerySuggestion>>
-  let suggestionsViewController: QuerySuggestionsViewController
+  let suggestionsHitsInteractor: HitsInteractor<QuerySuggestion>
+  let suggestionsViewController: SuggestionsTableViewController
   
   // Search results interactor + controller
   let resultsHitsInteractor: HitsInteractor<Hit<StoreItem>>
@@ -97,7 +97,6 @@ public class SearchViewController: UIViewController {
     suggestionsHitsInteractor.connectController(suggestionsViewController)
     resultsHitsInteractor.connectController(resultsViewController)
     
-    suggestionsViewController.isHighlightingInverted = true
     multiSearcher.search()
   }
   
