@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  QuerySuggestionsDemoViewController.swift
 //  QuerySuggestions
 //
 //  Created by Vladislav Fitc on 27/01/2020.

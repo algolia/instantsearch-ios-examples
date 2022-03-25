@@ -15,7 +15,7 @@
 		AF1AF45E262DC6580049DCE7 /* AlgoliaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */; };
 		AF1AF466262DC92A0049DCE7 /* InstantSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */; };
 		AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40596E2552D125003C8CDB /* ResultsViewController.swift */; };
-		AF4059742552D125003C8CDB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059702552D125003C8CDB /* SearchViewController.swift */; };
+		AF4059742552D125003C8CDB /* QuerySuggestionsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059702552D125003C8CDB /* QuerySuggestionsDemoViewController.swift */; };
 		AF4059862552D1EB003C8CDB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF4059852552D1EB003C8CDB /* SDWebImage */; };
 		AF4059942552D924003C8CDB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4059932552D924003C8CDB /* RatingViewController.swift */; };
 		AF46AE4327E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46AE4227E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift */; };
@@ -134,7 +134,7 @@
 		AF1AF45D262DC6580049DCE7 /* AlgoliaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoliaController.swift; sourceTree = "<group>"; };
 		AF1AF465262DC92A0049DCE7 /* InstantSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSearchItem.swift; sourceTree = "<group>"; };
 		AF40596E2552D125003C8CDB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
-		AF4059702552D125003C8CDB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		AF4059702552D125003C8CDB /* QuerySuggestionsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuerySuggestionsDemoViewController.swift; sourceTree = "<group>"; };
 		AF4059932552D924003C8CDB /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		AF46AE4227E8DD0E00966236 /* MultiIndexMergedListDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiIndexMergedListDemoViewController.swift; sourceTree = "<group>"; };
 		AF46AE4427E8DD9100966236 /* SearchSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSuggestionTableViewCell.swift; path = ../../../Examples/Examples/SearchSuggestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -398,7 +398,7 @@
 				AFBE2B8826A74D4E00F1E139 /* VoiceInputDemoViewController.swift */,
 				AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */,
 				AF40596E2552D125003C8CDB /* ResultsViewController.swift */,
-				AF4059702552D125003C8CDB /* SearchViewController.swift */,
+				AF4059702552D125003C8CDB /* QuerySuggestionsDemoViewController.swift */,
 				AF4059932552D924003C8CDB /* RatingViewController.swift */,
 			);
 			path = Demos;
@@ -790,7 +790,7 @@
 				AF9D1825268CBD2100EC68EA /* RefinementListDemoController.swift in Sources */,
 				AF1115E827E7EA9F008D2736 /* StoreItemsTableViewController.swift in Sources */,
 				AF46AE4727E8DD9100966236 /* SearchSuggestionTableViewCell+QuerySuggestion.swift in Sources */,
-				AF4059742552D125003C8CDB /* SearchViewController.swift in Sources */,
+				AF4059742552D125003C8CDB /* QuerySuggestionsDemoViewController.swift in Sources */,
 				AF4059722552D125003C8CDB /* ResultsViewController.swift in Sources */,
 				AF67793422FB34C000850ACC /* SearchStateViewController.swift in Sources */,
 				AF87B8EB26A4F7E20015F772 /* RelevantSortDemoViewController.swift in Sources */,
