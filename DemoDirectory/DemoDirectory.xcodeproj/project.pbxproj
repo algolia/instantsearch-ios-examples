@@ -108,6 +108,8 @@
 		AFBD4125261E304C00093F52 /* GettingStartedSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD4124261E304C00093F52 /* GettingStartedSwiftUI.swift */; };
 		AFBE2B8926A74D4E00F1E139 /* VoiceInputDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBE2B8826A74D4E00F1E139 /* VoiceInputDemoViewController.swift */; };
 		AFBE2B8C26A74D9F00F1E139 /* InstantSearchVoiceOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AFBE2B8B26A74D9F00F1E139 /* InstantSearchVoiceOverlay */; };
+		AFC542A227EE07ED00062F7F /* RelevantSortToggleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC542A127EE07ED00062F7F /* RelevantSortToggleController.swift */; };
+		AFC542A427EE089E00062F7F /* SortByController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC542A327EE089E00062F7F /* SortByController.swift */; };
 		AFCAE43C24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */; };
 		AFED9C9B23C8EB37005C2D93 /* SearchControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */; };
 		AFFB11F1260CAAE100E4E459 /* SwiftUIDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB11F0260CAAE000E4E459 /* SwiftUIDemoViewController.swift */; };
@@ -225,6 +227,8 @@
 		AFBA4C2F2617DE3C009A8E14 /* ShopItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemRow.swift; sourceTree = "<group>"; };
 		AFBD4124261E304C00093F52 /* GettingStartedSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSwiftUI.swift; sourceTree = "<group>"; };
 		AFBE2B8826A74D4E00F1E139 /* VoiceInputDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceInputDemoViewController.swift; sourceTree = "<group>"; };
+		AFC542A127EE07ED00062F7F /* RelevantSortToggleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelevantSortToggleController.swift; sourceTree = "<group>"; };
+		AFC542A327EE089E00062F7F /* SortByController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortByController.swift; sourceTree = "<group>"; };
 		AFCAE43B24D1F6FA00FD6A7D /* GettingStartedSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedSearchViewController.swift; sourceTree = "<group>"; };
 		AFED9C9A23C8EB37005C2D93 /* SearchControllerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDemo.swift; sourceTree = "<group>"; };
 		AFFB11F0260CAAE000E4E459 /* SwiftUIDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDemoViewController.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 				AF4CD87626906C8200D7A8AA /* RelevantSortDemoController.swift */,
 				AF87B8EC26A4F8060015F772 /* RelevantSortDemoSwiftUI.swift */,
 				AF87B8EA26A4F7E20015F772 /* RelevantSortDemoViewController.swift */,
+				AFC542A327EE089E00062F7F /* SortByController.swift */,
+				AFC542A127EE07ED00062F7F /* RelevantSortToggleController.swift */,
 			);
 			path = RelevantSort;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 				AF7A7B08268D2860003C62A5 /* ToggleDemoSwiftUI.swift in Sources */,
 				AF67793122FB34C000850ACC /* FacetListTableController.swift in Sources */,
 				AFBA4C302617DE3C009A8E14 /* ShopItemRow.swift in Sources */,
+				AFC542A427EE089E00062F7F /* SortByController.swift in Sources */,
 				AF67793322FB34C000850ACC /* DemoHelper.swift in Sources */,
 				AF87B8F626A594480015F772 /* QueryRuleCustomDataDemoSwiftUI.swift in Sources */,
 				AF5BDC3F268C8677001F4A38 /* HierarchicalDemoSwiftUI.swift in Sources */,
@@ -780,6 +787,7 @@
 				AF82C53126A6176A00609ECE /* RefinementPersistentListDemoViewController.swift in Sources */,
 				AF46AE4927E8DD9800966236 /* StoreItemTableViewCell.swift in Sources */,
 				AF82C53926A618EE00609ECE /* DynamicFacetsDemoViewController.swift in Sources */,
+				AFC542A227EE07ED00062F7F /* RelevantSortToggleController.swift in Sources */,
 				AF1AF45A262DC62E0049DCE7 /* FacetsView.swift in Sources */,
 				AF9D1828268CCFCA00EC68EA /* FilterListDemoController.swift in Sources */,
 				AF87B8ED26A4F8060015F772 /* RelevantSortDemoSwiftUI.swift in Sources */,
