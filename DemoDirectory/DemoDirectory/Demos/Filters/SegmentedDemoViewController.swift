@@ -25,12 +25,14 @@ class SegmentedDemoViewController: UIViewController {
   
   let male = Filter.Facet(attribute: "gender", stringValue: "male")
   let female = Filter.Facet(attribute: "gender", stringValue: "female")
+  let notSpecified = Filter.Facet(attribute: "gender", stringValue: "not specified")
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = HitsSearcher(client: .demo, indexName: "mobile_demo_filter_segment")
     let items: [Int: Filter.Facet] = [
       0: male,
-      1: female
+      1: female,
+      2: notSpecified,
     ]
     self.filterState = FilterState()
     self.genderInteractor = SelectableSegmentInteractor(items: items)

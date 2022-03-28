@@ -74,7 +74,7 @@ extension SortByDemoViewController: SelectableSegmentController {
 extension SortByDemoViewController {
   
   fileprivate func setupUI() {
-    title = "Movies"
+    title = "Sort By"
     view.backgroundColor = .white
     definesPresentationContext = true
     navigationItem.searchController = searchController

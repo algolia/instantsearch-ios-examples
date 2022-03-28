@@ -16,16 +16,14 @@ class FilterNumericRangeDemoViewController: UIViewController {
 
   let searchStateViewController: SearchStateViewController
   
-  let primaryNumericRangeController: NumericRangeController
-  let secondaryNumericRangeController: NumericRangeController
+  let numericRangeController: NumericRangeController
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 
-    primaryNumericRangeController = NumericRangeController(rangeSlider: .init())
-    secondaryNumericRangeController = NumericRangeController(rangeSlider: .init())
+    numericRangeController = NumericRangeController(rangeSlider: .init())
     
-    self.controller = .init(primaryController: primaryNumericRangeController,
-                            secondaryController: secondaryNumericRangeController)
+    self.controller = .init(primaryController: numericRangeController,
+                            secondaryController: numericRangeController)
     self.searchStateViewController = SearchStateViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     addChild(searchStateViewController)
@@ -52,15 +50,16 @@ private extension FilterNumericRangeDemoViewController {
     view.backgroundColor = .white
     let searchStateView = searchStateViewController.view!
     let mainStackView = UIStackView()
-      .set(\.axis, to: .vertical)
-      .set(\.spacing, to: .px16)
-      .set(\.distribution, to: .fill)
-      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
-      .set(\.alignment, to: .center)
+    mainStackView.axis = .vertical
+    mainStackView.spacing = .px16
+    mainStackView.distribution = .fill
+    mainStackView.translatesAutoresizingMaskIntoConstraints = false
+    mainStackView.alignment = .center
     mainStackView.addArrangedSubview(searchStateView)
-    mainStackView.addArrangedSubview(primaryNumericRangeController.view)
-    mainStackView.addArrangedSubview(secondaryNumericRangeController.view)
-    mainStackView.addArrangedSubview(UIView().set(\.translatesAutoresizingMaskIntoConstraints, to: false))
+    mainStackView.addArrangedSubview(numericRangeController.view)
+    let spacer = UIView()
+    spacer.translatesAutoresizingMaskIntoConstraints = false
+    mainStackView.addArrangedSubview(spacer)
     view.addSubview(mainStackView)
     mainStackView.pin(to: view.safeAreaLayoutGuide)
     searchStateView.heightAnchor.constraint(equalToConstant: 150).isActive = true
