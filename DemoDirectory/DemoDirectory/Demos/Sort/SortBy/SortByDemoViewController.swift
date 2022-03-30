@@ -10,24 +10,20 @@ import UIKit
 import InstantSearch
 
 class SortByDemoViewController: UIViewController {
-  
-  typealias HitType = Movie
-  
+    
   var onClick: ((Int) -> Void)? = nil
   
   let controller: SortByDemoController
 
   let searchController: UISearchController
   let textFieldController: TextFieldController
-  let hitsTableViewController: MovieHitsTableViewController<HitType>
+  let resultsViewController: ResultsViewController
   
-  private let cellIdentifier = "CellID"
-
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.hitsTableViewController = .init()
-    self.searchController = .init(searchResultsController: hitsTableViewController)
-    self.textFieldController = TextFieldController(searchBar: searchController.searchBar)
     self.controller = .init()
+    self.resultsViewController = .init(searcher: controller.searcher)
+    self.searchController = .init(searchResultsController: resultsViewController)
+    self.textFieldController = TextFieldController(searchBar: searchController.searchBar)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
@@ -43,7 +39,8 @@ class SortByDemoViewController: UIViewController {
 
   private func setup() {
     searchController.searchBar.delegate = self
-    controller.hitsConnector.connectController(hitsTableViewController)
+    controller.statsConnector.connectController(resultsViewController.statsController)
+    controller.hitsConnector.connectController(resultsViewController.hitsViewController)
     controller.queryInputConnector.connectController(textFieldController)
     controller.sortByConnector.connectController(self, presenter: controller.title(for:))
   }
@@ -77,11 +74,10 @@ extension SortByDemoViewController: SelectableSegmentController {
 extension SortByDemoViewController {
   
   fileprivate func setupUI() {
-    title = "Movies"
+    title = "Sort By"
     view.backgroundColor = .white
     definesPresentationContext = true
     navigationItem.searchController = searchController
-    hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     searchController.hidesNavigationBarDuringPresentation = false
     searchController.showsSearchResultsController = true
     searchController.automaticallyShowsCancelButton = false

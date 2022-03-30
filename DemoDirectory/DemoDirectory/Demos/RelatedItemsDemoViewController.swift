@@ -12,112 +12,61 @@ import SDWebImage
 
 class RelatedItemsDemoViewController: UIViewController {
   
-  let stackView = UIStackView()
-  
   let searcher: HitsSearcher
-  let hitsInteractor: HitsInteractor<Hit<Product>>
-  let hitsTableViewController: EcommerceHitsTableViewController
+  let hitsInteractor: HitsInteractor<Hit<StoreItem>>
   
-  let relatedItemSearcher: HitsSearcher
-  let relatedHitsInteractor: HitsInteractor<Hit<Product>>
-  let relatedHitsTableViewController: EcommerceHitsTableViewController
+  let queryInputConnector: QueryInputConnector
+  let searchController: UISearchController
+  let textFieldController: TextFieldController
+  let resultsViewController: ResultsViewController
+  let recommendController: RecommendController
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    self.searcher = HitsSearcher(client: .demo, indexName: "instant_search")
-    self.hitsInteractor = .init(settings: .init(infiniteScrolling: .off, showItemsOnEmptyQuery: true))
-    self.hitsTableViewController = EcommerceHitsTableViewController()
-    self.relatedItemSearcher = HitsSearcher(client: .demo, indexName: "instant_search")
-    self.relatedHitsInteractor = .init()
-    self.relatedHitsTableViewController = EcommerceHitsTableViewController()
+    self.searcher = .init(client: .recommend,
+                          indexName: .recommend)
+    self.recommendController = .init(recommendClient: .init(appID: SearchClient.recommend.applicationID,
+                                                            apiKey: SearchClient.recommend.apiKey))
+    self.resultsViewController = .init(searcher: searcher)
+    self.searchController = .init(searchResultsController: resultsViewController)
+    self.textFieldController = TextFieldController(searchBar: searchController.searchBar)
+    self.queryInputConnector = .init(searcher: searcher,
+                                     controller: textFieldController)
+    hitsInteractor = .init()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureUI()
-  }
-  
-  private func setup() {
-    
-    hitsTableViewController.tableView.keyboardDismissMode = .onDrag
-    hitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: hitsTableViewController.cellIdentifier)
-    
-    relatedHitsTableViewController.tableView.keyboardDismissMode = .onDrag
-    relatedHitsTableViewController.cellIdentifier = "relatedCellID"
-    relatedHitsTableViewController.tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: relatedHitsTableViewController.cellIdentifier)
-    
-    hitsTableViewController.didSelect = { hit in
-      
-      
-      let matchingPatterns: [MatchingPattern<Product>] =
-        [
-          MatchingPattern(attribute: "brand", score: 3, filterPath: \.brand),
-          MatchingPattern(attribute: "type", score: 10, filterPath: \.type),
-          MatchingPattern(attribute: "categories", score: 2, filterPath: \.categories),
-        ]
-      let objectWrapper = ObjectWrapper(objectID: hit.objectID, object: hit.object)
-      self.relatedHitsInteractor.connectSearcher(self.relatedItemSearcher, withRelatedItemsTo: objectWrapper, with: matchingPatterns)
-      self.relatedHitsInteractor.connectController(self.relatedHitsTableViewController)
-      
-      self.relatedItemSearcher.search()
+    setupUI()
+    resultsViewController.hitsViewController.didSelect = { [weak self] hit in
+      guard let viewController = self else { return }
+      viewController.recommendController.presentRelatedItems(for: hit.objectID, from: viewController)
     }
-    
-
-    
-    searcher.request.query.hitsPerPage = 3
-    
-    hitsInteractor.connectSearcher(searcher)
-    hitsInteractor.connectController(hitsTableViewController)
-    
-    searcher.search()
   }
-
-}
-
-private extension RelatedItemsDemoViewController {
   
-  func configureUI() {
-    title = "Related Items"
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    searchController.isActive = true
+  }
+  
+  fileprivate func setupUI() {
     view.backgroundColor = .white
-    configureStackView()
-    configureLayout()
+    definesPresentationContext = true
+    navigationItem.searchController = searchController
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.showsSearchResultsController = true
+    searchController.automaticallyShowsCancelButton = false
   }
-  
-  
-  func configureStackView() {
-    stackView.spacing = .px16
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-  }
-  
-  func configureLayout() {
     
-//    addChild(hitsTableViewController)
-//    hitsTableViewController.didMove(toParent: self)
-    
-    let label = UILabel()
-    label.text = "    Related Items"
-    label.font = .boldSystemFont(ofSize: 18)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    
-    hitsTableViewController.tableView.alwaysBounceVertical = false
-    
-    stackView.addArrangedSubview(hitsTableViewController.view)
-    stackView.addArrangedSubview(label)
-    stackView.addArrangedSubview(relatedHitsTableViewController.view)
-    
-    hitsTableViewController.view.heightAnchor.constraint(equalToConstant: 250).isActive = true
-    
-    
-    view.addSubview(stackView)
-
-    stackView.pin(to: view.safeAreaLayoutGuide)
-
+  private func setup() {
+    hitsInteractor.connectSearcher(searcher)
+    hitsInteractor.connectController(resultsViewController.hitsViewController)
+    searcher.search()
   }
   
 }

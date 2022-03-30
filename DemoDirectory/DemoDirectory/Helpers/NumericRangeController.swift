@@ -60,11 +60,11 @@ public class NumericRangeController: UIViewController, NumberRangeController {
         
     upperBoundLabel.textAlignment = .center
     let stackView = UIStackView()
-      .set(\.axis, to: .horizontal)
-      .set(\.spacing, to: .px16)
-      .set(\.distribution, to: .equalSpacing)
-      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
-      .set(\.alignment, to: .center)
+    stackView.axis = .horizontal
+    stackView.spacing = .px16
+    stackView.distribution = .equalSpacing
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.alignment = .center
     stackView.addArrangedSubview(lowerBoundLabel)
     stackView.addArrangedSubview(rangerSlider)
     stackView.addArrangedSubview(upperBoundLabel)

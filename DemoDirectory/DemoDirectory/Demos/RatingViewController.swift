@@ -12,16 +12,24 @@ import InstantSearch
 
 class RatingViewController: UIViewController {
   
-  let stackView = UIStackView()
-  let valueLabel = UILabel()
-  let stepper = UIStepper()
-  let ratingController = NumericRatingController()
+  let valueLabel: UILabel
+  let stepper: UIStepper
+  let numberInteractor: NumberInteractor<Double>
+  let ratingController: NumericRatingController
+  let filterState: FilterState
+  let searchStateViewController: SearchStateViewController
   
   var ratingControl: RatingControl {
     return ratingController.ratingControl
   }
 
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    valueLabel = UILabel()
+    stepper = UIStepper()
+    numberInteractor = NumberInteractor<Double>()
+    ratingController = NumericRatingController()
+    filterState = FilterState()
+    searchStateViewController = SearchStateViewController()
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
   
@@ -31,11 +39,24 @@ class RatingViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
     setupLayout()
+    setup()
+  }
+  
+  private func setup() {
+    addChild(searchStateViewController)
+    searchStateViewController.didMove(toParent: self)
+
+    searchStateViewController.connectFilterState(filterState)
+    numberInteractor.connectNumberController(ratingController)
+    numberInteractor.connectFilterState(filterState,
+                                        attribute: "rating",
+                                        numericOperator: .greaterThanOrEqual)
   }
   
   func setupLayout() {
+    view.backgroundColor = .white
+    
     ratingControl.translatesAutoresizingMaskIntoConstraints = false
     ratingControl.value = 3.5
     ratingControl.maximumValue = 5
@@ -54,20 +75,32 @@ class RatingViewController: UIViewController {
     valueLabel.widthAnchor.constraint(equalToConstant: 44).isActive = true
     refreshLabel()
 
-    stackView.spacing = 10
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.distribution = .fill
-    stackView.alignment = .top
-    stackView.addArrangedSubview(ratingControl)
-    stackView.addArrangedSubview(valueLabel)
-    stackView.addArrangedSubview(stepper)
-    view.addSubview(stackView)
+    let ratingStackView = UIStackView()
+    ratingStackView.spacing = 10
+    ratingStackView.translatesAutoresizingMaskIntoConstraints = false
+    ratingStackView.distribution = .fill
+    ratingStackView.alignment = .top
+    ratingStackView.addArrangedSubview(ratingControl)
+    ratingStackView.addArrangedSubview(valueLabel)
+    ratingStackView.addArrangedSubview(stepper)
+    
+    let mainStackView = UIStackView()
+    mainStackView.translatesAutoresizingMaskIntoConstraints = false
+    mainStackView.axis = .vertical
+    mainStackView.spacing = 10
+    
+    view.addSubview(mainStackView)
+    mainStackView.pin(to: view)
+    
     NSLayoutConstraint.activate([
-      stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-      stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+      mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+      mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
     ])
+    
+    mainStackView.addArrangedSubview(searchStateViewController.view)
+    mainStackView.addArrangedSubview(ratingStackView)
   }
 
   @objc private func controlValueChanged(_ sender: Any) {
@@ -93,5 +126,4 @@ class RatingViewController: UIViewController {
     return formatter.string(from: value as NSNumber) ?? "\(self)"
   }
 
-  
 }

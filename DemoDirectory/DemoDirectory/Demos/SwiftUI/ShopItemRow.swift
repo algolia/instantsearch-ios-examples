@@ -118,6 +118,20 @@ struct ShopItemRow: View {
     self.price = item.price
   }
   
+  init(product: Hit<StoreItem>?) {
+    guard let item = product?.object else {
+      self = .init()
+      return
+    }
+    self.title = item.name
+    self.subtitle = item.brand ?? ""
+    self.details = ""//item.description ?? ""
+    self.imageURL = item.images.first ?? URL(string: "google.com")!
+    self.highlightedTitle = product?.hightlightedString(forKey: "name")
+    self.price = 100 //item.price
+  }
+
+  
 }
 
 struct ShopItemRow_Previews : PreviewProvider {

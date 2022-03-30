@@ -26,7 +26,9 @@ class FacetSearchDemoViewController: UIViewController {
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
     filterState = .init()
-    facetSearcher = FacetSearcher(client: .demo, indexName: "mobile_demo_facet_list_search", facetName: "brand")
+    facetSearcher = FacetSearcher(client: .demo,
+                                  indexName: "mobile_demo_facet_list_search",
+                                  facetName: "brand")
     
     categoryController = FacetListTableController(tableView: .init())
     categoryListConnector = .init(searcher: facetSearcher,

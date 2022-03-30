@@ -11,27 +11,22 @@ import InstantSearch
 
 class SortByDemoController {
   
-  typealias HitType = Movie
-
   let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
-  let hitsConnector: HitsConnector<HitType>
+  let statsConnector: StatsConnector
+  let hitsConnector: HitsConnector<Hit<StoreItem>>
   let sortByConnector: SortByConnector
   
-  
-  let indexTitle: IndexName = "mobile_demo_movies"
-  let indexYearAsc: IndexName = "mobile_demo_movies_year_asc"
-  let indexYearDesc: IndexName = "mobile_demo_movies_year_desc"
-    
   init() {
-    self.searcher = HitsSearcher(client: .demo,
-                                 indexName: indexTitle)
+    self.searcher = HitsSearcher(client: .newDemo,
+                                 indexName: Index.Ecommerce.products)
     self.queryInputConnector = .init(searcher: searcher)
     self.hitsConnector = .init(searcher: searcher)
+    self.statsConnector = .init(searcher: searcher)
     sortByConnector = .init(searcher: searcher,
-                            indicesNames: [indexTitle,
-                                           indexYearAsc,
-                                           indexYearDesc],
+                            indicesNames: [Index.Ecommerce.products,
+                                           Index.Ecommerce.productsAsc,
+                                           Index.Ecommerce.productsDesc],
                             selected: 0)
     searcher.search()
     searcher.isDisjunctiveFacetingEnabled = false
@@ -39,12 +34,12 @@ class SortByDemoController {
   
   func title(for indexName: IndexName) -> String {
     switch indexName {
-    case indexTitle:
+    case Index.Ecommerce.products:
       return "Default"
-    case indexYearAsc:
-      return "Year Asc"
-    case indexYearDesc:
-      return "Year Desc"
+    case Index.Ecommerce.productsAsc:
+      return "Price Asc"
+    case Index.Ecommerce.productsDesc:
+      return "Price Desc"
     default:
       return indexName.rawValue
     }

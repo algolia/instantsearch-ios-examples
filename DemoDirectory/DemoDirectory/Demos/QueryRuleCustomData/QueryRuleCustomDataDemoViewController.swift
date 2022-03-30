@@ -11,21 +11,16 @@ import InstantSearch
 import SDWebImage
 
 class QueryRuleCustomDataDemoViewController: UIViewController {
-  
-  typealias HitType = ShopItem
-  
+    
   let searchBar = UISearchBar()
   
   let searcher: HitsSearcher
   
   let queryInputConnector: QueryInputConnector
   let textFieldController: TextFieldController
-  
-  let statsConnector: StatsConnector
-  let statsController: LabelStatsController
-  
-  let hitsConnector: HitsConnector<HitType>
-  let hitsTableViewController: ResultsTableViewController
+    
+  let hitsConnector: HitsConnector<Hit<StoreItem>>
+  let hitsTableViewController: ResultsViewController
   
   let queryRuleCustomDataConnector: QueryRuleCustomDataConnector<Banner>
   let bannerViewController: BannerViewController
@@ -33,12 +28,10 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     self.searcher = HitsSearcher(client: .demo, indexName: "instant_search")
     self.textFieldController = .init(searchBar: searchBar)
-    self.statsController = .init(label: .init())
-    self.hitsTableViewController = ResultsTableViewController()
+    self.hitsTableViewController = .init(searcher: searcher)
     self.bannerViewController = BannerViewController()
     self.queryInputConnector = .init(searcher: searcher, controller: textFieldController)
-    self.statsConnector = .init(searcher: searcher, controller: statsController)
-    self.hitsConnector = .init(searcher: searcher, interactor: .init(), controller: hitsTableViewController)
+    self.hitsConnector = .init(searcher: searcher, interactor: .init(), controller: hitsTableViewController.hitsViewController)
     self.queryRuleCustomDataConnector = .init(searcher: searcher, controller: bannerViewController)
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
@@ -60,7 +53,7 @@ class QueryRuleCustomDataDemoViewController: UIViewController {
     
     addChild(hitsTableViewController)
     hitsTableViewController.didMove(toParent: self)
-    hitsTableViewController.tableView.keyboardDismissMode = .onDrag
+    hitsTableViewController.hitsViewController.tableView.keyboardDismissMode = .onDrag
     
     bannerViewController.didTapBanner = { [weak self] in
       if let link = self?.bannerViewController.banner?.link {
@@ -120,16 +113,8 @@ private extension QueryRuleCustomDataDemoViewController {
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
 
-    statsController.label.translatesAutoresizingMaskIntoConstraints = false
-
     bannerViewController.view.isHidden = true
     bannerViewController.view.heightAnchor.constraint(lessThanOrEqualToConstant: 66.7).isActive = true
-
-    let statsContainer = UIView()
-      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
-      .set(\.layoutMargins, to: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-    statsContainer.addSubview(statsController.label)
-    statsController.label.pin(to: statsContainer.layoutMarginsGuide)
     
     let stackView = UIStackView()
       .set(\.spacing, to: .px16)
@@ -137,7 +122,6 @@ private extension QueryRuleCustomDataDemoViewController {
       .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
     
     stackView.addArrangedSubview(searchBar)
-    stackView.addArrangedSubview(statsContainer)
     stackView.addArrangedSubview(bannerViewController.view)
     stackView.addArrangedSubview(hitsTableViewController.view)
     view.addSubview(stackView)

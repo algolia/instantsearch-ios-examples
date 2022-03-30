@@ -26,7 +26,7 @@ class DemoFactory {
     
     switch demoID {
     case .singleIndex:
-      viewController = SingleIndexDemoViewController()
+      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
       
     case .sffv:
       viewController = FacetSearchDemoViewController()
@@ -37,9 +37,8 @@ class DemoFactory {
     case .toggleDefault:
       viewController = ToggleDefaultDemoViewController()
       
-    case .DynamicFacetList:
-      viewController = VoiceInputDemoViewController()
-//      viewController = DynamicFacetListDemoViewController()
+    case .dynamicFacetList:
+      viewController = DynamicFacetListDemoViewController()
       
     case .facetList:
       viewController = RefinementListDemoViewController()
@@ -59,7 +58,7 @@ class DemoFactory {
     case .filterRating:
       viewController = RatingViewController()
       
-    case .sortBy:
+    case .sortBy: //ok
       viewController = SortByDemoViewController()
       
     case .currentFilters:
@@ -96,10 +95,11 @@ class DemoFactory {
       viewController = StatsDemoViewController()
       
     case .highlighting:
-      viewController = HighlightingDemoViewController()
+      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
       
     case .loading:
-      viewController = LoadingDemoViewController()
+      viewController = SearchInputDemoViewController(searchTriggeringMode: .searchAsYouType)
+
       
     case .hierarchical:
       viewController = HierarchicalDemoViewController()
@@ -112,6 +112,9 @@ class DemoFactory {
       
     case .queryRuleCustomData:
       viewController = QueryRuleCustomDataDemoViewController()
+      
+    case .mergedList:
+      viewController = QuerySuggestionsAndHits.SearchViewController()
     }
     
     viewController.title = demo.name
