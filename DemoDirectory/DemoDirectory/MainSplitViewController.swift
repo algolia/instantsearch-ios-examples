@@ -29,7 +29,7 @@ class MainSplitViewController: UISplitViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    demoListViewController.title = "InstantSearch"
+    demoListViewController.title = "Demo Directory"
     demoListViewController.delegate = self
     viewControllers = [demoListNavigationController]
   }
