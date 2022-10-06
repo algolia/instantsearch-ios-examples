@@ -1,3 +1,6 @@
+# Warning: Migrated
+InstantSearch Examples has been migrated to the main [InstantSearch repository](https://github.com/algolia/instantsearch-ios). The updated Examples project is available in [the dedicated directory]([https://github.com/algolia/instantsearch-ios#](https://github.com/algolia/instantsearch-ios/tree/master/Examples)installation). This repository is no longer supported, please create your issues and submit your contributions to the main InstantSearch repository.
+
 # InstantSearch iOS: Examples
 >Example of search experience components built with [algolia/instantsearch-ios](https://github.com/algolia/instantsearch-ios).
 
